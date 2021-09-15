@@ -1,0 +1,50 @@
+.container{
+    margin: 0 auto;
+}
+
+img{
+    width: 2em;
+    height: 2em;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.st1 {
+    width: 450px;
+    border-bottom: 1px #7B7B7B dashed;
+    /* 以 border-bottom 為分界*/
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.t1 {
+    width: 100px;
+    /* float: left; */
+}
+
+.hint {
+    color: #7B7B7B;
+    font-size: small;
+}
+
+.correct {
+    color: green;
+    font-size: small;
+}
+
+.incorrect {
+    color: red;
+    font-style: italic;
+    font-size: small;
+}
+
+.fa-check-circle{
+    color: green;
+}
+
+.fa-time-circle{
+    color: red;
+}
