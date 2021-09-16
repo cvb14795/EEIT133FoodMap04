@@ -11,5 +11,5 @@
 	<h1>您已填過此問卷</h1>
 	<input type="button" value="回首頁" onclick="self.location.href='fontpage.html'">
 
-</body>
+</body> 
 </html>

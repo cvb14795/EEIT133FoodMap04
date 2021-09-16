@@ -16,7 +16,7 @@
 		height:300px;
 		padding: 20px;
 	}
-	
+	 
 	td,th {
 		border: 1px solid;
 		width: 200px;

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ReviseResult</title>
-</head>
+</head> 
 
 <body BGCOLOR="#FDF5E6">
     <H1 ALIGN=CENTER>修改結果</H1>
