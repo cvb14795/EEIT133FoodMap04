@@ -81,7 +81,7 @@ table {
 	<header>
 		<h1>請確認以下將刪除之資料</h1>
 	</header>
-	<jsp:useBean id="recipe" class="bean.RecipeBean" scope="session"></jsp:useBean>
+	<jsp:useBean id="recipe" class="recipe.bean.RecipeBean" scope="session"></jsp:useBean>
 	<form action="./DeleteController" method="post">
 		<table>
 			<tr bgcolor="#FFFFE1">

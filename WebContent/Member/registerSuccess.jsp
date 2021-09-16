@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <title>註冊成功</title>
-    <link rel="stylesheet" href="./style/registerSuccess.css">
+    <link rel="stylesheet" href="../css/registerSuccess.css">
 </head>
 
 <body>
-    <jsp:useBean id="member" class="member.bean.Member" scope="session" />
+    <jsp:useBean id="member" class="member.memberBean.Member" scope="session" />
     <p>請確認以下資料</p>
     <table>
         <thead>
@@ -37,13 +37,13 @@
         </tbody>
     </table>
 
-    <button id="confirmBtn" value="確定"></button>
+    <button id="confirmBtn" value="確定">確定</button>
 
     <script>
         var confirmBtn = document.getElementById("confirmBtn");
         confirmBtn.addEventListener("click", function (e) {
             // 點擊確定後回到首頁
-            location.href("./homepage.html");
+            location.href = "../Home" ;
         })
     </script>
 </body>

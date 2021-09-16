@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <p>您好，您現在登入的帳戶為：${user}</p>
+    <p>您好，您現在登入的帳戶為：${sessionScope.user}</p>
     <p>5秒後跳轉回首頁... <span id="countDown"></span></p>
 
     <script>
@@ -19,7 +19,7 @@
 
             if (time == 0) {
                 clearInterval(this);
-                location.href = "./Home";
+                location.href = "../Home";
             } else {
                 // 更新倒數秒數
                 cd.innerHTML = time;

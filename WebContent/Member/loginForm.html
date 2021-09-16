@@ -1,4 +1,4 @@
-<!DOCTYPE html>	
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,12 +8,12 @@
     <title>用戶登入</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./style/bootstrap.min.css">
-    <link rel="stylesheet" href="./style/login.css">
-	<link rel="stylesheet" href="./style/sweetalert2-9.17.2.css">
-    <script src="./js/jquery-3.6.0.js"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/sweetalert2-9.17.2.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/sweetalert2-9.17.2.css">
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/sweetalert2-9.17.2.js"></script>
 </head>
 
 <body>
@@ -27,10 +27,10 @@
             <!--           </div>  -->
 
             <!-- Login Form -->
-            <form action="./Login" method="POST">
+            <form action="./Login" method="POST" id="form">
                 <input type="text" id="account" class="fadeIn second" name="account" placeholder="請輸入帳號">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="請輸入密碼">
-                <input type="submit" id="loginBtn" class="fadeIn fourth" value="登入">
+                <input type="submit" id="loginBtn" class="fadeIn fourth" value="登入" autocomplete="on">
             </form>
 
             <!-- Remind Passowrd -->
@@ -43,28 +43,41 @@
 
     <script>
         var loginBtn = document.getElementById("loginBtn");
+        var $account = $("#account");
+        var $form = $("#form");
         loginBtn.addEventListener("click", loginCheck);
 
         function loginCheck(e) {
             console.log("偵測到使用者登入請求");
-            swal({
-            	  title:"登入", 
-            	  text: "登入中，請稍候...", 
-            	  type: "info",
-            	  confirmButtonColor: "#3085d6",
-            	  confirmButtonText: "確定", 
-            	  confirmButtonClass: "btn btn-success",
-            	  buttonsStyling: false
-            	}).then(function() {
-            	  swal(
-            	    "登入成功",
-            	    "你的文件已经被删除。",
-            	    "success"
-            	  ); 
-            	})
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: '登入',
+                html: "登入中，請稍候...",
+                timer: 1500,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                // title: "登入",
+                // text: "登入中，請稍候...",
+                // type: "info",
+                // confirmButtonColor: "#3085d6",
+                // confirmButtonText: "確定",
+                // confirmButtonClass: "btn btn-success",
+                // buttonsStyling: false
+            }).then(function () {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '登入成功',
+                    html: "您好，" + $account.val() + "！",
+                    timer: 1500,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                })
+            })
         }
-        
-        
+
+
     </script>
 </body>
 

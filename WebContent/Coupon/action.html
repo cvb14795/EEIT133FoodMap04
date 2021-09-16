@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>管理員專用</title>
+</head>
+<body>
+	<form action='administratorcontroller' method='post'>
+		<div>
+			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
+			<label><input type='radio' name='action' value='U'>發放折價券</label>
+			<label><input type='radio' name='action' value='B'>撤回</label>
+		</div>
+
+		<div>
+			<input type='submit' value='送出'>
+			<input type="button" value="首頁" onclick="self.location.href='fontpage.html'">
+		</div>
+
+	</form>
+
+</body>
+</html>
