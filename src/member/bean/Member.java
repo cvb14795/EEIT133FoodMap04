@@ -1,4 +1,4 @@
-package member.memberBean;
+package member.bean;
 
 import java.io.Serializable;
 

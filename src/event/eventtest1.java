@@ -1,4 +1,4 @@
-package event;
+package Event;
 
 public class eventtest1 {
 	private int id;

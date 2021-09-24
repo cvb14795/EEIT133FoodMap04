@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <jsp:useBean id="member" class="member.memberBean.Member" scope="session" />
+    <jsp:useBean id="member" class="member.bean.Member" scope="request" />
     <p>請確認以下資料</p>
     <table>
         <thead>
@@ -32,6 +32,9 @@
                 </td>
                 <td>
                     <jsp:getProperty name="member" property="phone" />
+                </td>
+                <td>
+                	<img style="width:400px; height:400px;" src="data:image/${imgExt};base64,${base64String}">
                 </td>
             </tr>
         </tbody>

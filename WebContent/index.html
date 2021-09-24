@@ -5,13 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="google-signin-client_id"
+        content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
     <title>首頁</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/jquery-3.6.0.js"></script>
     <script src="./js/bootstrap.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
+    <script>
+        /* 待完工 */
+        //接收登入狀態並alert
+        /* 待完工 */
+
+        // function signOut() {
+        //     var auth2 = gapi.auth2.getAuthInstance();
+        //     auth2.signOut().then(function () {
+        //         console.log('User signed out.');
+        //     });
+        // }
+
+        $(document).ready(function () {
+            const cookies = `${document.cookie}`;
+            console.log(`cookies: ${cookies}`);
+            const userName = cookies.split("user=")[1];
+            if (userName === undefined) {
+                console.log("使用者名稱:未定義 ");
+                $("#user").text("Guest");
+                console.log(document.getElementById("user").outerHTML);
+            } else {
+                console.log(`使用者名稱:${userName}`);
+                $("#user").text(`${userName}`);
+            }
+
+            $('#tabs a').click(function (e) {            //當按下 id=tabs 中的超連結時
+                e.preventDefault();                      //阻止事件向上提升 (處理一次)    
+                var url = $(this).attr("data-url");      //取得 data-url 屬性值
+                var href = this.hash;                    //取得 href 值
+                var pane = $(this);                      //轉成 DOM 物件
+                // console.log(url, href, pane);
+                //若點擊首頁則改為頁籤顯示
+                if (href == "#home") {
+                    $(href).load(url, function (result) {    //載入頁嵌內容
+                        console.log("點擊頁面: " + href);
+                        // $(`a[href="${url}"]`).tab('show');                    //將此頁籤設為顯示 (active)
+                        $(this).tab('show');
+                    });
+                    // 否則直接跳轉至外部頁面
+                } else {
+                    location.href = url;
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -86,7 +134,7 @@
                                 登入 <i class="fas fa-sign-in-alt"></i>
                             </a>
                         </li>
-                        <li hidden>
+                        <li>
                             <a data-toggle="tab" href="./Member/Logout" data-url="./Member/Logout">
                                 登出 <i class="fas fa-sign-out-alt"></i>
                             </a>
@@ -116,47 +164,6 @@
         <!-- 語君 -->
         <div class="tab-pane" id="comment"></div>
     </div>
-
-
-    <script>
-        /* 待完工 */
-        //接收登入狀態並alert
-        /* 待完工 */
-
-        $(document).ready(function () {
-            const cookies = `${document.cookie}`;
-            console.log(`cookies: ${cookies}`);
-            const userName = cookies.split("user=")[1];
-            console.log(`使用者名稱: ${userName}`);
-            if (userName === undefined) {
-                console.log("使用者名稱:未定義 ");
-                $("#user").text("Guest");
-                console.log(document.getElementById("user").outerHTML);
-            } else {
-                console.log(`使用者名稱:${userName}`);
-                $("#user").text(`${userName}`);
-            }
-
-            $('#tabs a').click(function (e) {            //當按下 id=tabs 中的超連結時
-                e.preventDefault();                      //阻止事件向上提升 (處理一次)    
-                var url = $(this).attr("data-url");      //取得 data-url 屬性值
-                var href = this.hash;                    //取得 href 值
-                var pane = $(this);                      //轉成 DOM 物件
-                // console.log(url, href, pane);
-                //若點擊首頁則改為頁籤顯示
-                if (href == "#home") {
-                    $(href).load(url, function (result) {    //載入頁嵌內容
-                        console.log("點擊頁面: "+href);
-                        // $(`a[href="${url}"]`).tab('show');                    //將此頁籤設為顯示 (active)
-                        $(this).tab('show');
-                    });
-                    // 否則直接跳轉至外部頁面
-                } else {
-                    location.href = url;
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

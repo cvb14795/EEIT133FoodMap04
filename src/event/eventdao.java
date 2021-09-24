@@ -1,4 +1,4 @@
-package event;
+package Event;
 
 import java.util.*;  
 import java.sql.*;  

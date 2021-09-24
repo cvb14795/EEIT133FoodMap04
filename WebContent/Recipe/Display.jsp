@@ -74,7 +74,6 @@ header {
 			</tr>
 			<tr bgcolor="#F2F4FB">
 				<td>照片:</td>
-				
 				<td><img src="data:image/jpg;base64,${sessionScope.base64Img}" width="100" height="100" ></td>
 			</tr>
 		</table>

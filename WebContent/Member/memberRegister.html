@@ -17,8 +17,8 @@
 
 <body>
     <div class="container">
-        <!-- 除非要上傳檔案 否則不要用method="multipart/form-data" 會抓不到參數-->
-        <form action="./Register" method="POST">
+        <!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
+        <form action="./Register" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>註冊表單</legend>
                 <div class="st1">
@@ -30,19 +30,23 @@
                 <div class="st1">
                     <label for="account" class="t1">帳號：</label>
                     <input type="text" name="account" id="account" class="formElem">
-                    <label for="name" id="accountCheckMsg"></label><br>
+                    <label for="account" id="accountCheckMsg"></label><br>
                     <span class="hint">(1.不可空白 2.至少6個字且必須包含英數字)</span>
                 </div>
                 <div class="st1">
                     <label for="password" class="t1">密碼：</label>
                     <input type="password" name="password" id="password" class="formElem">
-                    <label for="name" id="passwordCheckMsg"></label><br>
+                    <label for="password" id="passwordCheckMsg"></label><br>
                     <span class="hint">(1.不可空白 2.至少6個字且必須包含英數字)</span>
+                </div>
+                <div class="st1">
+                    <label for="password" class="t1">確認密碼：</label>
+                    <input type="password" name="passwordConfirm" id="passwordConfirm" class="formElem">
                 </div>
                 <div class="st1">
                     <label for="address" class="t1">地址：</label>
                     <input type="text" name="address" id="address" class="formElem">
-                    <label for="name" id="addressCheckMsg"></label><br>
+                    <label for="address" id="addressCheckMsg"></label><br>
                 </div>
                 <div class="st1">
                     <label for="phone" class="t1">電話：</label>
@@ -50,28 +54,17 @@
                     <label for="name" id="phoneCheckMsg"></label><br>
                     <span class="hint">(格式：0987654321之十碼數字)</span>
                 </div>
+                <div class="st1">
+                    <label for="image" class="t1">大頭貼：</label>
+                    <input type="file" name="image" id="image">
+                </div>
             </fieldset>
             <input type="submit" value="送出">
         </form>
     </div>
 
     <script>
-        function exitInputEvent(event) {
-            var formElemID = this.id;
-            var inputVal = document.getElementById(formElemID).value;
-            console.log(`"You selected ID: '${formElemID}' !"`);
-            console.log(`"Input value: '${inputVal}' !"`);
-
-            var result = validateInput(formElemID, inputVal);
-            setValidateStatus(result.status, formElemID, result.message);
-        }
-        var elem = document.getElementsByClassName("formElem");
-
-        // HTMLCollection不能用for in
-        for (let i = 0; i < elem.length; i++) {
-            elem[i].addEventListener("blur", exitInputEvent);
-        }
-
+        validate("formElem");
     </script>
 </body>
 

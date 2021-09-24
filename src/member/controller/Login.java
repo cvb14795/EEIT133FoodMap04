@@ -14,9 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import member.memberBean.Member;
-import member.memberDAO.MemberDAO;
-import member.memberDAO.MemberDAOFactory;
+import member.bean.Member;
+import member.dao.MemberDAO;
+import member.dao.MemberDAOFactory;
 
 
 /**
@@ -28,7 +28,7 @@ import member.memberDAO.MemberDAOFactory;
 		@WebInitParam(name = "ERROR", value = "./loginForm.html")}
 )
 	
-public class LoginController extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String SUCCESS_VIEW;
 	private String ERROR_VIEW;
@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginController() {
+	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -75,15 +75,14 @@ public class LoginController extends HttpServlet {
 
 		if (isAlreadyLogin) {
 			// 有登入紀錄 導向歡迎頁面
-			session.invalidate();
-			request.getRequestDispatcher(SUCCESS_VIEW).forward(request, response);
+			response.sendRedirect(SUCCESS_VIEW);
 		} else {
 			// 沒有登入紀錄 導向登入頁面
 			request.getRequestDispatcher(ERROR_VIEW).forward(request, response);
 		}
 		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -94,7 +93,6 @@ public class LoginController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		HttpSession session = request.getSession(true);
 		MemberDAO mDAO = MemberDAOFactory.getMemberDAO();
 
 		try {
@@ -115,14 +113,15 @@ public class LoginController extends HttpServlet {
 
 				if (checkpw) {
 					Cookie cookie = new Cookie("user", userName);
+					// 使全站(localhost下所有子路徑)都可以存取此路徑的cookie 而不只是原本限制的/Member底下
+					cookie.setPath("/");
 //					session.setAttribute("user", cookie.getValue());
 					// 單位:秒
 					cookie.setMaxAge(30 * 60); //30分鐘內有效
 					response.addCookie(cookie);
 					
 					isAlreadyLogin = true;
-					session.invalidate();
-					response.sendRedirect("../Home");
+					response.sendRedirect(SUCCESS_VIEW);
 				} else {
 					// 密碼錯誤
 					//改成JSON回傳 前端login接收並alert
@@ -149,9 +148,10 @@ public class LoginController extends HttpServlet {
 				if (cookie.getName() == "user") {
 					isAlreadyLogin = true;
 					userName = cookie.getName();
+					System.out.println("CookieName: "+cookie.getName());
+					System.out.println("CookieValue: "+cookie.getValue());
+					break;
 				}
-				System.out.println("CookieName: "+cookie.getName());
-				System.out.println("CookieValue: "+cookie.getValue());
 			}
 		} 
 //		else { // 沒登入或者登入時限已到(cookie過期)

@@ -1,4 +1,4 @@
-package member.memberDAO;
+package member.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,16 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import member.memberBean.Member;
+import member.bean.Member;
 import util.DbUtil;
 
 public class MemberDAO {
 
 	private Connection conn;
-	// scanner不需要close
-	// sc也不需要try catch 否則會無窮迴圈
-	private Scanner sc = new Scanner(System.in);
-
 	
 	/* ========== 使用連線池 ========== */
 	// 創連線

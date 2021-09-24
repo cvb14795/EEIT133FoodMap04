@@ -1,11 +1,11 @@
-package member.memberDAO;
+package member.dao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import member.memberBean.Member;
+import member.bean.Member;
 
 public class MemberDAOAction {
 
