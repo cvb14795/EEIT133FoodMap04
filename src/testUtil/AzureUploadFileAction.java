@@ -1,4 +1,4 @@
-package member.blob;
+package testUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
 
-public class AzureFileStorage {
+public class AzureUploadFileAction {
 	private static String ACCOUNT_NAME = "foodmap04";
 	private static String ACCOUNT_KEY = "QxYA1vViyKKx3PQKBopyPfghnqCgVnSw7MULep4h8EkSBEHiPfnWGG0GqO6fwmoYjcYebo8ObGMZmjPVXXgQvg==";
 	private static String END_POINT = "core.windows.net";

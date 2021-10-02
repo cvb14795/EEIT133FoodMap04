@@ -57,8 +57,9 @@
         var $account = $("#account");
         var $form = $("#form");
 
-        $form.on("submit", function() {
+        $form.on("submit", function(e) {
             console.log("偵測到使用者登入請求");
+            
             Swal.fire({
                 position: 'center',
                 icon: 'info',
@@ -75,16 +76,33 @@
                 // confirmButtonClass: "btn btn-success",
                 // buttonsStyling: false
             }).then(function () {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '登入成功',
-                    html: "您好，" + $account.val() + "！",
-                    timer: 1500,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
+                $.ajax({
+                    type: $form.attr("method"),
+                    url: $form.attr("action"),
+                    data: $form.serialize(),
+                    success: function (data) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '登入成功',
+                            html: "您好，" + $account.val() + "！",
+                            timer: 1500,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                        })
+                    },
+                    error: function (params) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: '登入失敗',
+                            html: "帳戶名稱錯誤或密碼錯誤！",
+                        })
+                    }
                 })
             })
+
+            e.preventDefault();
         })
 
         // loginBtn.addEventListener("click", loginCheck);

@@ -1,8 +1,8 @@
-package member.blob;
+package util.azure;
 
 import com.azure.storage.file.share.*;
 
-public class Test {
+public class AzureFileUtil {
 	// Define the connection-string.
 	// Replace the values, including <>, with
 	// the values from your storage account.
@@ -13,7 +13,7 @@ public class Test {
 			+ "EndpointSuffix=core.windows.net";
 
 	// 
-	public static String shareName = "Team";
+	public static String shareName = "fileStorage";
 
 	// 建立檔案共用
 	public static Boolean createFileShare(String connectStr, String shareName) {

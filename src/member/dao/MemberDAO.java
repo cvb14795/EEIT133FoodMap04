@@ -1,113 +1,71 @@
 package member.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import member.bean.Member;
-import util.DbUtil;
 
-public class MemberDAO {
-
-	private Connection conn;
+public class MemberDAO implements IMemberDao {
+	private Session session;
 	
-	/* ========== 使用連線池 ========== */
-	// 創連線
-	public void createConn() throws SQLException {
-		DbUtil util = new DbUtil();
-		conn = util.createConn();		
-		System.out.println("已開啟連線!!");
+	public MemberDAO(Session session) {
+		this.session = session;
 	}
 
-	// 關連線
-	public void closeConn() throws SQLException {
-		if (conn != null) {
-			conn.close();
-			System.out.println("已關閉連線!!");
+	@Override
+	public Member insertMember(Member m) {
+		// TODO Auto-generated method stub
+		Member resultMember = session.get(Member.class, m.getId());
+		if (resultMember != null) {
+			session.save(resultMember);
 		}
+		return resultMember;
 	}
-	/* ========== 使用連線池 ========== */
 	
-	
-	public Member createMember(String account, String password, String name, String address, String phone) {
-		Member m = new Member();
-		m.setAccount(account);
-		m.setPassword(password);
-		m.setName(name);
-		m.setAddress(address);
-		m.setPhone(phone);
-
-		return m;
+	@Override
+	public List<Member> selectAllMember() {
+		// TODO Auto-generated method stub
+		Query<Member> query = session.createQuery("from Member", Member.class);
+		return query.list();
 	}
 
-	// 新增單筆資料
-	public void addMember(Member m) throws SQLException {
-//		userAccount VARCHAR(20) NOT NULL,
-//		userPassword  VARCHAR(20) NOT NULL,
-//		userName VARCHAR(20),
-//		userAddress VARCHAR(50),
-//		userPhone VARCHAR(10),
-//		PRIMARY KEY(userAccount)
-		String sqlStr = "INSERT INTO users(userAccount, userPassword, userName, userAddress, userPhone) " 
-					+ "values(?,?,?,?,?)";
-		PreparedStatement preState;
-		preState = conn.prepareStatement(sqlStr);
-		// id為auto increament 不用手動給
-		preState.setString(1, m.getAccount());
-		preState.setString(2, m.getPassword());
-		preState.setString(3, m.getName());
-		preState.setString(4, m.getAddress());
-		preState.setString(5, m.getPhone());
-
-		preState.execute();
-		preState.close();
+	@Override
+	public Member selectMemberByAccount(String userAccount) {
+		// TODO Auto-generated method stub
+		Member resultMember = session.get(Member.class, userAccount);
+		return resultMember;
 	}
 
-	// 查詢資料
-	public Member findAllByAccount(String userAccount) throws SQLException {
-		String sqlStr = "SELECT * FROM users WHERE userAccount = ?";
-		PreparedStatement preState = conn.prepareStatement(sqlStr);
-		preState.setString(1, userAccount);
-
-		// 設一個空Member 以接收其查詢結果(rs)
-		Member m = null;
-		// 注意不是execute
-		ResultSet rs = preState.executeQuery();
-		System.out.println("正在查詢帳號:" + userAccount + " 的資料...");
-		
-		
-		// 是if 不是while 因為在ID不重複的情況下其資料只有一筆
-		if (rs.next()) {
-			// rs.get使用欄位名稱做查詢 不是index
-			m = new Member();
-			m.setAccount(rs.getString("userAccount"));
-			m.setPassword(rs.getString("userPassword"));
-			m.setName(rs.getString("userName"));
-			m.setAddress(rs.getString("userAddress"));
-			m.setPhone(rs.getString("userPhone"));
-
-		} else {
-			System.out.println("查無資料 資料庫無結果!");
+	@Override
+	public Member updateMember(String userAccount, Member m) {
+		// TODO Auto-generated method stub
+		Member resultMember = session.get(Member.class, userAccount);
+		if (resultMember != null) {
+			resultMember.setAddress(m.getAddress());
+			resultMember.setEmail(m.getEmail());
+			resultMember.setImgBytes(m.getImgBytes());
+			resultMember.setName(m.getName());
+			// 不給改密碼 要改密碼要在其他頁面執行
+			resultMember.setPhone(m.getPhone());
 		}
-		rs.close();
-		preState.close();
-
-		return m;
-
+		return resultMember;
 	}
 
-	// 刪除所有資料
-	public void deleteByAccount(String userAccount) throws SQLException {
-		String sqlStr = "DELETE FROM users WHERE userAccount = ?";
-
-		PreparedStatement preState = conn.prepareStatement(sqlStr);
-		preState.setString(1, userAccount);
-		preState.execute();
-		System.out.println("即將刪除users : " + userAccount + "的資料...");
-		preState.close();
-
+	@Override
+	public boolean deleteMemberByAccount(String userAccount) {
+		// TODO Auto-generated method stub
+		Member resultMember = session.get(Member.class, userAccount);
+		if (resultMember != null) {
+			session.delete(resultMember);
+			return true;			
+		}
+		return false;
 	}
+
+	
+
+	
 
 }

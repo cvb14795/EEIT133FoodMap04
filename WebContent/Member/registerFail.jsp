@@ -5,11 +5,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>登入成功</title>
+    <title>註冊失敗</title>
 </head>
 
 <body>
-    <p>您好，您現在登入的帳戶為：${sessionScope.user}</p>
+    <p>您註冊的的帳戶：${sessionScope.user} 已存在<br>請更換其他帳號名稱重試！</p>
     <p>5秒後跳轉回首頁... <span id="countDown"></span></p>
 
     <script>
