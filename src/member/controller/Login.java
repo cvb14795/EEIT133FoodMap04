@@ -1,7 +1,6 @@
 package member.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -24,13 +23,15 @@ import util.hibernate.HibernateUtil;
  * Servlet implementation class User
  */
 
-@WebServlet(urlPatterns = { "/Member/Login" }, initParams = { @WebInitParam(name = "SUCCESS", value = "../Home"),
-		@WebInitParam(name = "ERROR", value = "./loginForm.html") })
+@WebServlet(urlPatterns = { "/Member/Login" },
+			initParams = {
+					@WebInitParam(name = "loginPage", value = "./loginForm.html"),
+			}
+)
 
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String SUCCESS_VIEW;
-	private String ERROR_VIEW;
+	private String loginPage;
 	// 從cookie獲取已登入的使用者名稱
 	private String userName = "";
 	private boolean isAlreadyLogin = false;
@@ -39,8 +40,7 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
-		SUCCESS_VIEW = this.getInitParameter("SUCCESS");
-		ERROR_VIEW = this.getInitParameter("ERROR");
+		loginPage = this.getInitParameter("loginPage");
 	}
 
 	/**
@@ -71,12 +71,9 @@ public class Login extends HttpServlet {
 		System.out.println("\nuser: " + userName);
 		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
 
-		if (isAlreadyLogin) {
-			// 有登入紀錄 導向歡迎頁面
-			response.sendRedirect(SUCCESS_VIEW);
-		} else {
+		if (!isAlreadyLogin) {
 			// 沒有登入紀錄 導向登入頁面
-			request.getRequestDispatcher(ERROR_VIEW).forward(request, response);
+			request.getRequestDispatcher(loginPage).forward(request, response);
 		}
 
 	}
@@ -115,7 +112,6 @@ public class Login extends HttpServlet {
 				response.addCookie(cookie);
 
 				isAlreadyLogin = true;
-				response.sendRedirect(SUCCESS_VIEW);
 			} else {
 				// 密碼錯誤
 				// 改成JSON回傳 前端login接收並alert
@@ -127,7 +123,7 @@ public class Login extends HttpServlet {
 			// 找不到此帳號
 			// 改成JSON回傳 前端login接收並alert
 			System.out.println("無此帳號!");
-			request.getRequestDispatcher(ERROR_VIEW).forward(request, response);
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 
 	}
@@ -141,6 +137,8 @@ public class Login extends HttpServlet {
 					System.out.println("CookieName: " + cookie.getName());
 					System.out.println("CookieValue: " + cookie.getValue());
 					break;
+				} else {
+					isAlreadyLogin = false;
 				}
 			}
 		}

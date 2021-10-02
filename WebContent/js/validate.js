@@ -13,13 +13,14 @@ function validate(formElem) {
         console.log(`"Input value: '${inputVal}' !"`);
     
         var result = validateInput(formElemID, inputVal);
+        console.log(result.status, formElemID, result.message);
         setValidateStatus(result.status, formElemID, result.message);
     }
     
     function validateInput(inputType, val) {
         /* 使用regExp做資料驗證 */
         var msg = "錯誤";
-        var passed = false;
+        var isPassed = false;
         switch (inputType) {
             case "name":
                 // 姓名必須全為中文
@@ -40,7 +41,7 @@ function validate(formElem) {
                     }
                 }
                 if (isAllZh){
-                   passed = true;
+                    isPassed = true;
                     msg = "正確"; 
                 }
                 break;
@@ -51,7 +52,7 @@ function validate(formElem) {
     
                 if (phoneRegExp.test(val)) {
                     isPhone = true;
-                    passed = true;
+                    isPassed = true;
                     msg = "正確"; 
                     console.log("pass");
                     break;
@@ -61,7 +62,7 @@ function validate(formElem) {
     
                 break;
             case "address":
-                passed = true;
+                isPassed = true;
                 msg = "正確"; 
                 break;
                 
@@ -93,7 +94,7 @@ function validate(formElem) {
                 }
                 // 有任一英文＆任一數字就給過
                 if (isEng && isNum) {
-                    passed = true;
+                    isPassed = true;
                     msg = "正確";
                     console.log("passed!");
                     break;
@@ -112,7 +113,7 @@ function validate(formElem) {
     
                 if (emailRegExp.test(val)) {
                     isEmail = true;
-                    passed = true;
+                    isPassed = true;
                     msg = "正確"; 
                     console.log("pass");
                     break;
@@ -123,20 +124,20 @@ function validate(formElem) {
                 break;
         }
         // 驗證regexp 設訊息 設element
-        return { status: passed, message: msg };
+        return { status: isPassed, message: msg };
     }
     
     function setValidateStatus(status, inputType, msg) {
         var $msgElem = $("#"+ inputType + "CheckMsg");
-        console.log("before: ", $msgElem.children());
         
-        $("#"+inputType + "CheckMsg").children().remove();
+        // $("#"+inputType + "CheckMsg").children().remove();
     
         if (status) {
             $msgElem.removeClass("incorrect");
             $msgElem.addClass("correct");
-    
-            $msgElem.toggle("<i class='fa far fa-check-circle'></i>");
+            $msgElem.find(".fa-times-circle").remove();
+            $msgElem.text(msg);
+            $msgElem.append("<i class='fa far fa-check-circle'></i>");
             // imgElem.classList.toggle("fa");
             // imgElem.classList.toggle("far");
             // imgElem.classList.toggle("fa-check-circle");
@@ -144,13 +145,14 @@ function validate(formElem) {
         } else {
             $msgElem.removeClass("correct");
             $msgElem.addClass("incorrect");
-            $msgElem.toggle("<i class='fa far fa-times-circle'></i>");
+            $msgElem.find(".fa-check-circle").remove();
+            $msgElem.text(msg);
+            $msgElem.append("<i class='fa far fa-times-circle'></i>");
             // imgElem.classList.toggle("fa");
             // imgElem.classList.toggle("far");
             // imgElem.classList.toggle("fa-times-circle");
         }
-        console.log("after: ", $msgElem.children());
-        $msgElem.toggle(msg);
+        console.log($msgElem.text());
     }
 }
 

@@ -8,12 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class Member {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
 	
+	@Id
 	@Column(name = "userAccount")
 	private String account;
 	
@@ -34,14 +32,6 @@ public class Member {
 	
 	@Column(name = "userEmail")
 	private String email;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getAccount() {
 		return account;
@@ -110,4 +100,8 @@ public class Member {
 		this.email = email;
 	}
 
+	public Member() {
+	}
+	
+	
 }

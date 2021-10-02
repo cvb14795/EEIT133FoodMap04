@@ -70,6 +70,7 @@ public class Register extends HttpServlet {
 		String account = request.getParameter("account");
 		System.out.println("註冊帳號: " + account);
 
+		// 若此筆帳號沒註冊過(不存在資料庫) 才能進行註冊
 		if (mService.selectMemberByAccount(account) == null) {
 			// 密碼+10位鹽值hash
 			String hashpw = BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt(10));

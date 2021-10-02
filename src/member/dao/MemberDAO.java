@@ -17,9 +17,9 @@ public class MemberDAO implements IMemberDao {
 	@Override
 	public Member insertMember(Member m) {
 		// TODO Auto-generated method stub
-		Member resultMember = session.get(Member.class, m.getId());
-		if (resultMember != null) {
-			session.save(resultMember);
+		Member resultMember = session.get(Member.class, m.getAccount());
+		if (resultMember == null) {
+			session.save(m);
 		}
 		return resultMember;
 	}

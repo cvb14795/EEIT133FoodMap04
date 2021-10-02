@@ -9,13 +9,14 @@ legend {
 }
 
 .st1, .submitBtnContainer {
-    width: 450px;
+    width: 500px;
     margin: 0 auto;
 }
 
 .st1 {
     border-bottom: 1px #7B7B7B dashed;
     /* 以 border-bottom 為分界*/
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
