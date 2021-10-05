@@ -50,6 +50,7 @@ public class MemberDAO implements IMemberDao {
 			// 不給改密碼 要改密碼要在其他頁面執行
 			resultMember.setPhone(m.getPhone());
 		}
+		session.update(resultMember);
 		return resultMember;
 	}
 
