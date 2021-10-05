@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+package controller;
+=======
 package recipe.controller;
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,12 +20,21 @@ import javax.servlet.http.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+<<<<<<< HEAD
+import model.UserRecipeBean;
+import model.UserRecipeBeanDao;
+import util.HibernateUtil;
+
+@MultipartConfig
+@WebServlet("/UserInsertRecipe")
+=======
 import recipe.model.UserRecipeBean;
 import recipe.model.UserRecipeBeanDao;
 import util.hibernate.HibernateUtil;
 
 @MultipartConfig
 @WebServlet("/Recipe/UserInsertRecipe")
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 public class UserInsertRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

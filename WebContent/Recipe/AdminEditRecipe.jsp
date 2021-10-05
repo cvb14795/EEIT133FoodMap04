@@ -77,7 +77,11 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     <header>
         <h1>修改食譜</h1>
     </header>
+<<<<<<< HEAD:WebContent/Recipe/AdminEditRecipe.jsp
+	<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
+=======
 	<jsp:useBean id="recipe" class="recipe.model.RecipeBean" scope="session"></jsp:useBean>
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:WebContent/Recipe/Edit.jsp
     <form action="./AdminEditRecipeServlet" method="post">
         <fieldset>
             <legend>官方食譜</legend>

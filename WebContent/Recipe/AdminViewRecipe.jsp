@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
+<<<<<<< HEAD
+<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
+=======
 <jsp:useBean id="recipe" class="recipe.model.RecipeBean" scope="session"></jsp:useBean>
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 <%
 response.setContentType("text/html;charset=UTF-8");
 response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1

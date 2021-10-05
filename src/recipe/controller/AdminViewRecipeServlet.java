@@ -1,6 +1,13 @@
+<<<<<<< HEAD
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+=======
 package recipe.controller;
 
 import java.io.IOException;
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -15,10 +22,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+<<<<<<< HEAD
+import model.RecipeBean;
+import util.HibernateUtil;
+
+@WebServlet("/AdminViewRecipeServlet")
+=======
 import recipe.model.RecipeBean;
 import util.hibernate.HibernateUtil;
 
 @WebServlet("/Recipe/AdminViewRecipeServlet")
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 public class AdminViewRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
