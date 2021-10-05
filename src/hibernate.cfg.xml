@@ -12,6 +12,7 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<mapping class="member.bean.Member" />
+		<mapping class="Food.model.MapData" />
 		<mapping class="Coupon.model.QuestionnaireBean" />
 		<mapping class="recipe.model.RecipeBean" />
 		<mapping class="recipe.model.UserRecipeBean" />

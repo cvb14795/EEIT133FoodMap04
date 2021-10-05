@@ -20,7 +20,7 @@ import util.hibernate.HibernateUtil;
  * Servlet implementation class Register
  */
 @WebServlet("/Food/DelData")
-public class DelData extends HttpServlet{
+public class DelData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -32,27 +32,28 @@ public class DelData extends HttpServlet{
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		  request.setCharacterEncoding("UTF-8");  //setup response character encoding type
-		  
-		  response.setContentType("text/html");   //setup response content type
-		  response.setCharacterEncoding("UTF-8"); //setup response character encoding type
-		  
 
-		  String param1 = request.getParameter("name");
+		request.setCharacterEncoding("UTF-8"); // setup response character encoding type
 
-		  SessionFactory factory = HibernateUtil.getSessionFactory();
-		  Session session = factory.getCurrentSession();
-		  
-		  MapDataDAO mDAO = new MapDataDAO(session);		  		  
-		  List<MapData> mapData = mDAO.findByName(param1);
-		  request.setAttribute("mapData", mapData.get(0));	
-		  mDAO.deleteMapDataByname(param1);
-		  request.getRequestDispatcher("./DelDataResult.jsp").forward(request, response);
+		response.setContentType("text/html"); // setup response content type
+		response.setCharacterEncoding("UTF-8"); // setup response character encoding type
+
+		String param1 = request.getParameter("name");
+
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		MapDataDAO mDAO = new MapDataDAO(session);
+		List<MapData> mapData = mDAO.findByName(param1);
+		request.setAttribute("mapData", mapData.get(0));
+		mDAO.deleteMapDataByname(param1);
+		request.getRequestDispatcher("./DelDataResult.jsp").forward(request, response);
 //		  try {
 //			mDAO.createConn();
 //			
@@ -69,7 +70,6 @@ public class DelData extends HttpServlet{
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-	  
-		  
+
 	}
 }
