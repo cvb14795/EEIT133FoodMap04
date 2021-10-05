@@ -17,6 +17,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import member.bean.Member;
 import member.dao.MemberService;
+import util.MemberStatus;
 import util.hibernate.HibernateUtil;
 
 /**
@@ -65,7 +66,8 @@ public class Login extends HttpServlet {
 		// 確認登入紀錄
 		Cookie[] cookies = request.getCookies();
 		// 使用者是否已有登入紀錄(cookie)
-		CheckLogin(cookies);
+		MemberStatus.setCookies(cookies);
+		isAlreadyLogin = MemberStatus.getLoginStatus(userName);
 
 		session.setAttribute("user", userName);
 		System.out.println("\nuser: " + userName);
@@ -126,21 +128,5 @@ public class Login extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 
-	}
-
-	private void CheckLogin(Cookie[] cookies) {
-		if (cookies != null) { // 有登入紀錄
-			for (Cookie cookie : cookies) {
-				if (cookie.getName() == "user") {
-					isAlreadyLogin = true;
-					userName = cookie.getName();
-					System.out.println("CookieName: " + cookie.getName());
-					System.out.println("CookieValue: " + cookie.getValue());
-					break;
-				} else {
-					isAlreadyLogin = false;
-				}
-			}
-		}
 	}
 }

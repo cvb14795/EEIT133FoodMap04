@@ -15,7 +15,7 @@
 		height:300px;
 		padding: 20px;
 	}
-	 
+	
 	td,th {
 		border: 1px solid;
 		width: 200px;
@@ -47,7 +47,7 @@
 
 		<div>
 			<input type='submit' value='送出'>
-			<input type="button" value="回首頁" onclick="self.location.href='fontpage.html'">
+			<input type="button" value="回首頁" onclick="location.href='frontpage.html'">
 		</div>
 
 </form>
@@ -59,7 +59,7 @@
 <%
 	List<QuestionnaireBean> vaccineList = (List<QuestionnaireBean>)request.getAttribute("vaccine");
 
-	if (vaccineList.isEmpty()){
+	if (null!=vaccineList && vaccineList.isEmpty()){
 %>
 		<h4>無資料</h4>
 <%
@@ -92,8 +92,8 @@
 			<td><%=	qbean.getGender() %></td>
 			<td><%=	qbean.getBirth() %></td>
 			<td><%=	qbean.getPhone() %></td>
-			<td><%=	qbean.getForeign() %></td>
-			<td><%=	qbean.getMove() %></td>
+			<td><%=	qbean.getAbroad() %></td>
+			<td><%=	qbean.getMoving() %></td>
 			<td><%=	qbean.getFamily() %></td>
 			<td><%=	qbean.getVaccine() %></td>
 			<td><%=	qbean.getFever() %></td>

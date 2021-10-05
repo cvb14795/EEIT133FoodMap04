@@ -12,5 +12,6 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 
 		<mapping class="member.bean.Member" />
+		<mapping class="Coupon.model.QuestionnaireBean" />
 	</session-factory>
 </hibernate-configuration>
