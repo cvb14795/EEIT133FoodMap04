@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>成功送出表單</h1>
-	<input type="button" value="回首頁" onclick="self.location.href='fontpage.html'">
+	<input type="button" value="回首頁" onclick="location.href='frontpage.html'">
 
-</body> 
+</body>
 </html>
