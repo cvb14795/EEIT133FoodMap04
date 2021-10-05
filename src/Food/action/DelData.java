@@ -1,7 +1,8 @@
-package Food.DelData;
+package Food.action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Food.bean.MapData;
-import Food.controller.MapDataDAO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import Food.model.MapData;
+import Food.model.MapDataDAO;
+import Food.util.HibernateUtil;
 
 /**
  * Servlet implementation class Register
@@ -41,25 +46,31 @@ public class DelData extends HttpServlet{
 
 		  String param1 = request.getParameter("name");
 
-		  MapDataDAO mDAO = new MapDataDAO();		  		  
+		  SessionFactory factory = HibernateUtil.getSessionFactory();
+		  Session session = factory.getCurrentSession();
 		  
-		  try {
-			mDAO.createConn();
-			
-			//先搜尋NAME對應的mapData
-			MapData mapData = mDAO.findByName(param1);
-			request.setAttribute("mapData", mapData);	
-			//有結果後刪除該NAME對應的資料
-			mDAO.deleteMapDataByname(param1);
-			
-			mDAO.closeConn();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	  
+		  MapDataDAO mDAO = new MapDataDAO(session);		  		  
+		  List<MapData> mapData = mDAO.findByName(param1);
+		  request.setAttribute("mapData", mapData.get(0));	
+		  mDAO.deleteMapDataByname(param1);
 		  request.getRequestDispatcher("./DelDataResult.jsp").forward(request, response);
+//		  try {
+//			mDAO.createConn();
+//			
+////			//先搜尋NAME對應的mapData
+//			
+//			
+//			//有結果後刪除該NAME對應的資料
+//			
+//			
+//			mDAO.closeConn();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+	  
+		  
 	}
 }
