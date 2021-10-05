@@ -10,14 +10,16 @@
 
 <body>
     <p>您好，已經將您登出！</p>
-    <p>5秒後跳轉回首頁... <span id="countDown"></span></p>
+    <p><span id="count"></span>秒後跳轉回首頁... <span id="countDown"></span></p><br/>
+    或<a href="../Home">點擊此處</a>立刻返回首頁
 
     <script>
-        var time = 5;
+        var time = 3;
+        document.getElementById("count").innerHTML = time;
         function redirectCountDown() {
             var cd = document.getElementById("countDown");
 
-            if (time == 0) {
+            if (time <= 0) {
                 clearInterval(this);
                 location.href = "../Home";
             } else {

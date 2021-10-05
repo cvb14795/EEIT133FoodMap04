@@ -33,10 +33,20 @@
             const userName = cookies.split("user=")[1];
             if (userName === undefined) {
                 console.log("使用者名稱:未定義 ");
+                // 未登入狀態下(登出後)顯示登入按鈕
+                $("#loginNavBtn").show();
+                // 未登入狀態下(登出後)隱藏登出按鈕
+                $("#logoutNavBtn").hide();
+                // 未登入顯示為Guest
                 $("#user").text("Guest");
                 console.log(document.getElementById("user").outerHTML);
             } else {
                 console.log(`使用者名稱:${userName}`);
+                // 已登入狀態下(登入後)隱藏登入按鈕
+                $("#loginNavBtn").hide();
+                // 已登入狀態下(登入後)顯示登出按鈕
+                $("#logoutNavBtn").show();
+                // 登入後顯示用戶名稱
                 $("#user").text(`${userName}`);
             }
 
@@ -129,12 +139,12 @@
                                 註冊會員 <i class="fas fa-user-plus"></i>
                             </a>
                         </li>
-                        <li>
+                        <li id="loginNavBtn">
                             <a data-toggle="tab" href="./Member/Login" data-url="./Member/Login">
                                 登入 <i class="fas fa-sign-in-alt"></i>
                             </a>
                         </li>
-                        <li>
+                        <li id="logoutNavBtn">
                             <a data-toggle="tab" href="./Member/Logout" data-url="./Member/Logout">
                                 登出 <i class="fas fa-sign-out-alt"></i>
                             </a>

@@ -8,9 +8,9 @@
     <title>RecipeForm</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <script src="./js/jquery-3.6.0.js"></script>
-    <script src="./js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/bootstrap.js"></script>
     <style>
         body {
             font-size: 20px;
@@ -80,6 +80,7 @@
 		<p>
 			<a href="./ViewRecipe" >食譜總查詢</a> <!-- 超連結 -> Get方法 -->
 		</p>
+        <span id="user"></span>
 		<form action="./RecipeServlet" method="post" enctype="multipart/form-data">
             <fieldset>
                 
@@ -148,6 +149,23 @@
             document.images[0].src=this.result;
         }
 
+        // 抓名稱為user的cookie
+        const cookieName = "user";
+        // 獲取該網域的所有cookie
+        const cookies = document.cookie;
+        // 由cookie名稱找cookie值
+        var cookieList = cookies.split(";");
+        console.log("cookies: "+ cookies);
+        console.log("cookieList: "+cookieList);
+        for (const cookie of cookieList) {
+        console.log("cookie: "+cookie);
+        if (cookie.includes(cookieName)) {
+            console.log(cookie.split(`${cookieName}=`))
+            var userName = cookie.split(`${cookieName}=`)[1];
+            console.log("userName: "+ userName);
+        }
+    }
+        $("#user").text(`使用者名稱：${userName}`);
     </script>
 
 </body>

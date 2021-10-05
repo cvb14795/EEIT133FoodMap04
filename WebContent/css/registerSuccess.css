@@ -1,3 +1,8 @@
+img {
+	width:200px;
+	height:200px;
+}
+
 table {
 /*     border: 3px black solid; */
     border-collapse: collapse;

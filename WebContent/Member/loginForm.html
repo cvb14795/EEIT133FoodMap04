@@ -16,7 +16,7 @@
     <style>
         #my-signin2 {
             display: flex;
-            justify-content: center; 
+            justify-content: center;
         }
     </style>
     <script src="../js/jquery-3.6.0.js"></script>
@@ -25,7 +25,7 @@
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </head>
 
-<body>    
+<body>
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
@@ -37,9 +37,9 @@
 
             <!-- Login Form -->
             <form action="./Login" method="POST" id="form">
-                <input type="text" id="account"  name="account" placeholder="請輸入帳號">
-                <input type="password" id="password"  name="password" placeholder="請輸入密碼">
-                <input type="submit" id="loginBtn"  value="登入" autocomplete="on">
+                <input type="text" id="account" name="account" placeholder="請輸入帳號">
+                <input type="password" id="password" name="password" placeholder="請輸入密碼" autocomplete="on">
+                <input type="submit" id="loginBtn" value="登入">
             </form>
 
             <div id="my-signin2"></div>
@@ -57,8 +57,9 @@
         var $account = $("#account");
         var $form = $("#form");
 
-        $form.on("submit", function() {
+        $form.on("submit", function (e) {
             console.log("偵測到使用者登入請求");
+
             Swal.fire({
                 position: 'center',
                 icon: 'info',
@@ -74,16 +75,36 @@
                 // confirmButtonText: "確定",
                 // confirmButtonClass: "btn btn-success",
                 // buttonsStyling: false
-            }).then(function () {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: '登入成功',
-                    html: "您好，" + $account.val() + "！",
-                    timer: 1500,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                })
+            })
+
+            $.ajax({
+                type: $form.attr("method"),
+                url: $form.attr("action"),
+                data: $form.serialize(),
+                success: function (data) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '登入成功',
+                        html: "您好，" + $account.val() + "！",
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    })
+                    location.href = "../Home";
+                },
+                error: function (params) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: '登入失敗',
+                        html: "帳戶名稱錯誤或密碼錯誤！",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    })
+                }
             })
         })
 

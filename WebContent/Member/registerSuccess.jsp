@@ -4,6 +4,7 @@
 <html>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>註冊成功</title>
     <link rel="stylesheet" href="../css/registerSuccess.css">
@@ -33,12 +34,28 @@
                 <td>
                     <jsp:getProperty name="member" property="phone" />
                 </td>
-                <td>
-                	<img style="width:400px; height:400px;" src="data:image/${imgExt};base64,${base64String}">
-                </td>
             </tr>
         </tbody>
     </table>
+
+    <br>
+    
+	<table>
+		<thead>
+			<tr>
+				<th>頭像</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<img src="data:image/${imgExt};base64,${base64String}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<br>
 
     <button id="confirmBtn" value="確定">確定</button>
 

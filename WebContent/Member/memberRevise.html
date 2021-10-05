@@ -17,10 +17,9 @@
 
 <body>
     <div class="container">
-        <!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
-        <form action="./Register" method="POST" enctype="multipart/form-data">
+        <form action="./Revise" method="POST" enctype="multipart/form-data">
             <fieldset>
-                <legend>註冊表單</legend>
+                <legend>修改會員資料</legend>
                 <div class="st1">
                     <label for="name" class="t1">姓名：</label>
                     <input type="text" name="name" id="name" class="formElem">
@@ -35,13 +34,13 @@
                 </div>
                 <div class="st1">
                     <label for="password" class="t1">密碼：</label>
-                    <input type="password" name="password" id="password" class="formElem">
+                    <input type="password" name="password" id="password" class="formElem" autocomplete="on">
                     <label for="password" id="passwordCheckMsg" class="validation"></label><br>
                     <span class="hint">(1.不可空白 2.至少6個字且必須包含英數字)</span>
                 </div>
                 <div class="st1">
                     <label for="passwordConfirm" class="t1">確認密碼：</label>
-                    <input type="password" name="passwordConfirm" id="passwordConfirm">
+                    <input type="password" name="passwordConfirm" id="passwordConfirm" class="formElem">
                     <label for="passwordConfirm" id="passwordConfirmCheckMsg" class="validation"></label><br>
                 </div>
                 <div class="st1">
@@ -73,13 +72,13 @@
 
     <script>
         validate("formElem");
-        //仍會送出 待DEBUG
         $("form").submit(function (e) {
             var invalid = $(".checkMsg").hasClass("incorrect");
             if (invalid){
                 return false;
             }
             return true;
+            
         })
     </script>
 </body>

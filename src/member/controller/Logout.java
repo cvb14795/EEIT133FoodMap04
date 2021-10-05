@@ -42,6 +42,6 @@ public class Logout extends HttpServlet {
 		// 使cookie立即失效
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		request.getRequestDispatcher("./GoodbyeUser.jsp").forward(request, response);
+		request.getRequestDispatcher("./goodbyeUser.jsp").forward(request, response);
 	}
 }
