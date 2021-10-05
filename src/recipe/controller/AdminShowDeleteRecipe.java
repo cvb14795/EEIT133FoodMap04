@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/recipe/controller/AdminShowDeleteRecipe.java
 package controller;
+=======
+package recipe.controller;
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:src/recipe/servelet/crud/Delete.java
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,9 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD:src/recipe/controller/AdminShowDeleteRecipe.java
 import model.RecipeBean;
 
 @WebServlet("/AdminShowDeleteRecipe")
+=======
+import recipe.model.RecipeBean;
+
+
+@WebServlet("/Recipe/AdminShowDeleteRecipe")
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:src/recipe/servelet/crud/Delete.java
 public class AdminShowDeleteRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

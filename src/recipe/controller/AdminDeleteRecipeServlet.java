@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package controller;
+=======
+package recipe.controller;
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 
 import java.io.IOException;
 
@@ -11,10 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+<<<<<<< HEAD
 import model.RecipeBeanDao;
 import util.HibernateUtil;
 
 @WebServlet("/AdminDeleteRecipeServlet")
+=======
+import recipe.model.RecipeBeanDao;
+import util.hibernate.HibernateUtil;
+
+@WebServlet("/Recipe/AdminDeleteRecipeServlet")
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 public class AdminDeleteRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

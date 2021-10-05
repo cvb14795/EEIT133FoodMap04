@@ -81,7 +81,11 @@ table {
 	<header>
 		<h1>請確認以下將刪除之資料</h1>
 	</header>
+<<<<<<< HEAD:WebContent/Recipe/AdminDeleteConfirm.jsp
 	<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
+=======
+	<jsp:useBean id="recipe" class="recipe.model.RecipeBean" scope="session"></jsp:useBean>
+>>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:WebContent/Recipe/DeleteConfirm.jsp
 	<form action="./AdminDeleteRecipeServlet" method="post">
 		<table>
 			<tr bgcolor="#FFFFE1">
