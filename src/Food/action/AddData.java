@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
 
 import Food.model.MapData;
 import Food.model.MapDataDAO;
-import Food.util.HibernateUtil;
+import util.hibernate.HibernateUtil;
 
 /**
  * Servlet implementation class Register
