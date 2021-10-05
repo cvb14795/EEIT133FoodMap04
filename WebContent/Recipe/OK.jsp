@@ -34,7 +34,7 @@ header {
 			showConfirmButton : false,
 			timer : 3000
 		})
-		setTimeout("location.href = 'RecipeForm.html'",3000);
+		setTimeout("location.href = 'AdminStartingPage.jsp'",3000);
 		
 	</script>
 </body>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <% 
 response.setContentType("text/html;charset=UTF-8");
@@ -77,8 +77,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
     <header>
         <h1>修改食譜</h1>
     </header>
-	<jsp:useBean id="recipe" class="recipe.bean.RecipeBean" scope="session"></jsp:useBean>
-    <form action="./EditController" method="post">
+	<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
+    <form action="./AdminEditRecipeServlet" method="post">
         <fieldset>
             <legend>官方食譜</legend>
             <div class="st1">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <%
 response.setContentType("text/html;charset=UTF-8");
@@ -13,7 +13,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>資料修改</title>
+<title>資料刪除</title>
 <style>
 body {
 	font-size: 20px;
@@ -81,8 +81,8 @@ table {
 	<header>
 		<h1>請確認以下將刪除之資料</h1>
 	</header>
-	<jsp:useBean id="recipe" class="recipe.bean.RecipeBean" scope="session"></jsp:useBean>
-	<form action="./DeleteController" method="post">
+	<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
+	<form action="./AdminDeleteRecipeServlet" method="post">
 		<table>
 			<tr bgcolor="#FFFFE1">
 				<td>品項:</td>

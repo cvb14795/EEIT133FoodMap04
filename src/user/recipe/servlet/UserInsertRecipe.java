@@ -1,15 +1,11 @@
-package recipe.servelet;
+package user.recipe.servlet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Base64;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,26 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.sql.DataSource;
 
-import recipe.bean.RecipeBean;
-import util.DbUtil;
+import recipe.bean.UserRecipeBean;
+import recipe.servelet.UserRecipeDAO;
 
-/**
- * Servlet implementation class RecipeServlet
- */
 @MultipartConfig
-@WebServlet("/Recipe/RecipeServlet")
-public class RecipeServlet extends HttpServlet {
+@WebServlet("/Recipe/UserInsertRecipe")
+public class UserInsertRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
 	private static final String CHARSET_CODE = "UTF-8";
 
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-	}
-
-	public RecipeServlet() {
+	public UserInsertRecipe() {
 		super();
 	}
 
@@ -57,12 +45,12 @@ public class RecipeServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public void gotoSubmit(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = request.getParameter("name").trim();
+		String userName = request.getParameter("userName").trim();
+		String foodName = request.getParameter("foodName").trim();
 		String category = request.getParameter("category").trim();
 		String food1 = request.getParameter("food1").trim();
 		String food2 = request.getParameter("food2").trim();
@@ -87,37 +75,27 @@ public class RecipeServlet extends HttpServlet {
 		// write bytes to bos
 		photo = bos.toByteArray();
 
-		RecipeBean recipe = new RecipeBean(name, category, food1, food2, food3, food4, sauce1, sauce2, sauce3, photo);
-		request.getSession(true).setAttribute("recipe", recipe);
-		String base64 = Base64.getEncoder().encodeToString(recipe.getPhoto());
+		UserRecipeBean uRecipe = new UserRecipeBean(userName, foodName, category, food1, food2, food3, food4, sauce1,
+				sauce2, sauce3, photo);
+		request.getSession(true).setAttribute("recipe", uRecipe);
+		String base64 = Base64.getEncoder().encodeToString(uRecipe.getPhoto());
 		request.getSession(true).setAttribute("base64Img", base64);
-		request.getRequestDispatcher("./Display.jsp").forward(request, response);
+		request.getRequestDispatcher("./user/UserConfirm.jsp").forward(request, response);
 
 	}
 
 	// 確認之後送進資料庫(新增)
 	public void gotoConfirm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-//		InitialContext ctxt = null;
-//		DataSource ds = null;
-//		Connection conn = null;
 
-//			// 建立Context Object,連到JNDI Server
-//			ctxt = new InitialContext();
-//			// 使用JNDI API找到DataSource
-//			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/EmployeeDB");
-//			// ds = ( DataSource ) ctxt.lookup("jdbc/OracleXE");
-//			// 向DataSource要Connection
-//			conn = ds.getConnection();
-
-		RecipeDAO recipeDAO = new RecipeDAO();
-		recipeDAO.createConn();
-		RecipeBean r = (RecipeBean) request.getSession(true).getAttribute("recipe");
-		if (recipeDAO.insertData(r)) {
+		UserRecipeDAO uRecipeDAO = new UserRecipeDAO();
+		uRecipeDAO.createConn();
+		UserRecipeBean uR = (UserRecipeBean) request.getSession(true).getAttribute("recipe");
+		if (uRecipeDAO.insertData(uR)) {
 			request.getSession(true).invalidate();
-			request.getRequestDispatcher("./Success.jsp").forward(request, response);
+			request.getRequestDispatcher("./user/UserSuccess.jsp").forward(request, response);
 		}
-		recipeDAO.closeConn();
+		uRecipeDAO.closeConn();
 
 	}
 
