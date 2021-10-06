@@ -1,143 +1,100 @@
 package Coupon.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import Coupon.model.QuestionnaireBean;
 import Coupon.model.QuestionnaireDAO;
-import Coupon.model.QuestionnaireDAOFactor;
+import util.hibernate.HibernateUtil;
 
 /**
- * Servlet implementation class Check
+ * Servlet implementation class controller
  */
-@WebServlet("/Coupon/controller")
+@WebServlet(name = "Controller", 
+			urlPatterns = {"/Coupon/controller"},
+			initParams = {
+			// 設定初始參數
+					@WebInitParam(name="SUCCESS", value="send_success.jsp"),//成功路徑
+					@WebInitParam(name="ERROR", value="send_error.jsp")   //失敗路徑
+			})
+
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String RECORD = "./records";
-	private final String SUCCESS_PATH = "send_success.jsp";
-	private final String ERROR_PATH = "send_error.jsp";
+	private String SUCCESS_PATH;
+	private String ERROR_PATH;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Controller() {
+        super();
+    }
+    
+    @Override
+    public void init() throws ServletException {
+    	// 取得初始參數
+		SUCCESS_PATH = getInitParameter("SUCCESS");
+		ERROR_PATH = getInitParameter("ERROR");
+    }
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Controller() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	processAction(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	processAction(request, response);
+    }
+	
+	protected void processAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-
+		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		String birth = request.getParameter("birth");
 		String phone = request.getParameter("phone");
-		String foreign = request.getParameter("foreign");
-		String move = request.getParameter("move");
+		String abroad = request.getParameter("foreign");
+		String moving = request.getParameter("move");
 		String family = request.getParameter("family");
 		String vaccine = request.getParameter("vaccine");
 		String fever = request.getParameter("fever");
+		String label = "0";
+		String path = null;
 		
-		QuestionnaireDAO questionnaireDAOFactor = QuestionnaireDAOFactor.getQuestionnaireDAO();
-			
-		Path userhome = Paths.get(RECORD);
-		System.out.println("Record檔路徑: "+userhome);
-		String path;
-//		if (!(checkProfile(userhome, id))) {
-		// 測試 不使用record
-		if(true) {
-			path = SUCCESS_PATH;
-//			createUser(userhome, id);
-			try {
-				questionnaireDAOFactor.createConn(); // 開啟資料庫連線
-				
-				//設置Bean
-				QuestionnaireBean qbean = new QuestionnaireBean();
-				qbean.setName(name);
-				qbean.setId(id);
-				qbean.setBirth(birth);
-				qbean.setGender(gender);
-				qbean.setPhone(phone);
-				qbean.setForeign(foreign);
-				qbean.setMove(move);
-				qbean.setFamily(family);
-				qbean.setVaccine(vaccine);
-				qbean.setFever(fever);
-				qbean.setLabel("0");     //是否發放優惠劵
-				questionnaireDAOFactor.addNewData(qbean);
-				
-			}catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}finally {
-				try {
-					questionnaireDAOFactor.closeConn();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		}else {
-			
+	
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		//設置Java Bean
+		QuestionnaireBean qBean = new QuestionnaireBean(id, name, gender, birth, phone, 
+				abroad, moving, family, vaccine, fever, label);
+		
+		
+		try {
+			QuestionnaireDAO qDAO = new QuestionnaireDAO(session);
+			qDAO.addNewData(qBean);
+			path = SUCCESS_PATH;	
+		} catch (Exception e) {
+//			e.printStackTrace();
+			System.out.println("帳號重複 已註冊過!");
 			path = ERROR_PATH;
-			
+		} finally {
+			request.getRequestDispatcher(path).forward(request, response);
 		}
-		request.getRequestDispatcher(path).forward(request, response);
+		
 		
 	}
-	
-	// 將身分證字號寫入profile
-		private void createUser(Path userhome, String id) throws IOException {
-			Path profile = userhome.resolve("profile");
-			try (BufferedWriter writer = Files.newBufferedWriter(profile, StandardOpenOption.APPEND, StandardOpenOption.CREATE)){
-				writer.write("\n"+id);
-				
-			}
-		}
-	
-	// 檢查是否填過問卷
-	private boolean checkProfile(Path userhome, String id) throws IOException {
-		boolean adj = false;
-		String existId;
-		Path profile = userhome.resolve("profile");
-		try (BufferedReader reader = Files.newBufferedReader(profile)){
-			while ((existId=reader.readLine())!=null) {
-				if (existId.equals(id)) {
-					adj =  true;
-					break;
-				} else {
-					adj = false;
-				}
-			}
-		}
-		
-		return adj;
-		
-	}
-	
-	
-
-
 
 }

@@ -1,7 +1,6 @@
 package Coupon.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import Coupon.model.QuestionnaireBean;
 import Coupon.model.QuestionnaireDAO;
-import Coupon.model.QuestionnaireDAOFactor;
+import util.gmail.Mail;
+import util.hibernate.HibernateUtil;
+
+
 
 /**
  * Servlet implementation class AdministratorController
@@ -26,7 +31,6 @@ public class AdministratorController extends HttpServlet {
      */
     public AdministratorController() {
         super();
-        // TODO Auto-generated constructor stub
     }
  
 	/**
@@ -37,71 +41,64 @@ public class AdministratorController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
+		
 		String action = request.getParameter("action");
-		QuestionnaireDAO questionnaireDAOFactor = QuestionnaireDAOFactor.getQuestionnaireDAO();
+		SessionFactory factory = HibernateUtil.getSessionFactory();
+		Session session = factory.getCurrentSession();
+		
 		
 		if (action.equals("R")){
 			try {
-				PATH = "view.jsp";
-				questionnaireDAOFactor.createConn();
-				List<QuestionnaireBean> vaccine = questionnaireDAOFactor.QueryDataByVaccine();
 				
+				QuestionnaireDAO qDAO = new QuestionnaireDAO(session);
+				
+				PATH = "view.jsp";  
+				List<QuestionnaireBean> vaccine = qDAO.QueryDataByVaccine();
 				request.setAttribute("vaccine", vaccine);
-				request.getRequestDispatcher(PATH).forward(request, response);
 				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
-					questionnaireDAOFactor.closeConn();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				request.getRequestDispatcher(PATH).forward(request, response);
 			}
+			
 		}else if (action.equals("U")) {
 				try {
+					
+					QuestionnaireDAO qDAO = new QuestionnaireDAO(session);
+					
 					PATH = "view2.jsp";
-					questionnaireDAOFactor.createConn();
-					List<QuestionnaireBean> sendCouponsUsers = questionnaireDAOFactor.SendCouponsUsers();
+					List<QuestionnaireBean> sendUsersCoupons = qDAO.SendUsersCoupons();
+//					Mail.SendGmail(action, action, action, action);
 					
-					request.setAttribute("sendCouponsUsers", sendCouponsUsers);
-					request.getRequestDispatcher(PATH).forward(request, response);
+					for(QuestionnaireBean b:sendUsersCoupons) {
+						System.out.println(b.getId());
+					}
 					
-				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
+					request.setAttribute("sendUsersCoupons", sendUsersCoupons);
+					
+					
+				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
-					try {
-						questionnaireDAOFactor.closeConn();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					request.getRequestDispatcher(PATH).forward(request, response);
 				}
 				
 		}else if (action.equals("B")) {
 			try {
-				PATH = "view3.jsp";
-				questionnaireDAOFactor.createConn();
-				List<QuestionnaireBean> revokeCouponsUsers = questionnaireDAOFactor.revokeCouponsUsers();
 				
-				request.setAttribute("revokeCouponsUsers", revokeCouponsUsers);
-				request.getRequestDispatcher(PATH).forward(request, response);
+				QuestionnaireDAO qDAO = new QuestionnaireDAO(session);
+				
+				PATH = "view3.jsp";
+				List<QuestionnaireBean> revokeUsersCoupons = qDAO.revokeUsersCoupons();
+				
+				request.setAttribute("revokeUsersCoupons", revokeUsersCoupons);
+				
 			} catch (Exception e) {			
-				// TODO: handle exception
 				e.printStackTrace();
 			} finally {
-				try {
-					questionnaireDAOFactor.closeConn();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				request.getRequestDispatcher(PATH).forward(request, response);
 			}
 		}
 	}

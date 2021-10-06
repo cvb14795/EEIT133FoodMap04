@@ -16,7 +16,7 @@
 		height:300px;
 		padding: 20px;
 	}
-	 
+	
 	td,th {
 		border: 1px solid;
 		width: 200px;
@@ -48,7 +48,7 @@
 
 		<div>
 			<input type='submit' value='送出'>
-			<input type="button" value="回首頁" onclick="self.location.href='fontpage.html'">
+			<input type="button" value="回首頁" onclick="self.location.href='frontpage.html'">
 		</div>
 
 </form>
@@ -58,7 +58,7 @@
 
 <div class='box1'>
 <%
-	List<QuestionnaireBean> couponList = (List<QuestionnaireBean>)request.getAttribute("revokeCouponsUsers");
+	List<QuestionnaireBean> couponList = (List<QuestionnaireBean>)request.getAttribute("revokeUsersCoupons");
 
 	if (couponList.isEmpty()){
 %>
@@ -104,15 +104,15 @@
 	
 <%-- %> --%>
 
-					<c:forEach var="user" items="${revokeCouponsUsers}" >
+					<c:forEach var="user" items="${revokeUsersCoupons}" >
 						<tr>
 							<td>${user.id}</td>
 							<td>${user.name}</td>
 							<td>${user.gender}</td>
 							<td>${user.birth}</td>
 							<td>${user.phone}</td>
-							<td>${user.foreign}</td>
-							<td>${user.move}</td>
+							<td>${user.abroad}</td>
+							<td>${user.moving}</td>
 							<td>${user.family}</td>
 							<td>${user.vaccine}</td>
 							<td>${user.fever}</td>

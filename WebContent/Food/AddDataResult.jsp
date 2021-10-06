@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:useBean id="mapData" class="Food.bean.MapData" scope="request"/>
+<jsp:useBean id="mapData" class="Food.model.MapData" scope="request"/>
 <!DOCTYPE html>
 <html>
 
