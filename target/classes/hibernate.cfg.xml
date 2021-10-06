@@ -7,11 +7,10 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
-		
-		 <!-- 跟 getCurrentSession 配合 -->
-        <property name="hibernate.current_session_context_class">thread</property>
 
-		<mapping class="member.bean.Member"/>
-		
+		<!-- 跟 getCurrentSession 配合 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<mapping class="member.bean.Member" />
 	</session-factory>
 </hibernate-configuration>
