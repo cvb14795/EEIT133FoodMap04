@@ -1,17 +1,39 @@
-package Food.bean;
+package Food.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity @Table(name = "MapData")
 public class MapData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id @Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mapDataId;
+	
+	@Column(name = "mapname")
 	private String mapname;
+	
+	@Column(name = "mapku")
 	private String mapku;
+	
+	@Column(name = "mapnb")
 	private String mapnb;
+	
+	@Column(name = "mapxy")
 	private String mapxy;
+	
+	@Column(name = "mapcheck")
 	private String mapcheck;
+	
+	@Column(name = "img")
 	private String imgName;
 
 	public MapData() {

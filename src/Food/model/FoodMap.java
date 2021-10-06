@@ -1,4 +1,4 @@
-package Food.controller;
+package Food.model;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -26,8 +26,9 @@ public class FoodMap extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+//		// TODO Auto-generated method stub
 		request.getRequestDispatcher("./RestaurantMap.html").forward(request, response);
+		
 	}
 
 }
