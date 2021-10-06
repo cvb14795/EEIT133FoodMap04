@@ -15,6 +15,12 @@ public class Mail {
 	private static String userAccount = "foodmap04@gmail.com";
 	private static String userPassword = "food04map!";
 	
+	/**
+	 * @param from 寄件者(預設為userAccount)
+	 * @param to 收件者
+	 * @param subject 主旨
+	 * @param text 內文(可包含HTML元素)
+	 */
 	public static void SendGmail(String from, String to, String subject, String text) {
 		String host = "smtp.gmail.com";
 

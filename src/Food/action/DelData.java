@@ -1,7 +1,6 @@
 package Food.action;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,7 @@ import org.hibernate.SessionFactory;
 
 import Food.model.MapData;
 import Food.model.MapDataDAO;
-import Food.util.HibernateUtil;
+import util.hibernate.HibernateUtil;
 
 /**
  * Servlet implementation class Register
