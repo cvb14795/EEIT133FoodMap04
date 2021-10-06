@@ -33,11 +33,7 @@ header {
 	<header>
 		<h1>食譜確認</h1>
 	</header>
-<<<<<<< HEAD:WebContent/Recipe/AdminInsertConfirm.jsp
-	<jsp:useBean id="recipe" class="model.RecipeBean" scope="session"></jsp:useBean>
-=======
 	<jsp:useBean id="recipe" class="recipe.model.RecipeBean" scope="session"></jsp:useBean>
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:WebContent/Recipe/Display.jsp
 	<form action="./AdminInsertRecipeServlet" method="post">
 		<table>
 			<tr bgcolor="#FFFFE1">

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-package controller;
-=======
 package recipe.controller;
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,21 +16,12 @@ import javax.servlet.http.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-<<<<<<< HEAD
-import model.RecipeBean;
-import model.RecipeBeanDao;
-import util.HibernateUtil;
-
-@MultipartConfig
-@WebServlet("/AdminInsertRecipeServlet")
-=======
 import recipe.model.RecipeBean;
 import recipe.model.RecipeBeanDao;
 import util.hibernate.HibernateUtil;
 
 @MultipartConfig
 @WebServlet("/Recipe/AdminInsertRecipeServlet")
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 public class AdminInsertRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

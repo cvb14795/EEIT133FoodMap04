@@ -33,11 +33,7 @@ header {
 	<header>
 		<h1>食譜確認</h1>
 	</header>
-<<<<<<< HEAD
-	<jsp:useBean id="uRecipe" class="model.UserRecipeBean" scope="session"></jsp:useBean>
-=======
 	<jsp:useBean id="uRecipe" class="recipe.model.UserRecipeBean" scope="session"></jsp:useBean>
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 	<form action="./UserInsertRecipe" method="post">
 		<table>
 			<tr bgcolor="#F2F4FB">

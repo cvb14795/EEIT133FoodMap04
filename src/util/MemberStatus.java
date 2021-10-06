@@ -41,17 +41,13 @@ public class MemberStatus {
 		StringBuilder sb = new StringBuilder();
 		if (cookies != null) { // 有登入紀錄
 			for (Cookie cookie : cookies) {
-				String CookieName = cookie.getName();
-				String CookieValue = cookie.getValue();
-				System.out.println("value:'" + CookieName+"'");
-				if (CookieName == "user") {
-					sb.append(CookieValue);
-					System.out.println("CookieName: " + CookieName);
-					System.out.println("CookieValue: " + CookieValue);
+				if (cookie.getName() == "user") {
+					sb.append(cookie.getName());
+					System.out.println("CookieName: " + cookie.getName());
+					System.out.println("CookieValue: " + cookie.getValue());
 					break;
 				} 
 			}
-			System.out.println("userName:" + sb.toString());
 		}
 		return sb.toString();
 	}
