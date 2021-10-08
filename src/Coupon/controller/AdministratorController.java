@@ -14,7 +14,6 @@ import org.hibernate.SessionFactory;
 
 import Coupon.model.QuestionnaireBean;
 import Coupon.model.QuestionnaireDAO;
-import util.gmail.Mail;
 import util.hibernate.HibernateUtil;
 
 
