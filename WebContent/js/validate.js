@@ -76,8 +76,8 @@ function validate(formElem) {
                     isTooShort = true;
                     console.log("too short");
                     msg = "該欄位至少須6字元以上";
+                    break;
                 }
-                break;
 
                 for (let i = 0; i < val.length; i++) {
                     var char = val.charAt(i);

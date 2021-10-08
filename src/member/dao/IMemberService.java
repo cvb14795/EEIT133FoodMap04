@@ -15,6 +15,9 @@ public interface IMemberService {
 	// 查詢單筆資料
 	Member selectMemberByAccount(String userAccount);
 
+	// 查詢會員是否具有管理者權限
+	boolean isAdmin(String userAccount);
+
 	// 更新資料
 	// 若沒有要更新的資料(屬性) m的屬性請留空
 	Member updateMember(String userAccount, Member m);

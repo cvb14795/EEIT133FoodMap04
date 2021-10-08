@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <%
 response.setContentType("text/html;charset=UTF-8");
@@ -12,36 +14,70 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <meta charset="UTF-8">
 <title>查詢食譜</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/jquery-3.6.0.js"></script>
+<script src="../js/bootstrap.js"></script>
 <style>
     header {
-	background:	#9393FF;
-	color: white;
-	padding: 20px;
-	text-align: center;
-	margin-bottom: 10px;
-}
+		background:	#9393FF;
+		color: white;
+		padding: 20px;
+		text-align: center;
+		margin-bottom: 10px;
+	}
 </style>
 </head>
 <body>
-	<script src="/WebContent/js/jquery-3.6.0.js"></script>
+	<input type="hidden" id="isAdmin" value="${sessionScope.isAdmin}">
+	<input type="hidden" id="userName" value="${sessionScope.user}">
 	<header>
 		<h1>食譜查詢</h1>
 	</header>
+
+	<div class="text-right">
+ 		會員：
+ 		<span id="userNameContainer"></span>
+	</div>
+	<div class="text-right">
+ 		身分：
+ 		<span id="isAdminContainer"></span>
+	</div>
+
 	<form action="./UserStartingPage.jsp">
 		<input type="submit" value="首頁">
 	</form>
 	<form action="./AdminViewRecipeServlet" method="Post">
-		<button type="submit" name="confirm"><i class="fas fa-pizza-slice"></i>查詢官方食譜</button>
+		<button type="submit" name="confirm" class="adminScope"><i class="fas fa-pizza-slice"></i>查詢官方食譜</button>
 	</form>
 	<form action="./UserInsertRecipe.jsp" method="Post">
-		<button type="submit" name="submit">新增個人食譜</button>
+		<button type="submit" name="submit" class="userScope">新增您的個人食譜</button>
 	</form>
 	<form action="" method="Post">
-		<button type="submit" name="submit">查詢個人食譜</button>
+		<button type="submit" name="submit" class="userScope">查詢您的個人食譜</button>
 	</form>
 	<form action="" method="Post">
-		<button type="submit" name="submit">查詢會員食譜</button>
+		<button type="submit" name="submit" class="userScope">查詢所有會員食譜</button>
 	</form>
+
+	<script>
+		// 獲取登入帳號 並顯示於該標籤
+		let userName = $("#userName").val();
+		$("#userNameContainer").text(userName);
+		// 判斷是否具有管理員權限
+		let isAdmin = $("#isAdmin").val();
+		if(isAdmin === true){
+			$("#isAdminContainer").text("管理者");
+			// 若是管理員則只顯示管理員功能 並隱藏使用者功能
+			$(".userScope").hide();
+			$(".adminScope").show();
+		} else {
+			$("#isAdminContainer").text("一般會員");
+			// 若是使用者則只顯示使用者能操作的功能 並隱藏管理員功能
+			$(".userScope").show();
+			$(".adminScope").hide();
+		}
+	</script>
+
 </body>
 
 </html>

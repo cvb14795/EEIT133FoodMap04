@@ -75,6 +75,7 @@ public class Register extends HttpServlet {
 			// 密碼+10位鹽值hash
 			String hashpw = BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt(10));
 			String name = request.getParameter("name");
+			String id = request.getParameter("id");
 			String address = request.getParameter("address");
 			String phone = request.getParameter("phone");
 			String email = request.getParameter("email");
@@ -107,7 +108,7 @@ public class Register extends HttpServlet {
 
 			imgBytes = baos.toByteArray();
 
-			Member m = new Member(account, hashpw, name, address, phone, imgBytes, email);
+			Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
 //				mDAO.addMember(m);
 			mService.insertMember(m);
 			request.setAttribute("member", m);

@@ -4,51 +4,52 @@ import javax.servlet.http.Cookie;
 
 
 public class MemberStatus {
-	private static Cookie[] cookies;
-
-	public static void setCookies(Cookie[] cookies) {
-		MemberStatus.cookies = cookies;
+	private Cookie[] cookies;
+	
+	public MemberStatus(Cookie[] cookies) {
+		this.cookies = cookies;
 	}
-
+	
 	/**
 	 * @param userName 要查詢登入狀態的使用者名稱
 	 * @return 該帳號使用者現在是否有登入
 	 */
-	public static boolean getLoginStatus(String userName) {
-		boolean isAlreadyLogin=false;
-		
+	public boolean getLoginStatus(String userName) {
 		if (cookies != null) { // 有登入紀錄
 			for (Cookie cookie : cookies) {
-				if (cookie.getName() == "user") {
-					isAlreadyLogin = true;
-					userName = cookie.getName();
-					
-					System.out.println("CookieName: " + cookie.getName());
-					System.out.println("CookieValue: " + cookie.getValue());
-					break;
-				} else {
-					isAlreadyLogin = false;
+				// 兩個沒有放在字串池的字串不能用== 要用equals
+//				if (cookie.getName() == "user") {
+				if(cookie.getName().equals("user")) {
+					System.out.println("getLoginStatus, 獲取用戶登入名稱: " + cookie.getValue());
+					return cookie.getValue() == userName;
 				}
 			}
+		} else {
+			System.out.println("沒有Cookie!");
 		}
-		return isAlreadyLogin;
+		return false;
 	}
 	
 	/**
 	 * @return 現正登入的使用者名稱
 	 */
-	public static String getCurrentUserAccount() {
-		StringBuilder sb = new StringBuilder();
+	public String getCurrentUserAccount() {
+		String userName = "";
 		if (cookies != null) { // 有登入紀錄
 			for (Cookie cookie : cookies) {
-				if (cookie.getName() == "user") {
-					sb.append(cookie.getName());
-					System.out.println("CookieName: " + cookie.getName());
-					System.out.println("CookieValue: " + cookie.getValue());
+				// cookies: null for會拋NullPointerException
+				if (cookie.getName().equals("user")) {
+					userName = cookie.getValue();
+					System.out.println("getCurrentUserAccount, 獲取用戶登入名稱: " + cookie.getValue());
 					break;
 				} 
 			}
+		} else {
+			System.out.println("沒有Cookie!");
 		}
-		return sb.toString();
+		
+		return userName;
 	}
+
+	
 }

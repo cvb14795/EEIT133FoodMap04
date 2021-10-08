@@ -44,4 +44,10 @@ public class MemberService implements IMemberService {
 		return mDAO.deleteMemberByAccount(userAccount);
 	}
 
+	@Override
+	public boolean isAdmin(String userAccount) {
+		// TODO Auto-generated method stub
+		return mDAO.isAdmin(userAccount);
+	}
+
 }

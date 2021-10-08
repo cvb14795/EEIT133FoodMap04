@@ -65,6 +65,13 @@ public class MemberDAO implements IMemberDao {
 		return false;
 	}
 
+	@Override
+	public boolean isAdmin(String userAccount) {
+		// TODO Auto-generated method stub
+		Member resultMember = session.get(Member.class, userAccount);
+		return resultMember.isAdmin();
+	}
+
 	
 
 	

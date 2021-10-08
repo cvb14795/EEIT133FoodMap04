@@ -22,19 +22,19 @@ public class OpenSessionViewFilter implements Filter {
 		
 		try {
 			session.beginTransaction();
-			System.out.println("Transaction Begin.");
+//			System.out.println("Transaction Begin.");
 			
 			// chain.doFilter() 是分水嶺
 			chain.doFilter(request, response);
 			
 			session.getTransaction().commit();
-			System.out.println("Transaction Commit.");
+//			System.out.println("Transaction Commit.");
 		}catch(Exception e) {
 			session.getTransaction().rollback();
 			System.out.println("Transaction RollBack.");
 			e.printStackTrace();
 		}finally {
-			System.out.println("Session Closed.");
+//			System.out.println("Session Closed.");
 		}
 	}
 }
