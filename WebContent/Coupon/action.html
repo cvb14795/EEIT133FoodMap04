@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>管理員專用</title>
+	<meta charset="UTF-8">
+	<title>管理員專用</title>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/memberDetail.css">
+	<script src="../js/jquery-3.6.0.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script>
+		$(function () {
+			const cookies = `${document.cookie}`;
+			console.log(`cookies: ${cookies}`);
+			let userName = cookies.split("user=")[1];
+			$("#user").text(`${userName}`);
+		})
+	</script>
 </head>
+
 <body>
+	<div class="text-right memberDetail">
+        您好，<span id="user"></span>！
+    </div>
+
 	<form action='administratorcontroller' method='post'>
 		<div>
 			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
-			<label><input type='radio' name='action' value='U'>發放折價券</label>
-			<label><input type='radio' name='action' value='B'>撤回</label>
+				<label><input type='radio' name='action' value='U'>發放折價券</label>
+				<label><input type='radio' name='action' value='B'>撤回</label>
 		</div>
 
 		<div>
@@ -20,4 +38,5 @@
 	</form>
 
 </body>
+
 </html>

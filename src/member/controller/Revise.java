@@ -141,6 +141,7 @@ public class Revise extends HttpServlet {
 		byte[] imgBytes;
 		// 加密圖片byte資料為base64編碼後之字串
 		String base64String;
+		//有必要在修改後再顯示用戶修改後的圖片嗎？ 要的話還要再加一個jsp去顯示
 
 		InputStream is = imgPart.getInputStream();
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -160,6 +161,10 @@ public class Revise extends HttpServlet {
 		System.out.println("地址:" + m.getAddress());
 		System.out.println("電話:" + m.getPhone());
 		System.out.println("電子郵件:" + m.getEmail());
+		
+		/* 待完工 */
+		// 回首頁 但在這之前先加一個jsp 用ajax給他swal
+		response.sendRedirect("../Home");
 	}
 
 }

@@ -12,9 +12,12 @@ public interface IMemberService {
 	// 查詢資料
 	List<Member> selectAllMember();
 
-	// 查詢單筆資料
+	// 由帳號查詢單筆資料
 	Member selectMemberByAccount(String userAccount);
 
+	// 由身分證字號(ID)查詢單筆資料
+	public Member selectMemberById(String id);
+	
 	// 查詢會員是否具有管理者權限
 	boolean isAdmin(String userAccount);
 

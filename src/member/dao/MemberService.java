@@ -33,6 +33,12 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
+	public Member selectMemberById(String id) {
+		// TODO Auto-generated method stub
+		return mDAO.selectMemberById(id);
+	}
+	
+	@Override
 	public Member updateMember(String userAccount, Member m) {
 		// TODO Auto-generated method stub
 		return mDAO.updateMember(userAccount, m);
@@ -49,5 +55,6 @@ public class MemberService implements IMemberService {
 		// TODO Auto-generated method stub
 		return mDAO.isAdmin(userAccount);
 	}
+
 
 }

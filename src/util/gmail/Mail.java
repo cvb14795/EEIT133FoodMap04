@@ -59,7 +59,7 @@ public class Mail {
 			// Send message
 			Transport.send(message);
 
-			System.out.println("Sent message successfully....");
+			System.out.println("郵件寄送成功!");
 
 		} catch (NoSuchProviderException e) {
 			// TODO Auto-generated catch block

@@ -9,6 +9,16 @@
 <head>
 <meta charset="UTF-8">
 <title>管理員專用</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/memberDetail.css">
+<script src="../js/jquery-3.6.0.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/memberAuth.js"></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 
 <style>
 	.box1{
@@ -39,6 +49,19 @@
 </head>
 
 <body>
+<input type="hidden" id="isAdmin" value="${isAdmin}">
+<input type="hidden" id="userName" value="${user}">
+<div class="memberDetail">
+	<div class="text-right">
+		會員：
+		<span id="userNameContainer"></span>
+	</div>
+	<div class="text-right">
+		身分：
+		<span id="isAdminContainer"></span>
+	</div>
+</div>
+
 <form action='administratorcontroller' method='post'>
 		<div>
 			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>

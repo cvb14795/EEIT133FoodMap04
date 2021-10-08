@@ -2,6 +2,9 @@ package member.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -35,6 +38,25 @@ public class MemberDAO implements IMemberDao {
 	public Member selectMemberByAccount(String userAccount) {
 		// TODO Auto-generated method stub
 		Member resultMember = session.get(Member.class, userAccount);
+		return resultMember;
+	}
+	
+	@Override
+	public Member selectMemberById(String id) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Member as m WHERE m.id = :id";
+		Member resultMember = null;
+		try {
+			resultMember = session.createQuery(hql, Member.class).setParameter("id", id).getSingleResult();			
+		} catch (NonUniqueResultException e) {
+			// TODO: handle exception
+//			System.out.println("在selectMemberById方法出現錯誤：\n"+e.getMessage());
+//			System.out.println("於ID（身分證字號）為："+id+"之會員出現錯誤：\n該身份證字號對應一筆以上之帳號 因此無法特定某一位會員");
+		} catch (NoResultException e) {
+			// TODO: handle exception
+//			System.out.println("在selectMemberById方法出現錯誤：\n"+e.getMessage());
+//			System.out.println("於ID（身分證字號）為："+id+"之會員出現錯誤：\n找不到該身分證對應之會員");
+		}
 		return resultMember;
 	}
 

@@ -15,8 +15,15 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <title>查詢食譜</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/memberDetail.css">
 <script src="../js/jquery-3.6.0.js"></script>
 <script src="../js/bootstrap.js"></script>
+<script src="../js/memberAuth.js"></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 <style>
     header {
 		background:	#9393FF;
@@ -34,13 +41,15 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<h1>食譜查詢</h1>
 	</header>
 
-	<div class="text-right">
- 		會員：
- 		<span id="userNameContainer"></span>
-	</div>
-	<div class="text-right">
- 		身分：
- 		<span id="isAdminContainer"></span>
+	<div class="memberDetail">
+		<div class="text-right">
+			會員：
+			<span id="userNameContainer"></span>
+		</div>
+		<div class="text-right">
+			身分：
+			<span id="isAdminContainer"></span>
+		</div>
 	</div>
 
 	<form action="./UserStartingPage.jsp">
@@ -58,25 +67,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	<form action="" method="Post">
 		<button type="submit" name="submit" class="userScope">查詢所有會員食譜</button>
 	</form>
-
-	<script>
-		// 獲取登入帳號 並顯示於該標籤
-		let userName = $("#userName").val();
-		$("#userNameContainer").text(userName);
-		// 判斷是否具有管理員權限(它是string 不能使用if(isAdmin))
-		let isAdmin = $("#isAdmin").val();
-		if(isAdmin === "true"){
-			$("#isAdminContainer").text("管理者");
-			// 若是管理員則只顯示管理員功能 並隱藏使用者功能
-			$(".userScope").hide();
-			$(".adminScope").show();
-		} else if ((isAdmin === "false")){
-			$("#isAdminContainer").text("一般會員");
-			// 若是使用者則只顯示使用者能操作的功能 並隱藏管理員功能
-			$(".userScope").show();
-			$(".adminScope").hide();
-		}
-	</script>
 
 </body>
 
