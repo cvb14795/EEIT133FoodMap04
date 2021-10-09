@@ -9,11 +9,7 @@ response.setHeader("Pragma", "no-cache"); // HTTP 1.0
 response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
-<<<<<<< HEAD
-<jsp:useBean id="recipe" class="model.UserRecipeBean" scope="session"></jsp:useBean>
-=======
 <jsp:useBean id="recipe" class="recipe.model.UserRecipeBean" scope="session"></jsp:useBean>
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>

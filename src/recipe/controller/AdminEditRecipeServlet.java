@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-package controller;
-
-import java.io.IOException;
-=======
 package recipe.controller;
 
 import java.io.IOException;
 
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,17 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-<<<<<<< HEAD
-import model.RecipeBeanDao;
-import util.HibernateUtil;
-
-@WebServlet("/AdminEditRecipeServlet")
-=======
 import recipe.model.RecipeBeanDao;
 import util.hibernate.HibernateUtil;
 
 @WebServlet("/Recipe/AdminEditRecipeServlet")
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
 public class AdminEditRecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

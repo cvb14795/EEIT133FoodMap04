@@ -34,13 +34,13 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		<button type="submit" name="confirm"><i class="fas fa-pizza-slice"></i>查詢官方食譜</button>
 	</form>
 	<form action="./UserInsertRecipe.jsp" method="Post">
-		<button type="submit" name="submit">新增個人食譜</button>
+		<button type="submit" name="submit">新增您的個人食譜</button>
 	</form>
 	<form action="" method="Post">
-		<button type="submit" name="submit">查詢個人食譜</button>
+		<button type="submit" name="submit">查詢您的個人食譜</button>
 	</form>
-	<form action="" method="Post">
-		<button type="submit" name="submit">查詢會員食譜</button>
+	<form action="./UserViewMembersRecipe" method="Post">
+		<button type="submit" name="submit">查詢所有會員食譜</button>
 	</form>
 </body>
 

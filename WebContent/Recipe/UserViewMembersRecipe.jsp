@@ -21,7 +21,7 @@ table {
 }
 
 header {
-	background: #FFBB77;
+	background: #9393FF;
 	color: white;
 	padding: 20px;
 	text-align: center;
@@ -46,7 +46,7 @@ thead {
 	<header>
 		<h1>食譜查詢</h1>
 	</header>
-	<form action="./AdminStartingPage.jsp">
+	<form action="./UserStartingPage.jsp">
 		<input type="submit" value="首頁">
 	</form>
 
@@ -72,7 +72,9 @@ thead {
 						<tr bgcolor="#FFFFE1">
 							<td>${lists.get(i).id}</td>
 
-							<td>${lists.get(i).name}</td>
+							<td>${lists.get(i).userName}</td>
+							
+							<td>${lists.get(i).foodName}</td>
 
 							<td><c:out value="${lists.get(i).category}" /></td>
 
@@ -93,8 +95,8 @@ thead {
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}"
 								width="100" height="100"></td>
 
-							<td><a id="edit" href="./AdminShowEditRecipe?id=${lists.get(i).id}">修改</a>
-								<a id="delete" href="./AdminShowDeleteRecipe?id=${lists.get(i).id}">刪除</a></td>
+<%-- 							<td><a id="edit" href="./AdminShowEditRecipe?id=${lists.get(i).id}">修改</a> --%>
+<%-- 								<a id="delete" href="./AdminShowDeleteRecipe?id=${lists.get(i).id}">刪除</a></td> --%>
 						</tr>
 					</c:forEach>
 
@@ -102,7 +104,7 @@ thead {
 
 				<c:otherwise>
 					<td colspan=11 style="text-align: center;">無資料!</td>
-					<td><a id="edit" href="./AdminStartingPage.jsp">回首頁</a></td>
+					<td><a id="edit" href="./UserStartingPage.jsp">回首頁</a></td>
 				</c:otherwise>
 			</c:choose>
 

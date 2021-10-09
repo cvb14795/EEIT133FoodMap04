@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/recipe/controller/AdminShowEditRecipe.java
-package controller;
-=======
 package recipe.controller;
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:src/recipe/servelet/crud/Edit.java
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,19 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD:src/recipe/controller/AdminShowEditRecipe.java
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import model.RecipeBean;
-import util.HibernateUtil;
-
-@WebServlet("/AdminShowEditRecipe")
-=======
 import recipe.model.RecipeBean;
 
 @WebServlet("/Recipe/AdminShowEditRecipe")
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0:src/recipe/servelet/crud/Edit.java
 public class AdminShowEditRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

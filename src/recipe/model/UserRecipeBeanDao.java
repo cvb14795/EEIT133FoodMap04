@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-package model;
-=======
 package recipe.model;
->>>>>>> 1aa4bb469a768fe0d0a7474056f00cb62caa2ea0
+
+import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class UserRecipeBeanDao implements IUserRecipeBeanDao {
 
@@ -33,4 +32,10 @@ public class UserRecipeBeanDao implements IUserRecipeBeanDao {
 		return uRecipe;
 	}
 
+	@Override
+	public List<UserRecipeBean> findAll() {
+		Query<UserRecipeBean> query = session.createQuery("From UserRecipeBean",UserRecipeBean.class);
+		return query.list();
+	}
+	
 }

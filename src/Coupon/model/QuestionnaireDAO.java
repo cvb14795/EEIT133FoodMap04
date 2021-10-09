@@ -1,10 +1,14 @@
 package Coupon.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.Id;
 import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class QuestionnaireDAO implements IQuestionnaireDAO {
