@@ -171,6 +171,25 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<!--java目录下的文件 -->
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<!--resources目录下的文件 -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
