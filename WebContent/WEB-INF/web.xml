@@ -12,8 +12,8 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<resource-env-ref>
-		<resource-env-ref-name>jdbc/TeamProject</resource-env-ref-name>
-		<resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
-	</resource-env-ref>
+	<resource-ref>
+		<res-ref-name>jdbc/TeamProject</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+	</resource-ref>
 </web-app>
