@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		// 登出 清空session
 		session.invalidate();
 		// 清空使用者名稱

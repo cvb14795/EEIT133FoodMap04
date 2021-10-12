@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import recipe.model.IUserRecipeBeanDao;
 import recipe.model.UserRecipeBean;
 import recipe.model.UserRecipeBeanDao;
 import util.hibernate.HibernateUtil;
@@ -77,7 +78,7 @@ public class UserInsertRecipe extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		SessionFactory factory = HibernateUtil.getSessionFactory();
 		Session session = factory.getCurrentSession();
-		UserRecipeBeanDao urBeanDao = new UserRecipeBeanDao(session);
+		IUserRecipeBeanDao urBeanDao = new UserRecipeBeanDao(session);
 		UserRecipeBean ur = (UserRecipeBean) request.getSession(true).getAttribute("uRecipe");
 		urBeanDao.insert(ur);
 		System.out.println("已新增資料");

@@ -30,22 +30,26 @@
         $(document).ready(function () {
             const cookies = `${document.cookie}`;
             console.log(`cookies: ${cookies}`);
-            const userName = cookies.split("user=")[1];
+            let userName = cookies.split("user=")[1];
             if (userName === undefined) {
                 console.log("使用者名稱:未定義 ");
-                // 未登入狀態下(登出後)顯示登入按鈕
+                // 未登入狀態下(登出後)顯示登入按鈕及註冊按鈕
                 $("#loginNavBtn").show();
-                // 未登入狀態下(登出後)隱藏登出按鈕
+                $("#registerNavBtn").show();
+                // 未登入狀態下(登出後)隱藏登出按鈕及編輯按鈕
                 $("#logoutNavBtn").hide();
+                $("#editNavBtn").hide();
                 // 未登入顯示為Guest
                 $("#user").text("Guest");
                 console.log(document.getElementById("user").outerHTML);
             } else {
                 console.log(`使用者名稱:${userName}`);
-                // 已登入狀態下(登入後)隱藏登入按鈕
+                // 已登入狀態下(登入後)隱藏登入按鈕及註冊按鈕
                 $("#loginNavBtn").hide();
-                // 已登入狀態下(登入後)顯示登出按鈕
+                $("#registerNavBtn").hide();
+                // 已登入狀態下(登入後)顯示登出按鈕及編輯按鈕
                 $("#logoutNavBtn").show();
+                $("#editNavBtn").show();
                 // 登入後顯示用戶名稱
                 $("#user").text(`${userName}`);
             }
@@ -109,7 +113,7 @@
                         </li>
                         <!-- 峻豪 -->
                         <li>
-                            <a data-toggle="tab" href="#recipe" data-url="./Recipe/UserStartingPage.jsp">營養資訊</a>
+                            <a data-toggle="tab" href="#recipe" data-url="./Recipe/main">營養資訊</a>
                         </li>
                         <!-- 語君 -->
                         <li>
@@ -134,7 +138,12 @@
                                 您好，<span id="user"></span>！
                             </a>
                         </li>
-                        <li>
+                         <li id="editNavBtn">
+                            <a data-toggle="tab" href="./Member/Revise" data-url="./Member/Revise">
+                                修改會員資料<i class="fas fa-edit"></i>
+                            </a>
+                        </li>
+                        <li id="registerNavBtn">
                             <a data-toggle="tab" href="./Member/Register" data-url="./Member/Register">
                                 註冊會員 <i class="fas fa-user-plus"></i>
                             </a>

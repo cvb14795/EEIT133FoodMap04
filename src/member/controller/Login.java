@@ -66,17 +66,17 @@ public class Login extends HttpServlet {
 		// 確認登入紀錄
 		Cookie[] cookies = request.getCookies();
 		// 使用者是否已有登入紀錄(cookie)
-		MemberStatus.setCookies(cookies);
-		isAlreadyLogin = MemberStatus.getLoginStatus(userName);
-
-		session.setAttribute("user", userName);
-		System.out.println("\nuser: " + userName);
-		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
-
+		MemberStatus status = new MemberStatus(cookies);
+		
+		isAlreadyLogin = status.getLoginStatus(userName);		
 		if (!isAlreadyLogin) {
 			// 沒有登入紀錄 導向登入頁面
 			request.getRequestDispatcher(loginPage).forward(request, response);
 		}
+
+		session.setAttribute("user", userName);
+		System.out.println("\nuser: " + userName);
+		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
 
 	}
 
