@@ -39,7 +39,7 @@ header {
 	<form:form action="./UserInsertToDB" modelAttribute="userRecipe" method="POST">
 		<table>
 			<tr bgcolor="#F2F4FB">
-				<td>姓名:<form:input path="userName"/></td>
+				<td>姓名:<form:input path="userName" disabled="true"/></td>
 			</tr>
 			<tr bgcolor="#FFFFE1">
 				<td>品項:<form:input path="foodName"/></td>

@@ -13,12 +13,12 @@ response.setContentType("text/html;charset=UTF-8");
 <link rel="stylesheet" href="../css/memberDetail.css">
 <script src="../js/jquery-3.6.0.js"></script>
 <script src="../js/bootstrap.js"></script>
-<!-- <script src="../js/memberAuth.js"></script> -->
-<!-- <script>
-// 	$(function() {
-// 		adminAuth();
-// 	})
-</script> -->
+<script src="../js/memberAuth.js"></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 <style>
     header {
 	background:	#9393FF;
@@ -30,8 +30,8 @@ response.setContentType("text/html;charset=UTF-8");
 </style>
 </head>
 <body>
-	<input type="hidden" id="isAdmin" value="${sessionScope.isAdmin}">
-	<input type="hidden" id="userName" value="${sessionScope.user}">
+	<input type="hidden" id="isAdmin" value="${isAdmin}">
+	<input type="hidden" id="userName" value="${user}">
 	<header>
 		<h1>食譜查詢</h1>
 	</header>

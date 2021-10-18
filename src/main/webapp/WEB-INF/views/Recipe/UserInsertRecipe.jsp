@@ -82,10 +82,9 @@ legend {
 
 				<div class="st1">
 					<label for="" class="t1">姓名:</label>
-					<!-- 在spring taglib裡遇到required、hidden等等原本在HTML標籤不需要加="true"的 一定要補上 -->
-					<!-- 否則會出現 equal symbol expected-->
-<%-- 					<form:input path="userName" required="true" /> --%>
-					<input type="text" id="" name="userName" required>
+<!-- 					在spring taglib裡遇到required、hidden等等原本在HTML標籤不需要加="true"的 一定要補上 -->
+<!-- 					否則會出現 equal symbol expected -->
+					<input type="text" id="userName" name="userName" disabled>
 				</div>
 
 				<div class="st1">
@@ -158,6 +157,11 @@ legend {
 		x.onloadend = function() {
 			document.images[0].src = this.result;
 		}
+
+		var cookies = document.cookie;
+		var userName = cookies.split("user=")[1];
+		$("#userName").val(userName);
+
 	</script>
 
 </body>

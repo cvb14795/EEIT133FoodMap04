@@ -20,11 +20,30 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	margin-bottom: 10px;
 }
 </style>
+<script src="../js/memberAuth.js"></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 </head>
 <body>
+	<input type="hidden" id="isAdmin" value="${isAdmin}">
+	<input type="hidden" id="userName" value="${user}">
     <header>
 		<h1>食譜 or 營養</h1>
 	</header>
+	
+	<div class="memberDetail">
+		<div class="text-right">
+			會員：
+			<span id="userNameContainer"></span>
+		</div>
+		<div class="text-right">
+			身分：
+			<span id="isAdminContainer"></span>
+		</div>
+	</div>
 	
     <form action="./UserRecipe">
         <button type="submit">食譜</button>
