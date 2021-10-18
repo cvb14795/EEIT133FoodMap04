@@ -1,4 +1,3 @@
-build/
-target/
-.settings/
 .project
+.settings/
+target/

@@ -45,11 +45,6 @@ public class ForgetPassword {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@ModelAttribute("user")
-	public String user() {
-		return new String(""); // user for the first time if its null
-	}
-
 	@GetMapping("ForgetPassword")
 	private String forgetPasswordPage(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
