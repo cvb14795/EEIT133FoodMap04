@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"cf.cvb14795"})
+@ComponentScan({"cf.cvb14795","util"})
 public class WebAppConfig implements WebMvcConfigurer {
 	
 	@Bean

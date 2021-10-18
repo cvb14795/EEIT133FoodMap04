@@ -1,11 +1,14 @@
 package cf.cvb14795.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Base64;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +33,7 @@ import util.gmail.Mail;
 @RequestMapping("/Member")
 public class ForgetPassword {
 	private String prefix = "Member/";
-	private String currentLoginUserAccount;
-
+	
 	@Autowired
 	IMemberService mService;
 
@@ -40,40 +42,23 @@ public class ForgetPassword {
 	}
 
 	@GetMapping("ForgetPassword")
-	private String forgetPasswordPage(
-			Model model,
-			@RequestParam(required = false, value = "method") String method,
-			@QueryParam("token") String token,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private String forgetPasswordPage(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		System.out.println(method);
-		// 不能用== 要用equals
-		if (method.equals("reset")) {
-			boolean isAccountVaild = BCrypt.checkpw(currentLoginUserAccount, token);
-			if (isAccountVaild) {
-				System.out.println("Ｏreset: 帳號驗證成功!");
-				model.addAttribute("user", currentLoginUserAccount);
-				return prefix + "resetPassword";
-			} else {
-				System.out.println("＊reset: 帳號驗證失敗!");
-				return "redirect:/Home";
-			}
-		} else {
-//			request.getRequestDispatcher("./forgetPassword.html").forward(request, response);			
-			return prefix + "forgetPassword";
-		}
+		response.setContentType("text/html;charset=UTF-8");		
+		
+		return prefix + "forgetPassword";
 	}
 
 	@PostMapping("ForgetPassword")
 	private ResponseEntity<HttpStatus> doForgetPassword(
+			Model model,
 			@RequestParam("account") String account,
 			@RequestParam("email") String recipientEmail,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		// TODO Auto-generated method stub
+		String user;
 
 		/** Authorizes the installed application to access user's protected data. */
 		request.setCharacterEncoding("UTF-8");
@@ -85,23 +70,44 @@ public class ForgetPassword {
 		
 		System.out.println("正在確認註冊時信箱是否正確...");
 		Member m = mService.selectMemberByAccount(account);
-		
+		System.out.println("=====ForgetPassword=====");
+		System.out.println("帳號:"+account);
 		boolean isAccountCorrect = m.getAccount().equals(account);
 		boolean isEmailCorrect = m.getEmail().equals(recipientEmail);
 		System.out.println("isAccountCorrect: "+isAccountCorrect);
 		System.out.println("isEmailCorrect: "+isEmailCorrect);
 		if (isAccountCorrect && isEmailCorrect) {
-			currentLoginUserAccount = m.getAccount();
+			user = m.getAccount();
+			model.addAttribute("user", user);
 			// 郵件主旨
 			String subject = "FoodMap美食地圖——重設密碼認證信";
 			// 將帳號作為參數寫進驗證信的URL 供重設密碼時核對用戶是誰 
-			String token = BCrypt.hashpw(currentLoginUserAccount, BCrypt.gensalt(10));
+			String hash = BCrypt.hashpw(user, BCrypt.gensalt(10));
+			// unix timestamp (GMT-0)
+			String expireDateStr = String.valueOf(new Date().getTime()/1000);
+			String token = Base64.getEncoder().encodeToString(
+				StringUtils.join(new String[]{hash, expireDateStr}, "-")
+				.getBytes()
+			);
+			/* =====拼出請求路徑===== */
+			URL u = new URL(request.getRequestURL().toString());
+			// 由u的完整路徑拼出前綴路徑
+			StringBuilder sb = new StringBuilder();
+			// u.getProtocol(): "http" or "https"
+			sb.append(u.getProtocol()+"://");
+			// u.getAuthority(): localhost:8080
+			sb.append(u.getAuthority());
+			// request.getContextPath(): /FoodMap04
+			sb.append(request.getContextPath());
+			String baseUrl = sb.toString();
+			String url = baseUrl + "/Member/ResetPassword";
+			
 			// 郵件內容
-			/* 參考耿豪那邊的用參數拚網址*/
-			String text = "您好，" + currentLoginUserAccount + "！ <br/>"
-					+ "<a href='http://localhost:8080/FoodMap04/Member/ForgetPassword?"
-					+ "method=reset&token='" + token 
-					+">請點擊以下連結修改您的密碼</a>";
+			String text = String.format(
+					"您好，%s！ <br/>"
+					+ "<a href='%s?token=%s'>" 
+					+"請點擊以下連結修改您的密碼</a>",
+					user, url, token);
 			// 寄信
 			Mail.SendGmail("me", recipientEmail, subject, text);
 			System.out.println("送出成功");
@@ -113,7 +119,32 @@ public class ForgetPassword {
 		}
 	}
 	
-	@PostMapping("resetPassword")
+	@GetMapping("ResetPassword")
+	private String resetPasswordPage(
+			HttpServletResponse response,
+			@ModelAttribute("user") String user,
+			@QueryParam("token") String token) throws IOException {
+		
+		// 字串不能用== 要用equals
+		if (token != ""){
+			System.out.println("=====ResetPassword=====");
+			System.out.println("user: "+user);
+			boolean isAccountVaild = BCrypt.checkpw(user, token);
+			if (isAccountVaild) {
+				System.out.println("Ｏreset: 帳號驗證成功!");
+				return prefix + "resetPassword";
+			} else {
+				System.out.println("＊reset: 帳號驗證失敗!");
+				return "redirect:/Home";
+			}
+		} else {
+			// token不合法
+			response.getWriter().write("<p>驗證失敗！<br/>可能是您已進行過密碼變更，或該Email連結已過期！<p>");
+			return null;
+		}
+	}
+	
+	@PostMapping("ResetPassword")
 	@ResponseBody
 	private ResponseEntity<String> doResetPassword(
 			@ModelAttribute("user") String userAccount,  

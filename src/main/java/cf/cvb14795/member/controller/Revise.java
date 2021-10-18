@@ -53,39 +53,15 @@ public class Revise {
 		response.setContentType("text/html; charset=UTF-8");
 //		HttpSession httpSession = request.getSession();
 		cookies = request.getCookies();
-		System.out.println(cookies[1].getName()+" "+cookies[1].getValue());
 
 		MemberStatus status = new MemberStatus(cookies);
 		userAccount = status.getCurrentUserAccount();
 		if (status.getLoginStatus(userAccount)) {
-//			SessionFactory factory = HibernateUtil.getSessionFactory();
-//			Session hibernateSession = factory.getCurrentSession();
-//			MemberService mService = new MemberService(hibernateSession);
-			
-//			StringBuilder sb = new StringBuilder();
-//			for (Cookie cookie : cookies) {
-//				System.out.println("CookieNameALL: " + cookie.getName());
-//				System.out.println("CookieValueALL: " + cookie.getValue());
-//				// cookies: null for會拋NullPointerException
-//				System.out.println(cookie.getPath().equals("/"));
-//				if (cookie.getName() == "user") {
-//					sb.append(cookie.getName());
-//					System.out.println("CookieName: " + cookie.getName());
-//					System.out.println("CookieValue: " + cookie.getValue());
-//					break;
-//				}
-//			}
-//			userAccount = sb.toString();
-//			System.out.println(sb.toString());
 			Member m = mService.selectMemberByAccount(userAccount);
 			model.addAttribute("member", m);
 			
 			String base64String = Base64.getEncoder().encodeToString(m.getImgBytes());
-//			httpSession.setAttribute("base64String", base64String);
-			System.out.println("base64 size: "+ base64String.length());
 			model.addAttribute("base64String", base64String);
-			model.addAttribute("a", "測試");
-//			request.getRequestDispatcher("./memberRevise.jsp").forward(request, response);
 			return prefix+"memberRevise";
 		} else {
 //			PrintWriter out = response.getWriter();
@@ -124,9 +100,6 @@ public class Revise {
 		String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
 
 		// 獲取圖片檔名
-//		String imgPath = Paths.get(imgPart.getSubmittedFileName()).getFileName().toString();
-//		String imgExt = FilenameUtils.getExtension(imgPath);
-//		httpSession.setAttribute("imgExt", imgExt);
 		String imgPath = Paths.get(imgPart.getOriginalFilename()).getFileName().toString();
 		String imgExt = FilenameUtils.getExtension(imgPath);
 		model.addAttribute("imgExt", imgExt);
@@ -166,7 +139,6 @@ public class Revise {
 		
 		/* 待完工 */
 		// 回首頁 但在這之前先加一個jsp 用ajax給他swal
-//		response.sendRedirect("../Home");
 		return "redirect://Home";
 		
 	}

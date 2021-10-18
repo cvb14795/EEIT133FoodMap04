@@ -39,7 +39,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "cf.cvb14795" });
+		factory.setPackagesToScan(new String[] { "cf.cvb14795", "util"});
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}
