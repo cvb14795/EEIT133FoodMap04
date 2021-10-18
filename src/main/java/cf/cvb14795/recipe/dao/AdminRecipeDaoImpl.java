@@ -42,8 +42,6 @@ public class AdminRecipeDaoImpl implements IAdminRecipeDao {
 //		rBean.setSauce3(recipe.getSauce3());
 //		rBean.setFile1(recipe.getPhoto());
 //		session.save(rBean);
-
-
 	}
 
 	@Override
@@ -56,7 +54,7 @@ public class AdminRecipeDaoImpl implements IAdminRecipeDao {
 		
 		return list;
 	}
-
+	
 	@Override
 	public AdminRecipeBean getUpdateId(int id) {
 
@@ -105,6 +103,5 @@ public class AdminRecipeDaoImpl implements IAdminRecipeDao {
 		session.delete(rb);
 		
 	}
-
 
 }

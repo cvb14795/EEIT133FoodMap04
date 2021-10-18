@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import cf.cvb14795.member.dao.IMemberService;
@@ -25,46 +24,33 @@ import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.model.UserRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.recipe.service.IUserRecipeService;
-import util.MemberStatus;
 
 @Controller
 @RequestMapping("/Recipe/user")
+//將Model中屬性名為user的屬性
+//放到Session屬性列表中，以便這個屬性可以跨請求訪問
+@SessionAttributes({"user", "isAdmin"})
 public class UserRecipeController {
 
 	private final static String PREFIX = "Recipe/";
 
 	IUserRecipeService uRecipeService;
 	IAdminRecipeService aRecipeService;
-	IMemberService mService;
-
+	
 	@Autowired
-	public UserRecipeController(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,
-			IMemberService mService) {
+	public UserRecipeController(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService) {
 		this.uRecipeService = uRecipeService;
 		this.aRecipeService = aRecipeService;
-		this.mService = mService;
 	}
 
-
-	// ==============連結首頁==============
-	@GetMapping("/")
-	public String home(HttpServletRequest request, Model model) {
-		MemberStatus status = new MemberStatus(request.getCookies());
-		String userAccount = status.getCurrentUserAccount();
-//		httpSession.setAttribute("user", userAccount);
-		model.addAttribute("user", userAccount);
-
-		// 若沒有登入(沒有帳號)時則跳轉到登入畫面
-		model.addAttribute("isAdmin", mService.isAdmin(userAccount));
-		return PREFIX + "UserStartingPage";
-	}
-
-	@GetMapping("/UserRecipe")
-	public String userRecipe() {
+	@GetMapping("UserRecipe")
+	public String userRecipe(
+			@ModelAttribute("user") String user,
+			@ModelAttribute("isAdmin") boolean isAdmin) {
 		return PREFIX + "UserRecipe";
 	}
 
-	@GetMapping("/UserInsertRecipe")
+	@GetMapping("UserInsertRecipe")
 	public String recipe(Model model) {
 		UserRecipeBean userRecipe = new UserRecipeBean();
 		model.addAttribute("userRecipe", userRecipe);
@@ -72,7 +58,7 @@ public class UserRecipeController {
 	}
 
 	// ==============新增食譜 -> 寫進資料庫==============
-	@PostMapping("/UserInsertRecipe")
+	@PostMapping("UserInsertRecipe")
 	public String userInsertForm(Model model, @CookieValue("user") String userName,
 			@RequestParam(required = false, name = "foodName") String foodName,
 			@RequestParam(required = false, name = "category") String category,
@@ -103,7 +89,7 @@ public class UserRecipeController {
 		return PREFIX + "UserInsertConfirm";
 	}
 
-	@PostMapping("/UserInsertToDB")
+	@PostMapping("UserInsertToDB")
 	public String userInsertToDB(@ModelAttribute("userRecipe") UserRecipeBean recipe) {
 		uRecipeService.insert(recipe);
 
@@ -111,7 +97,7 @@ public class UserRecipeController {
 	}
 
 	// ==============使用者查詢官方食譜==============
-	@PostMapping("/UserViewAdminRecipe")
+	@PostMapping("UserViewAdminRecipe")
 	public String UserViewAdminRecipe(Model model) {
 
 		List<AdminRecipeBean> lists = aRecipeService.selectAll();
@@ -126,7 +112,7 @@ public class UserRecipeController {
 		return PREFIX + "UserViewAdminRecipe";
 	}
 
-	@PostMapping("/UserViewMembersRecipe")
+	@PostMapping("UserViewMembersRecipe")
 	public String UserViewMembersRecipe(Model model) {
 
 		List<UserRecipeBean> lists = uRecipeService.findMembersRecipe();
@@ -139,6 +125,16 @@ public class UserRecipeController {
 		model.addAttribute("imgList", imgList);
 
 		return PREFIX + "UserViewMembersRecipe";
+	}
+	
+	@PostMapping("ViewYourRecipe")
+	public String ViewYourRecipe(Model model) {
+		
+		
+		
+		
+		
+		return PREFIX + "ViewYourRecipe";
 	}
 
 }

@@ -12,9 +12,6 @@ response.setContentType("text/html;charset=UTF-8");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <style>
 header {
 	background: #9393FF;
@@ -24,39 +21,18 @@ header {
 	margin-bottom: 10px;
 }
 
-#myInput {
-  background-image: url('/css/searchicon.png'); 
-  background-position: 10px 12px; 
-  background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 50%; 
-  font-size: 16px; 
-  padding: 12px 20px 12px 40px; 
-  border: 1px solid #ddd; 
-  margin-bottom: 12px; 
+.wrapper {
+	position: relative;
 }
 
-#myTable {
-  border-collapse: collapse; 
-  width: 100%; 
-  border: 5px solid #FFDCB9; 
-  font-size: 16px; 
-  margin:auto;
-  font-family: monospace;
-  font-weight: bolder;
-            
+i.fas {
+	position: absolute;
+	top: 5px;
+	left: 5px;
 }
 
-#myTable th, #myTable td {
-  text-align: left; 
-  padding: 12px; 
-}
-
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #FFB5B5;
+.wrapper input {
+	text-indent: 20px;
 }
 </style>
 </head>
@@ -67,12 +43,12 @@ header {
 	<form>
 		<input type ="button" onclick="history.back()" value="上一頁">
 	</form>
-<!-- 	<div class="wrapper"> -->
-<!-- 		<i class="fas fa-search"></i> -->
-<!-- 		<input type="text" id="myInput" onkeyup="myFunction()" -->
-<!-- 			placeholder="Search for category.."></input> -->
-<!-- 	</div> -->
-	<table id="myTable" class="display">
+	<div class="wrapper">
+		<i class="fas fa-search"></i>
+		<input type="text" id="myInput" onkeyup="myFunction()"
+			placeholder="Search for category.."></input>
+	</div>
+	<table id="myTable">
 		<thead>
 			<th>編號</th>
 			<th>品項</th>
@@ -114,10 +90,24 @@ header {
 		</tbody>
 	</table>
 	<script>
-	
-		$(document).ready(function() {
-			$('#myTable').DataTable();
-		});
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[2];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
 	</script>
 
 </body>

@@ -80,12 +80,12 @@ legend {
 			<fieldset>
 				<legend>新增</legend>
 
-				<div class="st1">
-					<label for="" class="t1">姓名:</label>
+<!-- 				<div class="st1"> -->
+<!-- 					<label for="" class="t1">姓名:</label> -->
 <!-- 					在spring taglib裡遇到required、hidden等等原本在HTML標籤不需要加="true"的 一定要補上 -->
 <!-- 					否則會出現 equal symbol expected -->
-					<input type="text" id="userName" name="userName" disabled>
-				</div>
+<!-- 					<input type="text" id="userName" name="userName" disabled> -->
+<!-- 				</div> -->
 
 				<div class="st1">
 					<label for="" class="t1">品項:</label>
@@ -143,15 +143,15 @@ legend {
 
 			</fieldset>
 			<div class="sub">
-				<input type="reset" name="reset" value="清除"> <input
-					type="submit" name="submit" value="確認">
+				<input type="reset" name="reset" value="清除"> 
+				<input type="submit" name="submit" value="確認">
 			</div>
 
 		</form:form>
 	</div>
 	<script type="text/javascript">
 		var x = new FileReader;
-		document.forms[1].elements[11].onchange = function() {
+		document.forms[1].elements[10].onchange = function() {
 			x.readAsDataURL(this.files[0]);
 		}
 		x.onloadend = function() {

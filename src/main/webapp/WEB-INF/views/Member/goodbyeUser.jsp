@@ -11,7 +11,7 @@
 <body>
     <p>您好，已經將您登出！</p>
     <p><span id="count"></span>秒後跳轉回首頁... <span id="countDown"></span></p><br/>
-    或<a href="../Home">點擊此處</a>立刻返回首頁
+    或<a href='<c:url value="/"/>'>點擊此處</a>立刻返回首頁
 
     <script>
         var time = 3;
@@ -21,7 +21,7 @@
 
             if (time <= 0) {
                 clearInterval(this);
-                location.href = "../Home";
+                location.href = <c:url value="/"/>;
             } else {
                 // 更新倒數秒數
                 cd.innerHTML = time;
