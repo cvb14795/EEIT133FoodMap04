@@ -36,4 +36,14 @@ public class UserRecipeDaoImpl implements IUserRecipeDao {
 		return list;
 	}
 
+	@Override
+	public List<UserRecipeBean> findByName(String userName) {
+		Session session = factory.getCurrentSession();
+		String hql = "From UserRecipeBean where userName= :userName";
+		List<UserRecipeBean> list = session.createQuery(hql,UserRecipeBean.class)
+										   .setParameter("userName", userName).getResultList();
+		
+		return list;
+	}
+
 }

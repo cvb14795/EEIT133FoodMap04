@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%
 response.setContentType("text/html;charset=UTF-8");
@@ -8,7 +9,11 @@ response.setContentType("text/html;charset=UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>使用者起始畫面</title>
-<script src="../js/memberAuth.js"></script>
+<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
+<link rel="stylesheet" href='<c:url value="/css/memberDetail.css"/>'>
+<script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
+<script src='<c:url value="/js/bootstrap.js"/>'></script>
+<script src='<c:url value="/js/memberAuth.js"/>'></script>
 <script>
 	$(function() {
 		adminAuth();
@@ -42,7 +47,7 @@ response.setContentType("text/html;charset=UTF-8");
 		</div>
 	</div>
 	
-    <form action="./UserRecipe">
+    <form action='<c:url value="/Recipe/user/UserRecipe"/>'>
         <button type="submit">食譜</button>
     </form>
     <form action="">

@@ -20,8 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
 
-
-
 @Controller
 @RequestMapping("/Recipe/admin")
 public class AdminRecipeController {
@@ -35,14 +33,8 @@ public class AdminRecipeController {
 		this.aRecipeService = aRecipeService;
 	}
 
-	// ==============連結首頁==============
-	@GetMapping("/")
-	public String adminRecipeListPage(Model model) throws IOException {
-		return PREFIX+"AdminStartingPage";
-	}
-
 	// ==============管理者查詢食譜==============
-	@PostMapping("/AdminViewRecipe")
+	@PostMapping("AdminViewRecipe")
 	public String adminRecipeList(Model model) throws IOException {
 		List<AdminRecipeBean> lists = aRecipeService.selectAll();
 		List<String> imgList = new ArrayList<String>();
@@ -56,7 +48,7 @@ public class AdminRecipeController {
 	}
 
 	// ==============從資料庫讀取ID資料 -> 更新==============
-	@GetMapping("/AdminShowEditRecipe")
+	@GetMapping("AdminShowEditRecipe")
 	public String adminShowEditRecipe(@RequestParam("id") int id, Model model) {
 
 		AdminRecipeBean updateRecipe = aRecipeService.getUpdateId(id);
@@ -69,7 +61,7 @@ public class AdminRecipeController {
 		return PREFIX+"AdminEditRecipe";
 	}
 
-	@PostMapping("/adminEditRecipeAction")
+	@PostMapping("adminEditRecipeAction")
 	public String adminEditRecipeAction(@ModelAttribute("recipe") AdminRecipeBean adminRecipe,
 			@RequestParam("photo") String photo) {
 		adminRecipe.setPhoto(Base64.getDecoder().decode(photo));
@@ -80,7 +72,7 @@ public class AdminRecipeController {
 	}
 
 	// ==============從資料庫讀取ID資料 -> 刪除==============
-	@GetMapping("/AdminShowDeleteRecipe")
+	@GetMapping("AdminShowDeleteRecipe")
 	public String adminShowDeleteRecipe(@RequestParam("id") int id, Model model) {
 
 		AdminRecipeBean updateRecipe = aRecipeService.getUpdateId(id);
@@ -92,14 +84,14 @@ public class AdminRecipeController {
 		return "AdminDeleteConfirm";
 	}
 
-	@PostMapping("/AdminDeleteRecipeAction")
+	@PostMapping("AdminDeleteRecipeAction")
 	public String adminDeleteRecipeAction(@RequestParam("id") Integer id, Model model) {
 		aRecipeService.deleteById(id);
 		return "AdminStartingPage";
 	}
 
 	// ==============新增食譜 -> 寫進資料庫==============
-	@PostMapping("/AdminInsertRecipe")
+	@PostMapping("AdminInsertRecipe")
 	public String adminInsertRecipe(
 			Model model,
 			@RequestParam(required = false, name = "name") String name,
@@ -133,7 +125,7 @@ public class AdminRecipeController {
 		return "AdminInsertConfirm";
 	}
 
-	@PostMapping("/adminInsertToDB")
+	@PostMapping("adminInsertToDB")
 	public String adminInsertToDB(
 			@ModelAttribute("recipe") AdminRecipeBean recipe) {
 //		System.out.println("==========recipe============");

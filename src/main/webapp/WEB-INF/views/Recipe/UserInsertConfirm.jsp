@@ -39,7 +39,9 @@ header {
 	<form:form action="./UserInsertToDB" modelAttribute="userRecipe" method="POST">
 		<table>
 			<tr bgcolor="#F2F4FB">
-				<td>姓名:<form:input path="userName" disabled="true"/></td>
+				<!-- disabled傳不出去 -->
+				<td>姓名:${userRecipe.userName}</td> 
+				<form:hidden path="userName"/>
 			</tr>
 			<tr bgcolor="#FFFFE1">
 				<td>品項:<form:input path="foodName"/></td>

@@ -35,5 +35,11 @@ public class UserRcipeServiceImpl implements IUserRecipeService{
 		List<UserRecipeBean> list = uRecipeDao.findMembersRecipe();
 		return list;
 	}
+
+	@Override
+	public List<UserRecipeBean> findByName(String userName) {
+		List<UserRecipeBean> list = uRecipeDao.findByName(userName);
+		return list;
+	}
 	
 }
