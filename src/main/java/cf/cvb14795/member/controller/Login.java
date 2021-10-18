@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -26,12 +27,6 @@ import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.dao.IMemberService;
 import util.MemberStatus;
 
-//
-//@WebServlet(urlPatterns = { "/Member/Login" },
-//			initParams = {
-//					@WebInitParam(name = "loginPage", value = "./loginForm.html"),
-//			}
-//)
 @Controller
 @RequestMapping("/Member")
 public class Login {

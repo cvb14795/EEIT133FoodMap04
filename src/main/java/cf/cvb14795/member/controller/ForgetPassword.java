@@ -2,6 +2,7 @@ package cf.cvb14795.member.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.azure.core.annotation.QueryParam;
 
@@ -28,17 +30,24 @@ import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.dao.IMemberService;
 import util.gmail.Mail;
 
-//@WebServlet("/Member/ForgetPassword")
 @Controller
 @RequestMapping("/Member")
+//將Model中屬性名為user的屬性
+//放到Session屬性列表中，以便這個屬性可以跨請求訪問
+@SessionAttributes("user")
 public class ForgetPassword {
 	private String prefix = "Member/";
 	
 	@Autowired
 	IMemberService mService;
-
+	
 	public ForgetPassword() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	@ModelAttribute("user")
+	public String user() {
+		return new String(""); // user for the first time if its null
 	}
 
 	@GetMapping("ForgetPassword")
@@ -54,12 +63,10 @@ public class ForgetPassword {
 	@PostMapping("ForgetPassword")
 	private ResponseEntity<HttpStatus> doForgetPassword(
 			Model model,
-			@RequestParam("account") String account,
+			@RequestParam("account") String inputAccount,
 			@RequestParam("email") String recipientEmail,
 			HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
-		String user;
-
 		/** Authorizes the installed application to access user's protected data. */
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
@@ -69,20 +76,22 @@ public class ForgetPassword {
 //		String recipientEmail = request.getParameter("email");
 		
 		System.out.println("正在確認註冊時信箱是否正確...");
-		Member m = mService.selectMemberByAccount(account);
+		Member m = mService.selectMemberByAccount(inputAccount);
+		String userAccount = m.getAccount();
 		System.out.println("=====ForgetPassword=====");
-		System.out.println("帳號:"+account);
-		boolean isAccountCorrect = m.getAccount().equals(account);
+		System.out.println("使用者輸入帳號:"+inputAccount);
+		System.out.println("資料庫用戶帳號:"+userAccount);
+		boolean isAccountCorrect = m.getAccount().equals(inputAccount);
 		boolean isEmailCorrect = m.getEmail().equals(recipientEmail);
 		System.out.println("isAccountCorrect: "+isAccountCorrect);
 		System.out.println("isEmailCorrect: "+isEmailCorrect);
+		// 判斷使用者帳號與使用者email是否與資料庫相符
 		if (isAccountCorrect && isEmailCorrect) {
-			user = m.getAccount();
-			model.addAttribute("user", user);
+			model.addAttribute("user", userAccount);
 			// 郵件主旨
 			String subject = "FoodMap美食地圖——重設密碼認證信";
 			// 將帳號作為參數寫進驗證信的URL 供重設密碼時核對用戶是誰 
-			String hash = BCrypt.hashpw(user, BCrypt.gensalt(10));
+			String hash = BCrypt.hashpw(userAccount, BCrypt.gensalt(10));
 			// unix timestamp (GMT-0)
 			String expireDateStr = String.valueOf(new Date().getTime()/1000);
 			String token = Base64.getEncoder().encodeToString(
@@ -107,7 +116,7 @@ public class ForgetPassword {
 					"您好，%s！ <br/>"
 					+ "<a href='%s?token=%s'>" 
 					+"請點擊以下連結修改您的密碼</a>",
-					user, url, token);
+					userAccount, url, token);
 			// 寄信
 			Mail.SendGmail("me", recipientEmail, subject, text);
 			System.out.println("送出成功");
@@ -121,16 +130,29 @@ public class ForgetPassword {
 	
 	@GetMapping("ResetPassword")
 	private String resetPasswordPage(
+			HttpServletRequest request,
 			HttpServletResponse response,
 			@ModelAttribute("user") String user,
 			@QueryParam("token") String token) throws IOException {
-		
+			
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		System.out.println("=====ResetPassword=====");
+		System.out.println("user(textplain): "+user);
 		// 字串不能用== 要用equals
-		if (token != ""){
-			System.out.println("=====ResetPassword=====");
-			System.out.println("user: "+user);
-			boolean isAccountVaild = BCrypt.checkpw(user, token);
-			if (isAccountVaild) {
+		if (token != "" && !user.equals("")){
+			byte[] bytes = Base64.getDecoder().decode(token);
+			// [0]: user
+			// [1]: token過期時間
+			String[] tokenArray = new String(bytes, StandardCharsets.UTF_8).split("-");
+			System.out.println("user(encrypt):"+tokenArray[0]);
+			System.out.println("expire date:"+tokenArray[1]);
+			boolean isAccountVaild = BCrypt.checkpw(user, tokenArray[0]);
+			// 過期時間大於現在時間即表示該token已過期
+			boolean isExpired =  new Date().getTime() > Long.valueOf(tokenArray[1]);
+			System.out.println("isAccountVaild:"+isAccountVaild);
+			System.out.println("isExpired:"+isExpired);
+			if (isAccountVaild && isExpired) {
 				System.out.println("Ｏreset: 帳號驗證成功!");
 				return prefix + "resetPassword";
 			} else {
@@ -138,7 +160,7 @@ public class ForgetPassword {
 				return "redirect:/Home";
 			}
 		} else {
-			// token不合法
+			// token不合法或無user名
 			response.getWriter().write("<p>驗證失敗！<br/>可能是您已進行過密碼變更，或該Email連結已過期！<p>");
 			return null;
 		}
