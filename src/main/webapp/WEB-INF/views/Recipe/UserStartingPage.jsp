@@ -3,14 +3,17 @@
 <!DOCTYPE html>
 <%
 response.setContentType("text/html;charset=UTF-8");
-response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
-response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>使用者起始畫面</title>
+<script src="../js/memberAuth.js"></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 <style>
     header {
 	background: #9393FF;
@@ -20,12 +23,6 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	margin-bottom: 10px;
 }
 </style>
-<script src="../js/memberAuth.js"></script>
-<script>
-	$(function() {
-		adminAuth();
-	})
-</script>
 </head>
 <body>
 	<input type="hidden" id="isAdmin" value="${isAdmin}">

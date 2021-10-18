@@ -51,15 +51,15 @@ i.fas {
 	<table id="myTable">
 		<thead>
 			<th>編號</th>
-			<th width="10%">品項</th>
+			<th>品項</th>
 			<th>分類</th>
 			<th>食材1</th>
 			<th>食材2</th>
 			<th>食材3</th>
 			<th>食材4</th>
-			<th width="10%">調味料1</th>
-			<th width="10%">調味料2</th>
-			<th width="10%">調味料3</th>
+			<th>調味料1</th>
+			<th>調味料2</th>
+			<th>調味料3</th>
 			<th>照片</th>
 		</thead>
 		<tbody>
