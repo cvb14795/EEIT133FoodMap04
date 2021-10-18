@@ -87,7 +87,7 @@
 							data-url="./Event/eventjava">活動報名</a></li>
 						<!-- 峻豪 -->
 						<li><a data-toggle="tab" href="#recipe"
-							data-url="./Recipe/main">營養資訊</a></li>
+							data-url="./Recipe/user">營養資訊</a></li>
 						<!-- 語君 -->
 						<li><a data-toggle="tab" href="#comment"
 							data-url="./Comment/CommentControllerServlet">評論區</a></li>
