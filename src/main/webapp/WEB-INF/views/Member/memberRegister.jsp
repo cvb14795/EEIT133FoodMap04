@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 <body>
 	<div class="container">
 		<!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
-		<form action="./Register" method="POST" enctype="multipart/form-data">
+		<form method="POST" enctype="multipart/form-data">
 			<fieldset>
 				<legend>註冊表單</legend>
 				<div class="st1">
@@ -81,11 +82,25 @@
 	</div>
 
 	<script>
+		var $account = $("#account");
+		var $form = $("#form");
 		validate("formElem");
-		//仍會送出 待DEBUG
-		$("form").submit(function(e) {
+		
+		$form.submit(function (e) {
+			//仍會送出 待DEBUG
 			var invalid = $(".checkMsg").hasClass("incorrect");
-			if (invalid) {
+			var data = new FormData($form);
+			if (!invalid) {
+				console.log("資料正確，送出表單");
+				$.ajax({
+					type: $form.attr("method"),
+					url: "./user/"+$account,
+					data: data,
+					success: function (data) {
+						console.log("註冊成功");
+	                    location.href = '<c:url value="/Home"/>';
+					}
+				})
 				return false;
 			}
 			return true;

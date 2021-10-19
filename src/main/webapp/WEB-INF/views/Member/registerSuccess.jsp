@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <jsp:useBean id="member" class="cf.cvb14795.member.bean.Member" scope="request" />
     <p>請確認以下資料</p>
     <table>
         <thead>
@@ -22,18 +21,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>${member.name}<br/>
-                    <jsp:getProperty name="member" property="name" />
-                </td>
-                <td>
-                    <jsp:getProperty name="member" property="account" />
-                </td>
-                <td>
-                    <jsp:getProperty name="member" property="address" />
-                </td>
-                <td>
-                    <jsp:getProperty name="member" property="phone" />
-                </td>
+                <td>${member.name}</td>
+                <td>${member.account}</td>
+                <td>${member.address}</td>
+                <td>${member.phone}</td>
             </tr>
         </tbody>
     </table>
@@ -63,7 +54,7 @@
         var confirmBtn = document.getElementById("confirmBtn");
         confirmBtn.addEventListener("click", function (e) {
             // 點擊確定後回到首頁
-            location.href = "../Home" ;
+            location.href = '<c:url value="/Home"/>';
         })
     </script>
 </body>
