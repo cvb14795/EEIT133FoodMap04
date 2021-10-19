@@ -30,7 +30,7 @@
 	//         console.log('User signed out.');
 	//     });
 	// }
-	$(document).ready(function() {
+	$('document').ready(function() {
 		$('#tabs a').click(function(e) { //當按下 id=tabs 中的超連結時
 			e.preventDefault(); //阻止事件向上提升 (處理一次)    
 			var url = $(this).attr("data-url"); //取得 data-url 屬性值
