@@ -1,8 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>防疫問卷調查</title>
+<title>${title}</title>
 <style>
         p {
             font-size: 20px;
@@ -44,9 +49,7 @@
             margin:0 auto;
         }
     </style>
-</head>
-<body>
-<script>
+    <script>
 	function chk(){
 		var cnt = 0;
 		
@@ -102,21 +105,20 @@
 			return false
 		}	
 	}
-	
-	
-	
-	
 </script>
-
+</head>
+<body>
 
 <form action='controller' method='post' name='send' onsubmit="return chk();">
         <fieldset>
-            <legend>個人資料</legend>
+        	       	
+        	<legend>個人資料</legend>
             <div class='str1'>
 
                 <p>姓名:
-                    <label><input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='account1'
-                            name='name' required></label>
+                     <label> <input type='radio' name='gender' value='男'>男 </label>
+                    <label> <input type='radio' name='gender' value='女'>女 </label>
+                    <label> <input type='radio' name='gender' value='其他'>其他 </label>
                 </p>
 
                 <p> 性別:
@@ -147,11 +149,11 @@
             <legend>接觸史調查</legend>
             <div class='str1'>
                 <p>最近14天是否有出國紀錄:</p>
-                <label><input type='radio' name='foreign' value='1'>是</label>
-                <label><input type='radio' name='foreign' value='0'>否</label>
+                <label><input type='radio' name='abroad' value='1'>是</label>
+                <label><input type='radio' name='abroad' value='0'>否</label>
                 <p>最近14天是否有跨縣市移動:</p>
-                <label><input type='radio' name='move' value='1'>是</label>
-                <label><input type='radio' name='move' value='0'>否</label>
+                <label><input type='radio' name='moving' value='1'>是</label>
+                <label><input type='radio' name='moving' value='0'>否</label>
                 <p>同住親友是否有收到居家隔離通知單:</p>
                 <label><input type='radio' name='family' value='1'>是</label>
                 <label><input type='radio' name='family' value='0'>否</label>

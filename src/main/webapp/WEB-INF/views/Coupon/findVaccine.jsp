@@ -1,7 +1,8 @@
-<%@page import="cf.cvb14795.Coupon.model.QuestionnaireBean"%>
+<%@page import="cf.cvb14795.Coupon.model.bean.QuestionnaireBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -61,7 +62,7 @@
 	</div>
 </div>
 
-<form action='administratorcontroller' method='post'>
+<form action='admincontroller' method='post'>
 		<div>
 			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
 			<label><input type='radio' name='action' value='U'>發放折價券</label>
@@ -70,7 +71,7 @@
 
 		<div>
 			<input type='submit' value='送出'>
-			<input type="button" value="回首頁" onclick="location.href='frontpage.html'">
+			<input type="button" value="回首頁" onclick="location.href='frontpage'">
 		</div>
 
 </form>
@@ -104,7 +105,31 @@
 			<th>發送</th>
 		</thead>
 		<tbody>
+		<tr>
+			<c:forEach items='${vaccinelist}' var='vbean' >
+				<tr>
+					<td>${vbean.id}</td>
+					<td>${vbean.name}</td>
+					<td>${vbean.gender}</td>
+					<td>${vbean.birth}</td>
+					<td>${vbean.phone}</td>
+					<td>${vbean.abroad}</td>
+					<td>${vbean.moving}</td>
+					<td>${vbean.family}</td>
+					<td>${vbean.vaccine}</td>
+					<td>${vbean.fever}</td>
+					<td>${vbean.label}</td>
+				</tr>		
+			</c:forEach>
+		</tr>
+		
+			
 
+
+
+
+
+<%-- 
 <%
 		for (QuestionnaireBean qbean:vaccineList){
 %>
@@ -125,7 +150,7 @@
 <%
 		}
 	
-%>
+%>  --%>
 		</tbody>
 		</table>
 

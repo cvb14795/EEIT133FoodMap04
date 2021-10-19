@@ -1,8 +1,8 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="cf.cvb14795.Coupon.model.QuestionnaireBean"%>
+<%@page import="cf.cvb14795.Coupon.model.bean.QuestionnaireBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -41,9 +41,6 @@
 	}
 	
 	
-	
-	
-	
 </style>
 
 </head>
@@ -62,7 +59,7 @@
 	</div>
 </div>
 
-<form action='administratorcontroller' method='post'>
+<form action='admincontroller' method='post'>
 		<div>
 			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
 			<label><input type='radio' name='action' value='U'>發放折價券</label>
@@ -71,7 +68,7 @@
 
 		<div>
 			<input type='submit' value='送出'>
-			<input type="button" value="回首頁" onclick="self.location.href='frontpage.html'">
+			<input type="button" value="回首頁" onclick="location.href='frontpage'">
 		</div>
 
 </form>

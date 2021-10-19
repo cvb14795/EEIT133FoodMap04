@@ -1,15 +1,14 @@
-package cf.cvb14795.Coupon.model;
+package cf.cvb14795.Coupon.model.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity @Table(name = "questionnaire")
 public class QuestionnaireBean {
 
@@ -48,15 +47,17 @@ public class QuestionnaireBean {
 	@Column(name = "LABEL")
 	private String label;
 	
+	@Column(name = "ACCOUNT")
+	private String account;
 	
 	public QuestionnaireBean() {
 		
 	}
 	
 	
-
+	
 	public QuestionnaireBean(String id, String name, String gender, String birth, String phone, String abroad,
-			String moving, String family, String vaccine, String fever, String label) {
+			String moving, String family, String vaccine, String fever, String label, String account) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -68,8 +69,17 @@ public class QuestionnaireBean {
 		this.vaccine = vaccine;
 		this.fever = fever;
 		this.label = label;
+		this.account = account;
 	}
 
+	public String getAccount() {
+		return account;
+	}
+
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
 
 	public String getId() {

@@ -31,8 +31,8 @@ response.setContentType("text/html;charset=UTF-8");
 </style>
 </head>
 <body>
-	<input  id="isAdmin" value="${isAdmin}">
-	<input  id="userName" value="${user}">
+	<input  id="isAdmin" value="${isAdmin}" hidden="true">
+	<input  id="userName" value="${user}" hidden="true">
 	<header>
 		<h1>食譜查詢</h1>
 	</header>
