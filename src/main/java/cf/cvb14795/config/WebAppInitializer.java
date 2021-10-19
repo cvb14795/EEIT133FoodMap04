@@ -3,6 +3,7 @@ package cf.cvb14795.config;
 import javax.servlet.Filter;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -24,9 +25,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
 	@Override
 	protected Filter[] getServletFilters() {
+		System.out.println("filter...");
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
-		return new Filter[] {characterEncodingFilter, new MyFilter()};
+		characterEncodingFilter.setForceEncoding(true);
+		return new Filter[] {characterEncodingFilter, new HiddenHttpMethodFilter()};
 	}
-
 }

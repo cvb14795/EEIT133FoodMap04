@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,11 +40,10 @@
 			<!--           </div>  -->
 
 			<!-- Login Form -->
-			<form action="./Login" method="POST" id="form">
+			<form action="./Login" method="post" id="form" >
 				<input type="text" id="account" name="account" placeholder="請輸入帳號">
-				<input type="password" id="password" name="password"
-					placeholder="請輸入密碼" autocomplete="on"> <input type="submit"
-					id="loginBtn" value="登入">
+				<input type="password" id="password" name="password" placeholder="請輸入密碼" autocomplete="on">
+                <input type="submit" id="loginBtn" value="登入">
 			</form>
 
 			<div id="my-signin2"></div>
@@ -81,8 +81,11 @@
                 // buttonsStyling: false
             })
 
+            // 傳送登入資料
             $.ajax({
+                // type: "POST",
                 type: $form.attr("method"),
+                // url: "./Login",
                 url: $form.attr("action"),
                 data: $form.serialize(),
                 success: function (data) {
@@ -97,7 +100,7 @@
                         timerProgressBar: true,
                         showConfirmButton: false,
                     })
-                    location.href = "../Home";
+                    location.href = '<c:url value="/Home"/>';
                 },
                 error: function(result) {
 		            console.log("登入失敗");

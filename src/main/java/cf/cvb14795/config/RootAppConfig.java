@@ -60,6 +60,7 @@ public class RootAppConfig {
 		properties.put("default_batch_fetch_size", 10);
 //		properties.put("hibernate.current_session_context_class", "thread");
 		properties.put("hibernate.hbm2ddl.auto", "update");
+		properties.put("hibernate.allow_update_outside_transaction", Boolean.TRUE);
 		return properties;
 	}
 

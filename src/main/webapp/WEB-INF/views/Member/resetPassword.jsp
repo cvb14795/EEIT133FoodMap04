@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@
 				        html: "修改密碼成功！",
 				    }).then((result) => {
 				        if (result.isConfirmed) {
-				            location.href = "../Home";
+		                    location.href = '<c:url value="/Home"/>';
 				        }
 					})
 				},

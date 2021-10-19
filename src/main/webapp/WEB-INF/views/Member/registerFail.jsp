@@ -19,7 +19,7 @@
 
             if (time == 0) {
                 clearInterval(this);
-                location.href = "../Home";
+                location.href = '<c:url value="/Home"/>';
             } else {
                 // 更新倒數秒數
                 cd.innerHTML = time;
