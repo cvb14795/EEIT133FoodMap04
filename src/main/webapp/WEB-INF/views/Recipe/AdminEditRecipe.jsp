@@ -80,7 +80,8 @@
             <legend>官方食譜</legend>
             <div class="st1">
                 <label for="" class="t1">品項:</label>
-                <form:input path="name"/>
+<%--                 <form:input path="name"/> --%>
+                <input id="name" name="name" value=""/>
             </div>
             <div class="st1">
                 <label for="" class="t1">分類:</label>
@@ -121,12 +122,24 @@
                 <input type="text" name="photo" value="${base64String}" hidden>
             </div>
             <div>
-                <input type="text" name="id" value="${param.id}" hidden>
+                <input type="text" id="id" name="id" value="${param.id}" hidden>
             </div>
         </fieldset>
         <div class="sub">
             <input type="submit" name="submit" value="儲存">
         </div>
     </form:form>
+    
+    <script>
+		$.ajax({
+			type, "get"
+			url: "./AdminViewRecipe/"+$("#id").val(), 
+			success: function(data){
+				//放進form
+				$("#name").val(data.name);
+				
+			}
+		})
+    </script>
 </body>
 </html>

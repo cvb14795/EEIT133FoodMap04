@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import cf.cvb14795.member.dao.IMemberService;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.model.UserRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;

@@ -29,19 +29,28 @@ public class MyFilter implements Filter {
 		boolean isWhiteList1 = request.getRequestURI().startsWith(BASE_URL + "/");
 		boolean isWhiteList2 = request.getRequestURI().startsWith(BASE_URL + "/Member");
 
-		// 非首頁也非member頁面或已登出(沒有session) 表示需要跳轉到登入畫面
-		if (isWhiteList1 || isWhiteList2) {
-			HttpSession session = request.getSession();
-			String user = (String) session.getAttribute("user");
-			if (user == null) {
-				session.setAttribute("user", "");
-				session.setAttribute("isAdmin", false);
-				user = "";
-			} else {
-				chain.doFilter(servletRequest, servletResponse);
-			}
-		} else {
-			response.sendRedirect(BASE_URL + "/Member/Login");
+		/* 非首頁也非member頁面或已登出(沒有session) 表示需要跳轉到登入畫面 */
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("user");
+//		System.out.println("=====filter=====\nuser:"+user);
+		if (user == null) {
+			session.setAttribute("user", "");
+			session.setAttribute("isAdmin", false);
+			user = "";
 		}
+		chain.doFilter(servletRequest, servletResponse);
+//		// 曾登入但已經登出
+//		if (user.equals("")) {
+//			response.sendRedirect(BASE_URL + "/Member/Login");
+//		} 
+//			
+//		// 已在登入畫面(member路徑下)
+//		if (isWhiteList1 || isWhiteList2) {
+//			
+//		} else {
+//		// 尚未登入
+//			System.out.println("=====redirect to login=====");
+//			response.sendRedirect(BASE_URL + "/Member/Login");
+//		}
 	}
 }
