@@ -15,9 +15,11 @@
 		crossorigin="anonymous" />
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/memberRegister.css">
+	<link rel="stylesheet" href="../css/sweetalert2-9.17.2.css">
 	<script src="../js/jquery-3.6.0.js"></script>
 	<script src="../js/bootstrap.js"></script>
 	<script src="../js/validate.js"></script>
+	<script src="../js/sweetalert2-9.17.2.js"></script>
 	<style>
 		img {
 			width: 400px;
@@ -29,7 +31,10 @@
 <body>
 	<div class="container">
 		<!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
-		<form:form action="./Revise" modelAttribute="member" method="POST" enctype="multipart/form-data">
+		<form:form id="form" action="" modelAttribute="member" method="POST">
+<%-- 		enctype="multipart/form-data"> --%>
+			<!-- HiddenHttpMethodFilter轉PUT -->
+			<input type="hidden" name="_method" value="PUT"/>
 			<fieldset>
 				<legend>註冊表單</legend>
 				<div class="st1">
@@ -82,24 +87,97 @@
 				</div>
 				<div class="st1">
 					<label for="image" class="t1">上傳頭像：</label>
-					<form:input type="file" path="imgBytes" id="image"/>
-				</div>
+					<img src="" id="uploadImg"/>
+					<input type="hidden" id="imgBase64String" name="imgBase64String" value="">
+ 				</div>
 				<div class="submitBtnContainer">
 					<input type="submit" value="送出">
 				</div>
 			</fieldset>
 		</form:form>
+		<div class="st1">
+			<button id="uploadBtn">上傳頭像</button>
+		</div>
 	</div>
 
 	<script>
-		validate("formElem");
-		$("form").submit(function (e) {
-			var invalid = $(".checkMsg").hasClass("incorrect");
-			if (invalid) {
-				return false;
-			}
-			return true;
+		$("#uploadImg").hide();
+		$("#uploadBtn").on("click", async function(){
+			const { value: file } = await Swal.fire({
+			  title: '請選擇上傳頭像',
+			  input: 'file',
+			  inputAttributes: {
+			    'accept': 'image/*',
+			    'aria-label': 'Upload your profile picture'
+			  }
+			})
 
+			if (file) {
+			  const reader = new FileReader()
+			  reader.onload = (e) => {
+			    Swal.fire({
+			      title: 'Your uploaded picture',
+			      imageUrl: e.target.result,
+			      imageAlt: 'The uploaded picture'
+			    })
+				// 顯示圖片
+				$("#uploadImg").attr("src", e.target.result);
+			    $("#uploadImg").show();
+				// 儲存base64值供上傳進member
+				$("#imgBase64String").val(e.target.result.split(";base64,")[1]);
+			  }
+			  reader.readAsDataURL(file)
+			}
+		})
+	
+		var $account = $("#account");
+// 		取name為form的值
+// 		var form = document.forms.namedItem("form");
+		var $form = $("#form");
+		
+		validate("formElem");
+		
+		$form.on("submit", function (e) {
+			$form.attr("action", "./user/" + $account.val());
+			e.preventDefault();
+// 			給multipart/form-data使用
+// 			var data = new FormData(form);
+			Swal.fire({
+				position: 'center',
+				icon: 'info',
+				title: '提交',
+				html: "送出中，請稍候...",
+				allowOutsideClick: false,
+                onBeforeOpen: () => {
+    				Swal.showLoading()
+				},
+				showConfirmButton: false,
+			})
+			console.log("送出...");
+			var invalid = $(".checkMsg").hasClass("incorrect");
+			if (!invalid) {
+				console.log("資料正確，送出表單");
+				$.ajax({
+					type: $form.attr("method"),
+					url: $form.attr("action"),
+					data: $form.serialize(),
+					success: function (data) {
+						console.log("修改成功");
+						console.log(data);
+						swal.close();
+						Swal.fire({
+							position: 'center',
+							icon: 'success',
+							title: '修改成功',
+							html: "修改成功，將在3秒後回首頁...",
+							timer: 3000,
+							timerProgressBar: true,
+							showConfirmButton: false,
+						})
+						location.href = '<c:url value="/Home"/>';
+					}
+				})
+			}
 		})
 	</script>
 </body>

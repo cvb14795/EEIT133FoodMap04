@@ -64,7 +64,7 @@ table {
 
 		<div>
 			<input type='submit' value='送出'> <input type="button"
-				value="回首頁" onclick=".location.href='frontpage'">
+				value="回首頁" onclick="location.href='frontpage'">
 		</div>
 
 	</form>

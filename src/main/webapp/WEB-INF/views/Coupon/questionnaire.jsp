@@ -139,11 +139,9 @@ legend {
 			<div class='str1'>
 
 				<p>
-					姓名: <label> <input type='radio' name='gender' value='男'>男
-					</label> <label> <input type='radio' name='gender' value='女'>女
-					</label> <label> <input type='radio' name='gender' value='其他'>其他
-					</label>
-				</p>
+					姓名:<label><input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='account1'
+                            name='name' required></label>
+                </p>
 
 				<p>
 					性別: <label> <input type='radio' name='gender' value='男'>男

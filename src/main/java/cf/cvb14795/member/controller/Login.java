@@ -1,6 +1,7 @@
 package cf.cvb14795.member.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -36,7 +36,7 @@ public class Login {
 	private boolean isAlreadyLogin = false;
 	// 記得不要用class 用interface
 	// 否則會出現but was actually of type 'com.sun.proxy.$Proxy48'
-	@Autowired
+
 	IMemberService mService;
 	
 	public Login() {
@@ -44,6 +44,11 @@ public class Login {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Autowired
+	public Login(IMemberService mService) {
+		this.mService = mService;
+	}
+
 	@GetMapping("Login")
 	private String memberLogin(HttpServletRequest request,
 							   HttpServletResponse response){
@@ -71,7 +76,9 @@ public class Login {
 		// 有登入紀錄 回到首頁
 		return "redirect:/Home";
 	}
-
+	
+	
+	
 	@PostMapping(value = "Login", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	private ResponseEntity<String> doLogin(
@@ -80,9 +87,11 @@ public class Login {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
+		String message = "登入帳號:"+userAccount;
+		HttpHeaders responseHeaders = new HttpHeaders();
 		try {
 			request.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html; charset=UTF-8");
+//			response.setContentType("application/json; charset=UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,6 +119,13 @@ public class Login {
 				response.addCookie(cookie);
 
 				isAlreadyLogin = true;
+
+				responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+				responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+				return ResponseEntity.ok()
+					      .headers(responseHeaders)
+					      .body(new Gson().toJson(message));
+				
 			} else {
 				// 密碼錯誤
 				// 改成JSON回傳 前端login接收並alert
@@ -125,8 +141,7 @@ public class Login {
 //			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return ResponseEntity.ok(new Gson().toJson("登入帳號:"+userAccount));
-	}
+	}	
 	
 	@GetMapping("Logout")
 	private String doGet(HttpSession session, HttpServletResponse response){
