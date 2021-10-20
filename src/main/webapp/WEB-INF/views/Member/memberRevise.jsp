@@ -130,15 +130,15 @@
 			}
 		})
 	
-		var account = $("#account").val();
+		var $account = $("#account");
 // 		取name為form的值
 // 		var form = document.forms.namedItem("form");
 		var $form = $("#form");
-		$form.attr("action", "./user/"+account);
 		
 		validate("formElem");
 		
 		$form.on("submit", function (e) {
+			$form.attr("action", "./user/" + $account.val());
 			e.preventDefault();
 // 			給multipart/form-data使用
 // 			var data = new FormData(form);

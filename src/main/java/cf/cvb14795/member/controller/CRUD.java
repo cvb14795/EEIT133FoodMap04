@@ -91,6 +91,7 @@ public class CRUD {
 		System.out.println("*****修改會員資訊*****");
 		System.out.println("帳號:" + m.getAccount());
 		System.out.println("密碼:" + m.getPassword());
+		System.out.println("身分證字號:" + m.getId());
 		System.out.println("名稱:" + m.getName());
 		System.out.println("地址:" + m.getAddress());
 		System.out.println("電話:" + m.getPhone());
@@ -166,18 +167,19 @@ public class CRUD {
 
 			Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
 //				mDAO.addMember(m);
-			mService.insertMember(m);
 			model.addAttribute("member", m);
 
 			System.out.println("*****註冊會員資訊*****");
 			System.out.println("帳號:" + m.getAccount());
 			System.out.println("密碼:" + m.getPassword());
+			System.out.println("身分證字號:" + m.getId());
 			System.out.println("名稱:" + m.getName());
 			System.out.println("地址:" + m.getAddress());
 			System.out.println("電話:" + m.getPhone());
 			System.out.println("電子郵件:" + m.getEmail());
 			System.out.println("*****註冊會員資訊*****");
 
+			mService.insertMember(m);
 			base64String = Base64.getEncoder().encodeToString(imgBytes);
 			model.addAttribute("base64String", base64String);
 //			request.getRequestDispatcher(SUCCESS_VIEW).forward(request, response);

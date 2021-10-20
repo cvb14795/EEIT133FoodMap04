@@ -1,8 +1,10 @@
-package cf.cvb14795.Coupon.model;
+package cf.cvb14795.Coupon.model.service;
 
 import java.util.List;
 
-public interface IQuestionnaireBeanService {
+import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
+
+public interface IQuestionnaireService {
 
 	public void addNewData(QuestionnaireBean qBean); // 新增問卷資料
 
@@ -15,5 +17,9 @@ public interface IQuestionnaireBeanService {
 	public void UpdateData(String before, String after);	// 修改一筆資料
 
 	public boolean deleteDataById(String id); // 刪除資料
+	
+	public QuestionnaireBean queryIdData(String id); //查詢特定身分證資料 
+	
+	public Boolean checkAccount(String account);  //檢查同一帳號是否重複填寫
 
 }
