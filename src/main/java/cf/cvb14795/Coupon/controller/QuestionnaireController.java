@@ -34,13 +34,13 @@ public class QuestionnaireController {
 		String send_page;
 		label = "0";
 		System.out.println("cookie user: " + account);
-		QuestionnaireBean qbean = new QuestionnaireBean(name, gender, id, birth, phone, abroad, moving, family, fever,
-				vaccine, label, account);
+		QuestionnaireBean qbean = new QuestionnaireBean(id, name, gender, birth, phone, abroad, moving, family, vaccine, fever, label, account);
+//		QuestionnaireBean qbean = new QuestionnaireBean(name, gender, id, birth, phone, abroad, moving, family, fever,vaccine, label, account);
 		if (qService.checkAccount(qbean.getAccount())) {
 			qService.addNewData(qbean);
-			send_page = "redirect:/send_success";
+			send_page = "Coupon/send_success";
 		} else {
-			send_page = "redirect:/send_error";
+			send_page = "Coupon/send_error";
 		}
 
 		return send_page;

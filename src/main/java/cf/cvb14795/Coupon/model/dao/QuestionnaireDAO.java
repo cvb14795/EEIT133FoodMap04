@@ -2,6 +2,7 @@ package cf.cvb14795.Coupon.model.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
@@ -109,14 +110,19 @@ public class QuestionnaireDAO implements IQuestionnaireDAO {
 		query.setParameter("account", account);
 //		QuestionnaireBean resultBean = null;
 		
-		QuestionnaireBean queriedBean = query.getSingleResult();
-		
-		//若該帳號不存在DB中，回傳true
-		if(queriedBean!=null || !queriedBean.getAccount().equals(account)) {
+		QuestionnaireBean queriedBean;
+		try {
+			queriedBean = query.getSingleResult();			
+			return false;
+		} catch (NoResultException e) {
 			return true;
 		}
 		
-		return false;
+		//若該帳號不存在DB中，回傳true
+//		if(queriedBean!=null || !queriedBean.getAccount().equals(account)) {
+//			return true;
+//		}
+		
 		
 //		try {
 //			resultBean = query.getSingleResult();
