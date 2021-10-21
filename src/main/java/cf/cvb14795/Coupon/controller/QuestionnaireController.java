@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 import cf.cvb14795.Coupon.model.service.IQuestionnaireService;
 
 @Controller
+@RequestMapping("/Coupon")
 public class QuestionnaireController {
 	IQuestionnaireService qService;
 	

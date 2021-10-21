@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,8 @@
 <body>
 	<div class="container">
 		<!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
-		<form action="./Register" method="POST" enctype="multipart/form-data">
+		<form id="form" name="form" action="" method="POST"
+			enctype="multipart/form-data">
 			<fieldset>
 				<legend>註冊表單</legend>
 				<div class="st1">
@@ -81,14 +83,44 @@
 	</div>
 
 	<script>
+		var $account = $("#account");
+		var $form = $("#form");
+		var form = document.forms.namedItem("form");
 		validate("formElem");
-		//仍會送出 待DEBUG
-		$("form").submit(function(e) {
-			var invalid = $(".checkMsg").hasClass("incorrect");
-			if (invalid) {
-				return false;
+
+		$form.submit(function(e) {
+			$form.attr("action", "./user/" + $account.val());
+			e.preventDefault();
+			//仍會送出 待DEBUG
+			let invalid = $(".checkMsg").hasClass("incorrect");
+
+			//棄用$('#image').files[0]
+			let file = $('#image').prop('files')[0]; // 單個檔案
+
+			// 追加新值到 FormData 物件已有的對應鍵上；若該鍵不存在，則為其追加新的鍵
+			// 建立一個新的 FormData 物件
+			var formData = new FormData(form);
+			if (!invalid) {
+				console.log("資料正確，送出表單");
+				$.ajax({
+					type : $form.attr("method"),
+					url : $form.attr("action"),
+					headers: {
+				      // 'Content-Type': 'multipart/form-data',
+				      // 使用 multipart/form-data 在此不需要設定 Content-Type。
+				      'X-Requested-With': 'XMLHttpRequest',
+				    },
+				    contentType: false, //required
+				    processData: false, // required
+				    mimeType: 'multipart/form-data',
+					data : formData,
+					success : function(data) {
+						console.log("註冊成功");
+						// 尚未登入 跳轉去根目錄 有登入才是首頁 
+						location.href = '<c:url value="/"/>';
+					}
+				})
 			}
-			return true;
 		})
 	</script>
 </body>

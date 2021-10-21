@@ -13,7 +13,7 @@ public class CouponUsageUtil {
         this.baseUrl = baseUrl;
     }
     
-    public boolean sendCouponMail(Member member, String couponCode) {
+    public boolean sendMail(Member member, String couponCode) {
         if (member != null) {
             // 寄件者(自己)
             String from = "me";
