@@ -42,8 +42,8 @@ thead {
 	<header>
 		<h1>食譜查詢</h1>
 	</header>
-	<form action="./">
-		<input type="submit" value="首頁">
+	<form>
+		<input type ="button" onclick="history.back()" value="首頁">
 	</form>
 
 	<table>

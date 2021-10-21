@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>here</title>
+<link rel="stylesheet" href="../css/sweetalert2-9.17.2.css">
+<script src="../js/jquery-3.6.0.js"></script>
+<script src="../js/sweetalert2-9.17.2.js"></script>
 <style>
 body {
 	font-size: 20px;
@@ -70,10 +74,11 @@ legend {
 		<h1>Recipe</h1>
 	</div>
 	<div class="container">
-		<form action="./AdminViewRecipe" method="POST">
-			<input type="submit" name="submit" value="食譜查詢">
+		<form action="admin/AdminViewRecipe" method="get">
+<!-- 			<input type="submit" name="submit" value="食譜查詢"> -->
+			<button type="submit">食譜查詢</button>
 		</form>
-		<form action="./AdminInsertRecipe" method="post" enctype="multipart/form-data">
+		<form id="form">
 			<fieldset>
 				<legend>新增官方食譜</legend>
 				<div class="st1">
@@ -130,13 +135,103 @@ legend {
 	</div>
 	<script type="text/javascript">
 		var x = new FileReader;
+		var src;
 		document.forms[1].elements[10].onchange = function() {
 			x.readAsDataURL(this.files[0]);
 		}
 		x.onloadend = function() {
-			document.images[0].src = this.result;
+			src = this.result;
+			document.images[0].src = src;
 		}
-	</script>
 
+		var form = document.getElementById("form");
+		$("#form").on("submit", function(e){
+			/* =====for formData&MultipartFile =====*/
+			var formData = new FormData(form);
+			
+			/* =====for JSON =====*/
+			
+			var html = "";
+			var inputData = $(".st1 input").slice(0, 9);
+			// html += + "name" + $("#name").val() + "<br/>";
+			for (let i = 0; i < inputData.length; i++) {
+				let name = inputData.eq(i).attr("name");
+				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
+				html += name+": "+value+"</br>";
+			}
+			console.log(html);
+			
+			//改用ajax傳送 棄用原本的form傳送
+			e.preventDefault();
+			
+			Swal.fire({
+				title: '您確定要送出嗎？',
+				icon: 'question',
+				html: html,
+				imageUrl: src,
+				imageWidth: 400,
+				imageHeight: 200,
+				showCancelButton: true,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type:"post",
+						url:"<c:url value='/Recipe/admin/adminInsertToDB'/>",
+						data: formData,
+		// 				data: json,
+		// 				dataType:"json",
+		// 				contentType: "application/json; charset=utf-8",
+						contentType: false, //required
+						processData: false, // required
+						/*一定要加*/
+						mimeType: 'multipart/form-data', //有圖片就要加這行
+						/*一定要加*/
+						success: function(data){
+							var jsonData = JSON.parse(data);
+							console.log("Success:" + "\nID:" +jsonData.id + "\nName:" +jsonData.name) ;
+
+							var html1 = "";
+							for (const key in jsonData) {
+								console.log(key);
+								console.log(jsonData[key]);
+								let val = (jsonData[key] != "") ? jsonData[key] : "無";
+								if (!(key == "base64String" || key == "photo")) {
+									html1 += key+": "+val;
+									html1 += "<br/>";
+								} 
+								// else if (key == "base64String"){
+								// 	html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
+								// }
+							};
+							// console.log(html);
+
+							Swal.fire({
+								title: '已新增成功！',
+								icon: 'success',
+								html: html1,
+								imageUrl: 'data:image;base64,'+jsonData.base64String,
+								imageWidth: 400,
+								imageHeight: 200,
+							})
+									
+						},
+						error: function(e){
+							console.log(e);
+						}
+					})
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					Swal.fire({
+						icon: 'error',
+						title: '已取消送出請求',
+						text: '您的變更將不會被儲存!'
+					})
+				}
+			})
+			
+			
+		})
+
+
+	</script>
 </body>
 </html>

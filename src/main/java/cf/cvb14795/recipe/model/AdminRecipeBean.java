@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "recipe")
@@ -51,6 +53,9 @@ public class AdminRecipeBean implements Serializable {
 	@Column(name = "PHOTO")
 	private byte[] photo;
 	
+	@Transient
+	private String base64String;
+	
 	@Override
 	public String toString() {
 		return "RecipeBean [id=" + id + ", name=" + name + ", category=" + category + ", food1=" + food1 + ", food2="
@@ -62,7 +67,7 @@ public class AdminRecipeBean implements Serializable {
 	}
 
 	public AdminRecipeBean(String name, String category, String food1, String food2, String food3, String food4,
-			String sauce1, String sauce2, String sauce3, byte[] photo) {
+			String sauce1, String sauce2, String sauce3, byte[] photo, String base64String) {
 		this.name = name;
 		this.category = category;
 		this.food1 = food1;
@@ -73,7 +78,21 @@ public class AdminRecipeBean implements Serializable {
 		this.sauce2 = sauce2;
 		this.sauce3 = sauce3;
 		this.photo = photo;
+		this.base64String = base64String;
 	}
+	
+//	public AdminRecipeBean(String name, String category, String food1, String food2, String food3, String food4,
+//			String sauce1, String sauce2, String sauce3) {
+//		this.name = name;
+//		this.category = category;
+//		this.food1 = food1;
+//		this.food2 = food2;
+//		this.food3 = food3;
+//		this.food4 = food4;
+//		this.sauce1 = sauce1;
+//		this.sauce2 = sauce2;
+//		this.sauce3 = sauce3;
+//	}	
 
 	public int getId() {
 		return id;

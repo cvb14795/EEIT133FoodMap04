@@ -22,7 +22,6 @@ public class Register {
 	@GetMapping("Register")
 	private String registerPage(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("跳轉到註冊頁面");
-//		request.getRequestDispatcher("./memberRegister.html").forward(request, response);
 		return prefix + "memberRegister";
 
 	}

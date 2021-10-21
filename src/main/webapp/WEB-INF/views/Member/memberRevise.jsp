@@ -130,21 +130,25 @@
 			}
 		})
 	
-		var account = $("#account").val();
-		var form = document.getElementById("#form");
+		var $account = $("#account");
+// 		取name為form的值
+// 		var form = document.forms.namedItem("form");
 		var $form = $("#form");
-		$form.attr("action", "./user/"+account);
 		
 		validate("formElem");
 		
-		$form.submit(function (e) {
-			var data = new FormData(form);
+		$form.on("submit", function (e) {
+			$form.attr("action", "./user/" + $account.val());
+			e.preventDefault();
+// 			給multipart/form-data使用
+// 			var data = new FormData(form);
 			Swal.fire({
 				position: 'center',
 				icon: 'info',
 				title: '提交',
 				html: "送出中，請稍候...",
-				didOpen: () => {
+				allowOutsideClick: false,
+                onBeforeOpen: () => {
     				Swal.showLoading()
 				},
 				showConfirmButton: false,
@@ -156,9 +160,11 @@
 				$.ajax({
 					type: $form.attr("method"),
 					url: $form.attr("action"),
-					data: data,
+					data: $form.serialize(),
 					success: function (data) {
 						console.log("修改成功");
+						console.log(data);
+						swal.close();
 						Swal.fire({
 							position: 'center',
 							icon: 'success',
@@ -171,10 +177,7 @@
 						location.href = '<c:url value="/Home"/>';
 					}
 				})
-				return false;
 			}
-			return true;
-
 		})
 	</script>
 </body>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.dao.IMemberService;
@@ -49,8 +55,8 @@ public class CRUD {
 	}
 	
 	/* 修改會員資料 */
-	@PutMapping(path = "user/{account}")
-	private String doRevise(
+	@PutMapping(path = "user/{account}", produces = MediaType.APPLICATION_JSON_VALUE)
+	private ResponseEntity<String> doRevise(
 			Model model,
 			HttpServletRequest request,
 			HttpServletResponse response,
@@ -63,8 +69,11 @@ public class CRUD {
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
 			@RequestParam(value = "imgBase64String", required = false) String imgBase64String) throws IOException{
+		
+		String message;
+		HttpHeaders responseHeaders = new HttpHeaders();
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+//		response.setContentType("application/json; charset=UTF-8");
 
 		String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
 		// 圖片之完整byte資料
@@ -79,18 +88,24 @@ public class CRUD {
 		Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
 		mService.updateMember(account, m);
 
-		System.out.println("=====修改會員資訊=====");
+		System.out.println("*****修改會員資訊*****");
 		System.out.println("帳號:" + m.getAccount());
 		System.out.println("密碼:" + m.getPassword());
+		System.out.println("身分證字號:" + m.getId());
 		System.out.println("名稱:" + m.getName());
 		System.out.println("地址:" + m.getAddress());
 		System.out.println("電話:" + m.getPhone());
 		System.out.println("電子郵件:" + m.getEmail());
+		System.out.println("*****修改會員資訊*****");
 		
 		/* 待完工 */
 		// 回首頁 但在這之前先加一個jsp 用ajax給他swal
-		return "redirect://Home";
-		
+		message = "*****修改成功!!!*****";
+		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		return ResponseEntity.ok()
+			      .headers(responseHeaders)
+			      .body(new Gson().toJson(message));
 	}
 	
 	/* 註冊會員 */
@@ -152,16 +167,19 @@ public class CRUD {
 
 			Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
 //				mDAO.addMember(m);
-			mService.insertMember(m);
 			model.addAttribute("member", m);
 
+			System.out.println("*****註冊會員資訊*****");
 			System.out.println("帳號:" + m.getAccount());
 			System.out.println("密碼:" + m.getPassword());
+			System.out.println("身分證字號:" + m.getId());
 			System.out.println("名稱:" + m.getName());
 			System.out.println("地址:" + m.getAddress());
 			System.out.println("電話:" + m.getPhone());
 			System.out.println("電子郵件:" + m.getEmail());
+			System.out.println("*****註冊會員資訊*****");
 
+			mService.insertMember(m);
 			base64String = Base64.getEncoder().encodeToString(imgBytes);
 			model.addAttribute("base64String", base64String);
 //			request.getRequestDispatcher(SUCCESS_VIEW).forward(request, response);

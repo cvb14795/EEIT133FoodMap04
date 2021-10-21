@@ -1,6 +1,7 @@
 package cf.cvb14795.member.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -85,9 +87,11 @@ public class Login {
 			HttpServletRequest request,
 			HttpServletResponse response){
 		
+		String message = "登入帳號:"+userAccount;
+		HttpHeaders responseHeaders = new HttpHeaders();
 		try {
 			request.setCharacterEncoding("UTF-8");
-			response.setContentType("application/json; charset=UTF-8");
+//			response.setContentType("application/json; charset=UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,8 +119,12 @@ public class Login {
 				response.addCookie(cookie);
 
 				isAlreadyLogin = true;
-				//	return new ResponseEntity<>(HttpStatus.OK);
-				return ResponseEntity.ok(new Gson().toJson("登入帳號:"+userAccount));
+
+				responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+				responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+				return ResponseEntity.ok()
+					      .headers(responseHeaders)
+					      .body(new Gson().toJson(message));
 				
 			} else {
 				// 密碼錯誤
