@@ -15,6 +15,12 @@
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="./css/bootstrap.min.css">
+<!-- 開關改成IOS風格(左右滑動按鈕) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
+<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
+<!-- 暗黑模式 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <script src="./js/jquery-3.6.0.js"></script>
 <script src="./js/bootstrap.js"></script>
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
@@ -38,7 +44,7 @@
 			var pane = $(this); //轉成 DOM 物件
 			// console.log(url, href, pane);
 			//若點擊首頁則改為頁籤顯示
-			if (href == "#home") {
+			if (href == "#home" || href == "#darkmode") {
 				$(href).load(url, function(result) { //載入頁嵌內容
 					console.log("點擊頁面: " + href);
 					// $(`a[href="${url}"]`).tab('show');                    //將此頁籤設為顯示 (active)
@@ -54,7 +60,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default" id="headerNav">
+	<nav class="navbar navbar-default" id="nav">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -74,7 +80,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#home"
-							data-url="./homepage.html">首頁</a></li>
+							data-url="./resources/homepage.html">首頁</a></li>
 						<!-- 晉豪 -->
 						<li><a data-toggle="tab" href="#food"
 							data-url="./Food/FoodMap">商家資訊</a></li>
@@ -124,6 +130,12 @@
 							href="./Member/Logout" data-url="./Member/Logout"> 登出 <i
 								class="fas fa-sign-out-alt"></i>
 						</a></li>
+						<li>
+							<a data-toggle="tab" href="#darkmode" data-url="">
+								<label for="checkbox-switch">暗黑模式</label>
+								<input type="checkbox" id="checkbox-switch" class="checkbox-switch"/>							
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -151,8 +163,28 @@
 	</div>
 	<script>
 		$(function() {
+			var darkmode = new Darkmode({
+				saveInCookies: true, // default: true,
+			});
+			// 將所有checkbox-switch改成IOS風格
+			var el = document.querySelector('.checkbox-switch');
+			var nav = document.getElementById("nav");
+			var mySwitch = new Switch(el, {
+				size: 'small',
+				checked:false,
+				onChange: function(){
+// 					darkmode.toggle();
+					nav.classList.toggle("navbar-default");
+// 					nav.classList.toggle("navbar-dark");
+// 					nav.classList.toggle("bg-dark");
+				}
+			});
+			// 先關閉new完後預設自動轉暗黑模式的動作
+// 			darkmode.toggle();
+			
+			// 獲取使用者資訊
 			const cookies = document.cookie;
-			console.log("cookies:"+cookies);
+			console.log("cookies:" + cookies);
 			let userName = cookies.split("user=")[1];
 			if (userName === undefined) {
 				console.log("使用者名稱:未定義 ");
