@@ -80,14 +80,14 @@
 							data-url="./Food/FoodMap">商家資訊</a></li>
 						<!-- 耿豪 -->
 						<li><a data-toggle="tab" href="#coupon"
-							data-url="./Coupon/frontpage.html">防疫專區</a></li>
+							data-url="./Coupon/frontpage">防疫專區</a></li>
 						<!-- 玴辰 -->
 						<!-- 注意 name 不要一樣 -->
 						<li><a data-toggle="tab" href="#event"
 							data-url="./Event/eventjava">活動報名</a></li>
 						<!-- 峻豪 -->
 						<li><a data-toggle="tab" href="#recipe"
-							data-url="./Recipe/user">營養資訊</a></li>
+							data-url="./Recipe/admin">營養資訊</a></li>
 						<!-- 語君 -->
 						<li><a data-toggle="tab" href="#comment"
 							data-url="./Comment/CommentControllerServlet">評論區</a></li>

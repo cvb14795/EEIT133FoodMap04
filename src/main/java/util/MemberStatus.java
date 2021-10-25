@@ -20,7 +20,7 @@ public class MemberStatus {
 				// 兩個沒有放在字串池的字串不能用== 要用equals
 //				if (cookie.getName() == "user") {
 				if(cookie.getName().equals("user")) {
-					System.out.println("getLoginStatus, 獲取用戶登入名稱: " + cookie.getValue());
+//					System.out.println("getLoginStatus, 獲取用戶登入名稱: " + cookie.getValue());
 					return cookie.getValue() == userName;
 				}
 			}
@@ -40,7 +40,7 @@ public class MemberStatus {
 				// cookies: null for會拋NullPointerException
 				if (cookie.getName().equals("user")) {
 					userName = cookie.getValue();
-					System.out.println("getCurrentUserAccount, 獲取用戶登入名稱: " + cookie.getValue());
+//					System.out.println("getCurrentUserAccount, 獲取用戶登入名稱: " + cookie.getValue());
 					break;
 				} 
 			}

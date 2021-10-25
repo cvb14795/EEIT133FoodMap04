@@ -7,6 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
+<link rel="stylesheet" href='<c:url value="/css/memberDetail.css"/>'>
+<script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
+<script src='<c:url value="/js/bootstrap.js"/>'></script>
+<script src='<c:url value="/js/memberAuth.js"/>'></script>
+
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 <title>${title}</title>
 <style>
         p {
@@ -63,14 +74,14 @@
 		
 		
 		//針對各選項
-		var foreign = document.getElementsByName('foreign');
+		var foreign = document.getElementsByName('abroad');
 		for (let i=0;i<foreign.length;i++){
 			if (foreign[i].checked){
 				cnt++;
 			}	
 		}
 		
-		var move = document.getElementsByName('move');
+		var move = document.getElementsByName('moving');
 		for (let i=0;i<move.length;i++){
 			if (move[i].checked){
 				cnt++;
@@ -108,6 +119,18 @@
 </script>
 </head>
 <body>
+	<input type="hidden" name="isAdmin" id="isAdmin" value="${isAdmin}">
+	<input type="hidden" name="userName" id="userName" value="${user}">
+	<input type="hidden" name="label" id="label" value="0">
+
+	<div class="memberDetail">
+		<div class="text-right">
+			會員： <span id="userNameContainer"></span>
+		</div>
+		<div class="text-right">
+			身分： <span id="isAdminContainer"></span>
+		</div>
+	</div>
 
 <form action='controller' method='post' name='send' onsubmit="return chk();">
         <fieldset>
@@ -116,9 +139,8 @@
             <div class='str1'>
 
                 <p>姓名:
-                     <label> <input type='radio' name='gender' value='男'>男 </label>
-                    <label> <input type='radio' name='gender' value='女'>女 </label>
-                    <label> <input type='radio' name='gender' value='其他'>其他 </label>
+                     <label><input type='text' autofocus autocomplete='off'
+						placeholder='請輸入姓名' id='name' name='name' required></label>
                 </p>
 
                 <p> 性別:
@@ -157,7 +179,6 @@
                 <p>同住親友是否有收到居家隔離通知單:</p>
                 <label><input type='radio' name='family' value='1'>是</label>
                 <label><input type='radio' name='family' value='0'>否</label>
-
             </div>
         </fieldset>
         <fieldset>
@@ -184,7 +205,5 @@
 
 
     </form>
-
-
 </body>
 </html>

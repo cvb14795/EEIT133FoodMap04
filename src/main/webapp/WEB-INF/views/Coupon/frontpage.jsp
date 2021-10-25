@@ -31,11 +31,11 @@ $(function() {
 	<br>
 	<h2>歡迎大家來填問卷</h2>
 	<input type="button" value="填問卷"
-		onclick="location.href='<c:url value='/questionnaire' />'">
+		onclick="location.href='<c:url value='/Coupon/questionnaire' />'">
 
 
 	<h2>管理員專用</h2>
-	<input type="button" value="功能" onclick="location.href='<c:url value='/admin' />'">
+	<input type="button" value="功能" onclick="location.href='<c:url value='/Coupon/admin' />'">
 
 
 </body>
