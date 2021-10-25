@@ -20,8 +20,8 @@ public class HomeController {
 		this.qService = qService;
 	}
 	
-	@GetMapping({"/frontpage", "/", "default.htm"})
-	public String frontpage() {
+	@GetMapping({"/frontpage", "/", "/default.htm"})
+	public String  frontpage() {
 		return PREFIX+"frontpage";
 		
 	}

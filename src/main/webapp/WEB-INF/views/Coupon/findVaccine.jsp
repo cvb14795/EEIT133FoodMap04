@@ -16,6 +16,11 @@
 <script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
 <script src='<c:url value="/js/bootstrap.js"/>'></script>
 <script src='<c:url value="/js/memberAuth.js"/>'></script>
+<script>
+	$(function() {
+		adminAuth();
+	})
+</script>
 
 <style>
 .box1 {
@@ -35,17 +40,6 @@ table {
 	border-collapse: collapse;
 }
 </style>
-
-<script>
-	$(function() {
-		adminAuth();
-	})
-	
-</script>
-
-
-
-
 
 </head>
 <body>
