@@ -173,10 +173,10 @@
 				size: 'small',
 				checked:false,
 				onChange: function(){
-// 					darkmode.toggle();
+					darkmode.toggle();
 					nav.classList.toggle("navbar-default");
-// 					nav.classList.toggle("navbar-dark");
-// 					nav.classList.toggle("bg-dark");
+					nav.classList.toggle("navbar-dark");
+					nav.classList.toggle("bg-dark");
 				}
 			});
 			// 先關閉new完後預設自動轉暗黑模式的動作
