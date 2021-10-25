@@ -109,10 +109,10 @@ public class QuestionnaireDAO implements IQuestionnaireDAO {
 		query.setParameter("account", account);
 //		QuestionnaireBean resultBean = null;
 		
-		QuestionnaireBean queriedBean = query.getSingleResult();
+		List<QuestionnaireBean> queried_list = query.getResultList();
 		
 		//若該帳號不存在DB中，回傳true
-		if(queriedBean!=null || !queriedBean.getAccount().equals(account)) {
+		if(null == queried_list|| queried_list.isEmpty()) {
 			return true;
 		}
 		
