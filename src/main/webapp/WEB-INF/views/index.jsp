@@ -15,6 +15,7 @@
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/lineLogin.css">
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 <script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
@@ -23,6 +24,7 @@
 	src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <script src="./js/jquery-3.6.0.js"></script>
 <script src="./js/bootstrap.js"></script>
+<script src="./js/lineLogin.js"></script>
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
 <script>
@@ -86,7 +88,7 @@
 							data-url="./Food/FoodMap">商家資訊</a></li>
 						<!-- 耿豪 -->
 						<li><a data-toggle="tab" href="#coupon"
-							data-url="./Coupon/frontpage.html">防疫專區</a></li>
+							data-url="./Coupon/frontpage">防疫專區</a></li>
 						<!-- 玴辰 -->
 						<!-- 注意 name 不要一樣 -->
 						<li><a data-toggle="tab" href="#event"
@@ -141,7 +143,16 @@
 			</div>
 		</div>
 	</nav>
-
+	
+	<!-- line加好友按鈕 -->
+	<div>
+		<span>快加入我們的Line好友：FoodMap美食地圖</span>
+		<div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@lineteamjp" style="display: none;"></div></br>
+		<a href="" id="lineLoginHref">
+			<input type="button" class="lineLogin" style="width: 151px;height: 44px;border:none"/>
+		</a>
+		
+	</div>
 	<div class="tab-content" style="padding: 10px;" id="headerTabs">
 		<div class="tab-pane active" id="home"></div>
 		<!-- 待新增 其他頁面 -->
@@ -163,6 +174,7 @@
 	</div>
 	<script>
 		$(function() {
+			setLineOAuthUrl();
 			var darkmode = new Darkmode({
 				saveInCookies: true, // default: true,
 			});
@@ -173,10 +185,10 @@
 				size: 'small',
 				checked:false,
 				onChange: function(){
-// 					darkmode.toggle();
+					darkmode.toggle();
 					nav.classList.toggle("navbar-default");
-// 					nav.classList.toggle("navbar-dark");
-// 					nav.classList.toggle("bg-dark");
+					nav.classList.toggle("navbar-dark");
+					nav.classList.toggle("bg-dark");
 				}
 			});
 			// 先關閉new完後預設自動轉暗黑模式的動作
@@ -210,6 +222,7 @@
 			}
 		})
 	</script>
+	<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async defer></script>
 </body>
 
 </html>

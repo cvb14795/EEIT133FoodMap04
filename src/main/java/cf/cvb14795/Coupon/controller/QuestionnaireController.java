@@ -29,18 +29,19 @@ public class QuestionnaireController {
 			@RequestParam("id") String id, @RequestParam("birth") String birth, @RequestParam("phone") String phone,
 			@RequestParam("abroad") String abroad, @RequestParam("moving") String moving,
 			@RequestParam("family") String family, @RequestParam("fever") String fever,
-			@RequestParam("vaccine") String vaccine, @RequestParam("label") String label,
+			@RequestParam("vaccine") String vaccine, @RequestParam(name="label", required=false) String label,
 			@CookieValue("user") String account, Model model) {
 		String send_page;
 		label = "0";
 		System.out.println("cookie user: " + account);
-		QuestionnaireBean qbean = new QuestionnaireBean(name, gender, id, birth, phone, abroad, moving, family, fever,
-				vaccine, label, account);
+		System.out.println("labe****/*/*/*/*/*/*/*/*/*/l:" + label);
+		QuestionnaireBean qbean = new QuestionnaireBean(id, name, gender, birth, phone, abroad, 
+				moving, family, vaccine, fever, label, account);
 		if (qService.checkAccount(qbean.getAccount())) {
 			qService.addNewData(qbean);
-			send_page = "redirect:/send_success";
+			send_page = "/Coupon/send_success";
 		} else {
-			send_page = "redirect:/send_error";
+			send_page = "/Coupon/send_error";
 		}
 
 		return send_page;
