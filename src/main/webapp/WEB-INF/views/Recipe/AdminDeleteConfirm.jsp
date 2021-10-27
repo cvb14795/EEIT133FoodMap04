@@ -11,6 +11,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>資料刪除</title>
+<link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
+<script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
+<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
 <style>
 body {
 	font-size: 20px;

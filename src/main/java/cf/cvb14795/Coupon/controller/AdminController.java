@@ -3,6 +3,7 @@ package cf.cvb14795.Coupon.controller;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,7 @@ import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 import cf.cvb14795.Coupon.model.service.IQuestionnaireService;
 import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 
 @Controller
 @RequestMapping("/Coupon")
@@ -76,7 +77,7 @@ public class AdminController {
                 /* 待修改成問卷表格與會員表格join的形式 */
                 
                 // 由問卷表格查詢該身分證對應的會員
-                Member member = mService.selectMemberById(b.getId());
+                Optional<Member> member = mService.selectMemberByIdNum(b.getId());
                 // 產生優惠券代碼(預設為6位數)
                 String couponCode = couponUsage.generateCouponCode(6);
                 // 發送優惠券Email

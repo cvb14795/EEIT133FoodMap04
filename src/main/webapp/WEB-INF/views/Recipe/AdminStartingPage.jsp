@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>here</title>
-<link rel="stylesheet" href="../css/sweetalert2-9.17.2.css">
-<script src="../js/jquery-3.6.0.js"></script>
-<script src="../js/sweetalert2-9.17.2.js"></script>
+<link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
+<script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
+<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
 <style>
 body {
 	font-size: 20px;
@@ -74,7 +78,7 @@ legend {
 		<h1>Recipe</h1>
 	</div>
 	<div class="container">
-		<form action="admin/AdminViewRecipe" method="get">
+		<form action="admin/AdminViewRecipe" method="post">
 <!-- 			<input type="submit" name="submit" value="食譜查詢"> -->
 			<button type="submit">食譜查詢</button>
 		</form>
@@ -165,7 +169,7 @@ legend {
 			e.preventDefault();
 			
 			Swal.fire({
-				title: '您確定要送出嗎？',
+				title: '確定要新增嗎？',
 				icon: 'question',
 				html: html,
 				imageUrl: src,
@@ -178,9 +182,6 @@ legend {
 						type:"post",
 						url:"<c:url value='/Recipe/admin/adminInsertToDB'/>",
 						data: formData,
-		// 				data: json,
-		// 				dataType:"json",
-		// 				contentType: "application/json; charset=utf-8",
 						contentType: false, //required
 						processData: false, // required
 						/*一定要加*/
@@ -199,21 +200,17 @@ legend {
 									html1 += key+": "+val;
 									html1 += "<br/>";
 								} 
-								// else if (key == "base64String"){
-								// 	html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
-								// }
 							};
-							// console.log(html);
 
 							Swal.fire({
-								title: '已新增成功！',
+								title: '新增成功！',
 								icon: 'success',
 								html: html1,
 								imageUrl: 'data:image;base64,'+jsonData.base64String,
 								imageWidth: 400,
 								imageHeight: 200,
 							})
-									
+							setTimeout("window.location.pathname = 'FoodMap04/Recipe/admin'",1500);
 						},
 						error: function(e){
 							console.log(e);
@@ -227,11 +224,7 @@ legend {
 					})
 				}
 			})
-			
-			
 		})
-
-
 	</script>
 </body>
 </html>

@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 
 /**
  * Servlet implementation class MemberRegister
@@ -64,7 +64,7 @@ public class CRUD {
 			@PathVariable("account") String account,
 			@RequestParam("password") String password,
 			@RequestParam("name") String name,
-			@RequestParam("id") String id,
+			@RequestParam("id") String idNum,
 			@RequestParam("address") String address,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
@@ -83,15 +83,15 @@ public class CRUD {
 			imgBytes = Base64.getDecoder().decode(imgBase64String);
 		} else {
 			// 使用者無上傳圖片 使用原本圖片替代
-			imgBytes = mService.selectMemberByAccount(account).getImgBytes();
+			imgBytes = mService.selectMemberByAccount(account).get().getImgBytes();
 		}
-		Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
-		mService.updateMember(account, m);
+		Member m = new Member(account, hashpw, name, idNum, address, phone, imgBytes, email, false);
+		mService.updateMember(m);
 
 		System.out.println("*****修改會員資訊*****");
 		System.out.println("帳號:" + m.getAccount());
 		System.out.println("密碼:" + m.getPassword());
-		System.out.println("身分證字號:" + m.getId());
+		System.out.println("身分證字號:" + m.getIdNum());
 		System.out.println("名稱:" + m.getName());
 		System.out.println("地址:" + m.getAddress());
 		System.out.println("電話:" + m.getPhone());
@@ -115,7 +115,7 @@ public class CRUD {
 			@PathVariable("account") String account,
 			@RequestParam("password") String password,
 			@RequestParam("name") String name,
-			@RequestParam("id") String id,
+			@RequestParam("id") String idNum,
 			@RequestParam("address") String address,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
@@ -165,14 +165,14 @@ public class CRUD {
 
 			imgBytes = baos.toByteArray();
 
-			Member m = new Member(account, hashpw, name, id, address, phone, imgBytes, email, false);
+			Member m = new Member(account, hashpw, name, idNum, address, phone, imgBytes, email, false);
 //				mDAO.addMember(m);
 			model.addAttribute("member", m);
 
 			System.out.println("*****註冊會員資訊*****");
 			System.out.println("帳號:" + m.getAccount());
 			System.out.println("密碼:" + m.getPassword());
-			System.out.println("身分證字號:" + m.getId());
+			System.out.println("身分證字號:" + m.getIdNum());
 			System.out.println("名稱:" + m.getName());
 			System.out.println("地址:" + m.getAddress());
 			System.out.println("電話:" + m.getPhone());

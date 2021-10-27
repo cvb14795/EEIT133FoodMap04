@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 
 @Controller
 //將Model中屬性名為user的屬性

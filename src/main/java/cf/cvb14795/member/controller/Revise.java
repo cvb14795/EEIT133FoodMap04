@@ -1,6 +1,7 @@
 package cf.cvb14795.member.controller;
 
 import java.util.Base64;
+import java.util.Optional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 import util.MemberStatus;
 
 @Controller
@@ -46,11 +47,11 @@ public class Revise {
 
 		MemberStatus status = new MemberStatus(cookies);
 		userAccount = status.getCurrentUserAccount();
-		if (status.getLoginStatus(userAccount)) {
-			Member m = mService.selectMemberByAccount(userAccount);
-			model.addAttribute("member", m);
+		Optional<Member> m = mService.selectMemberByAccount(userAccount);
+		if (m.isPresent()) {
+			model.addAttribute("member", m.get());
 			
-			String base64String = Base64.getEncoder().encodeToString(m.getImgBytes());
+			String base64String = Base64.getEncoder().encodeToString(m.get().getImgBytes());
 			model.addAttribute("base64String", base64String);
 			return prefix+"memberRevise";
 		} else {

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ import com.azure.core.annotation.QueryParam;
 import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 
 @Controller
 @RequestMapping("/Member")
@@ -110,9 +111,12 @@ public class ResetPassword {
 		response.setContentType("text/html;charset=UTF-8");
 
 		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
-		Member m = mService.selectMemberByAccount(user);
-		boolean isSuccess = mService.updateMemberPassword(hashedPassword, m);
-		if (isSuccess) {
+		Optional<Member> m = mService.selectMemberByAccount(user);
+		if (m.isPresent()) {
+			//修改密碼
+			m.get().setPassword(hashedPassword);
+			//更新資料庫
+			mService.updateMember(m.get());
 			message = "修改成功!!!";
 			System.out.println(message);
 			responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -120,8 +124,9 @@ public class ResetPassword {
 			return ResponseEntity.ok()
 				      .headers(responseHeaders)
 				      .body(new Gson().toJson(message));		
+		}else {
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);			
 		}
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(HttpSessionRequiredException.class)

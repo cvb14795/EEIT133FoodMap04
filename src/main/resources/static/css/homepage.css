@@ -1,0 +1,8 @@
+#banner{
+    display: flex;
+    justify-content: center;
+}
+#banner img{
+    width: 80%;
+    height: 500px;
+}

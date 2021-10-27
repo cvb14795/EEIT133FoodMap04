@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 import util.gmail.Mail;
 
 @Controller
@@ -65,13 +66,13 @@ public class ForgetPassword {
 //		response.setContentType("text/html;charset=UTF-8");
 
 		System.out.println("正在確認註冊時信箱是否正確...");
-		Member m = mService.selectMemberByAccount(inputAccount);
-		String userAccount = m.getAccount();
+		Optional<Member> m = mService.selectMemberByAccount(inputAccount);
+		String userAccount = m.get().getAccount();
 		System.out.println("=====ForgetPassword=====");
 		System.out.println("使用者輸入帳號:"+inputAccount);
 		System.out.println("資料庫用戶帳號:"+userAccount);
-		boolean isAccountCorrect = m.getAccount().equals(inputAccount);
-		boolean isEmailCorrect = m.getEmail().equals(recipientEmail);
+		boolean isAccountCorrect = m.get().getAccount().equals(inputAccount);
+		boolean isEmailCorrect = m.get().getEmail().equals(recipientEmail);
 		System.out.println("isAccountCorrect: "+isAccountCorrect);
 		System.out.println("isEmailCorrect: "+isEmailCorrect);
 		// 判斷使用者帳號與使用者email是否與資料庫相符
