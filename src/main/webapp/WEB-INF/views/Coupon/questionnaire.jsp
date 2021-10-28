@@ -73,14 +73,14 @@ legend {
 		}
 
 		//針對各選項
-		var foreign = document.getElementsByName('foreign');
+		var foreign = document.getElementsByName('abroad');
 		for (let i = 0; i < foreign.length; i++) {
 			if (foreign[i].checked) {
 				cnt++;
 			}
 		}
 
-		var move = document.getElementsByName('move');
+		var move = document.getElementsByName('moving');
 		for (let i = 0; i < move.length; i++) {
 			if (move[i].checked) {
 				cnt++;
@@ -118,8 +118,85 @@ legend {
 </script>
 </head>
 <body>
-	<input type="hidden" id="isAdmin" value="${isAdmin}">
-	<input type="hidden" id="userName" value="${user}">
+
+<%-- 	<form:form method='POST' modelAttribute="QuestionnaireBean" action='qcontroller'  name='send' onsubmit="return chk();"> --%>
+<!--         <fieldset> -->
+        	       	
+<!--         	<legend>個人資料</legend> -->
+<!--             <div class='str1'> -->
+
+<!--                 <p>姓名: -->
+<!--                      <label> -->
+<%--                      <form:input id='name'  path='name' autofocus="true" autocomplete='off' placeholder='請輸入姓名' required="true" ></form:input> --%>
+<!--                      </label> -->
+<!--                 </p> -->
+
+<!--                 <p> 性別: -->
+                	
+<%--                     <label><form:radiobutton path="gender" value='男' />男 </label> --%>
+<%--                     <label><form:radiobutton path="gender" value='女' />女 </label> --%>
+<%--                     <label><form:radiobutton path="gender" value='其他' />其他 </label> --%>
+<!--                 </p> -->
+
+
+
+<!--                 <p>身分證字號: -->
+<%--                    <label><form:input path="id" placeholder='請輸入身份證字號'  --%>
+<%--                     		maxlength='10' pattern='^[A-Z]{1}[1-2]{1}[0-9]{8}$' required="true" /></label> --%>
+<!--                 </p> -->
+
+
+				
+<!--                 <p>生日: -->
+<%--                 	<label><form:input path="birth" id='birthday' placeholder='輸入格式(yyyymmdd)' maxlength='8' required="true"  --%>
+<%--                     	 pattern='((\d{3}[1-9]|\d{2}[1-9]\d|\d[1-9]\d{2}|[1-9]\d{3})(((0[13578]|1[02])(0[1-9]|[12]\d|3[01]))|((0[469]|11)(0[1-9]|[12]\d|30))|(02(0[1-9]|[1]\d|2[0-8]))))|(((\d{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))0229)'  --%>
+<%--                    		  />                 --%>
+<!--                 </p> -->
+
+<!--                 <p>聯絡電話:                -->
+<!--                 <label> -->
+<%--                 <form:input path="phone" id='phone' required="true" /> --%>
+<!--                 </label></p> -->
+<!--             </div> -->
+<!--         </fieldset> -->
+        
+<!--         <fieldset> -->
+<!--             <legend>接觸史調查</legend> -->
+<!--             <div class='str1'> -->
+<!--                 <p>最近14天是否有出國紀錄:</p> -->
+<%--                 <label><form:radiobutton path='abroad' value='1' /> 是</label> --%>
+<%--                 <label><form:radiobutton path='abroad' value='0' /> 否</label> --%>
+<!--                 <p>最近14天是否有跨縣市移動:</p> -->
+<%--                 <label><form:radiobutton path='moving' value='1' /> 是</label> --%>
+<%--                 <label><form:radiobutton path='moving' value='0' /> 否</label> --%>
+<!--                 <p>同住親友是否有收到居家隔離通知單:</p> -->
+<%--                 <label><form:radiobutton path='family' value='1' /> 是</label> --%>
+<%--                 <label><form:radiobutton path='family' value='0' /> 否</label> --%>
+<!--             </div> -->
+<!--         </fieldset> -->
+<!--         <fieldset> -->
+<!--             <legend>身體狀況調查</legend> -->
+<!--             <div class='str1'> -->
+
+<!--                 <p>過去 14 天是否有發燒、咳嗽或呼吸急促症狀？（已服藥者亦須勾選「是」）</p> -->
+<%--                  <label><form:radiobutton path='fever' value='1' /> 是</label> --%>
+<%--                  <label><form:radiobutton path='fever' value='0' /> 否</label> --%>
+<!--                 <p>是否有接種過疫苗</p> -->
+<%--                  <label><form:radiobutton path='vaccine' value='1' /> 是</label> --%>
+<%--                  <label><form:radiobutton path='vaccine' value='0' /> 否</label> --%>
+
+
+<!--             </div> -->
+
+<!--         </fieldset> -->
+<%-- </form:form> --%>
+
+
+
+
+
+
+
 
 	<div class="memberDetail">
 		<div class="text-right">
@@ -129,10 +206,15 @@ legend {
 			身分： <span id="isAdminContainer"></span>
 		</div>
 	</div>
+	
+	<form action='qcontroller' method='post'  modelAttribute="Member">
+ 		<input type="hidden" id="isAdmin" value="${isAdmin}">
+		<input type="hidden" id="userName" value="${user}">
+	</form>
 
-
-	<form action='controller' method='post' name='send'
-		onsubmit="return chk();">
+	<form action='qcontroller' method='post' name='send' modelAttribute="QuestionnaireBean"
+ 		onsubmit="return chk();">
+ 		
 		<fieldset>
 
 			<legend>個人資料</legend>
@@ -191,19 +273,19 @@ legend {
 			<legend>身體狀況調查</legend>
 			<div class='str1'>
 
-				<p>過去 14 天是否有發燒、咳嗽或呼吸急促症狀？（已服藥者亦須勾選「是」）</p>
-				<label><input type='radio' name='fever' value='1'>是
-				</label> <label><input type='radio' name='fever' value='0'>否
-				</label>
-				<p>是否有接種過疫苗</p>
-				<label><input type='radio' name='vaccine' value='1'>是
-				</label> <label><input type='radio' name='vaccine' value='0'>否
-				</label>
+				<p>過去 14 天是否有發燒、咳嗽或呼吸急促症狀？（已服藥者亦須勾選「是」）</p> 
+ 				<label><input type='radio' name='fever' value='1'>是
+ 				</label> <label><input type='radio' name='fever' value='0'>否 
+ 				</label> 
+ 				<p>是否有接種過疫苗</p> 
+ 				<label><input type='radio' name='vaccine' value='1'>是 
+ 				</label> <label><input type='radio' name='vaccine' value='0'>否 
+ 				</label> 
 
 
-			</div>
+			</div> 
 
-		</fieldset>
+ 		</fieldset> 
 
 
 		<div class='sub'>
@@ -212,7 +294,7 @@ legend {
 		</div>
 
 
-	</form>
+ 	</form> 
 
 
 </body>
