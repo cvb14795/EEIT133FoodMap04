@@ -1,0 +1,66 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    min-height: calc(100% - 50px);
+    /*減去footer高度*/
+}
+
+.footer, .navbar {
+    background-color: #333;
+    height: 100px;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    font-size: 14.5px;
+}
+
+ul.nav li a:hover{
+    /* background-color: #ffc078; */
+    background-color: #333;
+    /* color:#333; */
+    color: #EA7500;
+    transition:all .4s;
+    border-radius: 5px;
+}
+
+ul.nav li a, a.navbar-brand{
+    color: #ffc078;
+    line-height:50px;
+}
+
+.footer {
+    margin-top: 20px; 
+    /* 因為通常 footer 也跟 navbar 一樣會是固定的尺寸，所以這邊可以大膽的設定高度，為了區隔上方的內容，所以用了 margin-top */
+}
+
+.footer .footer-text {
+    float: left;
+    font-size: 16px;
+    color: #ffc078;
+    line-height: 100px;
+    /* 針對 footer-text 的文字做設定，讓它 footer 的左邊 */
+}
+
+.footer .footer-menu {
+    float: right;
+    line-height: 100px; 
+    /* 讓 footer 裡面的連結圖示靠右對齊 */
+}
+
+.footer .footer-menu li {
+    float: left;
+    margin-right: 1em; 
+    list-style: none;
+}
+
+.footer .footer-menu li a {
+    font-size: 16px;
+    color: #ffc078;
+    cursor: pointer;
+}

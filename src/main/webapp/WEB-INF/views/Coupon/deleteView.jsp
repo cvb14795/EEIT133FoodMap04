@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>已填過問卷</title>
+<title>刪除成功</title>
 </head>
 <body>
-	<h1>您已填過此問卷</h1>
-	<input type="button" value="回首頁" onclick="location.href='frontpage'">
 
+<h3>刪除成功</h3>
+
+ 
 </body>
 </html>
