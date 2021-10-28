@@ -9,9 +9,10 @@
 		<version>2.5.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.infotran</groupId>
+	<groupId>cf.cvb14795</groupId>
 	<artifactId>FoodMap04</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>FoodMap04</name>
 	<description>FoodMap04</description>
 	<properties>
