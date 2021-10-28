@@ -15,11 +15,11 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/lineLogin.css">
-<link rel="stylesheet" href="./css/index.css">
-<link rel="stylesheet" href="./css/homepage.css">
-<link rel="stylesheet" href="<c:url value='./vegas/vegas.css'/>"type="text/css" />
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/homepage.css'/>">
+<link rel="stylesheet" href="<c:url value='/vegas/vegas.css'/>"type="text/css" />
 
 <!-- <link href="./test/pre.css" rel="stylesheet" /> -->
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
@@ -30,7 +30,7 @@
 <script src="./js/jquery-3.6.0.js"></script>
 <script src="./js/bootstrap.js"></script>
 <script src="./js/lineLogin.js"></script>
-<script src="./js/getBackgroundImageSize.js"></script>
+<!-- <script src="./js/getBackgroundImageSize.js"></script> -->
 <script src="<c:url value='./vegas/vegas.js'/>"></script>
 <!-- Timeline -->
 <script src="./test/console-ban.min.js"></script>
@@ -50,13 +50,6 @@
 	//     });
 	// }
 	$('document').ready(function() {
-		getBackgroundImageSize(jQuery('.header'))
-			.then(function(size) {
-				console.log('Image size is', size.width, size.height);
-			})
-			.fail(function() {
-				console.log('Could not get size because could not load image');
-			});
 		$('#tabs a').click(function(e) { //當按下 id=tabs 中的超連結時
 			e.preventDefault(); //阻止事件向上提升 (處理一次)    
 			var url = $(this).attr("data-url"); //取得 data-url 屬性值
@@ -104,13 +97,13 @@
 					<li class="nav-item">
 						<a class="nav-link" href="./Event/eventjava">活動報名</a>
 					</li>
+					<!-- 語君 -->
+					<li class="nav-item">
+						<a class="nav-link" href="./Comment/CommentControllerServlet">評論專區</a>
+					</li>
 					<!-- 峻豪 -->
 					<li class="nav-item">
 						<a class="nav-link" href="./Recipe/user">營養資訊</a>
-					</li>
-					<!-- 語君 -->
-					<li class="nav-item">
-						<a class="nav-link" href="./Comment/CommentControllerServlet">評論區</a>
 					</li>
 					<!-- 下拉式選單 -->
 					<!-- <li class="dropdown">
@@ -151,7 +144,7 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">
-							<label for="checkbox-switch">暗黑模式</label>
+							<label for="checkbox-switch">淺色模式</label>
 							<input type="checkbox" id="checkbox-switch" class="checkbox-switch"/>							
 						</a>
 					</li>
@@ -203,7 +196,7 @@
 // 			});
 			// 將所有checkbox-switch改成IOS風格
 			var el = document.querySelector('.checkbox-switch');
-			var nav = document.getElementById("nav");
+			var nav = document.querySelector("nav");
 			var mySwitch = new Switch(el, {
 				size: 'small',
 				checked:false,
@@ -212,8 +205,26 @@
 					nav.classList.toggle("navbar-default");
 					nav.classList.toggle("navbar-dark");
 					nav.classList.toggle("bg-dark");
+
+          if (mySwitch.getChecked()) {
+            console.log("nav:深色模式");
+            $(".navbar").css("background-color", "#ffc078");
+            $("ul.nav li a").css("color", "#333")
+            $("ul.nav li a:hover").css("color", "#EA7500")
+            $("ul.nav li a:hover").css("background-color", "#333")
+            $("label[for='checkbox-switch']").text("深色模式")
+          } else {
+            console.log("nav:淺色模式");
+            $(".navbar").css("background-color", "#333");
+            $("ul.nav li a").css("color", "#ffc078");
+            $("ul.nav li a:hover").css("color", "#333")
+            $("ul.nav li a:hover").css("background-color", "#EA7500")
+            $("label[for='checkbox-switch']").text("淺色模式")
+          }
 				}
 			});
+
+      
 			// 先關閉new完後預設自動轉暗黑模式的動作
 // 			darkmode.toggle();
 			

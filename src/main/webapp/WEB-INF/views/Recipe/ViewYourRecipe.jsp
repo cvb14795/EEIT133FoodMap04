@@ -123,9 +123,15 @@ header {
 	</table>
 	<script>
 	
-		$(document).ready(function() {
-			$('#myTable').DataTable();
+	$(document).ready(function() {
+		$('#myTable').DataTable({
+			 rowReorder: true,
+		        columnDefs: [
+		            { orderable: true, className: 'reorder', targets: 0 },
+		            { orderable: false, targets: '_all' }
+		        ]
 		});
+	});
 	</script>
 </body>
 </html>
