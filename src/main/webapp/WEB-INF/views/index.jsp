@@ -77,10 +77,10 @@
 							data-url="./homepage.html">首頁</a></li>
 						<!-- 晉豪 -->
 						<li><a data-toggle="tab" href="#food"
-							data-url="./Food/FoodMap">商家資訊</a></li>
+							data-url="./Food/Fooddex">商家資訊</a></li>
 						<!-- 耿豪 -->
 						<li><a data-toggle="tab" href="#coupon"
-							data-url="./Coupon/frontpage.html">防疫專區</a></li>
+							data-url="./Coupon/frontpage">防疫專區</a></li>
 						<!-- 玴辰 -->
 						<!-- 注意 name 不要一樣 -->
 						<li><a data-toggle="tab" href="#event"
