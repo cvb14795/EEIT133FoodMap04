@@ -2,17 +2,19 @@ package cf.cvb14795.member.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * @author cvb14795
  *
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+	uniqueConstraints = {
+	    @UniqueConstraint(columnNames = {"id"}) 
+	})
 public class Member {
 
 	@Id
@@ -25,8 +27,8 @@ public class Member {
 	@Column(name = "userName")
 	private String name;
 
-	@Column(name = "id")
-	private String id;
+	@Column(name = "id", unique = true, length = 10)
+	private String idNum;
 	
 	@Column(name = "userAddress")
 	private String address;
@@ -41,7 +43,7 @@ public class Member {
 	private String email;
 
 	@Column(name = "isAdmin")
-	private boolean isAdmin;
+	private boolean admin;
 
 	public String getAccount() {
 		return account;
@@ -67,12 +69,13 @@ public class Member {
 		this.name = name;
 	}
 
-	public String getId() {
-		return id;
+	
+	public String getIdNum() {
+		return idNum;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdNum(String idNum) {
+		this.idNum = idNum;
 	}
 
 	public String getAddress() {
@@ -106,28 +109,29 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public boolean isAdmin() {
-		return isAdmin;
+		return admin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	public Member() {
 	}
 
-	public Member(String account, String password, String name, String id, String address, String phone,
-			byte[] imgBytes, String email, boolean isAdmin) {
+	public Member(String account, String password, String name, String idNum, String address, String phone,
+			byte[] imgBytes, String email, boolean admin) {
 		this.account = account;
 		this.password = password;
 		this.name = name;
-		this.id = id;
+		this.idNum = idNum;
 		this.address = address;
 		this.phone = phone;
 		this.imgBytes = imgBytes;
 		this.email = email;
-		this.isAdmin = isAdmin;
+		this.admin = admin;
 	}
+	
 }

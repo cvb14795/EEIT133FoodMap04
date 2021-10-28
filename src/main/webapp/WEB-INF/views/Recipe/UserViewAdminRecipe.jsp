@@ -119,6 +119,5 @@ header {
 			$('#myTable').DataTable();
 		});
 	</script>
-
 </body>
 </html>

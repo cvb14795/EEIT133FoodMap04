@@ -2,9 +2,6 @@ package cf.cvb14795.member.oauth2;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -23,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping("/api")
