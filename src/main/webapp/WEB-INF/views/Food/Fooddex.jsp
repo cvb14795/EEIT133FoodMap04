@@ -19,6 +19,8 @@
 		<a href="<c:url value='./_mapdata/' />">管理店家資料</a><br>
 		<br>
 	</div>
-	
+	<div align='center'>
+		<a href="<spring:url value='/' />">回首頁</a><br>
+	</div>>
 </body>
 </html>
