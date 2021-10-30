@@ -13,10 +13,24 @@
 
 <script>
 $(function() {
-		const cookies = `${document.cookie}`;
-		console.log(`cookies: ${cookies}`);
-	let userName = cookies.split("user=")[1];
-		$("#user").text(`${userName}`);
+		const cookies = document.cookie;
+		console.log("cookies:'" + cookies + "'");
+		let userName = cookies.split("user=")[1];
+		$("#admin").on("click", function(e){
+			if(userName != undefined){
+				location.href="<c:url value='/Coupon/admin' />";
+			} else {
+				alert("請先登入!")
+				location.href = "<c:url value='/Member/Login'/>";						
+			}
+		})
+		
+// 		$("#questionnaire").on("click", function(e){
+// 			if(userName != undefined){
+// // 				qService.checkAccount(bean.getAccount())
+// 				alert("您已填過此問卷!")
+// 			}
+// 		})
 })
 </script>
 
@@ -35,7 +49,8 @@ $(function() {
 
 
 	<h2>管理員專用</h2>
-	<input type="button" value="功能" onclick="location.href='<c:url value='/Coupon/admin' />'">
+	<input type="button" id="admin" value="功能" /> 
+<%-- 	onclick="location.href='<c:url value='/Coupon/admin' />'"> --%>
 
 
 </body>

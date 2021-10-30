@@ -24,9 +24,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,7 +63,8 @@ public class CRUD {
 	}
 	
 	/* 修改會員資料 */
-	@PutMapping(path = "user/{account}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@PutMapping(path = "user/{account}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "user/{account}", consumes = { "multipart/form-data" })
 	private ResponseEntity<String> doRevise(
 			Model model,
 			HttpServletRequest request,
@@ -70,21 +73,24 @@ public class CRUD {
 			@PathVariable("account") String account,
 			@RequestParam("password") String password,
 			@RequestParam("name") String name,
-			@RequestParam("id") String idNum,
+			@RequestParam("idNum") String idNum,
 			@RequestParam("address") String address,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
+//			@RequestBody Member m,
+//			@ModelAttribute("member") Member member,
 			@RequestParam(value = "imgBase64String", required = false) String imgBase64String) throws IOException{
 		
 		String message;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		request.setCharacterEncoding("UTF-8");
-//		response.setContentType("application/json; charset=UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 
 		String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
+//		String hashpw = BCrypt.hashpw(m.getPassword(), BCrypt.gensalt(10));
 		// 圖片之完整byte資料
 		byte[] imgBytes;
-		if (imgBase64String != "") {
+		if (imgBase64String != null) {
 			// 使用者有上傳圖片 解密後存進資料庫
 			imgBytes = Base64.getDecoder().decode(imgBase64String);
 		} else {
@@ -121,7 +127,7 @@ public class CRUD {
 			@PathVariable("account") String account,
 			@RequestParam("password") String password,
 			@RequestParam("name") String name,
-			@RequestParam("id") String idNum,
+			@RequestParam("idNum") String idNum,
 			@RequestParam("address") String address,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,

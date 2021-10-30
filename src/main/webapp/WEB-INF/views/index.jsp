@@ -74,7 +74,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./Home">期中專題2</a>
+				<a class="navbar-brand" href="./Home">想食What !</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<!-- nav-collapse: 頁寬太小時後改為直行顯示-->
@@ -86,7 +86,7 @@
 					</li>
 					<!-- 晉豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Food/FoodMap">商家資訊</a>
+						<a class="nav-link" href="./Food/Fooddex">商家資訊</a>
 					</li>
 					<!-- 耿豪 -->
 					<li class="nav-item">
@@ -99,7 +99,7 @@
 					</li>
 					<!-- 語君 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Comment/CommentControllerServlet">評論專區</a>
+						<a class="nav-link" href="./comments/list">評論專區</a>
 					</li>
 					<!-- 峻豪 -->
 					<li class="nav-item">
@@ -257,10 +257,12 @@
 			
 			 $("#header").vegas({
 	                slides: [
+	                    { src: "./image/question.jpeg" },
 	                    { src: "./image/salad.jpg" },
-	                    { src: "./image/taiwan.jpg" },
-	                    { src: "./image/coupon.jpg" },
-	                    { src: "./image/mapBanner.jpg" }
+	                    { src: "./image/food1.jpeg" },
+	                    { src: "./image/food2.jpeg" },
+	                    { src: "./image/food3.jpeg" },
+	                    { src: "./image/coupon.jpg" }
 	                ],
 	                transition: ['blur', 'zoomOut', 'swirlLeft'],
 	                delay: 3000

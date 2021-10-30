@@ -102,7 +102,7 @@ response.setContentType("text/html;charset=UTF-8");
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./Home">期中專題2</a>
+				<a class="navbar-brand" href="<c:url value='/Home'/>">期中專題2</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<!-- nav-collapse: 頁寬太小時後改為直行顯示-->
@@ -110,28 +110,28 @@ response.setContentType("text/html;charset=UTF-8");
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#">首頁</a>
+						<a class="nav-link" href="<c:url value='/Home'/>">首頁</a>
 					</li>
 					<!-- 晉豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Food/FoodMap">商家資訊</a>
+						<a class="nav-link" href="<c:url value='/Food/Fooddex'/>">商家資訊</a>
 					</li>
 					<!-- 耿豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Coupon/frontpage">防疫專區</a>
+						<a class="nav-link" href="<c:url value='/Coupon/frontpage'/>">防疫專區</a>
 					</li>
 					<!-- 玴辰 -->
 					<!-- 注意 name 不要一樣 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Event/eventjava">活動報名</a>
+						<a class="nav-link" href="<c:url value='/Event/eventjava'/>">活動報名</a>
 					</li>
 					<!-- 語君 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Comment/CommentControllerServlet">評論專區</a>
+						<a class="nav-link" href="<c:url value='/comments/list'/>">評論專區</a>
 					</li>
 					<!-- 峻豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Recipe/user">營養資訊</a>
+						<a class="nav-link" href="<c:url value='/Recipe/user'/>">營養資訊</a>
 					</li>
 					<!-- 下拉式選單 -->
 					<!-- <li class="dropdown">

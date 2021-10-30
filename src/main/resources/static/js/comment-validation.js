@@ -6,11 +6,11 @@ function checkname() {
   let sp = document.getElementById("idsp");
 
   if (thename == "") {
-    sp.innerHTML = "<img src='../images/error.png'>不可空白";
+    sp.innerHTML = "<img src='/img/error.png'>不可空白";
   } else if (thenameLen > 10) {
-    sp.innerHTML = "<img src='../images/error.png'>不可超過10字";
+    sp.innerHTML = "<img src='/img/error.png'>不可超過10字";
   } else {
-    sp.innerHTML = "<img src='../images/correct.png'>";
+    sp.innerHTML = "<img src='/img/correct.png'>";
   }
 }
 
@@ -21,11 +21,11 @@ function checkcommentarea() {
   let sp = document.getElementById("idsp3");
 
   if (thecommentarea == "") {
-    sp.innerHTML = "<img src='../images/error.png'>不可空白";
+    sp.innerHTML = "<img src='/img/error.png'>不可空白";
   } else if (thecommentareaLen > 100) {
-    sp.innerHTML = "<img src='../images/error.png'>不可超過100字";
+    sp.innerHTML = "<img src='/img/error.png'>不可超過100字";
   } else {
-    sp.innerHTML = "<img src='../images/correct.png'>";
+    sp.innerHTML = "<img src='/img/correct.png'>";
   }
 }
 
@@ -59,7 +59,7 @@ function validateForm() {
   }
 
   // check comment area
-  let userComment = commentForm["userComment"].value.trim();
+//  let userComment = commentForm["userComment"].value.trim();
   let thecommentarea = document.getElementById("commentarea").value;
   let thecommentareaLen = thecommentarea.length;
 
@@ -67,9 +67,9 @@ function validateForm() {
     theLengthError.push("評論區 ");
   }
 
-  if (userComment == "") {
-    theErrorFields.push("評論區 ");
-  }
+//  if (userComment == "") {
+//    theErrorFields.push("評論區 ");
+//  }
 
   if (theErrorFields.length > 0) {
     alert("表單未完成：" + theErrorFields + " 不可空白");

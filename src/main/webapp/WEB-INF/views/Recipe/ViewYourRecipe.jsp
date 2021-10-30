@@ -88,7 +88,7 @@ header {
 			<th width="10%">調味料2</th>
 			<th width="10%">調味料3</th>
 			<th>照片</th>
-			<th>選項</th>
+			<th width="5%">選項</th>
 		</thead>
 		<tbody>
 			<c:choose>
@@ -108,8 +108,8 @@ header {
 							<td><c:out value="${lists.get(i).sauce3}" /></td>
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
 							<td>
-								<a id="edit" href="./ViewYourRecipe/id=${lists.get(i).id}">修改<br/></a>
-								<a id="delete" href="./UserShowDeleteRecipe?id=${lists.get(i).id}">刪除</a>
+								<a id="edit" href="./ViewYourRecipe/id=${lists.get(i).id}">修改</a>
+								<a id="delete" href="./UserShowDeleteRecipe?id=${lists.get(i).id}"><br/>刪除</a>
 							</td>
 						</tr>
 					</c:forEach>

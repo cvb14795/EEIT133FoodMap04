@@ -93,10 +93,10 @@ legend {
 <!-- 					<input type="text" id="userName" name="userName" disabled> -->
 <!-- 				</div> -->
 				
-				<div class="st1">
-				<label for="" class="t1">姓名:</label>
-					<input type="text" id="" name="userName">
-				</div>
+<!-- 				<div class="st1"> -->
+<!-- 				<label for="" class="t1">姓名:</label> -->
+<!-- 					<input type="text" id="" name="userName"> -->
+<!-- 				</div> -->
 				
 				<div class="st1">
 					<label for="" class="t1">品項:</label>
@@ -163,7 +163,7 @@ legend {
 	<script type="text/javascript">
 		var x = new FileReader;
 		var src;
-		document.forms[1].elements[11].onchange = function() {
+		document.forms[1].elements[10].onchange = function() {
 			x.readAsDataURL(this.files[0]);
 		}
 		x.onloadend = function() {
