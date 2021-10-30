@@ -4,11 +4,18 @@ import java.util.List;
 
 import cf.cvb14795.recipe.model.UserRecipeBean;
 
-
 public interface IUserRecipeService {
-	public void insert(UserRecipeBean uRecipe);
+	void insert(UserRecipeBean uRecipe);
 	
-	public List<UserRecipeBean> findMembersRecipe();
-	
-	public List<UserRecipeBean> findByName(String userName);
+//	List<UserRecipeBean> findAll();
+
+	List<UserRecipeBean> findMembersRecipe();
+
+	List<UserRecipeBean> findByName(String userName);
+
+	UserRecipeBean getUpdateId(int id);
+
+	void saveRecipe(UserRecipeBean userRecipe);
+
+	void deleteById(int id);
 }

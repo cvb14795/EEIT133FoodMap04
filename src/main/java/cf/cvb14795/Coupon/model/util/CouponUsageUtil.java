@@ -1,5 +1,7 @@
 package cf.cvb14795.Coupon.model.util;
 
+import java.util.Optional;
+
 import cf.cvb14795.member.bean.Member;
 import util.gmail.Mail;
 
@@ -13,19 +15,20 @@ public class CouponUsageUtil {
         this.baseUrl = baseUrl;
     }
     
-    public boolean sendMail(Member member, String couponCode) {
-        if (member != null) {
-            // 寄件者(自己)
+    public boolean sendMail(Optional<Member> member, String couponCode) {
+        if (member.isPresent()) {
+            Member m = member.get();
+        	// 寄件者(自己)
             String from = "me";
             // 收件者(使用者Email)
-            String to = member.getEmail();
+            String to = m.getEmail();
             String subject = "FoodMap美食地圖——發送優惠通知信";
             String url = baseUrl+"/Coupon/use?code="+couponCode;
             // 郵件內文的優惠券超連結
             String href = String.format("<a href=%s>點擊這裡</a>", url);
             // 郵件內文
-            String text = String.format("您好，%s<br/>這是您的優惠券代碼: %s<br/>請%s或以下連結以使用該優惠券:<br/>%s", member.getAccount(),
-                    couponCode, href, url);
+            String text = String.format("您好，%s<br/>這是您的優惠券代碼: %s<br/>請%s或以下連結以使用該優惠券:<br/>%s",
+            		m.getAccount(), couponCode, href, url);
             Mail.SendGmail(from, to, subject, text);
             System.out.println("Ｏ發送優惠券：成功! 收件者:" + to);
             return true;

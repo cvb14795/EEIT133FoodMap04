@@ -1,5 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="cf.cvb14795.Coupon.model.QuestionnaireBean"%>
+<%@page import="cf.cvb14795.Coupon.model.bean.QuestionnaireBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
