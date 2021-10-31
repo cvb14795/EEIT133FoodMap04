@@ -1,1 +1,1 @@
-java -Dserver.port=$PORT $JAVA_OPTS -war target/FoodMap04-0.0.1-SNAPSHOT.war
+web: java -Dserver.port=$PORT $JAVA_OPTS -war target/FoodMap04-0.0.1-SNAPSHOT.war
