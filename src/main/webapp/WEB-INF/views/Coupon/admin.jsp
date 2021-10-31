@@ -51,7 +51,7 @@
 		<div>
 			<input type='submit' value='送出'> 
 			<input type="button"
-				value="首頁" onclick="location.href='<c:url value='/frontpage' />'">
+				value="首頁" onclick="location.href='<c:url value="/Coupon/frontpage"/>'">
 		</div>
 
 	</form>

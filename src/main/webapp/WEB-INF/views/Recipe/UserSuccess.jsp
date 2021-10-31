@@ -24,17 +24,17 @@ header {
 <body>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<header>
-	<h1>Success!</h1>
+	<h1>請確認以下將刪除之資料</h1>
 	</header>
 	<script>
 		Swal.fire({
 			position : 'center',
 			icon : 'success',
-			title : '即將回到首頁...',
+			title : '刪除成功',
 			showConfirmButton : false,
 			timer : 3000
 		})
-		setTimeout("location.href = './UserStartingPage.jsp'",3000);
+		setTimeout("window.location.pathname = 'FoodMap04/Recipe/user'",1500);
 		
 	</script>
 </body>

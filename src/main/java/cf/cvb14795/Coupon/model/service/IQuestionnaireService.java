@@ -4,15 +4,17 @@ import java.util.List;
 
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 
+
+
 public interface IQuestionnaireService {
 
 	public void addNewData(QuestionnaireBean qBean); // 新增問卷資料
 
-	public List<QuestionnaireBean> QueryDataByVaccine(); // 查詢有無接種疫苗
+	public List<QuestionnaireBean> QueryDataByVaccine(String vaccine); // 查詢有無接種疫苗
 
-	public List<QuestionnaireBean> SendUsersCoupons(); // 修改問卷(當折價券發放時，更改折價券狀態)
+	public QuestionnaireBean SendUsersCoupons(QuestionnaireBean qBean); // 發放單一使用者折價券(當折價券發放時，更改折價券狀態)	
 
-	public List<QuestionnaireBean> revokeUsersCoupons(); // 撤回修改問卷(當折價券發放後，更改折價券狀態)
+	public QuestionnaireBean revokeUsersCoupons(QuestionnaireBean qBean); // 撤回單一使用者折價券(當折價券發放後，更改折價券狀態 => 測試用)
 
 	public void UpdateData(String before, String after);	// 修改一筆資料
 
@@ -20,6 +22,8 @@ public interface IQuestionnaireService {
 	
 	public QuestionnaireBean queryIdData(String id); //查詢特定身分證資料 
 	
-	public Boolean checkAccount(String account);  //檢查同一帳號是否重複填寫
+	public boolean checkAccount(String account);
+	
+
 
 }

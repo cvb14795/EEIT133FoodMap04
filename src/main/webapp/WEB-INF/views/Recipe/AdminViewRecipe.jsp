@@ -9,6 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
+<script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
+<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
 <style>
 table {
 	border: 1px solid black;
@@ -31,6 +34,7 @@ th{
 
 td{
 	border:1px solid black;
+	text-align: center;
 	
 }
 thead {
@@ -77,7 +81,7 @@ thead {
 							<td><c:out value="${lists.get(i).sauce2}" /></td>
 							<td><c:out value="${lists.get(i).sauce3}" /></td>
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
-							<td><a id="edit" href="./AdminShowEditRecipe?id=${lists.get(i).id}">修改</a>
+							<td><a id="edit" href="./AdminViewRecipe/id=${lists.get(i).id}">修改</a>
 								<a id="delete" href="./AdminShowDeleteRecipe?id=${lists.get(i).id}">刪除</a></td>
 						</tr>
 					</c:forEach>
@@ -89,5 +93,10 @@ thead {
 			</c:choose>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		
+
+
+	</script>
 </body>
 </html>

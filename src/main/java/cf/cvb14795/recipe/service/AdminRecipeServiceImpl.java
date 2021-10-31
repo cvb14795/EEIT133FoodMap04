@@ -2,47 +2,42 @@ package cf.cvb14795.recipe.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cf.cvb14795.recipe.dao.IAdminRecipeDao;
+import cf.cvb14795.recipe.dao.AdminRecipeRepository;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 
 @Service
-@Transactional
 public class AdminRecipeServiceImpl implements IAdminRecipeService{
 	
-	SessionFactory factory;
-	IAdminRecipeDao recipeDao;
+//	@Qualifier("AdminRecipeRepository")
+	AdminRecipeRepository recipeDao;
 	
 	@Autowired
-	public AdminRecipeServiceImpl(SessionFactory factory, IAdminRecipeDao recipeDao) {
-		this.factory = factory;
+	public AdminRecipeServiceImpl(AdminRecipeRepository recipeDao) {
 		this.recipeDao = recipeDao;
 	}
 
 	@Override
 	public void insert(AdminRecipeBean recipe) {
-		recipeDao.insert(recipe);
+		recipeDao.save(recipe);
 	}
 
 	@Override
 	public List<AdminRecipeBean> selectAll() {
-		List<AdminRecipeBean> list = recipeDao.selectAll();
+		List<AdminRecipeBean> list = recipeDao.findAll();
 		return list;
 	}
 
 	@Override
 	public AdminRecipeBean getUpdateId(int id) {
-		return recipeDao.getUpdateId(id);
+		return recipeDao.getById(id);
 	}
 
 	@Override
 	public void saveRecipe(AdminRecipeBean adminRecipe) {
-		recipeDao.saveRecipe(adminRecipe);
+		recipeDao.save(adminRecipe);
 		
 	}
 	

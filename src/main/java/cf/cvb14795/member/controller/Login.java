@@ -2,6 +2,7 @@ package cf.cvb14795.member.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Optional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
-import cf.cvb14795.member.dao.IMemberService;
+import cf.cvb14795.member.service.IMemberService;
 import util.MemberStatus;
 
 @Controller
@@ -100,12 +101,12 @@ public class Login {
 //		userName = request.getParameter("account");
 		userName = userAccount;
 //		Member m = mDAO.findAllByAccount(userName);
-		Member m = mService.selectMemberByAccount(userName);
+		Optional<Member> m = mService.selectMemberByAccount(userName);
 //		String userPassword = request.getParameter("password");
 		System.out.println("正在驗證使用者:" + userName + "的登入...");
-		if (m != null) {
+		if (m.isPresent()) {
 			// 撈資料庫傳回的加密後密碼
-			String hashPassword = m.getPassword();
+			String hashPassword = m.get().getPassword();
 			boolean checkpw = BCrypt.checkpw(userPassword, hashPassword);
 
 			if (checkpw) {

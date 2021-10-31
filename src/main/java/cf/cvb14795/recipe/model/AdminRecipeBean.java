@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "recipe")
@@ -180,6 +179,14 @@ public class AdminRecipeBean implements Serializable {
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+	public String getBase64String() {
+		return base64String;
+	}
+
+	public void setBase64String(String base64String) {
+		this.base64String = base64String;
 	}
 	
 }

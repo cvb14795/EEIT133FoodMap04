@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="mapData" class="cf.cvb14795.Food.model.MapData" scope="request" />
+<jsp:useBean id="mapData" class="cf.cvb14795.Food.model.MapDataBean" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>

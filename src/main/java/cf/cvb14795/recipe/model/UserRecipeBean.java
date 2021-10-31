@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "userRecipe")
@@ -41,6 +42,8 @@ public class UserRecipeBean implements Serializable{
 	private String sauce3;
 	@Column(name = "PHOTO")
 	private byte[] photo;
+	@Transient
+	private String base64String;
 
 	@Override
 	public String toString() {
@@ -54,7 +57,7 @@ public class UserRecipeBean implements Serializable{
 	}
 
 	public UserRecipeBean(String userName, String foodName, String category, String food1, String food2, String food3,
-			String food4, String sauce1, String sauce2, String sauce3, byte[] photo) {
+			String food4, String sauce1, String sauce2, String sauce3, byte[] photo, String base64String) {
 		this.userName = userName;
 		this.foodName = foodName;
 		this.category = category;
@@ -66,6 +69,7 @@ public class UserRecipeBean implements Serializable{
 		this.sauce2 = sauce2;
 		this.sauce3 = sauce3;
 		this.photo = photo;
+		this.base64String = base64String;
 	}
 
 	public int getId() {
@@ -162,6 +166,14 @@ public class UserRecipeBean implements Serializable{
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+	public String getBase64String() {
+		return base64String;
+	}
+
+	public void setBase64String(String base64String) {
+		this.base64String = base64String;
 	}
 
 }

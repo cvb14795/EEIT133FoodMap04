@@ -52,7 +52,7 @@
 				</div>
 				<div class="st1">
 					<label for="ID" class="t1">身分證字號：</label> <input type="text"
-						name="id" id="ID" class="formElem"> <label for="ID"
+						name="idNum" id="ID" class="formElem"> <label for="ID"
 						id="IDCheckMsg" class="validation"></label><br>
 				</div>
 				<div class="st1">
