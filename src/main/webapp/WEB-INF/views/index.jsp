@@ -33,8 +33,8 @@
 <!-- <script src="./js/getBackgroundImageSize.js"></script> -->
 <script src="<c:url value='./vegas/vegas.js'/>"></script>
 <!-- Timeline -->
-<script src="./test/console-ban.min.js"></script>
-<script src="./test/previewjs.js"></script>
+<!-- <script src="./test/console-ban.min.js"></script> -->
+<!-- <script src="./test/previewjs.js"></script> -->
 
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
@@ -59,6 +59,7 @@
 			location.href = url;
 		});
 	});
+	
 </script>
 </head>
 
@@ -103,7 +104,7 @@
 					</li>
 					<!-- 峻豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Recipe/user">營養資訊</a>
+						<a class="nav-link" href="./Recipe/user">食譜養成</a>
 					</li>
 					<!-- 下拉式選單 -->
 					<!-- <li class="dropdown">
@@ -152,9 +153,33 @@
 			</div>
 		</div>
 	</nav>
-		
-	<div class="header" id="header">
+	
+<!--             <a class="slide-arrow" id="slidePrev"><i class="fas fa-chevron-left"></i></a> -->
+<!--             <a class="slide-arrow right" id="slideNext"><i class="fas fa-chevron-right"></i></a> -->
+<!--             <ul class="slide-img" id="slide-img"> -->
+<!--                 <li><img src="./image/car1.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car2.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car3.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car4.jpg" alt=""></li> -->
+<!--             </ul> -->
+
+	<div class="wrap" id="header">
+		<ul class="pages" id="pages">
+	        <li></li>
+	        <li></li>
+	        <li></li>
+	        <li></li>
+	        <li></li>
+	        <li></li>
+        </ul>
+		<a class="aboutUs" href="#">關於我們</a>
+		<div class="title">
+			<h1>想食</h1>
+			<img alt="What" src="<c:url value='./image/what.svg'/>">
+		</div>
 	</div>
+	
+	
 	<div id="timeLine">
 		<div id="iframe-wrap">
 
@@ -177,10 +202,24 @@
 			<ul class="footer-menu">
 				<li><a href="" id="lineLoginHref"><input type="button" class="lineLogin" style="width: 151px;height: 44px;border:none"/></a></li>
 				<li class="footer-text"><div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@lineteamjp" style="display: none;"></div></li>
-				<li class="footer-text">友站連結1</li>
-				<li class="footer-text">友站連結2</li>
-				<li class="footer-text">友站連結3</li>
-				<li class="footer-text">友站連結4</li>
+				<li class="footer-text">
+					<a  href="#">首頁</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Food/Fooddex">商家資訊</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Coupon/frontpage">防疫專區</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Event/eventjava">活動報名</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./comments/list">評論專區</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Recipe/user">食譜養成</a>
+				</li>
 			</ul>
 		</div>
 	</footer>
@@ -256,17 +295,34 @@
 			}
 			
 			 $("#header").vegas({
-	                slides: [
-	                    { src: "./image/question.jpeg" },
-	                    { src: "./image/salad.jpg" },
-	                    { src: "./image/food1.jpeg" },
-	                    { src: "./image/food2.jpeg" },
-	                    { src: "./image/food3.jpeg" },
-	                    { src: "./image/coupon.jpg" }
-	                ],
-	                transition: ['blur', 'zoomOut', 'swirlLeft'],
-	                delay: 3000
-	            });
+	             slides: [
+	                 { src: "./image/question.jpeg" },
+	                 { src: "./image/salad.jpg" },
+	                 { src: "./image/food1.jpeg" },
+	                 { src: "./image/food2.jpeg" },
+	                 { src: "./image/food3.jpeg" },
+	                 { src: "./image/coupon.jpg" }
+	             ],
+	             transition: ['blur', 'zoomOut', 'swirlLeft'],
+	             delay: 5000
+	        });
+// 			 $("#header").vegas({
+// 				 overlay: true,
+// 				 transition: 'fade', 
+// 				 transitionDuration: 2000,
+// 				 delay: 6000,
+// 				 color: 'red',
+// 				 animation: 'random',
+// 				 animationDuration: 8000,
+// 	             slides: [
+// 	                 { src: "./image/question.jpeg" },
+// 	                 { src: "./image/salad.jpg" },
+// 	                 { src: "./image/food1.jpeg" },
+// 	                 { src: "./image/food2.jpeg" },
+// 	                 { src: "./image/food3.jpeg" },
+// 	                 { src: "./image/coupon.jpg" }
+// 	             ],
+// 	        });
 		})
 	</script>
 	<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async defer></script>
