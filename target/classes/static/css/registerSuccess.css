@@ -1,0 +1,22 @@
+img {
+	width:200px;
+	height:200px;
+}
+
+table {
+/*     border: 3px black solid; */
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid gray;
+    width: 200px;
+}
+
+tr:nth-child(2n) {
+    background-color: gainsboro;
+}
+
+tr:nth-child(2n+1) {
+    background-color: whitesmoke;
+}
