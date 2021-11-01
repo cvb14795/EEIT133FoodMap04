@@ -37,30 +37,30 @@ response.setContentType("text/html;charset=UTF-8");
 		<h1>食譜查詢</h1>
 	</header>
 	
-	<div class="memberDetail">
-		<div class="text-right">
-			會員：
-			<span id="userNameContainer"></span>
-		</div>
-		<div class="text-right">
-			身分：
-			<span id="isAdminContainer"></span>
-		</div>
-	</div>
+<!-- 	<div class="memberDetail"> -->
+<!-- 		<div class="text-right"> -->
+<!-- 			會員： -->
+<!-- 			<span id="userNameContainer"></span> -->
+<!-- 		</div> -->
+<!-- 		<div class="text-right"> -->
+<!-- 			身分： -->
+<!-- 			<span id="isAdminContainer"></span> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
 	<form>
 		<input type ="button" onclick="history.back()" value="首頁"> <!-- OK -->
 	</form>
-	<form action="./UserViewAdminRecipe" method="Post">
+	<form action='<c:url value="/Recipe/user/UserViewAdminRecipe"/>' method="Post">
 		<button type="submit" name="confirm"><i class="fas fa-pizza-slice"></i>查詢官方食譜</button> <!-- OK -->
 	</form>
-	<form action="./UserInsertRecipe">
+	<form action='<c:url value="/Recipe/user/UserInsertRecipe"/>'>
 		<button type="submit" name="submit">新增您的個人食譜</button> <!-- OK -->
 	</form>
-	<form action="./ViewYourRecipe" method="Post">
+	<form action='<c:url value="/Recipe/user/ViewYourRecipe"/>' method="Post">
 		<button type="submit" name="submit">查詢您的個人食譜</button> 
 	</form>
-	<form action="./UserViewMembersRecipe" method="Post">
+	<form action='<c:url value="/Recipe/user/UserViewMembersRecipe"/>' method="Post">
 		<button type="submit" name="submit">查詢所有會員食譜</button> <!-- OK -->
 	</form>
 </body>
