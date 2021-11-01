@@ -76,17 +76,17 @@ header {
 
 	<table id="myTable" class="display">
 		<thead>
-			<th>編號</th>
-			<th width="5%">會員姓名</th>
-			<th width="9%">品項</th>
-			<th width="9%">分類</th>
-			<th width="9%">食材1</th>
-			<th width="9%">食材2</th>
-			<th width="9%">食材3</th>
-			<th width="9%">食材4</th>
-			<th width="9%">調味料1</th>
-			<th width="9%">調味料2</th>
-			<th width="9%">調味料3</th>
+			<th width="5%">編號</th>
+			<th width="6%">會員姓名</th>
+			<th width="5%">品項</th>
+			<th>分類</th>
+			<th>食材1</th>
+			<th>食材2</th>
+			<th>食材3</th>
+			<th>食材4</th>
+			<th width="10%">調味料1</th>
+			<th width="10%">調味料2</th>
+			<th width="10%">調味料3</th>
 			<th width="9%">照片</th>
 		</thead>
 		<tbody>
@@ -120,7 +120,13 @@ header {
 	<script>
 	
 		$(document).ready(function() {
-			$('#myTable').DataTable();
+			$('#myTable').DataTable({
+				 rowReorder: true,
+			        columnDefs: [
+			            { orderable: true, className: 'reorder', targets: 0 },
+			            { orderable: false, targets: '_all' }
+			        ]
+			});
 		});
 	</script>
 </body>

@@ -38,7 +38,7 @@ public class IndexController {
 	@GetMapping({ "/" })
 	private String index() {
 		System.out.println("使用者未登入，將跳轉至根目錄");
-		return "index";
+		return "/HomePage/User/index";
 	}
 
 	@GetMapping({ "/Home" })
@@ -47,14 +47,14 @@ public class IndexController {
 		if (member.isPresent()) {
 			boolean isAdmin = member.get().isAdmin(); 	
 			String status = "使用者"; 
-			String nextPage = "index"; 
+			String nextPage = "/HomePage/User/index"; 
 			
 			model.addAttribute("user", user);
 			model.addAttribute("isAdmin", isAdmin);
 			
 			if (isAdmin) {
 				status = "管理者";
-				nextPage = "redirect:/admin";
+				nextPage = "redirect:/HomePage/Admin/index";
 			}
 			
 			System.out.println("用戶:' "+user+" '登入");

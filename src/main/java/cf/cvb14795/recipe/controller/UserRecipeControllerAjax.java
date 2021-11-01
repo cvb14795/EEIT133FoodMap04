@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -43,8 +41,8 @@ public class UserRecipeControllerAjax {
 
 	private final static String PREFIX = "Recipe/";
 
-	@Autowired
-	ServletContext context;
+//	@Autowired
+//	ServletContext context;
 
 	IUserRecipeService uRecipeService;
 	IAdminRecipeService aRecipeService;

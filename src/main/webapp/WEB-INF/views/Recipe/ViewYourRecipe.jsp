@@ -13,6 +13,8 @@ response.setContentType("text/html;charset=UTF-8");
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <style>
@@ -76,9 +78,9 @@ header {
 
 	<table id="myTable" class="display">
 		<thead>
-			<th>編號</th>
-			<th>會員<br/>姓名</th>
-			<th width="10%">品項</th>
+			<th width="5%">編號</th>
+			<th width="6%">會員姓名</th>
+			<th width="5%">品項</th>
 			<th>分類</th>
 			<th>食材1</th>
 			<th>食材2</th>
@@ -108,8 +110,8 @@ header {
 							<td><c:out value="${lists.get(i).sauce3}" /></td>
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
 							<td>
-								<a id="edit" href="./ViewYourRecipe/id=${lists.get(i).id}">修改</a>
-								<a id="delete" href="./UserShowDeleteRecipe?id=${lists.get(i).id}"><br/>刪除</a>
+								<a id="edit" href="./ViewYourRecipe/id=${lists.get(i).id}"><i class="fas fa-edit"></i></a>
+								<a id="delete" href="./UserShowDeleteRecipe?id=${lists.get(i).id}"><i class="fas fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/homepage.css'/>">
 <link rel="stylesheet" href="<c:url value='/vegas/vegas.css'/>"type="text/css" />
 
 <!-- <link href="./test/pre.css" rel="stylesheet" /> -->
@@ -31,10 +30,12 @@
 <script src="./js/bootstrap.js"></script>
 <script src="./js/lineLogin.js"></script>
 <!-- <script src="./js/getBackgroundImageSize.js"></script> -->
-<script src="<c:url value='./vegas/vegas.js'/>"></script>
+<%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- Timeline -->
-<!-- <script src="./test/console-ban.min.js"></script> -->
-<!-- <script src="./test/previewjs.js"></script> -->
+<script src="./test/console-ban.min.js"></script>
+<script src="./test/previewjs.js"></script>
+<!-- aboutUs -->
+<script src="./js/aboutUs.js"></script>
 
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
@@ -104,7 +105,7 @@
 					</li>
 					<!-- 峻豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Recipe/user">食譜養成</a>
+						<a class="nav-link" href="./Recipe/user">食譜規劃</a>
 					</li>
 					<!-- 下拉式選單 -->
 					<!-- <li class="dropdown">
@@ -163,19 +164,47 @@
 <!--                 <li><img src="./image/car4.jpg" alt=""></li> -->
 <!--             </ul> -->
 
-	<div class="wrap" id="header">
+	<div class="wrap">
 		<ul class="pages" id="pages">
-	        <li></li>
-	        <li></li>
-	        <li></li>
-	        <li></li>
-	        <li></li>
-	        <li></li>
-        </ul>
-		<a class="aboutUs" href="#">關於我們</a>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+		<a class="aboutUs" href="#contact">關 於 我 們</a>
+    <!-- Contact -->
+    <article id="contact">
+        <h2 class="major">想食 What！</h2>
+        <form method="post" action="#">
+            <div class="fields">
+                <div class="field">
+                    <label>製作團隊</label>
+                    <h5>鄧峻豪、陳貴宏</h5>
+                    <h5>林語君、張晉豪</h5>
+                    <h5>張耿豪、伍玴辰</h5>
+                </div>
+                <div class="field">
+                    <label>網站發想</label>
+                    <p>1.每次想要查詢美食時，都會耗費太多時間，希望有一個平台能夠找出各地美食資訊，也藉由大家的評論來了解當地人推薦的道地美食。<br/>
+            2.因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。<br/>
+            3.現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
+                </div>
+                <div class="field">
+                    <label>網站特色</label>
+                    <p>1.此平台除了能快速找出使用者想要的美食資訊，也會提供google map地圖來讓使用者了解與美食的距離。<br/> 
+                        2.人們在購買東西時，都希望會有折扣，因此平台也會有特約餐廳的優惠券，以及針對已接踵疫苗之民眾的專屬優惠券。<br/> 
+                        3.打造適合自己的專屬食譜，實現健康生活。<br/> 
+                        4.平台定期舉辦一些會員活動，活絡會員間的感情。</p>
+                </div>
+            </div>
+        </form>
+        <div id="close"></div>
+    </article>
 		<div class="title">
 			<h1>想食</h1>
-			<img alt="What" src="<c:url value='./image/what.svg'/>">
+			<img alt="What" src="<c:url value='./image/what4.png'/>">
 		</div>
 	</div>
 	
@@ -201,7 +230,7 @@
 			<!-- line加好友按鈕 -->			
 			<ul class="footer-menu">
 				<li><a href="" id="lineLoginHref"><input type="button" class="lineLogin" style="width: 151px;height: 44px;border:none"/></a></li>
-				<li class="footer-text"><div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@lineteamjp" style="display: none;"></div></li>
+				<li class="footer-text"><div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@413ghgmq" style="display: none;"></div></li>
 				<li class="footer-text">
 					<a  href="#">首頁</a>
 				</li>
@@ -226,10 +255,14 @@
 	
 	<script>
 		$(function() {
+		    var $contact = $("#contact");
+		    $contact.addClass("close");
+		    $contact.hide();
+			contentInit();
 			setLineOAuthUrl();
-			var navbarHeight = $(".navbar:eq(0)").height()
+// 			var navbarHeight = $(".navbar:eq(0)").height()
 			// $(".header").height(innerHeight - navbarHeight);
-			console.log($(".header").attr("height"));
+// 			console.log($(".header").attr("height"));
 // 			var darkmode = new Darkmode({
 // 				saveInCookies: true, // default: true,
 // 			});
@@ -294,26 +327,7 @@
 				$("#user").text(userName);
 			}
 			
-			 $("#header").vegas({
-	             slides: [
-	                 { src: "./image/question.jpeg" },
-	                 { src: "./image/salad.jpg" },
-	                 { src: "./image/food1.jpeg" },
-	                 { src: "./image/food2.jpeg" },
-	                 { src: "./image/food3.jpeg" },
-	                 { src: "./image/coupon.jpg" }
-	             ],
-	             transition: ['blur', 'zoomOut', 'swirlLeft'],
-	             delay: 5000
-	        });
 // 			 $("#header").vegas({
-// 				 overlay: true,
-// 				 transition: 'fade', 
-// 				 transitionDuration: 2000,
-// 				 delay: 6000,
-// 				 color: 'red',
-// 				 animation: 'random',
-// 				 animationDuration: 8000,
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },
 // 	                 { src: "./image/salad.jpg" },
@@ -322,7 +336,26 @@
 // 	                 { src: "./image/food3.jpeg" },
 // 	                 { src: "./image/coupon.jpg" }
 // 	             ],
+// 	             transition: ['blur', 'zoomOut', 'swirlLeft'],
+// 	             delay: 5000
 // 	        });
+			 $(".wrap").vegas({
+				 overlay: true,
+				 transition: 'fade', 
+				 transitionDuration: 2000,
+				 delay: 6000,
+				 color: 'red',
+				 animation: 'random',
+				 animationDuration: 8000,
+	             slides: [
+	                 { src: "./image/question.jpeg" },
+	                 { src: "./image/salad.jpg" },
+	                 { src: "./image/food1.jpeg" },
+	                 { src: "./image/food2.jpeg" },
+	                 { src: "./image/food3.jpeg" },
+	                 { src: "./image/coupon.jpg" }
+	             ],
+	        });
 		})
 	</script>
 	<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async defer></script>

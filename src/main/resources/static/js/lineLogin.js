@@ -8,6 +8,9 @@ function setLineOAuthUrl() {
 	url += "&scope=profile%20openid"
 	// 檢查是否加入官方帳號好友
 	url += "&bot_prompt=aggressive"
-	console.log(url)
-    document.getElementById("lineLoginHref").setAttribute("href", url);	
+	console.log(url);
+    var href = document.getElementById("lineLoginHref");
+	if (href) {
+		href.setAttribute("href", url);	
+	}
 }
