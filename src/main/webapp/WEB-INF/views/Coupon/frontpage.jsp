@@ -15,8 +15,11 @@
 		border:3px solid #00AEAE;
 		float:right;
 		margin: 8px; 
-		padding: 3px;
+		padding: 5px;
 		border-radius: 10px;
+	}
+	.mhw h4  {
+		font-size: 20px;
 	}
 
 </style>

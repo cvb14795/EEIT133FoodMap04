@@ -23,7 +23,8 @@ public class HomeController {
 	
 	@GetMapping({"/frontpage", "/", "default.htm"})
 	public String frontpage(Model model) {
-		return PREFIX+"frontpage";		
+//		return PREFIX+"frontpage";
+		return PREFIX+"frontpage-final";
 	}
 	
 	

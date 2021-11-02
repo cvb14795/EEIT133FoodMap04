@@ -9,6 +9,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <meta name="google-signin-client_id"
 		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
+<style>
+	.mhw {
+		text-align:center;
+		width:150px;height:50px;
+		background-color:#fd7e14;
+		border:3px solid #fd7e14;
+		float:right;
+		margin: 8px; 
+		padding: 5px;
+		border-radius: 10px;
+	}
+	.mhw h4  {
+		font-size: 20px;
+	}
+	.main {
+		padding-left: 150px;
+		padding-right: 150px;
+	}
+</style>
 <title>首頁</title>
 
 <!-- favicon -->
@@ -37,7 +56,6 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/index.css'/>">
 <!-- vegas -->
 <link rel="stylesheet" href="<c:url value='/css/vegas.css'/>"/>
 
@@ -107,9 +125,9 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
-								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+								<li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
 									<ul class="sub-menu">
 										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
@@ -159,153 +177,58 @@
 	</div>
 	<!-- end header -->
 	
-  <div class="wrap">
-	<!-- <a class="aboutUs" href="#contact">關 於 我 們</a> -->
-	<a class="aboutUs" href="<c:url value='/aboutUs'/>">關 於 我 們</a>
-	<div class="title">
-	  <h1>想食</h1>
-	  <img alt="What" src="<c:url value='./image/what4.png'/>">
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>人人有責</p>
+						<h1>防疫專區</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-  </div>
+	<!-- end breadcrumb section -->
 
+	<input type="hidden" id="isAdmin" value="${isAdmin}">
+	<input type="hidden" id="userName" value="${user}">
 	
-	<!-- 網站發想 -->
-	<div class="abt-section mt-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-12">
-					<div class="abt-text">
-						<p class="top-sub">EEIT133—跨域Java班—第四組期末專題</p>
-						<h2>網站<span class="orange-text">發想</span></h2>
-						<p>每次想要查詢美食時，都會耗費太多時間，希望有一個平台能夠找出各地美食資訊，也藉由大家的評論來了解當地人推薦的道地美食。</p>
-			<p>因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。</p>
-			<p>現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
-						<a href="about.jsp" class="boxed-btn mt-4">詳細資訊</a>
-					</div>
-				</div>
-			</div>
+	<!-- 防疫專區 -->
+	<div class="main mt-150 mb-150">
+		<div style="width:550px;height:500px;float:right;">
+			<div style="text-align:center;width:550px;height:50px;"><h2>疫情相關資訊</h2></div>
+			<div class="mhw"><h4><a role=button href='https://sites.google.com/cdc.gov.tw/2019ncov/taiwan' target="_blank" style='color:white'>疫情監測</a></h4></div>
+			<div class="mhw"><h4><a role=button href='https://www.mohw.gov.tw/mp-1.html' target="_blank"  style='color:white'>衛福部</a></h4></div>
+			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/Page/vleOMKqwuEbIMgqaTeXG8A' target="_blank" style='color:white'>病毒介紹</a></h4></div>
+			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/List/SI4DlKBGujaYVJVSVKmwJw' target="_blank" style='color:white'>疫苗資訊</a></h4></div>	
+			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/MPage/epjWGimoqASwhAN8X-5Nlw' target="_blank" style='color:white'>疫苗簡介</a></h4></div>	
+			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/Page/9mcqWyq51P_aYADuh3rTBA' target="_blank" style='color:white'>接種對象</a></h4></div>	
+			<div class="mhw"><h4><a role=button href='https://1922.gov.tw/' target="_blank" style='color:white'>疫苗預約平台</a></h4></div>	
+			<div class="mhw"><h4><a role=button href='https://www.mohw.gov.tw/np-15-1.html' target="_blank" style='color:white'>最新消息</a></h4></div>	
+			<div class="mhw"><h4><a role=button href='https://covid19.mohw.gov.tw/ch/np-5187-205.html' target="_blank" style='color:white'>紓困4.0</a></h4></div>	
+			<div style="text-align:center;width:550px;height:50px;float:right;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
 		</div>
+		<div>			
+			<br>
+			<h2>歡迎大家來填問卷</h2>
+			<input type="button" value="填問卷" id='questionnaire'
+			onclick="location.href='<c:url value='/Coupon/questionnaire' />'">
+			
+			
+			<h2>管理員專用</h2>
+			<input type="button" id="admin" value="功能" /> 
+			<%-- 	onclick="location.href='<c:url value='/Coupon/admin' />'"> --%>
+			
+			<br>
+			
+			<h2>回美食地圖首頁</h2>
+			<input type="button" value="首頁"
+			onclick="location.href='<c:url value='/' />'">		
+		</div>		
 	</div>
-	<!-- end 網站發想 section -->
-
-	<!-- 活動總覽 -->
-	<div class="latest-news pt-150 pb-150">
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">活動</span>總覽</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">More News</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end 活動總覽 -->
-
-  <!-- 食譜 -->
-	<div class="product-section mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">食譜</span>規劃</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-1.jpg'/>" alt=""></a>
-						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-2.jpg'/>" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-3.jpg'/>" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end 食譜 section -->
+	<!-- end 防疫專區 -->
 
 	<!-- footer -->
 	<div class="footer-area">
@@ -380,6 +303,18 @@
 	<script>
 		$(function() {
 			userNameMain();
+
+			const cookies = document.cookie;
+			console.log("cookies:'" + cookies + "'");
+			let userName = cookies.split("user=")[1];   //帳號
+			$("#admin").on("click", function(e){
+				if(userName != undefined){
+					location.href="<c:url value='/Coupon/admin' />";
+				} else {
+					alert("請先登入!")
+					location.href = "<c:url value='/Member/Login'/>";						
+				}
+			})
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },

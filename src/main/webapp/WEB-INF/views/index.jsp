@@ -25,9 +25,9 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 <script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <!-- 暗黑模式 -->
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-<script src="./js/jquery-3.6.0.js"></script>
-<script src="./js/bootstrap.js"></script>
-<script src="./js/lineLogin.js"></script>
+<script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.js'/>"></script>
+<script src="<c:url value='/js/lineLogin.js'/>"></script>
 <!-- <script src="./js/getBackgroundImageSize.js"></script> -->
 <%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- Timeline -->
