@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,7 +34,7 @@ public class QuestionnaireController {
 
 	// 將問卷內容存入資料庫
 	@PostMapping("/qcontroller")
-	public String addNewData(@ModelAttribute QuestionnaireBean bean, @CookieValue("user") String account, Model model,
+	public String addNewData(QuestionnaireBean bean, @CookieValue("user") String account, Model model,
 			HttpServletRequest request) {
 		String send_page;
 		bean.setLabel("0");
@@ -69,7 +68,9 @@ public class QuestionnaireController {
 			System.out.println("================正在寄送Email...==================");
 			Optional<Member> m = mService.selectMemberByAccount(account);
 			// 產生優惠券代碼(預設為6位數)
-			String couponCode = couponUsage.generateCouponCode(6);
+//			String couponCode = couponUsage.generateCouponCode(6);
+			String radomCode = couponUsage.generateCouponCode(3);
+			String couponCode = "QNCP15"+radomCode;
 			// 發送優惠券Email
 			couponUsage.sendMail(m, couponCode);
 

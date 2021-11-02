@@ -62,7 +62,7 @@
 				</div>
 				<div class="st1">
 					<label for="ID" class="t1">身分證字號：</label>
-					<form:input type="text" path="id" id="ID" class="formElem"/>
+					<form:input type="text" path="idNum" id="ID" class="formElem"/>
 					<label for="ID" id="IDCheckMsg" class="validation"></label><br>
 				</div>
 				<div class="st1">

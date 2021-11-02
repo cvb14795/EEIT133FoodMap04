@@ -18,6 +18,29 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		<!-- line bot -->
+		<!-- spring boot don't need this dependency unless you use spring mvc -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.linecorp.bot</groupId> -->
+<!-- 			<artifactId>line-bot-spring-boot</artifactId> -->
+<!-- 			<version>4.3.0</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.linecorp.bot</groupId>
+			<artifactId>line-bot-model</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.linecorp.bot</groupId>
+			<artifactId>line-bot-api-client</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.linecorp.bot</groupId>
+			<artifactId>line-bot-servlet</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+		<!-- spring boot --> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -53,10 +76,15 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>		
-		<!-- gson -->
+		<!-- json -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20160810</version>
 		</dependency>
 		<!-- Azure Blob Storage --> 
 		<dependency>

@@ -1,7 +1,7 @@
 <%@page import="cf.cvb14795.Coupon.model.bean.QuestionnaireBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -9,11 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>管理員專用</title>
-<link rel="stylesheet" href='<c:url value="/css/bootstrap.min.css"/>'>
-<link rel="stylesheet" href='<c:url value="/css/memberDetail.css"/>'>
-<script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
-<script src='<c:url value="/js/bootstrap.js"/>'></script>
-<script src='<c:url value="/js/memberAuth.js"/>'></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/memberDetail.css">
+<script src="../js/jquery-3.6.0.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/memberAuth.js"></script>
 <script>
 	$(function() {
 		adminAuth();
@@ -21,67 +21,70 @@
 </script>
 
 <style>
-.box1 {
-	border: 1px solid;
-	height: 300px;
-	padding: 20px;
-}
+	.box1{
+		border: 1px solid;
+		height:300px;
+		padding: 20px;
+	}
+	
+	td,th {
+		border: 1px solid;
+		width: 200px;
+		text-align:center;
 
-td, th {
-	border: 1px solid;
-	width: 200px;
-	text-align: center;
-}
-
-table {
-	border: 1px;
-	border-collapse: collapse;
-}
+	}
+	
+	table {
+		 border: 1px; 
+		 border-collapse:collapse;
+		
+	}
+	
 </style>
 
 </head>
 
 <body>
-	<input type="hidden" id="isAdmin" value="${isAdmin}">
-	<input type="hidden" id="userName" value="${user}">
-	<div class="memberDetail">
-		<div class="text-right">
-			會員： <span id="userNameContainer"></span>
-		</div>
-		<div class="text-right">
-			身分： <span id="isAdminContainer"></span>
-		</div>
+<input type="hidden" id="isAdmin" value="${isAdmin}">
+<input type="hidden" id="userName" value="${user}">
+<div class="memberDetail">
+	<div class="text-right">
+		會員：
+		<span id="userNameContainer"></span>
 	</div>
+	<div class="text-right">
+		身分：
+		<span id="isAdminContainer"></span>
+	</div>
+</div>
 
-	<form action='admincontroller' method='post'>
+<form action='admincontroller' method='post'>
 		<div>
-			<p>
-				<label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
-				<label><input type='radio' name='action' value='U'>發放折價券</label>
-				<label><input type='radio' name='action' value='B'>撤回</label>
-			</p>
+			<p><label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
+			<label><input type='radio' name='action' value='U'>發放折價券</label>
+			<label><input type='radio' name='action' value='B'>撤回</label></p>
 		</div>
 
 		<div>
-			<input type='submit' value='送出'> <input type="button"
-				value="回首頁" onclick="location.href='frontpage'">
+			<input type='submit' value='送出'>
+			<input type="button" value="回首頁" onclick="location.href='frontpage'">
 		</div>
 
-	</form>
+</form>
 
-	<br>
-	<br>
+<br>
+<br>
 
-	<div class='box1'>
-		<%
-		List<QuestionnaireBean> couponList = (List<QuestionnaireBean>) request.getAttribute("sendUsersCoupons");
+<div class='box1'>
+<%
+	List<QuestionnaireBean> couponList = (List<QuestionnaireBean>)request.getAttribute("sendUsersCoupons");
 
-		if (couponList.isEmpty()) {
-		%>
+	if (couponList.isEmpty()){
+%>
 		<h4>無資料</h4>
-		<%
-		} else {
-		%>
+<%
+	} else {
+%>
 		<table>
 			<thead>
 				<th>身份證字號</th>
@@ -98,55 +101,55 @@ table {
 			</thead>
 			<tbody>
 
-				<%-- <% --%>
-				<%-- 		for (QuestionnaireBean user:couponList){  --%>
-				<%-- %> --%>
+<%-- <% --%>
+<%-- 		for (QuestionnaireBean user:couponList){  --%>
+<%-- %> --%>
+		
+<!-- 			<tr> -->
+<%-- 			<td><%= user.getId() %></td> --%>
+<%-- 			<td><%=	user.getName() %></td> --%>
+<%-- 			<td><%=	user.getGender() %></td> --%>
+<%-- 			<td><%=	user.getBirth() %></td> --%>
+<%-- 			<td><%=	user.getPhone() %></td> --%>
+<%-- 			<td><%=	user.getForeign() %></td> --%>
+<%-- 			<td><%=	user.getMove() %></td> --%>
+<%-- 			<td><%=	user.getFamily() %></td> --%>
+<%-- 			<td><%=	user.getVaccine() %></td> --%>
+<%-- 			<td><%=	user.getFever() %></td> --%>
+<%-- 			<td><%=	user.getLabel() %></td> --%>
+<!-- 			</tr> -->
+<%-- <% --%>
+<%-- } --%>
+	
+<%-- %> --%>
 
-				<!-- 			<tr> -->
-				<%-- 			<td><%= user.getId() %></td> --%>
-				<%-- 			<td><%=	user.getName() %></td> --%>
-				<%-- 			<td><%=	user.getGender() %></td> --%>
-				<%-- 			<td><%=	user.getBirth() %></td> --%>
-				<%-- 			<td><%=	user.getPhone() %></td> --%>
-				<%-- 			<td><%=	user.getForeign() %></td> --%>
-				<%-- 			<td><%=	user.getMove() %></td> --%>
-				<%-- 			<td><%=	user.getFamily() %></td> --%>
-				<%-- 			<td><%=	user.getVaccine() %></td> --%>
-				<%-- 			<td><%=	user.getFever() %></td> --%>
-				<%-- 			<td><%=	user.getLabel() %></td> --%>
-				<!-- 			</tr> -->
-				<%-- <% --%>
-				<%-- } --%>
-
-				<%-- %> --%>
-
-				<c:forEach var="user" items="${sendUsersCoupons}">
-					<tr>
-						<td>${user.id}</td>
-						<td>${user.name}</td>
-						<td>${user.gender}</td>
-						<td>${user.birth}</td>
-						<td>${user.phone}</td>
-						<td>${user.abroad}</td>
-						<td>${user.moving}</td>
-						<td>${user.family}</td>
-						<td>${user.vaccine}</td>
-						<td>${user.fever}</td>
-						<td>${user.label}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+					<c:forEach var="user" items="${sendUsersCoupons}" >
+						<tr>
+							<td>${user.id}</td>
+							<td>${user.name}</td>
+							<td>${user.gender}</td>
+							<td>${user.birth}</td>
+							<td>${user.phone}</td>
+							<td>${user.abroad}</td>
+							<td>${user.moving}</td>
+							<td>${user.family}</td>
+							<td>${user.vaccine}</td>
+							<td>${user.fever}</td>
+							<td>${user.label}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 		</table>
 
-		<%
-		}
-		%>
+<%
+	}
+%>
 
 
 
 
 
-	</div>
+</div>
 
 </body>
 </html>
