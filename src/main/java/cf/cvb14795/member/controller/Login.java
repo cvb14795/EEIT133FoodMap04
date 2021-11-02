@@ -66,7 +66,7 @@ public class Login {
 		// 使用者是否已有登入紀錄(cookie)
 		MemberStatus status = new MemberStatus(cookies);
 		userName = status.getCurrentUserAccount();
-		isAlreadyLogin = status.getLoginStatus(userName);
+		isAlreadyLogin = status.getLoginStatus();
 		System.out.println("\nuser: " + userName);
 		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
 		if (!isAlreadyLogin) {

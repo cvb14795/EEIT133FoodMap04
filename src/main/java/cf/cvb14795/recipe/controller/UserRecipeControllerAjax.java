@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +56,7 @@ public class UserRecipeControllerAjax {
 
 	@GetMapping("UserRecipe")
 	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
-		return PREFIX + "UserRecipe";
+		return PREFIX + "UserViewAdminRecipe2";
 	}
 
 	@GetMapping("UserInsertRecipe")
@@ -202,4 +203,5 @@ public class UserRecipeControllerAjax {
 		uRecipeService.deleteById(id);
 		return PREFIX + "UserSuccess";
 	}
+	
 }
