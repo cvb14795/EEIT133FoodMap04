@@ -92,7 +92,12 @@ legend {
 <!-- 					否則會出現 equal symbol expected -->
 <!-- 					<input type="text" id="userName" name="userName" disabled> -->
 <!-- 				</div> -->
-
+				
+<!-- 				<div class="st1"> -->
+<!-- 				<label for="" class="t1">姓名:</label> -->
+<!-- 					<input type="text" id="" name="userName"> -->
+<!-- 				</div> -->
+				
 				<div class="st1">
 					<label for="" class="t1">品項:</label>
 <%-- 					<form:input path="foodName" required="true" /> --%>

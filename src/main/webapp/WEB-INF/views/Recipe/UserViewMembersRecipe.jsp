@@ -11,6 +11,10 @@ response.setContentType("text/html;charset=UTF-8");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <style>
 table {
 	border: 1px solid black;
@@ -26,17 +30,39 @@ header {
 	margin-bottom: 10px;
 }
 
-th {
-	text-overflow: ellipsis;
-	white-space: nowrap;
+#myInput {
+  background-image: url('/css/searchicon.png'); 
+  background-position: 10px 12px; 
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 50%; 
+  font-size: 16px; 
+  padding: 12px 20px 12px 40px; 
+  border: 1px solid #ddd; 
+  margin-bottom: 12px; 
 }
 
-td {
-	border: 1px solid black;
+#myTable {
+  border-collapse: collapse; 
+  width: 100%; 
+  border: 5px solid #FFDCB9; 
+  font-size: 16px; 
+  margin:auto;
+  font-family: monospace;
+  font-weight: bolder;
+            
 }
 
-thead {
-	text-align: center;
+#myTable th, #myTable td {
+  text-align: left; 
+  padding: 12px; 
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #FFB5B5;
 }
 </style>
 </head>
@@ -48,19 +74,19 @@ thead {
 		<input type="button" onclick="history.back()" value="上一頁">
 	</form>
 
-	<table>
+	<table id="myTable" class="display">
 		<thead>
-			<th>編號</th>
-			<th width="5%">會員姓名</th>
-			<th width="9%">品項</th>
-			<th width="9%">分類</th>
-			<th width="9%">食材1</th>
-			<th width="9%">食材2</th>
-			<th width="9%">食材3</th>
-			<th width="9%">食材4</th>
-			<th width="9%">調味料1</th>
-			<th width="9%">調味料2</th>
-			<th width="9%">調味料3</th>
+			<th width="5%">編號</th>
+			<th width="6%">會員姓名</th>
+			<th width="5%">品項</th>
+			<th>分類</th>
+			<th>食材1</th>
+			<th>食材2</th>
+			<th>食材3</th>
+			<th>食材4</th>
+			<th width="10%">調味料1</th>
+			<th width="10%">調味料2</th>
+			<th width="10%">調味料3</th>
 			<th width="9%">照片</th>
 		</thead>
 		<tbody>
@@ -91,5 +117,17 @@ thead {
 			</c:choose>
 		</tbody>
 	</table>
+	<script>
+	
+		$(document).ready(function() {
+			$('#myTable').DataTable({
+				 rowReorder: true,
+			        columnDefs: [
+			            { orderable: true, className: 'reorder', targets: 0 },
+			            { orderable: false, targets: '_all' }
+			        ]
+			});
+		});
+	</script>
 </body>
 </html>

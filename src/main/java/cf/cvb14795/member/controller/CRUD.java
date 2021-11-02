@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,16 +15,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -55,7 +63,8 @@ public class CRUD {
 	}
 	
 	/* 修改會員資料 */
-	@PutMapping(path = "user/{account}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	@PutMapping(path = "user/{account}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "user/{account}", consumes = { "multipart/form-data" })
 	private ResponseEntity<String> doRevise(
 			Model model,
 			HttpServletRequest request,
@@ -68,17 +77,20 @@ public class CRUD {
 			@RequestParam("address") String address,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
+//			@RequestBody Member m,
+//			@ModelAttribute("member") Member member,
 			@RequestParam(value = "imgBase64String", required = false) String imgBase64String) throws IOException{
 		
 		String message;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		request.setCharacterEncoding("UTF-8");
-//		response.setContentType("application/json; charset=UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 
 		String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
+//		String hashpw = BCrypt.hashpw(m.getPassword(), BCrypt.gensalt(10));
 		// 圖片之完整byte資料
 		byte[] imgBytes;
-		if (imgBase64String != "") {
+		if (imgBase64String != null) {
 			// 使用者有上傳圖片 解密後存進資料庫
 			imgBytes = Base64.getDecoder().decode(imgBase64String);
 		} else {
@@ -193,5 +205,24 @@ public class CRUD {
 	}
 
 	
+	@GetMapping("/user/{account}/photo")
+    @ResponseBody
+    public ResponseEntity<?> getPicture(HttpServletResponse resp, @PathVariable String account) {
+        Optional<Member> memberOpt = mService.selectMemberByAccount(account);
+        if (memberOpt.isPresent()) {
+	        Member member = memberOpt.get();
+	        byte[] photo = member.getImgBytes();
+//	        String base64String = Base64.getEncoder().encodeToString(photo);
+	        ByteArrayResource resource = new ByteArrayResource(photo);
+//	        String urlString="data:image/jpg;base64,"+base64String;
+	        String fileName = "avatar_"+account+".jpg";
+	        HttpHeaders responseHeaders = new HttpHeaders();
+	        responseHeaders.setContentDispositionFormData("attachment", fileName);
+	        responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
+	        return new ResponseEntity<Resource>(resource, responseHeaders, HttpStatus.OK);
+        } else {
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CouponUsageController {
        
     public CouponUsageController() {
-        super();
-        // TODO Auto-generated constructor stub
     }
 
    @GetMapping(value = "/use",produces = "text/html; charset=UTF-8")
