@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 
@@ -33,6 +34,7 @@ import util.gmail.Mail;
 
 @Controller
 @RequestMapping("/Member")
+@SessionAttributes("user")
 public class ForgetPassword {
 	private String prefix = "Member/";
 	

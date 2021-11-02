@@ -40,7 +40,7 @@ public class UserHomePageController {
 			Model model) {
 
 		// 若沒有登入(沒有帳號)時則跳轉到登入畫面
-		return "Recipe/UserStartingPage";
+		return "Recipe/UserViewAdminRecipe2";
 	}
 
 }

@@ -31,8 +31,7 @@
 <body>
 	<div class="container">
 		<!-- 除非要上傳檔案 否則不要用enctype="multipart/form-data" 會抓不到參數-->
-		<form:form id="form" action="" modelAttribute="member" method="POST">
-<%-- 		enctype="multipart/form-data"> --%>
+		<form:form id="form" action="" modelAttribute="member" method="POST" enctype="multipart/form-data">
 			<!-- HiddenHttpMethodFilter轉PUT -->
 			<input type="hidden" name="_method" value="PUT"/>
 			<fieldset>
@@ -141,7 +140,7 @@
 			$form.attr("action", "./user/" + $account.val());
 			e.preventDefault();
 // 			給multipart/form-data使用
-// 			var data = new FormData(form);
+			var formData = new FormData(form);
 			Swal.fire({
 				position: 'center',
 				icon: 'info',
@@ -158,12 +157,20 @@
 			if (!invalid) {
 				console.log("資料正確，送出表單");
 				$.ajax({
+// 					type: "PUT",
 					type: $form.attr("method"),
 					url: $form.attr("action"),
-					data: $form.serialize(),
+// 					data: $form.serialize(),
+					data: formData,
+					contentType: false, //required
+					processData: false, // required
+					/*一定要加*/
+					mimeType: 'multipart/form-data', //有圖片就要加這行
 					success: function (data) {
 						console.log("修改成功");
+						var jsonData = JSON.parse(data);
 						console.log(data);
+						console.log(jsonData);
 						swal.close();
 						Swal.fire({
 							position: 'center',

@@ -14,11 +14,10 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<link rel="stylesheet" href="./css/lineLogin.css">
-<link rel="stylesheet" href="./css/index.css">
-<link rel="stylesheet" href="./css/homepage.css">
-<link rel="stylesheet" href="<c:url value='./vegas/vegas.css'/>"type="text/css" />
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/index.css'/>">
+<link rel="stylesheet" href="<c:url value='/vegas/vegas.css'/>"type="text/css" />
 
 <!-- <link href="./test/pre.css" rel="stylesheet" /> -->
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
@@ -29,11 +28,13 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 <script src="./js/jquery-3.6.0.js"></script>
 <script src="./js/bootstrap.js"></script>
 <script src="./js/lineLogin.js"></script>
-<script src="./js/getBackgroundImageSize.js"></script>
-<script src="<c:url value='./vegas/vegas.js'/>"></script>
+<!-- <script src="./js/getBackgroundImageSize.js"></script> -->
+<%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- Timeline -->
 <script src="./test/console-ban.min.js"></script>
 <script src="./test/previewjs.js"></script>
+<!-- aboutUs -->
+<script src="./js/aboutUs.js"></script>
 
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
@@ -49,13 +50,6 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 	//     });
 	// }
 	$('document').ready(function() {
-		getBackgroundImageSize(jQuery('.header'))
-			.then(function(size) {
-				console.log('Image size is', size.width, size.height);
-			})
-			.fail(function() {
-				console.log('Could not get size because could not load image');
-			});
 		$('#tabs a').click(function(e) { //當按下 id=tabs 中的超連結時
 			e.preventDefault(); //阻止事件向上提升 (處理一次)    
 			var url = $(this).attr("data-url"); //取得 data-url 屬性值
@@ -65,6 +59,7 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 			location.href = url;
 		});
 	});
+	
 </script>
 </head>
 
@@ -80,7 +75,7 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="./Home">期中專題2</a>
+				<a class="navbar-brand" href="./Home">想食What !</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<!-- nav-collapse: 頁寬太小時後改為直行顯示-->
@@ -92,7 +87,7 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 					</li>
 					<!-- 晉豪 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Food/FoodMap">商家資訊</a>
+						<a class="nav-link" href="./Food/Fooddex">商家資訊</a>
 					</li>
 					<!-- 耿豪 -->
 					<li class="nav-item">
@@ -103,13 +98,13 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 					<li class="nav-item">
 						<a class="nav-link" href="./Event/eventjava">活動報名</a>
 					</li>
-					<!-- 峻豪 -->
-					<li class="nav-item">
-						<a class="nav-link" href="./Recipe/user">營養資訊</a>
-					</li>
 					<!-- 語君 -->
 					<li class="nav-item">
-						<a class="nav-link" href="./Comment/CommentControllerServlet">評論區</a>
+						<a class="nav-link" href="./comments/list">評論專區</a>
+					</li>
+					<!-- 峻豪 -->
+					<li class="nav-item">
+						<a class="nav-link" href="./Recipe/user">食譜規劃</a>
 					</li>
 					<!-- 下拉式選單 -->
 					<!-- <li class="dropdown">
@@ -150,7 +145,7 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">
-							<label for="checkbox-switch">暗黑模式</label>
+							<label for="checkbox-switch">淺色模式</label>
 							<input type="checkbox" id="checkbox-switch" class="checkbox-switch"/>							
 						</a>
 					</li>
@@ -158,9 +153,61 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 			</div>
 		</div>
 	</nav>
-		
-	<div class="header" id="header">
+	
+<!--             <a class="slide-arrow" id="slidePrev"><i class="fas fa-chevron-left"></i></a> -->
+<!--             <a class="slide-arrow right" id="slideNext"><i class="fas fa-chevron-right"></i></a> -->
+<!--             <ul class="slide-img" id="slide-img"> -->
+<!--                 <li><img src="./image/car1.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car2.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car3.jpg" alt=""></li> -->
+<!--                 <li><img src="./image/car4.jpg" alt=""></li> -->
+<!--             </ul> -->
+
+	<div class="wrap">
+		<ul class="pages" id="pages">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+		<a class="aboutUs" href="#contact">關 於 我 們</a>
+    <!-- Contact -->
+    <article id="contact">
+        <h2 class="major">想食 What！</h2>
+        <form method="post" action="#">
+            <div class="fields">
+                <div class="field">
+                    <label>製作團隊</label>
+                    <h5>鄧峻豪、陳貴宏</h5>
+                    <h5>林語君、張晉豪</h5>
+                    <h5>張耿豪、伍玴辰</h5>
+                </div>
+                <div class="field">
+                    <label>網站發想</label>
+                    <p>1.每次想要查詢美食時，都會耗費太多時間，希望有一個平台能夠找出各地美食資訊，也藉由大家的評論來了解當地人推薦的道地美食。<br/>
+            2.因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。<br/>
+            3.現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
+                </div>
+                <div class="field">
+                    <label>網站特色</label>
+                    <p>1.此平台除了能快速找出使用者想要的美食資訊，也會提供google map地圖來讓使用者了解與美食的距離。<br/> 
+                        2.人們在購買東西時，都希望會有折扣，因此平台也會有特約餐廳的優惠券，以及針對已接踵疫苗之民眾的專屬優惠券。<br/> 
+                        3.打造適合自己的專屬食譜，實現健康生活。<br/> 
+                        4.平台定期舉辦一些會員活動，活絡會員間的感情。</p>
+                </div>
+            </div>
+        </form>
+        <div id="close"></div>
+    </article>
+		<div class="title">
+			<h1>想食</h1>
+			<img alt="What" src="<c:url value='./image/what4.png'/>">
+		</div>
 	</div>
+	
+	
 	<div id="timeLine">
 		<div id="iframe-wrap">
 
@@ -182,27 +229,45 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 			<!-- line加好友按鈕 -->			
 			<ul class="footer-menu">
 				<li><a href="" id="lineLoginHref"><input type="button" class="lineLogin" style="width: 151px;height: 44px;border:none"/></a></li>
-				<li class="footer-text"><div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@lineteamjp" style="display: none;"></div></li>
-				<li class="footer-text">友站連結1</li>
-				<li class="footer-text">友站連結2</li>
-				<li class="footer-text">友站連結3</li>
-				<li class="footer-text">友站連結4</li>
+				<li class="footer-text"><div class="line-it-button" data-lang="zh_Hant" data-type="friend" data-lineid="@413ghgmq" style="display: none;"></div></li>
+				<li class="footer-text">
+					<a  href="#">首頁</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Food/Fooddex">商家資訊</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Coupon/frontpage">防疫專區</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Event/eventjava">活動報名</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./comments/list">評論專區</a>
+				</li>
+				<li class="footer-text">
+					<a  href="./Recipe/user">食譜養成</a>
+				</li>
 			</ul>
 		</div>
 	</footer>
 	
 	<script>
 		$(function() {
+		    var $contact = $("#contact");
+		    $contact.addClass("close");
+		    $contact.hide();
+			contentInit();
 			setLineOAuthUrl();
-			var navbarHeight = $(".navbar:eq(0)").height()
+// 			var navbarHeight = $(".navbar:eq(0)").height()
 			// $(".header").height(innerHeight - navbarHeight);
-			console.log($(".header").attr("height"));
+// 			console.log($(".header").attr("height"));
 // 			var darkmode = new Darkmode({
 // 				saveInCookies: true, // default: true,
 // 			});
 			// 將所有checkbox-switch改成IOS風格
 			var el = document.querySelector('.checkbox-switch');
-			var nav = document.getElementById("nav");
+			var nav = document.querySelector("nav");
 			var mySwitch = new Switch(el, {
 				size: 'small',
 				checked:false,
@@ -211,8 +276,26 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 					nav.classList.toggle("navbar-default");
 					nav.classList.toggle("navbar-dark");
 					nav.classList.toggle("bg-dark");
+
+          if (mySwitch.getChecked()) {
+            console.log("nav:深色模式");
+            $(".navbar").css("background-color", "#ffc078");
+            $("ul.nav li a").css("color", "#333")
+            $("ul.nav li a:hover").css("color", "#EA7500")
+            $("ul.nav li a:hover").css("background-color", "#333")
+            $("label[for='checkbox-switch']").text("深色模式")
+          } else {
+            console.log("nav:淺色模式");
+            $(".navbar").css("background-color", "#333");
+            $("ul.nav li a").css("color", "#ffc078");
+            $("ul.nav li a:hover").css("color", "#333")
+            $("ul.nav li a:hover").css("background-color", "#EA7500")
+            $("label[for='checkbox-switch']").text("淺色模式")
+          }
 				}
 			});
+
+      
 			// 先關閉new完後預設自動轉暗黑模式的動作
 // 			darkmode.toggle();
 			
@@ -243,16 +326,35 @@ integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg
 				$("#user").text(userName);
 			}
 			
-			 $("#header").vegas({
-	                slides: [
-	                    { src: "./image/salad.jpg" },
-	                    { src: "./image/taiwan.jpg" },
-	                    { src: "./image/coupon.jpg" },
-	                    { src: "./image/mapBanner.jpg" }
-	                ],
-	                transition: ['blur', 'zoomOut', 'swirlLeft'],
-	                delay: 3000
-	            });
+// 			 $("#header").vegas({
+// 	             slides: [
+// 	                 { src: "./image/question.jpeg" },
+// 	                 { src: "./image/salad.jpg" },
+// 	                 { src: "./image/food1.jpeg" },
+// 	                 { src: "./image/food2.jpeg" },
+// 	                 { src: "./image/food3.jpeg" },
+// 	                 { src: "./image/coupon.jpg" }
+// 	             ],
+// 	             transition: ['blur', 'zoomOut', 'swirlLeft'],
+// 	             delay: 5000
+// 	        });
+			 $(".wrap").vegas({
+				 overlay: true,
+				 transition: 'fade', 
+				 transitionDuration: 2000,
+				 delay: 6000,
+				 color: 'red',
+				 animation: 'random',
+				 animationDuration: 8000,
+	             slides: [
+	                 { src: "./image/question.jpeg" },
+	                 { src: "./image/salad.jpg" },
+	                 { src: "./image/food1.jpeg" },
+	                 { src: "./image/food2.jpeg" },
+	                 { src: "./image/food3.jpeg" },
+	                 { src: "./image/coupon.jpg" }
+	             ],
+	        });
 		})
 	</script>
 	<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async defer></script>
