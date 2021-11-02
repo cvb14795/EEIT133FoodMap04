@@ -20,8 +20,19 @@
 		padding: 5px;
 		border-radius: 10px;
 	}
-	.mhw h4  {
+	.mhw:hover{
+		background-color:#f17612;
+		border:3px solid #f17612;
+	}
+	.mhw a  {
 		font-size: 20px;
+	}
+	.mhw a:hover {
+		text-decoration: none;
+	}
+	.mhw:active{
+		background-color:#e95714;
+		border:3px solid #e95714;
 	}
 	.main {
 		padding-left: 150px;
@@ -199,22 +210,31 @@
 	<div class="main mt-150 mb-150">
 		<div style="width:550px;height:500px;float:right;">
 			<div style="text-align:center;width:550px;height:50px;"><h2>疫情相關資訊</h2></div>
-			<div class="mhw"><h4><a role=button href='https://sites.google.com/cdc.gov.tw/2019ncov/taiwan' target="_blank" style='color:white'>疫情監測</a></h4></div>
-			<div class="mhw"><h4><a role=button href='https://www.mohw.gov.tw/mp-1.html' target="_blank"  style='color:white'>衛福部</a></h4></div>
-			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/Page/vleOMKqwuEbIMgqaTeXG8A' target="_blank" style='color:white'>病毒介紹</a></h4></div>
-			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/List/SI4DlKBGujaYVJVSVKmwJw' target="_blank" style='color:white'>疫苗資訊</a></h4></div>	
-			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/MPage/epjWGimoqASwhAN8X-5Nlw' target="_blank" style='color:white'>疫苗簡介</a></h4></div>	
-			<div class="mhw"><h4><a role=button href='https://www.cdc.gov.tw/Category/Page/9mcqWyq51P_aYADuh3rTBA' target="_blank" style='color:white'>接種對象</a></h4></div>	
-			<div class="mhw"><h4><a role=button href='https://1922.gov.tw/' target="_blank" style='color:white'>疫苗預約平台</a></h4></div>	
-			<div class="mhw"><h4><a role=button href='https://www.mohw.gov.tw/np-15-1.html' target="_blank" style='color:white'>最新消息</a></h4></div>	
-			<div class="mhw"><h4><a role=button href='https://covid19.mohw.gov.tw/ch/np-5187-205.html' target="_blank" style='color:white'>紓困4.0</a></h4></div>	
-			<div style="text-align:center;width:550px;height:50px;float:right;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="mhw"><a role="button" href='https://sites.google.com/cdc.gov.tw/2019ncov/taiwan' target="_blank" style='color:white'>疫情監測</a></div>
+					<div class="mhw"><a role="button" href='https://www.mohw.gov.tw/mp-1.html' target="_blank"  style='color:white'>衛福部</a></div>
+					<div class="mhw"><a role="button" href='https://www.cdc.gov.tw/Category/Page/vleOMKqwuEbIMgqaTeXG8A' target="_blank" style='color:white'>病毒介紹</a></div>
+				</div>
+				<div class="row align-items-center">
+					<div class="mhw"><a role="button" href='https://www.cdc.gov.tw/Category/List/SI4DlKBGujaYVJVSVKmwJw' target="_blank" style='color:white'>疫苗資訊</a></div>	
+					<div class="mhw"><a role="button" href='https://www.cdc.gov.tw/Category/MPage/epjWGimoqASwhAN8X-5Nlw' target="_blank" style='color:white'>疫苗簡介</a></div>	
+					<div class="mhw"><a role="button" href='https://www.cdc.gov.tw/Category/Page/9mcqWyq51P_aYADuh3rTBA' target="_blank" style='color:white'>接種對象</a></div>	
+		
+				</div>
+				<div class="row align-items-center">
+					<div class="mhw"><a role="button" href='https://1922.gov.tw/' target="_blank" style='color:white'>疫苗預約平台</a></div>	
+					<div class="mhw"><a role="button" href='https://www.mohw.gov.tw/np-15-1.html' target="_blank" style='color:white'>最新消息</a></div>	
+					<div class="mhw"><a role="button" href='https://covid19.mohw.gov.tw/ch/np-5187-205.html' target="_blank" style='color:white'>紓困4.0</a></div>	
+				</div>
+				<div style="text-align:center;width:550px;height:50px;float:right;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
+			</div>			
 		</div>
 		<div>			
 			<br>
 			<h2>歡迎大家來填問卷</h2>
 			<input type="button" value="填問卷" id='questionnaire'
-			onclick="location.href='<c:url value='/Coupon/questionnaire' />'">
+			onclick="location.href='<c:url value="/Coupon/questionnaire" />'">
 			
 			
 			<h2>管理員專用</h2>
