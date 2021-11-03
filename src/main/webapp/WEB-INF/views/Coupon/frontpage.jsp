@@ -53,6 +53,26 @@ $(function() {
 })
 </script>
 
+<script type="text/javascript">
+	//國內檢驗總計
+	var result = {
+	    //檢驗人數
+	    peopleTotal:"",
+	    //檢驗件數
+	    caseTotal: "",
+	    //資料更新時間 (yyyy/mm/d)
+	    updateTime: "",
+	};
+	$.ajax({
+	    url: "https://covid19dashboard.cdc.gov.tw/dash7",
+	    success: function (data) {
+	        console.log(data)
+	        result.peopleTotal = data[0]["檢驗人數"];
+	        result.caseTotal = data[0]["檢驗件數"];
+	        result.updateTime = data[0]["資料更新時間"];
+	    }
+});
+</script>
 </head>
 <body>
 <!-- 	<div class="text-right memberDetail"> -->
