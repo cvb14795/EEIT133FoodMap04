@@ -85,17 +85,19 @@ public class CRUD {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-
-		String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
-//		String hashpw = BCrypt.hashpw(m.getPassword(), BCrypt.gensalt(10));
-		// 圖片之完整byte資料
-		byte[] imgBytes;
-		if (imgBase64String != null) {
+		
+		
+		Member memberBeforeRevise = mService.selectMemberByAccount(account).get();
+		// 獲得使用者修改前的資料 以防使用者沒有上傳圖片或沒有變更密碼
+		byte[] imgBytes = memberBeforeRevise.getImgBytes();
+		String hashpw = memberBeforeRevise.getPassword();
+		if (password != "") {
+			// 則仍沿用原本密碼
+			hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));			
+		}
+		if (imgBase64String != "") {
 			// 使用者有上傳圖片 解密後存進資料庫
-			imgBytes = Base64.getDecoder().decode(imgBase64String);
-		} else {
-			// 使用者無上傳圖片 使用原本圖片替代
-			imgBytes = mService.selectMemberByAccount(account).get().getImgBytes();
+			imgBytes = Base64.getDecoder().decode(imgBase64String);					
 		}
 		Member m = new Member(account, hashpw, name, idNum, address, phone, imgBytes, email, false);
 		mService.updateMember(m);

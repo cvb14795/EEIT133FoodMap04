@@ -62,10 +62,10 @@ public class IndexController {
 			
 			if (isAdmin) {
 				status = "管理者";
-				nextPage = "redirect:/HomePage/Admin/index";
+				nextPage = "redirect:/admin";
 			}
 			
-			System.out.println("用戶:' "+user+" '登入");
+			System.out.println("用戶: '"+user+"' 登入");
 			System.out.println("登入身分: "+status);
 			return nextPage;
 		} else {
@@ -90,7 +90,7 @@ public class IndexController {
 		
 		model.addAttribute("imageMap", imageMap);
 		model.addAttribute("members", memberList);
-		return "adminIndex";
+		return "HomePage/Admin/index";
 	}
 	
 	@GetMapping("/aboutUs")
@@ -99,8 +99,8 @@ public class IndexController {
 	}
 	
 	@ModelAttribute
-	private void setUserAndAdmin(Model model) {
-		model.addAttribute("user", "");
+	private void setUserAndAdmin(Model model, HttpServletRequest request) {
+		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
 		model.addAttribute("isAdmin", false);
 	}
 }

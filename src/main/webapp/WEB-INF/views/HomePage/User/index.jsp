@@ -79,6 +79,11 @@
 	});
 	
 </script>
+<style>
+	img.user-avatar {
+		width:40px;
+	}
+	</style>
 </head>
 
 <body>
@@ -120,7 +125,7 @@
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
+										<li><a href=""><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -345,7 +350,7 @@
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-							<li><a href="<c:url value='/Recipe/user'/>">食譜養成</a></li>
+							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 						</ul>
 					</div>
 				</div>
@@ -379,7 +384,8 @@
 	
 	<script>
 		$(function() {
-			userNameMain();
+			var src = "<c:url value='/Member/user/${user}/photo'/>";
+			userNameMain(src);
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },
