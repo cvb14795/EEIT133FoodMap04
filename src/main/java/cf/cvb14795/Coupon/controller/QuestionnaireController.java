@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
@@ -70,7 +68,9 @@ public class QuestionnaireController {
 			System.out.println("================正在寄送Email...==================");
 			Optional<Member> m = mService.selectMemberByAccount(account);
 			// 產生優惠券代碼(預設為6位數)
-			String couponCode = couponUsage.generateCouponCode(6);
+//			String couponCode = couponUsage.generateCouponCode(6);
+			String radomCode = couponUsage.generateCouponCode(3);
+			String couponCode = "QNCP15"+radomCode;
 			// 發送優惠券Email
 			couponUsage.sendMail(m, couponCode);
 

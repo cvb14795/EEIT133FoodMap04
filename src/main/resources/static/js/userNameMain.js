@@ -1,4 +1,4 @@
-function userNameMain() {
+function userNameMain(photoSrc) {
     // 將所有checkbox-switch改成IOS風格
     var el = document.querySelector('.checkbox-switch');
     var nav = document.querySelector("nav");
@@ -47,6 +47,7 @@ function userNameMain() {
         $("#editNavBtn").hide();
         // 未登入顯示為Guest
         $("#user").text("Guest");
+        $("img.user-avatar").hide();
         console.log(document.getElementById("user").outerHTML);
     } else {
         console.log(`使用者名稱:${userName}`);
@@ -58,5 +59,7 @@ function userNameMain() {
         $("#editNavBtn").show();
         // 登入後顯示用戶名稱
         $("#user").text(userName);
+        console.log(photoSrc);
+        $("img.user-avatar").attr("src", photoSrc);
     }
 }

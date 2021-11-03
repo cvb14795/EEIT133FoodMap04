@@ -18,7 +18,7 @@ public interface IQuestionnaireService {
 
 	public void UpdateData(String before, String after);	// 修改一筆資料
 
-	public boolean deleteDataById(String id); // 刪除資料
+	public void deleteDataById(String id); // 刪除資料
 	
 	public QuestionnaireBean queryIdData(String id); //查詢特定身分證資料 
 	

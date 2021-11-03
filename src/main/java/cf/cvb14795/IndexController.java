@@ -65,7 +65,7 @@ public class IndexController {
 				nextPage = "redirect:/admin";
 			}
 			
-			System.out.println("用戶:' "+user+" '登入");
+			System.out.println("用戶: '"+user+"' 登入");
 			System.out.println("登入身分: "+status);
 			return nextPage;
 		} else {
@@ -99,8 +99,8 @@ public class IndexController {
 	}
 	
 	@ModelAttribute
-	private void setUserAndAdmin(Model model) {
-		model.addAttribute("user", "");
+	private void setUserAndAdmin(Model model, HttpServletRequest request) {
+		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
 		model.addAttribute("isAdmin", false);
 	}
 }

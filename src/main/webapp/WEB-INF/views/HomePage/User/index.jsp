@@ -47,14 +47,10 @@
 <script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <!-- 暗黑模式 -->
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
-<script src="./js/jquery-3.6.0.js"></script>
-<script src="./js/bootstrap.js"></script>
-<script src="./js/lineLogin.js"></script>
-<!-- <script src="./js/getBackgroundImageSize.js"></script> -->
+<script src="<c:url value='/js/jquery-3.6.0.js"'/>"></script>
+<script src="<c:url value='/js/bootstrap.js'/>"></script>
+<script src="<c:url value='/js/lineLogin.js'/>"></script>
 <%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
-<!-- Timeline -->
-<script src="./test/console-ban.min.js"></script>
-<script src="./test/previewjs.js"></script>
 <!-- aboutUs -->
 <!-- <script src="./js/aboutUs.js"></script> -->
 
@@ -83,6 +79,11 @@
 	});
 	
 </script>
+<style>
+	img.user-avatar {
+		width:40px;
+	}
+	</style>
 </head>
 
 <body>
@@ -124,7 +125,7 @@
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
+										<li><a href=""><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -349,7 +350,7 @@
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-							<li><a href="<c:url value='/Recipe/user'/>">食譜養成</a></li>
+							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 						</ul>
 					</div>
 				</div>
@@ -383,7 +384,8 @@
 	
 	<script>
 		$(function() {
-			userNameMain();
+			var src = "<c:url value='/Member/user/${user}/photo'/>";
+			userNameMain(src);
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },
