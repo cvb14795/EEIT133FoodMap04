@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
 
@@ -66,7 +67,7 @@ public class Login {
 		// 使用者是否已有登入紀錄(cookie)
 		MemberStatus status = new MemberStatus(cookies);
 		userName = status.getCurrentUserAccount();
-		isAlreadyLogin = status.getLoginStatus(userName);
+		isAlreadyLogin = status.getLoginStatus();
 		System.out.println("\nuser: " + userName);
 		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
 		if (!isAlreadyLogin) {
@@ -145,9 +146,16 @@ public class Login {
 	}	
 	
 	@GetMapping("Logout")
-	private String doGet(HttpSession session, HttpServletResponse response){
+	private String doGet(
+			HttpSession session,
+			HttpServletResponse response,
+			SessionStatus sessionStatus){
 		// TODO Auto-generated method stub
 		
+		// 清除session旗下的attribute以及@SessionAttributes內的session
+		session.removeAttribute("user");
+        session.removeAttribute("isAdmin");
+        sessionStatus.setComplete();
 		// 登出 清空session
 		session.invalidate();
 		// 清空使用者名稱

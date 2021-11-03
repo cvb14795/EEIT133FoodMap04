@@ -67,7 +67,12 @@ table {
 				<label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
 				<label><input type='radio' name='action' value='U'>發放折價券</label>
 				<label><input type='radio' name='action' value='B'>撤回</label>
+				<label><input type='radio' name='action' value='D'>刪除</label>
 			</p>
+		</div>
+		<div>
+			<h6>	註: 撤回與刪除:為方便測試時使用，並非正式功能。</h6>
+			<h6>        刪除: 功能為刪除測試帳號 caterpillar123 </h6>
 		</div>
 
 		<div>
@@ -94,6 +99,7 @@ table {
 		<table>
 			<thead>
 				<tr>
+					<th>帳號</th>
 					<th>身份證字號</th>
 					<th>姓名</th>
 					<th>性別</th>
@@ -110,6 +116,7 @@ table {
 				<tr>
 					<c:forEach items='${beans}' var='bean'>
 						<tr>
+							<td>${bean.account}</td>
 							<td>${bean.id}</td>
 							<td>${bean.name}</td>
 							<td>${bean.gender}</td>
@@ -160,11 +167,8 @@ table {
 		}
 		%>
 
-
-
-
-
 	</div>
+	
 
 </body>
 </html>

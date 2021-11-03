@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
+import util.MemberStatus;
 
 @Controller
 //將Model中屬性名為user的屬性
@@ -36,9 +39,14 @@ public class IndexController {
 	}
 
 	@GetMapping({ "/" })
-	private String index() {
-		System.out.println("使用者未登入，將跳轉至根目錄");
-		return "/HomePage/User/index";
+	private String index(@ModelAttribute String user, HttpServletRequest request) {
+		MemberStatus status = new MemberStatus(request.getCookies());
+		if (!status.getLoginStatus()) {
+			System.out.println("使用者未登入，將跳轉至根目錄");
+			return "/HomePage/User/index";
+		} else {
+			return "redirect:/Home";
+		}
 	}
 
 	@GetMapping({ "/Home" })
@@ -54,10 +62,10 @@ public class IndexController {
 			
 			if (isAdmin) {
 				status = "管理者";
-				nextPage = "redirect:/HomePage/Admin/index";
+				nextPage = "redirect:/admin";
 			}
 			
-			System.out.println("用戶:' "+user+" '登入");
+			System.out.println("用戶: '"+user+"' 登入");
 			System.out.println("登入身分: "+status);
 			return nextPage;
 		} else {
@@ -82,6 +90,17 @@ public class IndexController {
 		
 		model.addAttribute("imageMap", imageMap);
 		model.addAttribute("members", memberList);
-		return "adminIndex";
+		return "HomePage/Admin/index";
+	}
+	
+	@GetMapping("/aboutUs")
+	private String aboutUs() {
+		return "HomePage/User/aboutUs";
+	}
+	
+	@ModelAttribute
+	private void setUserAndAdmin(Model model, HttpServletRequest request) {
+		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
+		model.addAttribute("isAdmin", false);
 	}
 }

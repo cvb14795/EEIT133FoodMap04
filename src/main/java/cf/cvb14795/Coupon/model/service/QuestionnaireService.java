@@ -48,10 +48,8 @@ public class QuestionnaireService implements IQuestionnaireService {
 	}
 
 	@Override
-	public boolean deleteDataById(String id) {
-		// TODO Auto-generated method stub
+	public void deleteDataById(String id) {
 		qDao.deleteById(id);
-		return true;
 	}
 
 	@Override

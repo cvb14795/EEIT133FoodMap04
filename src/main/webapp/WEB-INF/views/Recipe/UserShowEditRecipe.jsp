@@ -178,7 +178,7 @@
 				showCancelButton: true,
 			}).then((result) => {
 				if (result.isConfirmed) {
-					let url = "<c:url value='/Recipe/user/ViewYourRecipe/id=" + ${updateRecipe.id} +"'/>"
+					let url = "<c:url value='/Recipe/user/ViewYourRecipe/" + ${updateRecipe.id} +"'/>"
 					console.log(url)
 					$.ajax({
 						type:"post",

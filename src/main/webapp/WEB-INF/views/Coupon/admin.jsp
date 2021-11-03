@@ -46,6 +46,11 @@
 				<label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
 				<label><input type='radio' name='action' value='U'>發放折價券</label>
 				<label><input type='radio' name='action' value='B'>撤回</label>
+				<label><input type='radio' name='action' value='D'>刪除</label>
+		</div>
+		<div>
+			<h6>	註: 撤回與刪除:為方便測試時使用，並非正式功能。</h6>
+			<h6>        刪除: 功能為刪除測試帳號 caterpillar123 </h6>
 		</div>
 
 		<div>
@@ -55,6 +60,8 @@
 		</div>
 
 	</form>
+	
+
 
 
 </body>
