@@ -102,7 +102,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="index.html">
+							<a href="<c:url value='/'/>">
 								<img src="<c:url value='/image/user/logo.png'/>" alt="">
 							</a>
 						</div>
@@ -416,25 +416,25 @@
 		})
 	</script>
 	<!-- count down -->
-	<script src="<c:url value='js/user/js/jquery.countdown.js'/>"></script>
+	<script src="<c:url value='/js/user/js/jquery.countdown.js'/>"></script>
 	<!-- isotope -->
-	<script src="<c:url value='js/user/js/jquery.isotope-3.0.6.min.js'/>"></script>
+	<script src="<c:url value='/js/user/js/jquery.isotope-3.0.6.min.js'/>"></script>
 	<!-- waypoints -->
-	<script src="<c:url value='js/user/js/waypoints.js'/>"></script>
+	<script src="<c:url value='/js/user/js/waypoints.js'/>"></script>
 	<!-- owl carousel -->
-	<script src="<c:url value='js/user/js/owl.carousel.min.js'/>"></script>
+	<script src="<c:url value='/js/user/js/owl.carousel.min.js'/>"></script>
 	<!-- magnific popup -->
-	<script src="<c:url value='js/user/js/jquery.magnific-popup.min.js'/>"></script>
+	<script src="<c:url value='/js/user/js/jquery.magnific-popup.min.js'/>"></script>
 	<!-- mean menu -->
-	<script src="<c:url value='js/user/js/jquery.meanmenu.min.js'/>"></script>
+	<script src="<c:url value='/js/user/js/jquery.meanmenu.min.js'/>"></script>
 	<!-- sticker js -->
-	<script src="<c:url value='js/user/js/sticker.js'/>"></script>
+	<script src="<c:url value='/js/user/js/sticker.js'/>"></script>
 	<!-- main js -->
-	<script src="<c:url value='js/user/js/main.js'/>"></script>
+	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
-	<script src="<c:url value='js/userNameMain.js'/>"></script>
+	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
-	<script src="<c:url value='js/vegas.js'/>"></script>
+	<script src="<c:url value='/js/vegas.js'/>"></script>
 	
 </body>
 </html>

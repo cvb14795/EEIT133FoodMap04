@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,13 +37,62 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="<c:url value='/css/user/css/responsive.css'/>">
 	<link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
+	<!-- sweetalert -->
+	<link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
 	<!-- 開關改成IOS風格(左右滑動按鈕) -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 	<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
-</head>
+<style>
+/* body { */
+/* 	font-size: 20px; */
+/* 	font-family: Arial, Helvetica, sans-serif; */
+/* 	background-color: white; */
+/* 	line-height: 1.5em; */
+/* } */
 
+/* .insertForm { */
+/* 	width: 90%; */
+/* 	margin: auto; */
+/* 	padding: 10px; */
+/* } */
+
+fieldset {
+	/*因為是包住 div 所以要比 div 大*/
+	width: 500px;
+	margin: 15px;
+	border: 3px solid #FF0080;
+	border-radius: 20px;
+	margin: auto;
+}
+
+legend {
+	font-size: 24px;
+	color: #66B3FF;
+	/* text-align: center; */
+	margin-left: 10px;
+}
+
+.st1 {
+	width: 450px;
+	border-bottom: 2px dashed #FF95CA;
+	margin: 20px;
+	padding-bottom: 20px;
+}
+
+.sub {
+	width: 450px;
+	margin: auto;
+	text-align: center;
+}
+
+.t1 {
+	width: 100px;
+	float: left;
+	text-align: right;
+}
+</style>
+</head>
 <body>
-	
 	<!--PreLoader-->
 	<div class="loader">
 		<div class="loader-inner">
@@ -125,24 +176,19 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>官方食譜</p>
+						<p>新增專屬食譜</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end breadcrumb section -->
-
-	<!-- products -->
-	<div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
+	<div class="row">
 				<div class="col-md-12">
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
@@ -151,64 +197,64 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="row product-lists">
-				<c:choose>
-					<c:when test="${lists.size() != 0}">
-						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
-							<div class="col-lg-4 col-md-6 text-center">
-								<div class="single-product-item">
-									<div class="product-image">
-										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
-									</div>
-									<h3>品名:${lists.get(i).name}</h3>
-									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
-									<h6>食材:
-										<p>
-											<span>
-												${lists.get(i).food1}<br /> ${lists.get(i).food2}<br />
-												${lists.get(i).food3}<br /> ${lists.get(i).food4}
-											</span>
-										</p>
-									</h6>
-									<h6>調味料:
-										<p>
-											<span>
-												${lists.get(i).sauce1}<br /> ${lists.get(i).sauce2}<br />
-												${lists.get(i).sauce3}
-											</span>
-										</p>
-									</h6>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-								</div>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<td colspan=11 style="text-align: center;">無資料!</td>
-						<td><a id="edit" href="<c:url value='/'/>">回首頁</a></td>
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">前一頁</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">下一頁</a></li>
-						</ul>
-					</div>
+	<div class="insertForm">
+		<form id="form">	
+			<fieldset>
+				<legend>新增</legend>
+				<div class="st1">
+					<label for="" class="t1">品項:</label>
+					<input type="text" id="" name="foodName" required>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end products -->
+				<div class="st1">
+					<label for="" class="t1">分類:</label>
+					<input type="text" id="" name="category" required>
+				</div>
+				<div class="st1">
+					<label for="" class="t1">食材1:</label>
+					<input type="text" id="" name="food1" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">食材2:</label>
+					<input type="text" id="" name="food2" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">食材3:</label>
+					<input type="text" id="" name="food3" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">食材4:</label>
+					<input type="text" id="" name="food4" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">調味料1:</label>
+					<input type="text" id="" name="sauce1" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">調味料2:</label>
+					<input type="text" id="" name="sauce2" />
+				</div>
+				<div class="st1">
+					<label for="" class="t1">調味料3:</label>
+					<input type="text" id="" name="sauce3" />
+				</div>
+				<div class="st1">
+					<img src="" width="450" height="300" alt="請選擇照片"  id="showPic">
+				</div>
+				<div class="st1">
+					<label for="" class="t1">照片:</label>
+					<input type="file" name="photo" id="projectImage">
+				</div>
 
-		<!-- footer -->
+			</fieldset>
+			<div class="sub">
+				<input type="reset" name="reset" value="清除"> 
+				<input type="submit" name="submit" value="確認">
+			</div>
+
+		</form>
+	</div>
+	
+	<!-- footer -->
 	<div class="footer-area">
 		<div class="container">
 			<div class="row">
@@ -303,12 +349,125 @@
 	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
+	<!-- sweetalert js -->
+	<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
 	
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			userNameMain();
 		})
-	</script>
+		
+// 		var x = new FileReader;
+// 		var src;
+// 		document.forms[1].elements[10].onchange = function() {
+// 			x.readAsDataURL(this.files[0]);
+// 		}
+// 		x.onloadend = function() {
+// 			src = this.result;
+// 			document.images[0].src = src;;
+// 		}
 
+        var img;
+		$('#projectImage').change(function() {
+            var projectImage = $("#projectImage")[0].files[0];
+            var reader = new FileReader;
+            reader.onload = function(e) {
+                $('#showPic').attr('src', e.target.result);
+                img = e.target.result;
+            }
+            reader.readAsDataURL(projectImage);
+        })
+
+		var cookies = document.cookie;
+		var userName = cookies.split("user=")[1];
+		$("#userName").val(userName);
+
+		var form = document.getElementById("form");
+		$("#form").on("submit", function(e){
+			/* =====for formData&MultipartFile =====*/
+			var formData = new FormData(form);
+			
+			/* =====for JSON =====*/
+			
+			var html = "";
+			var inputData = $(".st1 input").slice(0, 9);
+			// html += + "name" + $("#name").val() + "<br/>";
+			for (let i = 0; i < inputData.length; i++) {
+				let name = inputData.eq(i).attr("name");
+				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
+				html += name+": "+value+"</br>";
+			}
+			console.log(html);
+			
+			//改用ajax傳送 棄用原本的form傳送
+			e.preventDefault();
+			
+			Swal.fire({
+				title: '您確定要新增嗎？',
+				icon: 'question',
+				html: html,
+// 				imageUrl: src,
+				imageUrl: img,
+				imageWidth: 400,
+				imageHeight: 200,
+				showCancelButton: true,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type:"post",
+						url:"<c:url value='/Recipe/user/UserInsertToDB'/>",
+						data: formData,
+		// 				data: json,
+		// 				dataType:"json",
+		// 				contentType: "application/json; charset=utf-8",
+						contentType: false, //required
+						processData: false, // required
+						/*一定要加*/
+						mimeType: 'multipart/form-data', //有圖片就要加這行
+						/*一定要加*/
+						success: function(data){
+							var jsonData = JSON.parse(data);
+							console.log("Success:" + "\nID:" +jsonData.id + "\nName:" +jsonData.name) ;
+
+							var html1 = "";
+							for (const key in jsonData) {
+								console.log(key);
+								console.log(jsonData[key]);
+								let val = (jsonData[key] != "") ? jsonData[key] : "無";
+								if (!(key == "base64String" || key == "photo")) {
+									html1 += key+": "+val;
+									html1 += "<br/>";
+								} 
+								// else if (key == "base64String"){
+								// 	html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
+								// }
+							};
+							// console.log(html);
+
+							Swal.fire({
+								title: '已新增成功！',
+								icon: 'success',
+								html: html1,
+								imageUrl: 'data:image;base64,'+jsonData.base64String,
+								imageWidth: 400,
+								imageHeight: 200,
+							})
+							setTimeout("window.location.pathname = 'FoodMap04/Recipe/user'",1500);
+						},
+						error: function(e){
+							console.log(e);
+						}
+					})
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					Swal.fire({
+						icon: 'error',
+						title: '已取消送出請求',
+						text: '您的變更將不會被儲存!'
+					})
+				}
+			})
+		})
+	</script>
+	
 </body>
 </html>

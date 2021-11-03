@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.model.UserRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.recipe.service.IUserRecipeService;
@@ -54,16 +52,16 @@ public class UserRecipeControllerAjax {
 		this.aRecipeService = aRecipeService;
 	}
 
-	@GetMapping("UserRecipe")
-	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
-		return PREFIX + "UserViewAdminRecipe2";
-	}
+//	@GetMapping("UserRecipe")
+//	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
+//		return PREFIX + "UserViewAdminRecipe2";
+//	}
 
-	@GetMapping("UserInsertRecipe")
+	@GetMapping("UserInsertRecipe2")
 	public String recipe(Model model) {
 		UserRecipeBean userRecipe = new UserRecipeBean();
 		model.addAttribute("userRecipe", userRecipe);
-		return PREFIX + "UserInsertRecipe";
+		return PREFIX + "UserInsertRecipe2";
 	}
 
 	// ============== 新增食譜 -> 寫進資料庫 ==============
@@ -108,22 +106,22 @@ public class UserRecipeControllerAjax {
 	}
 
 	// ============== 使用者查詢官方食譜 ==============
-	@PostMapping("UserViewAdminRecipe")
-	public String UserViewAdminRecipe(Model model) {
+//	@PostMapping("UserViewAdminRecipe2")
+//	public String UserViewAdminRecipe(Model model) {
+//
+//		List<AdminRecipeBean> lists = aRecipeService.selectAll();
+//		List<String> imgList = new ArrayList<String>();
+//		for (AdminRecipeBean bean : lists) {
+//			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
+//			imgList.add(base64String);
+//		}
+//		model.addAttribute("lists", lists);
+//		model.addAttribute("imgList", imgList);
+//
+//		return PREFIX + "UserViewAdminRecipe2";
+//	}
 
-		List<AdminRecipeBean> lists = aRecipeService.selectAll();
-		List<String> imgList = new ArrayList<String>();
-		for (AdminRecipeBean bean : lists) {
-			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
-			imgList.add(base64String);
-		}
-		model.addAttribute("lists", lists);
-		model.addAttribute("imgList", imgList);
-
-		return PREFIX + "UserViewAdminRecipe";
-	}
-
-	@PostMapping("UserViewMembersRecipe")
+	@GetMapping("UserViewMembersRecipe2")
 	public String UserViewMembersRecipe(Model model) {
 
 		List<UserRecipeBean> lists = uRecipeService.findMembersRecipe();
@@ -135,10 +133,10 @@ public class UserRecipeControllerAjax {
 		model.addAttribute("lists", lists);
 		model.addAttribute("imgList", imgList);
 
-		return PREFIX + "UserViewMembersRecipe";
+		return PREFIX + "UserViewMembersRecipe2";
 	}
 
-	@PostMapping("ViewYourRecipe")
+	@GetMapping("ViewYourRecipe2")
 	public String ViewYourRecipe(@CookieValue("user") String userName, Model model) {
 
 		List<UserRecipeBean> lists = uRecipeService.findByName(userName);
@@ -151,11 +149,11 @@ public class UserRecipeControllerAjax {
 		model.addAttribute("lists", lists);
 		model.addAttribute("imgList", imgList);
 
-		return PREFIX + "ViewYourRecipe";
+		return PREFIX + "ViewYourRecipe2";
 	}
 
 	// ============== 根據ID讀取資料庫資料:更新 ==============
-	@GetMapping(path = "ViewYourRecipe/id={id}")
+	@GetMapping(path = "ViewYourRecipe2/{id}")
 	public String ViewYourRecipe(@PathVariable("id") int id, Model model) {
 		UserRecipeBean updateRecipe = uRecipeService.getUpdateId(id);
 		String base64String = Base64.getEncoder().encodeToString(updateRecipe.getPhoto());
@@ -163,11 +161,11 @@ public class UserRecipeControllerAjax {
 		model.addAttribute("updateRecipe", updateRecipe);
 		model.addAttribute("base64String", base64String);
 
-		return PREFIX + "UserShowEditRecipe";
+		return PREFIX + "UserShowEditRecipe2";
 	}
 
 	// ============== 資料更新 ==============
-	@PostMapping(path = "ViewYourRecipe/id={id}")
+	@PostMapping(path = "ViewYourRecipe2/{id}")
 	public ResponseEntity<String> UserEditRecipeAction(@PathVariable("id") int id,
 			@ModelAttribute("recipe") UserRecipeBean userRecipe, @RequestParam("photo") String photo)
 			throws IOException {

@@ -62,7 +62,7 @@ public class IndexController {
 			
 			if (isAdmin) {
 				status = "管理者";
-				nextPage = "redirect:/HomePage/Admin/index";
+				nextPage = "redirect:/admin";
 			}
 			
 			System.out.println("用戶:' "+user+" '登入");
@@ -90,7 +90,7 @@ public class IndexController {
 		
 		model.addAttribute("imageMap", imageMap);
 		model.addAttribute("members", memberList);
-		return "adminIndex";
+		return "HomePage/Admin/index";
 	}
 	
 	@GetMapping("/aboutUs")

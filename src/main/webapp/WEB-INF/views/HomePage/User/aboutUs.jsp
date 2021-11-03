@@ -56,7 +56,7 @@
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
-							<a href="./index.jsp">
+							<a href="<c:url value='/'/>">
 								<img src="<c:url value='/image/user/logo.png'/>" alt="">
 							</a>
 						</div>

@@ -13,6 +13,7 @@
 
 	<!-- title -->
 	<title>食譜規劃</title>
+
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
 	<!-- google font -->
@@ -39,7 +40,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 	<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 </head>
-
 <body>
 	
 	<!--PreLoader-->
@@ -125,7 +125,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>官方食譜</p>
+						<p>會員食譜</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
@@ -137,16 +137,17 @@
 	<!-- products -->
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
+
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li data-filter=".lemon">我的最愛</li>
+							<li>我的最愛</li>
 						</ul>
 					</div>
 				</div>
@@ -161,8 +162,8 @@
 									<div class="product-image">
 										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
 									</div>
-									<h3>品名:${lists.get(i).name}</h3>
-									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
+									<h3>會員:${lists.get(i).userName}</h3>
+									<h3>品名:${lists.get(i).foodName}</h3>
 									<h6>食材:
 										<p>
 											<span>
