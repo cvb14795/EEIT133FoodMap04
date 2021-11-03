@@ -32,3 +32,7 @@ build/
 .vscode/
 bin/
 *.class
+target/m2e-wtp/web-resources/META-INF/maven/cf.cvb14795/FoodMap04/pom.properties
+target/m2e-wtp/web-resources/META-INF/maven/cf.cvb14795/FoodMap04/pom.xml
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
