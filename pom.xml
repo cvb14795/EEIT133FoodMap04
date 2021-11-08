@@ -17,29 +17,34 @@
 	<description>FoodMap04</description>
 	<properties>
 		<java.version>11</java.version>
+		<line.bot.version>4.6.0</line.bot.version>
 	</properties>
 	<dependencies>
 		<!-- line bot -->
-		<!-- spring boot don't need this dependency unless you use spring mvc -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.linecorp.bot</groupId> -->
-<!-- 			<artifactId>line-bot-spring-boot</artifactId> -->
-<!-- 			<version>4.3.0</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.linecorp.bot</groupId>
+			<artifactId>line-bot-spring-boot</artifactId>
+			<version>${line.bot.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.linecorp.bot</groupId>
 			<artifactId>line-bot-model</artifactId>
-			<version>4.3.0</version>
+			<version>${line.bot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.linecorp.bot</groupId>
 			<artifactId>line-bot-api-client</artifactId>
-			<version>4.3.0</version>
+			<version>${line.bot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.linecorp.bot</groupId>
 			<artifactId>line-bot-servlet</artifactId>
-			<version>4.3.0</version>
+			<version>${line.bot.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.linecorp.bot</groupId>
+		  <artifactId>line-bot-parser</artifactId>
+		  <version>${line.bot.version}</version>
 		</dependency>
 		<!-- spring boot --> 
 		<dependency>
