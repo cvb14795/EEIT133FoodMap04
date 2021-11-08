@@ -38,6 +38,7 @@ import com.google.gson.Gson;
 
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
+import cf.cvb14795.photo.photoAttachment;
 
 /**
  * Servlet implementation class MemberRegister
@@ -214,14 +215,8 @@ public class CRUD {
         if (memberOpt.isPresent()) {
 	        Member member = memberOpt.get();
 	        byte[] photo = member.getImgBytes();
-//	        String base64String = Base64.getEncoder().encodeToString(photo);
-	        ByteArrayResource resource = new ByteArrayResource(photo);
-//	        String urlString="data:image/jpg;base64,"+base64String;
 	        String fileName = "avatar_"+account+".jpg";
-	        HttpHeaders responseHeaders = new HttpHeaders();
-	        responseHeaders.setContentDispositionFormData("attachment", fileName);
-	        responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
-	        return new ResponseEntity<Resource>(resource, responseHeaders, HttpStatus.OK);
+	        return photoAttachment.getPhoto(resp, photo, fileName);
         } else {
         	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

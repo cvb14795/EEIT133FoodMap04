@@ -1,4 +1,4 @@
-package util.lintbot;
+package util.linebot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,16 +10,17 @@ import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.profile.UserProfileResponse;
 import com.linecorp.bot.model.response.BotApiResponse;
 
+import cf.cvb14795.FoodMap04Application;
+
 /**
  * @author cvb14795
  *
  */
 public class MessageUtil {
-	final static String CHANNEL_ACCESS_TOKEN = "URD9rRscqtskuIOeyH3gE34kr2M9BlYNsIl89uQzXnKbwxOC8VgGuxfTOINwJ+/K8W24tD1kDIsfel9+c57WZSUvyV4mcV3V32xWjeCE4te4peIp3YbTfnenLp2+CDieTt8WM8bQ/oeV+0IRxc7HbQdB04t89/1O/w1cDnyilFU=";
 	final static LineMessagingClient client = LineMessagingClient
-			.builder(CHANNEL_ACCESS_TOKEN)
+			.builder(FoodMap04Application.getChannelToken())
 			.build();
-
+	
 	public static void reply(String message, String replyToken) {
 
 		final TextMessage textMessage = new TextMessage(message);
