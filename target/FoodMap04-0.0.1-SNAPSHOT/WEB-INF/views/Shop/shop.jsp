@@ -144,7 +144,7 @@
 			</div>
 
 			<div class="row">
-					<a href="<c:url value='/Shop/Item/AddItem'/>"><button>新增商品</button></a>
+				<a href="<c:url value='/Shop/Item/Add'/>"><button>新增商品</button></a>
 <!-- 				<div class="col-lg-4 col-md-6 text-center"> -->
 <!-- 					<div class="single-product-item"> -->
 <!-- 						<div class="product-image"> -->
@@ -155,16 +155,21 @@
 <!-- 						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a> -->
 <!-- 					</div> -->
 <!-- 				</div> -->
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
+
+				<c:forEach items="${items}" var="item">
+					<div class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a href="<c:url value='/Shop/Item/${item.id}'/>">
+									<img src="<c:url value='/Shop/Item/${item.id}/Photo'/>" alt="">
+								</a>
+							</div>
+							<h3><a href="<c:url value='/Shop/Item/${id}'/>">${item.name}</a></h3>
+							<p class="product-price"><span>價錢:</span> $${item.price} </p>
+							<a href="javascript:void(0)" onclick="addTocart(${item.id})" class="cart-btn"><i class="fas fa-shopping-cart"></i> 加入購物車</a>
 						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="javascript:void(0)" onclick="addTocart()" class="cart-btn"><i class="fas fa-shopping-cart"></i> 加入購物車</a>
 					</div>
-				</div>
+				</c:forEach>
 <!-- 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center"> -->
 <!-- 					<div class="single-product-item"> -->
 <!-- 						<div class="product-image"> -->
@@ -282,13 +287,14 @@
 			userNameMain();
 		})
 		
-		function addTocart(){
-			var url = <c:url value='/Shop/AddToCart'/>;
+		function addTocart(id){
+			var url = "<c:url value='/Shop/AddtoCart/'/>"+id;
 			$.ajax({
 				url: url,
-				method: "get",
+				method: "post",
+				data: {qty: 1},
 				success: function (data) {
-					console.log("將加進購物車: "+data);
+					alert("成功加入購物車");
 				}
 			})
 		}

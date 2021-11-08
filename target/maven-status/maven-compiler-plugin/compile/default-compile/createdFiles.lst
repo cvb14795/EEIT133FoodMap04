@@ -51,7 +51,6 @@ cf\cvb14795\FoodMap04Application.class
 cf\cvb14795\recipe\service\IUserRecipeService.class
 util\Result.class
 cf\cvb14795\Coupon\model\service\QuestionnaireService.class
-util\lintbot\MessageUtil.class
 ecpay\payment\integration\verification\VerifyCapture.class
 ecpay\payment\integration\AllInOne.class
 ecpay\payment\integration\domain\AioCheckOutWebATM.class

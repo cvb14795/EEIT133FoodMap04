@@ -141,38 +141,26 @@
 							<thead class="cart-table-head">
 								<tr class="table-head-row">
 									<th class="product-remove"></th>
-									<th class="product-image">Product Image</th>
-									<th class="product-name">Name</th>
-									<th class="product-price">Price</th>
-									<th class="product-quantity">Quantity</th>
-									<th class="product-total">Total</th>
+									<th class="product-image">商品圖片</th>
+									<th class="product-name">商品名稱</th>
+									<th class="product-price">價錢</th>
+									<th class="product-quantity">數量</th>
+									<th class="product-total">小計</th>
 								</tr>
 							</thead>
+						
 							<tbody>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-1.jpg" alt=""></td>
-									<td class="product-name">Strawberry</td>
-									<td class="product-price">$85</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-2.jpg" alt=""></td>
-									<td class="product-name">Berry</td>
-									<td class="product-price">$70</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-3.jpg" alt=""></td>
-									<td class="product-name">Lemon</td>
-									<td class="product-price">$35</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
+								<c:forEach items="${entrySet}" var="entry" varStatus="status">
+									<input type="hidden" value="${entry.getKey()}"/>
+									<tr class="table-body-row">
+										<td class="product-remove"><a href="javascript:void(0)" onclick="removeFromCart(${entry.getKey()}, ${status.index})"><i class="far fa-window-close"></i></a></td>
+										<td class="product-image"><img src="<c:url value='/Shop/Item/${entry.getValue().item.id}/photo'/>" alt=""></td>
+										<td class="product-name">${entry.getValue().item.name}</td>
+										<td class="product-price">$${entry.getValue().item.price}</td>
+										<td class="product-quantity"><input type="number" placeholder="0" value="${entry.getValue().qty}"></td>
+										<td class="product-total">1</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -183,22 +171,22 @@
 						<table class="total-table">
 							<thead class="total-table-head">
 								<tr class="table-total-row">
-									<th>Total</th>
-									<th>Price</th>
+									<th>項目</th>
+									<th>費用</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr class="total-data">
-									<td><strong>Subtotal: </strong></td>
-									<td>$500</td>
+									<td><strong>小計: </strong></td>
+									<td>${subTotal}</td>
 								</tr>
 								<tr class="total-data">
-									<td><strong>Shipping: </strong></td>
-									<td>$45</td>
+									<td><strong>運費: </strong></td>
+									<td>$0</td>
 								</tr>
 								<tr class="total-data">
-									<td><strong>Total: </strong></td>
-									<td>$545</td>
+									<td><strong>總計: </strong></td>
+									<td>${subTotal}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -324,6 +312,21 @@
 		$(function(){
 			userNameMain();
 		})
+		
+		function removeFromCart(id, index){
+			var url = "<c:url value='/Shop/RemoveFromCart/'/>"+id;
+			$.ajax({
+				url: url,
+				method: "get",
+				success: function(){
+					$(".table-body-row").eq(index).remove();
+					console.log("移除成功")
+				},
+				error: function(){
+					console.log("移除失敗")
+				}
+			})		
+		}
 	</script>
 
 </body>
