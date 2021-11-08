@@ -143,8 +143,8 @@
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
-							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
+							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
 							<li>我的最愛</li>
@@ -181,6 +181,7 @@
 										</p>
 									</h6>
 									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
+									<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2/${lists.get(i).id}'/>" class="cart-btn">詳細資訊</a>
 								</div>
 							</div>
 						</c:forEach>

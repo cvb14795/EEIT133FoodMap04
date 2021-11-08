@@ -53,7 +53,8 @@ public class AdminRecipeControllerAjax {
 			@RequestParam(required = false, name = "sauce1") String sauce1,
 			@RequestParam(required = false, name = "sauce2") String sauce2,
 			@RequestParam(required = false, name = "sauce3") String sauce3,
-			@RequestParam(required = false, name = "photo") MultipartFile photoPart) throws IOException {
+			@RequestParam(required = false, name = "photo") MultipartFile photoPart,
+			@RequestParam(required = false, name = "step") String step) throws IOException {
 		
 		byte[] photo = new byte[1024];
 		String base64String="";
@@ -74,7 +75,7 @@ public class AdminRecipeControllerAjax {
 				name, category, 
 				food1, food2, food3, food4, 
 				sauce1, sauce2, sauce3,
-				photo, base64String);
+				photo, base64String, step);
 		
 		aRecipeService.insert(recipe);
 		
@@ -103,7 +104,7 @@ public class AdminRecipeControllerAjax {
 	@GetMapping(path = "AdminViewRecipe/id={id}")
 	public String AdminViewRecipe(@PathVariable("id") int id, Model model) {
 
-		AdminRecipeBean updateRecipe = aRecipeService.getUpdateId(id);
+		AdminRecipeBean updateRecipe = aRecipeService.getId(id);
 
 		String base64String = Base64.getEncoder().encodeToString(updateRecipe.getPhoto());
 
@@ -136,7 +137,7 @@ public class AdminRecipeControllerAjax {
 	@GetMapping("AdminShowDeleteRecipe")
 	public String adminShowDeleteRecipe(@RequestParam("id") int id, Model model) {
 
-		AdminRecipeBean deleteRecipe = aRecipeService.getUpdateId(id);
+		AdminRecipeBean deleteRecipe = aRecipeService.getId(id);
 
 		String base64String = Base64.getEncoder().encodeToString(deleteRecipe.getPhoto());
 

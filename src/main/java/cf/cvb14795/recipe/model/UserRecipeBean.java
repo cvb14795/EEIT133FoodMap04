@@ -2,12 +2,17 @@ package cf.cvb14795.recipe.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,15 +49,28 @@ public class UserRecipeBean implements Serializable{
 	private byte[] photo;
 	@Transient
 	private String base64String;
+	@Column
+	private String step;
+	
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userRecipe", cascade = CascadeType.ALL)
+//	private Set<MyFavoritesBean> userFavRecipe = new HashSet<MyFavoritesBean>();
 
+//	@Override
+//	public String toString() {
+//		return "UserRecipeBean [id=" + id + ", userName=" + userName + ", foodName=" + foodName + ", category="
+//				+ category + ", food1=" + food1 + ", food2=" + food2 + ", food3=" + food3 + ", food4=" + food4
+//				+ ", sauce1=" + sauce1 + ", sauce2=" + sauce2 + ", sauce3=" + sauce3 + ", photo="
+//				+ Arrays.toString(photo) + "]";
+//	}
+	
 	@Override
 	public String toString() {
 		return "UserRecipeBean [id=" + id + ", userName=" + userName + ", foodName=" + foodName + ", category="
 				+ category + ", food1=" + food1 + ", food2=" + food2 + ", food3=" + food3 + ", food4=" + food4
 				+ ", sauce1=" + sauce1 + ", sauce2=" + sauce2 + ", sauce3=" + sauce3 + ", photo="
-				+ Arrays.toString(photo) + "]";
+				+ Arrays.toString(photo) + ", base64String=" + base64String + ", step=" + step + "]";
 	}
-
+	
 	public UserRecipeBean() {
 	}
 
@@ -70,6 +88,24 @@ public class UserRecipeBean implements Serializable{
 		this.sauce3 = sauce3;
 		this.photo = photo;
 		this.base64String = base64String;
+	}
+	
+	public UserRecipeBean(String userName, String foodName, String category, String food1, String food2,
+			String food3, String food4, String sauce1, String sauce2, String sauce3, byte[] photo, String base64String,
+			String step) {
+		this.userName = userName;
+		this.foodName = foodName;
+		this.category = category;
+		this.food1 = food1;
+		this.food2 = food2;
+		this.food3 = food3;
+		this.food4 = food4;
+		this.sauce1 = sauce1;
+		this.sauce2 = sauce2;
+		this.sauce3 = sauce3;
+		this.photo = photo;
+		this.base64String = base64String;
+		this.step = step;
 	}
 
 	public int getId() {
@@ -175,5 +211,15 @@ public class UserRecipeBean implements Serializable{
 	public void setBase64String(String base64String) {
 		this.base64String = base64String;
 	}
+
+	public String getStep() {
+		return step;
+	}
+
+	public void setStep(String step) {
+		this.step = step;
+	}
+	
+	
 
 }

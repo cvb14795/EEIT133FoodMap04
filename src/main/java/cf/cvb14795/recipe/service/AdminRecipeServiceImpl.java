@@ -1,6 +1,7 @@
 package cf.cvb14795.recipe.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import cf.cvb14795.recipe.model.AdminRecipeBean;
 @Service
 public class AdminRecipeServiceImpl implements IAdminRecipeService{
 	
-//	@Qualifier("AdminRecipeRepository")
 	AdminRecipeRepository recipeDao;
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class AdminRecipeServiceImpl implements IAdminRecipeService{
 	}
 
 	@Override
-	public AdminRecipeBean getUpdateId(int id) {
+	public AdminRecipeBean getId(int id) {
 		return recipeDao.getById(id);
 	}
 
@@ -46,5 +46,8 @@ public class AdminRecipeServiceImpl implements IAdminRecipeService{
 		recipeDao.deleteById(id);
 	}
 
-
+	@Override
+	public Optional<AdminRecipeBean> findById(int id) {
+		return recipeDao.findById(id);
+	}
 }
