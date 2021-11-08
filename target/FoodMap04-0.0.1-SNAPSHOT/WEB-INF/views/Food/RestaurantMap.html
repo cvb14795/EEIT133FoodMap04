@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestaurantMap</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        .abgne_product_arrow_silder {
+            width: 450px;
+            height: 350px;
+            position: relative;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .abgne_product_arrow_silder ul,
+        .abgne_product_arrow_silder ul li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .abgne_product_arrow_silder ul li {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .abgne_product_arrow_silder ul li.selected {
+            z-index: 99;
+        }
+
+
+        .fa-arrow-left,
+        .fa-arrow-right {
+            color: black;
+        }
+
+        .prev {
+            /* background: url(./Images/prev.svg) no-repeat; */
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 175px;
+            /* (區塊高-圖片高) / 2 */
+            z-index: 100;
+        }
+
+        .next {
+            /* background: url(./Images/next.svg) no-repeat; */
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 175px;
+            /* (區塊高-圖片高) / 2 */
+            z-index: 100;
+        }
+        body{
+            background-color: rgb(215, 231, 236);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>美食地圖</h1>
+    </header>
+    <div class="container">
+        <div class="abgne_product_arrow_silder">
+            <ul>
+                <li class="selected"><a href="./RestaurantInfo"><img src="../images/一蘭.jpg" /></a></li>
+                <li><a href="./RestaurantInfo"><img src="../images/壽司.jpg" /></a></li>
+                <li><a href="./RestaurantInfo"><img src="../images/大方冰品.jpg" /></a></li>
+                <li><a href="./RestaurantInfo"><img src="../images/起家雞.jpg" /></a></li>
+                <li><a href="./RestaurantInfo"><img src="../images/霸味.jpg" /></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align:center;">
+        <input id="reviseBtn" type="button" name="revise" value="修改">
+    </div>
+
+    <script>
+        var reviseBtn = document.getElementById("reviseBtn");
+        reviseBtn.addEventListener("click", function (e) {
+            location.href = "./ReviseForm.jsp";
+        })
+    </script>
+
+    <div style="text-align:center;">
+        <input id="AddBtn" type="button" name="add" value="新增">
+    </div>
+
+    <script>
+        var AddBtn = document.getElementById("AddBtn");
+        AddBtn.addEventListener("click", function (e) {
+            location.href = "./AddDataForm.html";
+        })
+    </script>
+
+    <div style="text-align:center;">
+    <input id="DelBtn" type="button" name="del" value="刪除">
+    </div>
+
+    <script>
+        var DelBtn = document.getElementById("DelBtn");
+        DelBtn.addEventListener("click", function (e) {
+            location.href = "./DelDataForm.jsp";
+        })
+    </script>
+
+
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script>
+        var selectNo = 0;
+
+        $("ul li a").click(function (e) {
+            var imgSrc = $("ul li a img").eq(selectNo).attr("src");
+            alert("點擊圖片: " + imgSrc);
+            alert(`index: ${selectNo}\n你點擊了第${selectNo + 1}張`);
+            //取 "../Images/"到 ".jpg" 之間的所有文字 (index[10]至index[長度-4])
+            var mapName = imgSrc.slice(10, -4);
+            $(this).attr("href", "./RestaurantInfo" + "?mapName=" + mapName);
+        })
+
+
+        $(function () {
+            var $silder = $('.abgne_product_arrow_silder'),
+                $li = $('ul li', $silder),
+                arrowWidth = 48 * -1,
+                arrowOpacity = .3,
+                arrowPrevHtml = "<a href='#' class='prev'><i class='fas fa-arrow-left fa-3x'></i></a>"
+            arrowNextHtml = "<a href='#' class='next'><i class='fas fa-arrow-right fa-3x'></i></a>"
+            $arrows = $(arrowPrevHtml + arrowNextHtml).css('opacity', arrowOpacity),
+                $prev = $arrows.filter('.prev'),
+                $next = $arrows.filter('.next'),
+                fadeSpeed = 400;
+
+            $silder.append($arrows).hover(function () {
+                var no = $li.filter('.selected').index();
+                arrowAction(no > 0 ? 0 : arrowWidth, no < $li.length - 1 ? 0 : arrowWidth);
+            }, function () {
+                arrowAction(arrowWidth, arrowWidth);
+            });
+
+            $arrows.click(function () {
+                // 先取出目前顯示的 li 及其排行
+                var $selected = $li.filter('.selected');
+                selectNo = $selected.index();
+
+                // 判斷是要上一張還是下一張
+                selectNo = this.className == 'prev' ? selectNo - 1 : selectNo + 1;
+                $li.eq(selectNo).addClass('selected').siblings().removeClass('selected');
+
+
+                arrowAction(selectNo > 0 ? 0 : arrowWidth, selectNo < $li.length - 1 ? 0 : arrowWidth);
+
+                return false;
+            }).focus(function () {
+                this.blur();
+            });
+
+            // 控制左右箭頭顯示或隱藏
+            function arrowAction(l, r) {
+                $prev.stop().animate({ left: l });
+                $next.stop().animate({ right: r });
+            }
+        });
+    </script>
+</body>
+
+</html>

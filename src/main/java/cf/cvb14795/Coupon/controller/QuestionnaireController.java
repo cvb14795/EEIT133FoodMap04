@@ -1,47 +1,89 @@
 package cf.cvb14795.Coupon.controller;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
-import cf.cvb14795.Coupon.model.service.IQuestionnaireService;
+import cf.cvb14795.Coupon.model.service.QuestionnaireService;
+import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
+import cf.cvb14795.member.bean.Member;
+import cf.cvb14795.member.service.MemberService;
 
 @Controller
 @RequestMapping("/Coupon")
 public class QuestionnaireController {
-	IQuestionnaireService qService;
-	
-	
+	QuestionnaireService qService;
+	MemberService mService;
+	URL u;
+
 	@Autowired
-	public QuestionnaireController(IQuestionnaireService qService) {
+	public QuestionnaireController(QuestionnaireService qService, MemberService mService) {
 		this.qService = qService;
+		this.mService = mService;
 	}
 
-
-
-	@PostMapping("/controller")
-	public String addNewData(@RequestParam("name") String name, @RequestParam("gender") String gender,
-			@RequestParam("id") String id, @RequestParam("birth") String birth, @RequestParam("phone") String phone,
-			@RequestParam("abroad") String abroad, @RequestParam("moving") String moving,
-			@RequestParam("family") String family, @RequestParam("fever") String fever,
-			@RequestParam("vaccine") String vaccine, @RequestParam("label") String label,
-			@CookieValue("user") String account, Model model) {
+	// 將問卷內容存入資料庫
+	@PostMapping("/qcontroller")
+	public String addNewData(QuestionnaireBean bean, @CookieValue("user") String account, Model model,
+			HttpServletRequest request) {
 		String send_page;
-		label = "0";
+		bean.setLabel("0");
+		bean.setAccount(account);
 		System.out.println("cookie user: " + account);
-		QuestionnaireBean qbean = new QuestionnaireBean(id, name, gender, birth, phone, abroad, moving, family, vaccine, fever, label, account);
-//		QuestionnaireBean qbean = new QuestionnaireBean(name, gender, id, birth, phone, abroad, moving, family, fever,vaccine, label, account);
-		if (qService.checkAccount(qbean.getAccount())) {
-			qService.addNewData(qbean);
+
+		if (qService.checkAccount(bean.getAccount())) {
+			qService.addNewData(bean);
 			send_page = "Coupon/send_success";
+			
+			
+			// 寄信
+			/* 由url的完整路徑拼出前綴路徑 */
+
+			try {
+				u = new URL(request.getRequestURL().toString());
+			} catch (MalformedURLException e) {
+
+				System.out.println("請求URL時發生錯誤: " + e.getMessage());
+				System.out.println("URL: " + request.getRequestURL().toString());
+				System.out.println("*****將跳轉回首頁*****");
+				return "redirect:/Home";
+			}
+			StringBuilder sb = new StringBuilder();
+			sb.append(u.getProtocol() + "://"); // u.getProtocol(): "http" or "https"
+			sb.append(u.getAuthority()); // u.getAuthority(): localhost:8080
+			sb.append(request.getContextPath()); // request.getContextPath(): /FoodMap04
+			String baseUrl = sb.toString();
+
+			CouponUsageUtil couponUsage = new CouponUsageUtil(baseUrl);
+			System.out.println("================正在寄送Email...==================");
+			Optional<Member> m = mService.selectMemberByAccount(account);
+			// 產生優惠券代碼(預設為6位數)
+//			String couponCode = couponUsage.generateCouponCode(6);
+			String radomCode = couponUsage.generateCouponCode(3);
+			String couponCode = "QNCP15"+radomCode;
+			// 發送優惠券Email
+			couponUsage.sendMail(m, couponCode);
+
 		} else {
 			send_page = "Coupon/send_error";
 		}
+
+		
+
+		
+		
+
+		System.out.println("================寄送Email完成！==================");
 
 		return send_page;
 	}
