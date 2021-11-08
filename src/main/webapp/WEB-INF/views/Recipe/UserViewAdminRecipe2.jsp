@@ -38,6 +38,7 @@
 	<!-- 開關改成IOS風格(左右滑動按鈕) -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 	<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
+
 </head>
 
 <body>
@@ -142,11 +143,11 @@
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li data-filter=".lemon">我的最愛</li>
+							<li><a>我的最愛</a></li>
 						</ul>
 					</div>
 				</div>
@@ -155,7 +156,7 @@
 			<div class="row product-lists">
 				<c:choose>
 					<c:when test="${lists.size() != 0}">
-						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
+						<c:forEach var="i" begin="0" end="${lists.size()-1}" varStatus="status">
 							<div class="col-lg-4 col-md-6 text-center">
 								<div class="single-product-item">
 									<div class="product-image">
@@ -179,14 +180,27 @@
 											</span>
 										</p>
 									</h6>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
+									
+									<c:choose>
+										<c:when test="${i < favList.size() && lists.get(i).id == favList.get(i).aRecipeId.id}">
+											<a href="javascript:void(0)" onclick="addToFavorite(${lists.get(i).id}, ${status.index})" class="cart-btn fav isFav" style="background-color: red;"><i class="fas fa-heart"></i> 移除我的最愛</a>
+										</c:when>
+										<c:otherwise>
+											<a href="javascript:void(0)" onclick="addToFavorite(${lists.get(i).id}, ${status.index})" class="cart-btn fav notFav"><i class="far fa-heart"></i> 加入我的最愛</a>
+										</c:otherwise>
+									</c:choose>
+
+									<a href="<c:url value='/Recipe/user/UserViewAdminRecipe2/${lists.get(i).id}'/>" class="cart-btn">詳細資訊</a>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<td colspan=11 style="text-align: center;">無資料!</td>
-						<td><a id="edit" href="<c:url value='/'/>">回首頁</a></td>
+						<div class="container">
+							<div style="text-align: center;">
+								<h2>無資料!</h2>
+							</div>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -307,7 +321,39 @@
 	<script>
 		$(function(){
 			userNameMain();
+			// $(".fav")
 		})
+		
+		function addToFavorite(id, index){
+			console.log(id, index)
+			
+			var fav = $(".fav").eq(index)
+			$.ajax({
+				url: "<c:url value='/Recipe/user/myfavorites/'/>"+id,
+				method:"get",
+				success: function(){
+					//不在我的最愛裡
+					if (fav.hasClass("notFav")) {
+						fav.removeClass("notFav")
+						fav.addClass("isFav")
+						fav.css("background-color", "red")
+						fav.html('<i class="fas fa-heart"></i> 移除我的最愛')
+					}
+					alert("收藏至我的最愛成功!")
+				},
+				error: function(xhr, status) {
+					console.log(xhr.status);
+					console.log(status);
+					// alert("已收藏過!")
+					//已經是我的最愛 則移除
+					fav.removeClass("isFav")
+					fav.addClass("notFav")
+					fav.css("background-color", "#F28123")
+					fav.html('<i class="far fa-heart"></i> 加入我的最愛')
+					alert("移除成功!")
+				}
+			})	
+		}
 	</script>
 
 </body>

@@ -127,7 +127,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>個人食譜</p>
+						<p>詳細資訊</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
@@ -181,13 +181,6 @@
 											</span>
 										</p>
 									</h6>
-									<h6>步驟:
-										<p>
-											<span>
-												${lists.get(i).step}
-											</span>
-										</p>
-									</h6>
 									<a href="<c:url value='/Recipe/user/ViewYourRecipe2/${lists.get(i).id}'/>" class="cart-btn"><i class="fas fa-edit"></i> 修改</a>
 									<a href="javascript:void(0)" onclick="doDelete('${lists.get(i).id}', '${lists.get(i).foodName}')" class="cart-btn"><i class="fas fa-trash-alt"></i> 刪除</a>
 								</div>
@@ -212,22 +205,6 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-
-			<c:if test="${lists.size() != 0}">
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<div class="pagination-wrap">
-							<ul>
-								<li><a href="#">前一頁</a></li>
-								<li><a href="#">1</a></li>
-								<li><a class="active" href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">下一頁</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</c:if>
 		</div>
 	</div>
 	<!-- end products -->
@@ -330,31 +307,5 @@
 	<!-- sweetAlert js -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
-	<script>
-		$(function(){
-			userNameMain();
-		})
-		
-		function doDelete(id, name){
-			let isAccept = confirm("您確認要從食譜中移除 "+ name +" 嗎？")
-			if (isAccept) {
-				let url = "<c:url value='/Recipe/user/ViewYourRecipe2/'/>"+id;
-				
-				$.ajax({
-					url: url,
-					method: "delete",
-					success: function () {
-						Swal.fire({
-							position : 'center',
-							icon : 'success',
-							title : '刪除成功'
-						})
-						location.reload();
-					}
-				})
-			}
-		}
-	</script>
-
 </body>
 </html>
