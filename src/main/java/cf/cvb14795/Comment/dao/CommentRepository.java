@@ -13,13 +13,18 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	public List<Comment> findAllByOrderByIdDesc();
 
 	public List<Comment> findByUserCommentContainsAllIgnoreCase(String comment);
-
-//	public List<Comment> findAllByOrderByUserDateAsc();
-//	
-//	public List<Comment> findAllByOrderByUserDateDesc();
-//	
-//	public List<Comment> findAllByOrderByScoreAsc();
-//	
-//	public List<Comment> findAllByOrderByScoreDesc();
 	
+	public List<Comment> findByMapNameContainsAllIgnoreCase(String theMapName);
+	
+	public List<Comment> findByUserAccountContainsAllIgnoreCase(String theUserAccount);
+
+	public List<Comment> findAllByOrderByUserDateAsc();
+	
+	public List<Comment> findAllByOrderByUserDateDesc();
+	
+	public List<Comment> findAllByOrderByScoreAsc();
+
+	public List<Comment> findAllByOrderByScoreDesc();
+	
+	public List<Comment> findAllByOrderByUserLikesDesc();
 }

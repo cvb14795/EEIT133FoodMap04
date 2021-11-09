@@ -28,16 +28,42 @@ public class Comment {
 	@Column(name="user_date")
 	private String userDate;	
 	
+	@Column(name="user_likes")
+	private String userLikes;
+	
+	// 測試頁面用
+	
+	@Column(name="userAccount")
+	private String userAccount;
+	
+	@Column(name="mapname")
+	private String mapName;
+	
+	
+	
 	public Comment() {
 		
 	}
 
-	public Comment(int id, String userName, String score, String userComment, String userDate) {
+	public Comment(int id, String userName, String score, String userComment, String userDate, String userLikes) {
+		
 		this.id = id;
 		this.userName = userName;
 		this.score = score;
 		this.userComment = userComment;
 		this.userDate = userDate;
+		this.userLikes = userLikes;
+	}
+
+	
+
+	public Comment(String userName, String score, String userComment, String userDate, String userLikes) {
+		
+		this.userName = userName;
+		this.score = score;
+		this.userComment = userComment;
+		this.userDate = userDate;
+		this.userLikes = userLikes;
 	}
 
 	public Comment(String userName, String score, String userComment, String userDate) {
@@ -46,6 +72,21 @@ public class Comment {
 		this.userComment = userComment;
 		this.userDate = userDate;
 	}
+	
+	// 測試用
+	
+	public Comment(int id, String userName, String score, String userComment, String userDate, String userLikes,
+			String userAccount, String mapName) {
+		this.id = id;
+		this.userName = userName;
+		this.score = score;
+		this.userComment = userComment;
+		this.userDate = userDate;
+		this.userLikes = userLikes;
+		this.userAccount = userAccount;
+		this.mapName = mapName;
+	}
+	
 
 	public int getId() {
 		return id;
@@ -86,13 +127,42 @@ public class Comment {
 	public void setUserDate(String userDate) {
 		this.userDate = userDate;
 	}
+	
+	public String getUserLikes() {
+		return userLikes;
+	}
+
+	public void setUserLikes(String userLikes) {
+		this.userLikes = userLikes;
+	}
+	
+	// 測試頁面用
+	
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public String getMapName() {
+		return mapName;
+	}
+
+	public void setMapName(String mapName) {
+		this.mapName = mapName;
+	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", userName=" + userName + ", score=" + score + ", userComment=" + userComment
 				+ ", userDate=" + userDate + "]";
 	}
-	
+
 	
 	
 }

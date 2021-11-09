@@ -36,7 +36,7 @@ public class CommentController {
 		
 		theModel.addAttribute("comments", theComments);
 		
-		return "comments/list-comments";
+		return "comments/list-comments-user";
 	}
 	
 	@GetMapping("/showFormForAdd")
@@ -90,18 +90,99 @@ public class CommentController {
 		
 		theModel.addAttribute("comments", theComments);
 
-		return "/comments/list-comments";		
+		return "/comments/list-comments-user";		
+	}
+		
+	@GetMapping("/admin-list")
+	public String listCommentsAdmin(Model theModel) {
+	
+		List<Comment> theComments = commentService.findAll();
+		
+		theModel.addAttribute("comments", theComments);
+		
+		return "comments/list-comments-admin";
 	}
 	
-//	@GetMapping("/sorting")
-//	public String sortingComments(String sortingType, Model theModel) {
-//	
-//		List<Comment> theComments = commentService.sortBy(sortingType);
-//		
-//		theModel.addAttribute("comments", theComments);
-//		
-//		return "comments/list-comments";
-//	}
-//	
+	@GetMapping("/admin-delete/{commentId}")
+	public String deleteByAdmin(@PathVariable("commentId") int theId) {
+		
+		commentService.deleteById(theId);
+		
+		return "redirect:/comments/admin-list";
+		
+	}
+	
+	@GetMapping("/admin-search")
+	public String searchCommentsAdmin(@RequestParam("commentName") String theComment,
+			Model theModel) {
+
+		List<Comment> theComments = commentService.searchBy(theComment);
+
+		theModel.addAttribute("comments", theComments);
+
+		return "/comments/list-comments-admin";		
+	}
+	
+	@GetMapping("/sortByMapName")
+	public String searchMapName(@RequestParam("mapName") String theMapName,
+									Model theModel) {
+
+		List<Comment> theMapNames = commentService.searchByMapName(theMapName);
+		
+		theModel.addAttribute("comments", theMapNames);
+
+		return "/comments/list-comments-user";		
+	}
+	
+	@GetMapping("/sortByUserAccount")
+	public String searchUserAccount(@RequestParam("userAccount") String theUserAccount,
+									Model theModel) {
+
+		List<Comment> theUserAccounts = commentService.searchByUserAccount(theUserAccount);
+		
+		theModel.addAttribute("comments", theUserAccounts);
+
+		return "/comments/list-comments-show-userAccount";		
+	}
+	
+	@GetMapping("/sortByUserDate")
+	public String listCommentsByUserDate(Model theModel) {
+	
+		List<Comment> theComments = commentService.findAllByUserDate();
+		
+		theModel.addAttribute("comments", theComments);
+		
+		return "comments/list-comments-user";
+	}
+	
+	@GetMapping("/sortByUserScore")
+	public String listCommentsByUserScore(Model theModel) {
+	
+		List<Comment> theComments = commentService.findAllByUserScore();
+		
+		theModel.addAttribute("comments", theComments);
+		
+		return "comments/list-comments-user";
+	}
+	
+	@GetMapping("/sortByUserScoreAsc")
+	public String listCommentsByUserScoreAsc(Model theModel) {
+	
+		List<Comment> theComments = commentService.findAllByUserScoreAsc();
+		
+		theModel.addAttribute("comments", theComments);
+		
+		return "comments/list-comments-user";
+	}
+	
+	@GetMapping("/sortByUserLikes")
+	public String listCommentsByUserLikes(Model theModel) {
+	
+		List<Comment> theComments = commentService.findAllByUserLikes();
+		
+		theModel.addAttribute("comments", theComments);
+		
+		return "comments/list-comments-user";
+	}
 	
 }

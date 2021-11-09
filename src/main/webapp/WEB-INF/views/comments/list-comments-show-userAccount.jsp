@@ -1,9 +1,8 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>   
 <!DOCTYPE html>
 <html>
 
@@ -84,12 +83,6 @@
 <script src="<c:url value='/js/jquery-3.6.0.js"'/>"></script>
 <script src="<c:url value='/js/bootstrap.js'/>"></script>
 <script src="<c:url value='/js/lineLogin.js'/>"></script>
-
-<script type="text/javascript" src="<c:url value='/js/comment-validation.js'/>"></script>			
-<link rel="stylesheet" href="<c:url value='/css/jquery.rating.css'/>" />
-<script src='<c:url value="/js/jquery.js"/>'></script>
-<script src='<c:url value="/js/jquery.rating.js"/>'></script>
-
 <%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- aboutUs -->
 <!-- <script src="./js/aboutUs.js"></script> -->
@@ -217,66 +210,56 @@
 	<input type="hidden" id="isAdmin" value="${isAdmin}">
 	<input type="hidden" id="userName" value="${user}">
 	
-	<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row justify-content-center">
-    <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
 	
-		<h3>更新評論</h3>
-		<hr>
-		<div>
-		
-		<form:form action="" id="commentForm"
-					modelAttribute="comment" method="POST" name="commentForm"
-					onSubmit="return validateForm()">
-						 
-			<!-- Add hidden form field to handle update -->
-			<form:input type="hidden" path="id" />
-<%-- 			<input type="hidden" value="${#dates.format(now, 'yyyy-MM-dd')}" name="userDate" > --%>
-			<form:input type="hidden" path="userDate" id="userDate"/>
-			<input type="hidden" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${now}"/>' id="now"/>
-			<input type="hidden" name="userLikes" value="0">
-					
-			 
-			<form:input type="text" path="userName" id="name"
-					class="form-control mb-4 col-4" placeholder="姓名(1.不可空白 2.10字以內)" onblur="'checkname()'"/>
-			<span id="idsp"></span><br />
-			
-			<form:input type="text" path="mapName" 
-					class="form-control mb-4 col-4" placeholder="店家名稱"/>
-					
-			<form:input type="text" path="userAccount" 
-					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
-					
-			<!-- Ratting system -->
-			<label>評分(不可空白)：</label>	<br>
-			
-		 	 
-		 	 <div>
-			<input type="radio" name="score" value="1" class="star">
-            <input type="radio" name="score" value="2" class="star">
-            <input type="radio" name="score" value="3" class="star">
-            <input type="radio" name="score" value="4" class="star">
-            <input type="radio" name="score" value="5" class="star">
-            </div>
-		 	 
-		 	 <br><br><br>
-			
-			<input type="hidden" id="userComment" value="${comment.userComment}"/>
-			<form:textarea  id="commentarea" path="userComment" class="form-control input-sm" rows="5" placeholder="評論區(100字以內)" onblur="'checkcommentarea'" />
-			<span id="idsp3"></span><br /><br /><br />			
-			
-			<button type="submit" class="btn btn-info col-2">送出</button>
-		
-		</form:form >
-		
-		<hr>
-		<a href="<c:url value='/comments/list'/>">回到評論區</a>
-	
-	</div>
-	</div>
-	</div>
-	</div>
+<!-- another rating diagram -->
 
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
+
+			
+			<h2>會員評論</h2>
+			
+            <c:forEach items="${comments}" var="tempComment">
+            <div class="card">
+                <div class="row d-flex">
+                    <div class=""> <img class="profile-pic" src="https://randomuser.me/api/portraits/women/44.jpg"> </div>
+                    <div class="d-flex flex-column">
+                        <h3 class="text-left"><a href="sortByUserAccount?userAccount=${tempComment.userAccount}">${tempComment.userName}</a></h3>
+                        <div class="rating">
+                            <img src="<c:url value='/image/star${tempComment.score}.png'/>" />
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3">${tempComment.userDate}</p>
+                    </div>
+                </div>
+               	
+               	
+                
+                <div class="row text-left">
+                    <h4 class="blue-text mt-4"><a href="sortByMapName?mapName=${tempComment.mapName}">${tempComment.mapName}</a></h4>
+                </div>
+                
+                    <div class="row text-left">
+                    <p class="content">${tempComment.userComment}</p>
+               		</div>
+               		<br><br>
+               		<form:form action="" id="likesForm" method="POST">
+               		<div class="heart"></div><p class = "heartnum" id = heartnum>${tempComment.userLikes}</p>
+                   	<input type="hidden" name="userLikes" value="${tempComment.userLikes}">
+                	</form:form>
+            </div>
+        </c:forEach>
+  </div>
+  </div>
+  </div>      
+        
+        
+     
+
+<!-- ends here -->
+	
 	<!-- footer -->
 	<div class="footer-area">
 		<div class="container">
@@ -394,17 +377,89 @@
 		})
 	</script>
 	
-	<script type="text/javascript">
-		var userDate = $("#userDate").val()
-		var userComment = $("#userComment").val()
-		var date = '<fmt:formatDate pattern="yyyy-MM-dd" value="${now}"/>'
-		$("#userDate").val(date)
-		$("#commentarea").text(userComment)
-		$("#commentForm").attr("action", "<c:url value='/comments/save'/>")
+	<script>
+	var clicks = 0;
+	var userLikes = clicks;
+	var userLikes = $("#userLikes").val()
+	
+	<!-- like button js -->
+	
+	var hasClicked = false;
+	
+	
+		
+    function onClick() 
+    {
+        if(!hasClicked)
+        {
+           clicks += 1;
+           document.getElementById("heartnum").innerHTML = clicks;
+           hasClicked = true;
+           userLikes = clicks;
+           
+        }else {
+        	clicks -= 1;
+            document.getElementById("heartnum").innerHTML = clicks;
+        	hasClicked = false;
+        	userLikes = clicks;
+        }
+
+    }
+		
+	
+    </script>
+    
+    <script>
+    // 計算有幾則評論
+    
+    var numItems = $('.rating').length;
+    document.getElementById("rating").innerHTML ="共" + (numItems-1) + "則評論";
+    
+    </script>
+    
+    <script>
+	$(function() {
+		
+		var clicks = 0;
+		var userLikes = clicks;
+		var userLikes = $("#userLikes").val()
+		
+		<!-- like button js -->
+		
+		var hasClicked = false;
+		
+		  $(".heart").on("click", function() {
+			  if(!hasClicked)
+		        {
+				  clicks += 1;
+				  document.getElementById("heartnum").innerHTML = clicks;
+				  hasClicked = true;
+				  userLikes = clicks;
+		           $(this).toggleClass("is-active");
+		           
+		        }else {
+		        	 clicks -= 1;
+		        	 document.getElementById("heartnum").innerHTML = clicks;
+		        	 hasClicked = false;
+		        	 userLikes = clicks;
+		        	 $(this).toggleClass("is-active");
+		        }
+		   
+		  });
+		});
+	$("#likesForm").attr("action", "<c:url value='/comments/save'/>")
 	</script>
 	
 	
+	<script>
+	function
+	 $("#searchForm").attr("action", "<c:url value='/comments/search'/>")
 	</script>
+	
+	<script>
+	 $("#searchMapName").attr("action", "<c:url value='/comments/sortByMapName'/>")
+	</script>
+	
 	<!-- count down -->
 	<script src="<c:url value='/js/user/js/jquery.countdown.js'/>"></script>
 	<!-- isotope -->
@@ -428,10 +483,6 @@
 	
 </body>
 </html>
-
-
-
-
 
 
 
