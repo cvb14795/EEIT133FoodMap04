@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -98,9 +100,19 @@ public class IndexController {
 		return "HomePage/User/aboutUs";
 	}
 	
+	@GetMapping("/loginAlert")
+	private String alertToLoginPage() {
+		return "HomePage/loginAlert";
+	}
+	
 	@ModelAttribute
 	private void setUserAndAdmin(Model model, HttpServletRequest request) {
 		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
 		model.addAttribute("isAdmin", false);
+	}
+	
+	@ExceptionHandler(MissingRequestCookieException.class)
+	private String handleMissingCookieError(Model model) {
+		return "redirect:/loginAlert";
 	}
 }

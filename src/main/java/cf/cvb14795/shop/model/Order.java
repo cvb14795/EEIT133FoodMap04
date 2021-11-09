@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  */
 //單件商品(某一件貨)->訂單明細(貨*數量-折扣)->*單筆訂單(使用者)*
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
 
 	@Id
@@ -34,7 +35,7 @@ public class Order {
 	//下單日期
 	@Column
 	private String orderDate;
-	//狀態(已下單、已結帳、已發貨、已付款、已取消)
+	//狀態(已下單未付款、已發貨、已付款、已取消)
 	@Column
 	private String status;
 	//發貨日期
@@ -46,11 +47,27 @@ public class Order {
 	//優惠券代碼
 	@Column
 	private String coupon; 
-	
-	
-	@OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+	@Column
+	private Integer shippingFee;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order",cascade = CascadeType.ALL)
 	Set<OrderItem> orderItemList = new LinkedHashSet<>();
 
+	public Order() {
+	}
+
+	public Order(String memberAccount, Integer totalPrice, String shippingAddress, String orderDate, String status,
+			String shippingDate, boolean cancelFlag, String coupon, Set<OrderItem> orderItemList, Integer shippingFee) {
+		this.memberAccount = memberAccount;
+		this.totalPrice = totalPrice;
+		this.shippingAddress = shippingAddress;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.shippingDate = shippingDate;
+		this.cancelFlag = cancelFlag;
+		this.coupon = coupon;
+		this.orderItemList = orderItemList;
+		this.shippingFee = shippingFee;
+	}
 
 	public String getOrderId() {
 		return orderId;
@@ -148,6 +165,14 @@ public class Order {
 
 	public void setOrderItemList(Set<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
+	}
+
+	public Integer getShippingFee() {
+		return shippingFee;
+	}
+
+	public void setShippingFee(Integer shippingFee) {
+		this.shippingFee = shippingFee;
 	}
 	
 	

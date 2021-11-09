@@ -14,14 +14,14 @@ public interface IOrderService {
 	
 	 List<Order> findAll();
 	
-	 Optional<Order> findByOrderId(Integer id);
-	
+	 Optional<Order> findByOrderId(String trackNo);
+	 
 	 Order findByMemberAccount(String memberAccount);
 	
 	//修改訂單
 	 void reviseOrder(Order order);
 	
-	 void deleteById(Integer id);
+	 void deleteById(String trackNo);
 
 	
 }

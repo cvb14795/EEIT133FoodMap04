@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 /**
  * @author cvb14795
  *
@@ -31,17 +34,23 @@ public class OrderItem {
 	private Integer qty;
 	//小計
 	@Column
-	private Double subTotal;	
+	private Integer subTotal;	
 	@Transient
 	private Item item;
 	@Column
 	private Double discount = 1.0;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="orderId")
+	@JoinColumn(name="orderFkId",insertable = false, updatable = false)
 	private Order order;
+	@GenericGenerator(
+		name = "generator",
+		strategy = "foreign",
+		parameters = @Parameter(name="property", value = "order")
+	)
+	@GeneratedValue(generator = "generator")
+	private String orderFkId;
 	
-	
-	public OrderItem(Integer qty, Double subTotal, Item item, Double discount, Order order) {
+	public OrderItem(Integer qty, Integer subTotal, Item item, Double discount, Order order) {
 		this.qty = qty;
 		this.subTotal = subTotal;
 		this.item = item;
@@ -73,10 +82,10 @@ public class OrderItem {
 		this.qty = qty;
 	}
 
-	public Double getSubTotal() {
+	public Integer getSubTotal() {
 		return subTotal;
 	}
-	public void setSubTotal(Double subTotal) {
+	public void setSubTotal(Integer subTotal) {
 		this.subTotal = subTotal;
 	}
 	public Order getOrder() {

@@ -391,7 +391,7 @@ legend {
 				if (result.isConfirmed) {
 					$.ajax({
 						type:"post",
-						url:"<c:url value='/Shop/Item/AddItem'/>",
+						url:"<c:url value='/Shop/Item/Add'/>",
 						data: formData,
 		// 				data: json,
 		// 				dataType:"json",
@@ -424,12 +424,12 @@ legend {
 								title: '已新增成功！',
 								icon: 'success',
 								html: html1,
-								imageUrl: "<c:url value='/Shop/Item/'/>"+jsonData.id+"/photo",
+								imageUrl: img,
 								imageWidth: 400,
 								imageHeight: 200,
 							}).then((result) => {
 								if (result.isConfirmed) {
-									location.href = "<c:url value='/Shop'/>"
+									location.href = "<c:url value='/Shop/'/>"
 								}
 							})
 						},
