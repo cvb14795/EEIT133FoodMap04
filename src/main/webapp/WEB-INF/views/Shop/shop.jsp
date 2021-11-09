@@ -137,14 +137,14 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">Our</span> Products</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<h3><span class="orange-text">美食</span> 商城</h3>
+						<p>許多美食任挑任選</p>
 					</div>
 				</div>
 			</div>
 
+			<a href="<c:url value='/Shop/Item/Add'/>"><button>新增商品</button></a>
 			<div class="row">
-				<a href="<c:url value='/Shop/Item/Add'/>"><button>新增商品</button></a>
 <!-- 				<div class="col-lg-4 col-md-6 text-center"> -->
 <!-- 					<div class="single-product-item"> -->
 <!-- 						<div class="product-image"> -->
@@ -161,7 +161,7 @@
 						<div class="single-product-item">
 							<div class="product-image">
 								<a href="<c:url value='/Shop/Item/${item.id}'/>">
-									<img src="<c:url value='/Shop/Item/${item.id}/Photo'/>" alt="">
+									<img src="<c:url value='/Shop/Item/photo/${item.id}'/>" alt="">
 								</a>
 							</div>
 							<h3><a href="<c:url value='/Shop/Item/${id}'/>">${item.name}</a></h3>
@@ -288,7 +288,7 @@
 		})
 		
 		function addTocart(id){
-			var url = "<c:url value='/Shop/AddtoCart/'/>"+id;
+			var url = "<c:url value='/Shop/Cart/Add/'/>"+id;
 			$.ajax({
 				url: url,
 				method: "post",

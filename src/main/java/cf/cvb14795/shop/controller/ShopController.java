@@ -1,8 +1,10 @@
 package cf.cvb14795.shop.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -16,12 +18,19 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingRequestCookieException;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +54,8 @@ public class ShopController {
 	private String prefix = "Shop/";
 	private OrderStatusUtil orderStatus;
 	Map<Integer, OrderItem> cart = new LinkedHashMap<>();
+	// 運費先固定60 有折價再扣
+	private Integer shippingFee = 60;
 	
 	IShopService shopService;
 	IOrderService orderService;
@@ -60,12 +71,17 @@ public class ShopController {
 		this.orderService = orderService;
 	}
 	
-	/* 商城首頁 */
-	@GetMapping("/")
-	public String index(Model model) {
+	@ModelAttribute
+	public void initAttr(Model model) {
 		List<Item> items = shopService.findAll();
 		model.addAttribute("items", items);
 		model.addAttribute("cart", cart);
+		model.addAttribute("shippingFee", shippingFee);
+	}
+	
+	/* 商城首頁 */
+	@GetMapping({"/", ""})
+	public String index() {
 		return prefix+"shop";
 	}
 	
@@ -73,12 +89,12 @@ public class ShopController {
 	@GetMapping("/Cart")
 	public String cart(Model model) {
 		model.addAttribute("entrySet", cart.entrySet().iterator());
-		model.addAttribute("subTotal", getSubtotal());
+		model.addAttribute("total", getTotal());
 		return prefix+"cart";
 	}
 	
 	/* 加進購物車 */
-	@PostMapping("/AddtoCart/{idStr}")
+	@PostMapping("/Cart/Add/{idStr}")
 	public ResponseEntity<HttpStatus> addItem(
 			Model model,
 			@PathVariable String idStr,
@@ -89,10 +105,14 @@ public class ShopController {
 			if (opt.isPresent()) {
 				OrderItem orderItem = new OrderItem();
 				if ( cart.get(id) == null ) {
-					orderItem.setItem(opt.get());
-					//預設無折扣(尚未使用優惠券)
-					orderItem.setDiscount(1.0);
+					Item item = opt.get();
+					orderItem.setItem(item);
+					// 預設無折扣(尚未使用優惠券)
+					// 85折=0.85, 9折=0.9, etc...
+					Double discount = 1.0;
+					orderItem.setDiscount(discount);
 					orderItem.setQty(qty);
+					orderItem.setSubTotal(qty * item.getPrice());
 					cart.put(id, orderItem);
 				} else {
 			        // 如果客戶在伺服器端已有此項商品的資料，則客戶『加購』此項商品
@@ -111,7 +131,8 @@ public class ShopController {
 		}
 	}
 	
-	@GetMapping("/RemoveFromCart/{idStr}")
+	/* 移除購物車內某商品*/
+	@GetMapping("/Cart/Remove/{idStr}")
 	public ResponseEntity<HttpStatus> removeCartItem(
 			Model model,
 			@PathVariable String idStr) {
@@ -129,52 +150,100 @@ public class ShopController {
 		}
 	}
 	
+	/* 更新購物車小計&總價 */
+	@PostMapping("/Cart/update")
+	@ResponseBody
+	public ResponseEntity<String> updateCart(
+			@RequestBody String json
+		) throws IOException {
+		
+		System.out.println(json);
+		JSONObject obj = new JSONObject(json);
+		
+		OrderItem orderItem = cart.get(obj.getInt("orderItemId"));
+		orderItem.setQty(obj.getInt("qty"));
+		
+		//計算總計 其中會重新計算到各商品的小計
+		//因此不用再setSubTotal
+		obj = new JSONObject();
+		obj.append("subTotal", orderItem.getSubTotal());
+		obj.append("total", getTotal());
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+
+		return ResponseEntity.ok().headers(responseHeaders).body(obj.toString());
+	}
+	
 	/* 結帳&回調 */
 	@PostMapping("/listenPayResult")
 	@ResponseBody
-	private String listenPayResult(@RequestBody String body, HttpServletRequest request) throws UnsupportedEncodingException {
+	private String listenPayResult(
+			@RequestBody String body,
+			@RequestParam("RtnMsg") String rtnMsg,
+			@RequestParam("CheckMacValue") String checkMacValue,
+			@RequestParam("RtnCode") String rtnCode,
+			@RequestParam("MerchantTradeNo") String merchantTradeNo,
+			@RequestParam("PaymentDate") String paymentDate,
+			@RequestParam("TradeAmt") String tradeAmt,
+			@RequestParam("TradeDate") String tradeDate,
+			HttpServletRequest request) throws UnsupportedEncodingException {
 		System.out.println("listenPayResult");
-		System.out.println(body);
-		Iterator<Entry<String, String[]>> it = request.getParameterMap().entrySet().iterator();
 		
 		System.out.println("===== 以下為綠界付款成功後回調 =====");
-		while (it.hasNext()) {
-			Entry<String, String[]> entry = it.next();
-			String key = entry.getKey();
-			String value = entry.getValue()[0];
-			
-			switch (key) {
-			case "PaymentDate":
-				
-				break;
-
-			case "RtnMsg":
-				Hashtable<String, String> dict = new Hashtable<String, String>();
-				dict.put("CheckMacValue", value);
-				System.out.println(orderStatus.checkMacValue(dict)); 
-				break;
-			
-			case "RtnCode":
-				// 狀態碼為1表示交易成功 其餘表示失敗
-				break;
-			}
-			
-			System.out.println("key:"+key);
-			System.out.println("value:"+value+"\n");
+		System.out.println("訂單編號:"+merchantTradeNo);
+		System.out.println("訂單狀態:"+rtnMsg);
+		System.out.println("付款日期:"+paymentDate);
+		System.out.println("交易金額:"+tradeAmt);
+		System.out.println("交易發生日期:"+tradeDate);
+		
+		System.out.println(body);
+		Order order = new Order();
+		Optional<Order> opt = orderService.findByOrderId(merchantTradeNo);
+		if (opt.isPresent()) {
+			order = opt.get();
+			order.setStatus("已付款");
+			System.out.println("訂單狀態更新為: 已付款");
+			//付款日期
+			order.setShippingDate(paymentDate);	
+			//更新訂單
+			orderService.addOrder(order);
 		}
+	
+		Hashtable<String, String> dict = new Hashtable<String, String>();
+		dict.put("CheckMacValue", checkMacValue);
+		System.out.println(orderStatus.checkMacValue(dict)); 
+
 		System.out.println("===== 以上為綠界付款成功後回調 =====");
+		
 		return "1|OK";
+	}
+	
+	@PostMapping("applyCoupon")
+	private ResponseEntity<HttpStatus> applyCoupon(@RequestParam("coupon") String coupon){
+		if (true) {
+			return new ResponseEntity(HttpStatus.OK);
+		} else {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		
 	}
 	
 	@GetMapping("checkout")
 	@ResponseBody
-	private String checkOut(
+	private String doCheckOut(
 			Model model,
+			@CookieValue("user") String user,
 			HttpServletRequest request, HttpServletResponse response) throws MalformedURLException {
 		
-		AllInOne all = new AllInOne("");
 		Order order = new Order();
+		order.setMemberAccount(user);
+		order.setShippingFee(shippingFee);
+		order.setCoupon("");
+		order.setStatus("未付款");
 		
+		AllInOne all = new AllInOne("");
 		orderStatus = new OrderStatusUtil(all);
 		AioCheckOutALL obj = orderStatus.getCheckOutObj();
 		
@@ -191,21 +260,22 @@ public class ShopController {
 		// 交易發生日期
 		String now = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
 		obj.setMerchantTradeDate(now);
-		order.setShippingDate(now);
+		//下單日期(付款前)
+		order.setOrderDate(now);
 		// 交易金額（不是數量）
 		// 必須大於10(不含10)
-		obj.setTotalAmount(String.valueOf(getSubtotal()));
-		order.setTotalPrice(getSubtotal());
+		obj.setTotalAmount(String.valueOf( getTotal()+shippingFee ));
+		order.setTotalPrice(getTotal());
 		//交易描述
 		obj.setTradeDesc("test Description");
 			
+		orderService.addOrder(order);
 		Iterator<OrderItem> it = cart.values().iterator();
 		while (it.hasNext()) {
 			OrderItem orderItem = (OrderItem) it.next();
 			orderItem.setOrder(order);
 			orderService.addOrderItem(orderItem);
 		}
-		orderService.addOrder(order);
 		
 		// 商品明細
 		// 格式: {商品名1}{OO元}x{數量n1}#{商品名2}{OO元}x{數量n2}#...
@@ -213,15 +283,15 @@ public class ShopController {
 		obj.setItemName("想食What商城商品一批X1");
 		
 		// http://localhost:8080/FoodMap04/
-		String baseUrl = util.ParseUrlPath.getFullContextPath(request)+request.getContextPath()+"/";
+		String baseUrl = util.ParseUrlPath.getFullContextPath(request)+"/";
 		
 		// 發送付款資訊的網址(POST)
 		System.out.println("base網址:"+baseUrl+prefix);
-//		obj.setReturnURL("https://b283-1-200-32-88.ngrok.io/FoodMap04/Cart/listenPayResult");
-		obj.setReturnURL(baseUrl+prefix+"/callback");
+		obj.setReturnURL("https://fcdb-140-115-236-39.ngrok.io/FoodMap04/Shop/listenPayResult");
+//		obj.setReturnURL(baseUrl+prefix+"listenPayResult");
 		obj.setNeedExtraPaidInfo("N");
 		// 付款成功後將用戶導向的網址（返回商店）
-		obj.setClientBackURL(baseUrl); // 檢查ContextPath是否為/結尾
+		obj.setClientBackURL(baseUrl+prefix+""); // 檢查ContextPath是否為/結尾
 //		obj.setNeedExtraPaidInfo("N");
 		String form = orderStatus.getECPayForm();
 		
@@ -231,18 +301,27 @@ public class ShopController {
 	}
 	
 	//計算購物車內所有商品的合計金額(每項商品的單價*數量的總和)
-	public Integer getSubtotal(){
-		Double subTotal = 0.0 ;
+	public Integer getTotal(){
+		Integer total = 0 ;
 		Set<Integer> set = cart.keySet();
 		for(int n : set){
 			OrderItem orderItem = cart.get(n);
 			int price    = orderItem.getItem().getPrice();
 			double discount = orderItem.getDiscount();
 			int qty      = orderItem.getQty();
-			subTotal +=  price * discount * qty;
-			System.out.println("小計:"+price * discount * qty);
+			int subTotal = Long.valueOf(Math.round(price * discount * qty)).intValue();
+			orderItem.setSubTotal(subTotal);
+			total += subTotal;
+			System.out.println("小計 "+ orderItem.getItem().getName() +":"+subTotal);
 		}
-		return subTotal.intValue();
+		System.out.println("總計:"+total);
+		//四捨五入折扣後的金額
+		return total;
+	}
+	
+	@ExceptionHandler(MissingRequestCookieException.class)
+	private String handleMissingCookieError(Model model) {
+		return "redirect:/loginAlert";
 	}
 
 }

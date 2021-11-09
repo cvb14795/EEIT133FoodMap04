@@ -150,17 +150,32 @@
 							</thead>
 						
 							<tbody>
-								<c:forEach items="${entrySet}" var="entry" varStatus="status">
-									<input type="hidden" value="${entry.getKey()}"/>
-									<tr class="table-body-row">
-										<td class="product-remove"><a href="javascript:void(0)" onclick="removeFromCart(${entry.getKey()}, ${status.index})"><i class="far fa-window-close"></i></a></td>
-										<td class="product-image"><img src="<c:url value='/Shop/Item/${entry.getValue().item.id}/photo'/>" alt=""></td>
-										<td class="product-name">${entry.getValue().item.name}</td>
-										<td class="product-price">$${entry.getValue().item.price}</td>
-										<td class="product-quantity"><input type="number" placeholder="0" value="${entry.getValue().qty}"></td>
-										<td class="product-total">1</td>
-									</tr>
-								</c:forEach>
+								<c:choose>
+									<c:when test="${cart.size() > 0}">
+										<c:forEach items="${entrySet}" var="entry" varStatus="status">
+											<input type="hidden" value="${entry.getKey()}"/>
+											<tr class="table-body-row">
+												<input class="product-id" type="hidden" value="${entry.getValue().item.id}" >
+												<td class="product-remove"><a href="javascript:void(0)" onclick="removeFromCart(${entry.getKey()}, ${status.index})"><i class="far fa-window-close"></i></a></td>
+												<td class="product-image"><img src="<c:url value='/Shop/Item/photo/${entry.getValue().item.id}'/>" alt=""></td>
+												<td class="product-name">${entry.getValue().item.name}</td>
+												<td class="product-price">$${entry.getValue().item.price}</td>
+												<td class="product-quantity"><input type="number" placeholder="0" value="${entry.getValue().qty}"></td>
+												<td class="product-total">${entry.getValue().subTotal}</td>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="6">
+												<span style="text-align:center;font-weight: bold;font-size: large;">您尚未購買任何商品！</span>
+												<a href="<c:url value='/Shop'/>">
+	                                                <span style="font-size: large;">去看看 Go <i class="fas fa-arrow-right"></i></span>
+	                                            </a>
+											</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>
@@ -178,30 +193,31 @@
 							<tbody>
 								<tr class="total-data">
 									<td><strong>小計: </strong></td>
-									<td>${subTotal}</td>
+									<td id="subTotal">$${total}</td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>運費: </strong></td>
-									<td>$0</td>
+									<td id="shippingFee">$${shippingFee}</td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>總計: </strong></td>
-									<td>${subTotal}</td>
+									<td id="total">$${total + shippingFee}</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="cart-buttons">
-							<a href="cart.html" class="boxed-btn">Update Cart</a>
-							<a href="checkout.html" class="boxed-btn black">Check Out</a>
+<!-- 							<a href="cart.html" class="boxed-btn">更新</a> -->
+							<a href="<c:url value='/Shop/checkout'/>" class="boxed-btn black">結帳</a>
 						</div>
 					</div>
 
 					<div class="coupon-section">
-						<h3>Apply Coupon</h3>
+						<h3>您有優惠券嗎？</h3>
 						<div class="coupon-form-wrap">
-							<form action="index.html">
-								<p><input type="text" placeholder="Coupon"></p>
-								<p><input type="submit" value="Apply"></p>
+							<form>
+								<p><input type="text" id="coupon" name="coupon" placeholder="輸入優惠券代碼"></p>
+								<p id="couponStatusMsg"></p>
+								<p><a href="javascript:void(0)" onclick="useCoupon()" class="boxed-btn black">使用優惠券</a></p>
 							</form>
 						</div>
 					</div>
@@ -313,8 +329,38 @@
 			userNameMain();
 		})
 		
+		$(".product-quantity input").on("blur", function (e) {
+			var qtyElem = e.currentTarget;
+			var orderItemIdElem = qtyElem.parentElement.parentElement.querySelector(".product-id");
+			var orderItemSubTotalElem = qtyElem.parentElement.parentElement.querySelector(".product-total");
+			var data = {
+				qty: qtyElem.value,
+				orderItemId: orderItemIdElem.value,
+			};
+			console.log(data)
+			console.log(JSON.stringify(data))
+			$.ajax({
+				url: "<c:url value='/Shop/Cart/update/'/>",
+				method: "post",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json; charset=UTF-8',
+				success: function (data, textStatus, jqXHR) {
+					console.log(data);
+					orderItemSubTotalElem.innerText = data.subTotal;
+					//小計
+					$("#subTotal").text(data.total)
+					//總計
+					$("#total").text(data.total)
+				}
+			})
+		})
+					//運費（如有免運優惠券需修改）
+// 					$("#shippingFee").text("0")
+		
+		
 		function removeFromCart(id, index){
-			var url = "<c:url value='/Shop/RemoveFromCart/'/>"+id;
+			var url = "<c:url value='/Shop/Cart/Remove/'/>"+id;
 			$.ajax({
 				url: url,
 				method: "get",
@@ -326,6 +372,22 @@
 					console.log("移除失敗")
 				}
 			})		
+		}
+		
+		function useCoupon() {
+			$.ajax({
+				url: "<c:url value='/Shop/applyCoupon'/>",
+				method: "post",
+				data: {coupon: $("#coupon").val()},
+				success: function () {
+					console.log("使用優惠券"+ $("#coupon").val() + "成功！");
+					$("#couponStatusMsg").text("使用優惠: "+ "" +"成功!");
+				},
+				error: function (e) {
+					console.log(e.statusText);
+					$("#couponStatusMsg").text("此優惠券無效，可能已過期或輸入了不正確的優惠碼!");
+				}
+			})
 		}
 	</script>
 

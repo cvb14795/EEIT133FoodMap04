@@ -58,18 +58,20 @@ public class ItemController {
 	@PostMapping("/Add")
 	public ResponseEntity<String> doAddItem(
 			Model model,
-			@RequestParam String itemName,
-			@RequestParam String itemDescription,
+			@RequestParam String name,
+			@RequestParam String description,
 			@RequestParam("price") String priceStr,
 			@RequestParam MultipartFile photo) throws IOException {
 		
+		System.out.println("商品名："+name);
+		System.out.println("價錢："+priceStr);
 		Integer price;
 		try {
 			price = Integer.valueOf(priceStr);
 		} catch (NumberFormatException e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
-		Item item = new Item(itemName,itemDescription,price,photo.getBytes());
+		Item item = new Item(name,description,price,photo.getBytes());
 		System.out.println(item.toString());
 		
 		shopService.addItem(item);
@@ -77,7 +79,7 @@ public class ItemController {
 	}
 	
 	
-	@GetMapping("/{id}/photo")
+	@GetMapping("/photo/{id}")
     @ResponseBody
     public ResponseEntity<?> getPicture(HttpServletResponse resp, @PathVariable String id) {
         Optional<Item> itemOpt = shopService.findById(Integer.valueOf(id));

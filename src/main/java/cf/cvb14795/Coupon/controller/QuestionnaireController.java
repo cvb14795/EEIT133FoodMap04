@@ -69,8 +69,8 @@ public class QuestionnaireController {
 			Optional<Member> m = mService.selectMemberByAccount(account);
 			// 產生優惠券代碼(預設為6位數)
 //			String couponCode = couponUsage.generateCouponCode(6);
-			String radomCode = couponUsage.generateCouponCode(3);
-			String couponCode = "QNCP15"+radomCode;
+//			String radomCode = couponUsage.generateCouponCode(3);
+			String couponCode = "QNCP15";
 			// 發送優惠券Email
 			couponUsage.sendMail(m, couponCode);
 

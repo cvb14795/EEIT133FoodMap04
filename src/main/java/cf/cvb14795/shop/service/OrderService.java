@@ -28,7 +28,6 @@ public class OrderService implements IOrderService{
 	public void addOrder(Order order) {
 		// TODO Auto-generated method stub
 		orderRepository.save(order);
-		
 	}
 
 	@Override
@@ -37,16 +36,17 @@ public class OrderService implements IOrderService{
 	}
 	
 	@Override
+	public Optional<Order> findByOrderId(String trackNo) {
+		// TODO Auto-generated method stub
+		return orderRepository.findById(trackNo);
+	}
+
+	@Override
 	public List<Order> findAll() {
 		// TODO Auto-generated method stub
 		return orderRepository.findAll();
 	}
 
-	@Override
-	public Optional<Order> findByOrderId(Integer id) {
-		// TODO Auto-generated method stub
-		return orderRepository.findById(id);
-	}
 
 	@Override
 	public Order findByMemberAccount(String memberAccount) {
@@ -60,10 +60,11 @@ public class OrderService implements IOrderService{
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteById(String trackNo) {
 		// TODO Auto-generated method stub
-		orderRepository.deleteById(id);
+		orderRepository.deleteById(trackNo);
 	}
+
 
 	
 	
