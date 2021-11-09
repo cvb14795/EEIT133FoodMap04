@@ -247,9 +247,27 @@
 						</td>
 					</tr>
 					<tr>
+						<td align='right'>是否為折數折價券(1:是, 0:否)：<br>&nbsp;</td>
+						<td><form:input path="isdiscount" size="25" /><br>&nbsp;
+							<form:errors path="isdiscount" cssClass="error" />
+						</td>
+					</tr>
+					<tr>
 						<td align='right'>折數：<br>&nbsp;</td>
 						<td><form:input path="discount"  size="25" /><br>&nbsp;
 							<form:errors path="discount" cssClass="error" />
+						</td>
+					</tr>
+					<tr>
+						<td align='right'>是否為扣減折價券(1:是, 0:否)：<br>&nbsp;</td>
+						<td><form:input path="isdeduct" size="25" /><br>&nbsp;
+							<form:errors path="isdeduct" cssClass="error" />
+						</td>
+					</tr>
+					<tr>
+						<td align='right'>扣除金額：<br>&nbsp;</td>
+						<td><form:input path="deduct"  size="25" /><br>&nbsp;
+							<form:errors path="deduct" cssClass="error" />
 						</td>
 					</tr>
 					<tr>

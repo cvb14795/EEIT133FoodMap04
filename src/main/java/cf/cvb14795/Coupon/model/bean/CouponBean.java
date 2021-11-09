@@ -22,15 +22,17 @@ public class CouponBean {
 	private String description;
 	private String status;
 	private int price_floor;
-	private int discount;
+	private double discount;
+	private int isdiscount;
+	private int isdeduct;
+	private int deduct;
 	
 	public CouponBean() {
 		
 	}
 
-
 	public CouponBean(String id, String name, String start_time, String end_time, String value, String description,
-			String status, int price_floor, int discount) {
+			String status, int price_floor, double discount, int isdiscount, int isdeduct, int deduct) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,10 +43,13 @@ public class CouponBean {
 		this.status = status;
 		this.price_floor = price_floor;
 		this.discount = discount;
+		this.isdiscount = isdiscount;
+		this.isdeduct = isdeduct;
+		this.deduct = deduct;
 	}
 
 
-
+	
 
 	public String getId() {
 		return id;
@@ -101,37 +106,57 @@ public class CouponBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 
 	public int getPrice_floor() {
 		return price_floor;
 	}
 
-
 	public void setPrice_floor(int price_floor) {
 		this.price_floor = price_floor;
 	}
 
-
-	public int getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
-
-	public void setDiscount(int discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 
+	public int getIsdiscount() {
+		return isdiscount;
+	}
+
+	public void setIsdiscount(int isdiscount) {
+		this.isdiscount = isdiscount;
+	}
+
+	public int getIsdeduct() {
+		return isdeduct;
+	}
+
+	public void setIsdeduct(int isdeduct) {
+		this.isdeduct = isdeduct;
+	}
+
+	public int getDeduct() {
+		return deduct;
+	}
+
+	public void setDeduct(int deduct) {
+		this.deduct = deduct;
+	}
 
 	@Override
 	public String toString() {
 		return "CouponBean [id=" + id + ", name=" + name + ", start_time=" + start_time + ", end_time=" + end_time
 				+ ", value=" + value + ", description=" + description + ", status=" + status + ", price_floor="
-				+ price_floor + ", discount=" + discount + "]";
+				+ price_floor + ", discount=" + discount + ", isdiscount=" + isdiscount + ", isdeduct=" + isdeduct
+				+ ", deduct=" + deduct + "]";
 	}
 
-
+	
+	
 	
 	
 }
