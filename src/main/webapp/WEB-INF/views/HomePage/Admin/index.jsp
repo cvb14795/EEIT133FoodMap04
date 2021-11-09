@@ -94,7 +94,7 @@
                         <a href="./Event/eventjava"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
-                        <a href="./Comment/CommentControllerServlet"> <i class="menu-icon ti-email"></i>評論專區 </a>
+                        <a href="./comments/admin-list"> <i class="menu-icon ti-email"></i>評論專區 </a>
                     </li>
                     <li>
                         <a href="./Recipe/admin"> <i class="menu-icon ti-email"></i>營養資訊 </a>

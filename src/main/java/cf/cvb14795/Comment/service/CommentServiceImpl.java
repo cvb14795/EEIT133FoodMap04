@@ -65,32 +65,50 @@ public class CommentServiceImpl implements CommentService {
 		return results;
 	}
 	
-//	@Override
-//	public List<Comment> sortBy(int theSortField) {
-//		List<Comment> results = null;
-//		
-//		switch (sortingType) {
-//		case "high":
-//			results = commentRepository.findAllByOrderByScoreDesc();
-//			break;
-//			
-//		case "lowToHigh":
-//			results = commentRepository.findAllByOrderByScoreAsc();
-//			break;
-//			
-//		case "new":
-//			results = commentRepository.findAllByOrderByUserDateDesc();
-//			break;
-//			
-//		case "oldToNew":
-//			results = commentRepository.findAllByOrderByUserDateAsc();
-//			break;
-//			
-//		default:
-//			results = commentRepository.findAllByOrderByIdDesc();
-//		}
-//		
-//		return results;
-//	}
+	@Override
+	public List<Comment> searchByMapName(String theMapName) {
+		
+		List<Comment> results = null;
+				
+		if (theMapName != null && (theMapName.trim().length() > 0)) {
+			results = commentRepository.findByMapNameContainsAllIgnoreCase(theMapName);
+		}
+		else {
+			results = findAll();
+		}
+		
+		
+		return results;
+	}
+
+	@Override
+	public List<Comment> searchByUserAccount(String theUserAccount) {
+		List<Comment> results = null;
+		
+		results = commentRepository.findByUserAccountContainsAllIgnoreCase(theUserAccount);
+		
+		return results;
+	}
+
+	@Override
+	public List<Comment> findAllByUserDate() {
+		return commentRepository.findAllByOrderByUserDateDesc();
+	}
+	
+	@Override
+	public List<Comment> findAllByUserScore() {
+		return commentRepository.findAllByOrderByScoreDesc();
+	}
+	
+	@Override
+	public List<Comment> findAllByUserScoreAsc() {
+		return commentRepository.findAllByOrderByScoreAsc();
+	}
+	
+	@Override
+	public List<Comment> findAllByUserLikes() {
+		return commentRepository.findAllByOrderByUserLikesDesc();
+	}
+
 
 }

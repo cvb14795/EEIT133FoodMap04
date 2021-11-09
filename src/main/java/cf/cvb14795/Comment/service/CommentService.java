@@ -15,7 +15,18 @@ public interface CommentService {
 	public void deleteById(int theId);
 
 	public List<Comment> searchBy(String theComment);
+	
+	public List<Comment> searchByMapName(String theMapName);
 
-//	public List<Comment> sortBy(String sortingType);
+	public List<Comment> searchByUserAccount(String theUserAccount);
+
+	public List<Comment> findAllByUserDate();
+
+	public List<Comment> findAllByUserScore();
+
+	public List<Comment> findAllByUserScoreAsc();
+
+	public List<Comment> findAllByUserLikes();
+
 	
 }
