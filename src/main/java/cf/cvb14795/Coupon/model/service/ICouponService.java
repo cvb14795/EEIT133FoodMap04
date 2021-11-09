@@ -7,13 +7,13 @@ import cf.cvb14795.Coupon.model.bean.CouponBean;
 
 public interface ICouponService {
 
-	Optional<CouponBean> getCopounById(int id);    //查
+	CouponBean getCouponById(String id);    //依code查詢單一折價券
 
-	List<CouponBean> getCoupons();
+	List<CouponBean> getCoupons();        //查全部折價券
 
-	CouponBean save(CouponBean bean);       //新
+	CouponBean addNewData(CouponBean bean);       //新
 	
-	CouponBean updateCustomer(CouponBean bean);  //改
+	CouponBean updateCoupon(CouponBean bean);  //改
 
-	void deleteCustomerByPrimaryKey(int key);  //刪
+	void deleteCouponById(CouponBean bean);  //刪
 }

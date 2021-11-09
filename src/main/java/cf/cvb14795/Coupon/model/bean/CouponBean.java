@@ -1,52 +1,46 @@
 package cf.cvb14795.Coupon.model.bean;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import org.hibernate.annotations.Type;
 
-@Component
-@Entity @Table(name = "coupon")
+@Entity
+@Table(name = "Coupon")
 public class CouponBean {
 	
 	@Id 
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Type(type = "string")
+	@Column(name = "id")
 	private String id;
-	@Column(name = "NAME")
 	private String name;
-	@Column(name = "CODE")
-	private String code;
-	@Column(name = "START_TIME")
-	private Date start_time;
-	@Column(name = "END_TIME")
-	private Date end_time;
-	@Column(name = "DESCRIPTION")
+	private String start_time;
+	private String end_time;
+	private String value;
 	private String description;
-	@Column(name="STATUS")
 	private String status;
 	
 	public CouponBean() {
 		
 	}
-	
-	public CouponBean(String id, String name, String code, Date start_time, Date end_time, String description,
+
+	public CouponBean(String id, String name, String start_time, String end_time, String value, String description,
 			String status) {
 		super();
+		
+		
 		this.id = id;
 		this.name = name;
-		this.code = code;
 		this.start_time = start_time;
 		this.end_time = end_time;
+		this.value = value;
 		this.description = description;
 		this.status = status;
 	}
+
+	
 
 	public String getId() {
 		return id;
@@ -64,28 +58,28 @@ public class CouponBean {
 		this.name = name;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public Date getStart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
 
-	public Date getEnd_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public String getDescription() {
@@ -103,9 +97,12 @@ public class CouponBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "CouponBean [id=" + id + ", name=" + name + ", start_time=" + start_time + ", end_time=" + end_time
+				+ ", value=" + value + ", description=" + description + ", status=" + status + "]";
+	}
+	
+	
 }
