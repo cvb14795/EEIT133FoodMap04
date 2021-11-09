@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="cf.cvb14795.Coupon.model.bean.CouponBean"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="cf.cvb14795.Coupon.model.bean.QuestionnaireBean"%>
-<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,31 +11,45 @@
 <!-- <meta name="google-signin-client_id"
 		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
 <style>
-.box1 {
-	border: 1px solid;
-	height: 300px;
-	padding: 20px;
-}
-
-td, th {
-	border: 1px solid;
-	width: 200px;
-	text-align: center;
-}
-
-table {
-	border: 1px;
-	border-collapse: collapse;
-}
-</style>
-
-<script>
-	$(function() {
-		adminAuth();
-	})
+	.rs {
+		font-size:30px;
+		text-align:center;
+	}
 	
-</script>
-<title>管理員頁面</title>
+	.rst{
+		font-size:20px;
+		text-align:center;
+	}
+	.mhw {
+		text-align:center;
+		width:150px;height:50px;
+		background-color:#fd7e14;
+		border:3px solid #fd7e14;
+		float:right;
+		margin: 8px; 
+		padding: 5px;
+		border-radius: 10px;
+	}
+	.mhw:hover{
+		background-color:#f17612;
+		border:3px solid #f17612;
+	}
+	.mhw a  {
+		font-size: 20px;
+	}
+	.mhw a:hover {
+		text-decoration: none;
+	}
+	.mhw:active{
+		background-color:#e95714;
+		border:3px solid #e95714;
+	}
+	.main {
+		padding-left: 150px;
+		padding-right: 150px;
+	}
+</style>
+<title>防疫專區</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
@@ -76,7 +89,6 @@ table {
 <script src="<c:url value='/js/jquery-3.6.0.js"'/>"></script>
 <script src="<c:url value='/js/bootstrap.js'/>"></script>
 <script src="<c:url value='/js/lineLogin.js'/>"></script>
-<script src='<c:url value="/js/memberAuth.js"/>'></script>
 <%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- aboutUs -->
 <!-- <script src="./js/aboutUs.js"></script> -->
@@ -171,8 +183,8 @@ table {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>防疫生活 人人有責</p>
-						<h1>防疫專區</h1>
+						<p>此處顯示各折價券資訊</p>
+						<h1>折價券專區</h1>
 					</div>
 				</div>
 			</div>
@@ -182,46 +194,34 @@ table {
 
 	<input type="hidden" id="isAdmin" value="${isAdmin}">
 	<input type="hidden" id="userName" value="${user}">
-	<div class="memberDetail">
-		<div class="text-right">
-			會員： <span id="userNameContainer"></span>
-		</div>
-		<div class="text-right">
-			身分： <span id="isAdminContainer"></span>
-		</div>
-	</div>
 	
 	<!-- 防疫專區 -->
-		<form action='admincontroller' method='post'>
-		<div>
-			<p>
-				<label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
-				<label><input type='radio' name='action' value='U'>發放折價券</label>
-				<label><input type='radio' name='action' value='B'>撤回</label>
-				<label><input type='radio' name='action' value='D'>刪除</label>
-			</p>
-		</div>
-		<div>
-			<h6>	註: 撤回與刪除:為方便測試時使用，並非正式功能。</h6>
-			<h6>        刪除: 功能為刪除測試帳號 caterpillar123 </h6>
-		</div>
+	<div align='center'>
+		<h3>折價券資料</h3>
+		<hr>
+		<table border='1'>
+			<tr>
+				<th width='60'>編輯</th>
+				<th width='160'>折價券名稱</th>
+			</tr>
+			<c:choose>
+				<c:when test="${not empty beans}">
+					<c:forEach var='bean' items="${beans}">
+						<tr>
+							<td align='center'><a
+								href='coupons/${bean.id}'>${bean.id}</a></td>
+							<td>${bean.name}</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+				查無Coupon資料
+			</c:otherwise>
+			</c:choose>
+		</table>
+		<br> <a href="<c:url value='/Coupon/adminforCoupon' />">回前頁</a>
+	</div>	
 
-		<div>
-			<input type='submit' value='送出'> 
-			<input type="button"
-				value="回首頁" onclick="location.href='<c:url value="/Coupon/frontpage"/>'">
-			<input type="button"
-				value="管理" onclick="location.href='<c:url value="/Coupon/adminforCoupon"/>'">
-		</div>
-
-	</form>
-
-	<br>
-	<br>
-	<div style="display:flex;margin:20px;">			
-		<h4>刪除成功</h4>
-	</div>
-	
 	<!-- end 防疫專區 -->
 
 	<!-- footer -->

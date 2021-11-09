@@ -10,6 +10,15 @@
 <!-- <meta name="google-signin-client_id"
 		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
 <style>
+	.rs {
+		font-size:30px;
+		text-align:center;
+	}
+	
+	.rst{
+		font-size:20px;
+		text-align:center;
+	}
 	.mhw {
 		text-align:center;
 		width:150px;height:50px;
@@ -39,7 +48,7 @@
 		padding-right: 150px;
 	}
 </style>
-<title>首頁</title>
+<title>防疫專區</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
@@ -108,6 +117,84 @@
 	});
 	
 </script>
+<script type="text/javascript">
+
+	//國內檢驗總計
+	var result = {
+	    //檢驗人數
+	    peopleTotal:"",
+	    //檢驗件數
+	    caseTotal: "",
+	    //資料更新時間 (yyyy/mm/d)
+	    updateTime: "",
+	    
+	    //總通報(總送驗 )
+	    comunicatedTotal: "",
+	    //總排除
+	    excludedTotal: "",
+	    //總確診
+	    confirmedTotal: "",
+	    //死亡
+	    dead: "",
+	    //日排除
+	    excluded: "",
+	    //日通報(送驗)
+	    comunicated: "",
+	    //日確診
+	    confirmed: ""
+	    
+	};
+	
+	$.ajax({
+	    url: "https://covid19dashboard.cdc.gov.tw/dash3",
+	    type: 'GET',
+	    success: function (data) {
+	        console.log(data)
+	        result.comunicatedTotal = data[0]["送驗"];
+	        result.excludedTotal = data[0]["排除"];
+	        result.confirmedTotal = data[0]["確診"];
+	        result.dead = data[0]["死亡"];        
+	        result.comunicated = data[0]["昨日送驗"];
+	        result.excluded = data[0]["昨日排除"];
+	        result.confirmed = data[0]["昨日確診"];
+	             
+	    }
+	    
+	});
+	$.ajax({
+	    url: "https://covid19dashboard.cdc.gov.tw/dash7",
+	    type: 'GET',
+	    success: function (data) {
+	        console.log(data)
+	        result.peopleTotal = data[0]["檢驗人數"];
+	        result.caseTotal = data[0]["檢驗件數"];
+	        result.updateTime = data[0]["資料更新時間"];
+	    }
+	    
+	});
+	
+	
+	window.onload = function(){
+		// 國內檢驗總計
+		document.getElementById('result11').innerHTML = result.peopleTotal;
+		document.getElementById('result12').innerHTML = result.caseTotal;
+		document.getElementById('result13').innerHTML = result.updateTime;
+		
+		//疫情監測(總數)
+		document.getElementById('result21').innerHTML = result.comunicatedTotal;
+		document.getElementById('result22').innerHTML = result.excludedTotal;
+		document.getElementById('result23').innerHTML = result.confirmedTotal;
+		document.getElementById('result24').innerHTML = result.dead;
+		
+		//疫情監測(每日)
+		document.getElementById('result31').innerHTML = result.comunicated;
+		document.getElementById('result32').innerHTML = result.excluded;
+		document.getElementById('result33').innerHTML = result.confirmed;
+		
+	}
+	
+</script>
+
 </head>
 
 <body>
@@ -194,7 +281,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>人人有責</p>
+						<p>防疫生活 人人有責</p>
 						<h1>防疫專區</h1>
 					</div>
 				</div>
@@ -207,7 +294,34 @@
 	<input type="hidden" id="userName" value="${user}">
 	
 	<!-- 防疫專區 -->
+		
 	<div class="main mt-150 mb-150">
+		<div>
+			<div style="display:flex;margin:10px;">
+				<div style="margin:20px 50px 10px 40px;"><div class="rst" style="font-size:30px;text-align:center">國內疫情總計數據</div></div>
+				<div style="margin:10px 50px 10px 50px;"><div class="rst">總通報人數:<div id="result21" class="rs">無資料</div></div></div>
+				<div style="margin:10px 50px 10px 50px;"><div class="rst">總排除人數:<div id="result22" class="rs">無資料</div></div></div>
+				<div style="margin:10px 50px 10px 50px;"><div class="rst">總確診人數:<div id="result23" class="rs">無資料</div></div></div>			 
+				<div style="margin:10px 50px 10px 50px;"><div class="rst">總死亡人數:<div id="result24" class="rs">無資料</div></div></div>				 
+			</div>
+			<div style="display:flex; margin:20px;">
+				<div style="margin:20px 50px 10px 80px;"><div class="rst" style="font-size:30px;text-align:center">   今日數據</div></div>
+				<div style="margin:10px 100px 10px 150px;"><div class="rst">通報數:<div id="result31" class="rs">無資料</div></div></div>
+				<div style="margin:10px 100px 10px 100px;"><div class="rst">排除數:<div id="result32" class="rs">無資料</div></div></div>
+				<div style="margin:10px 70px 10px 70px;"><div class="rst" >確診人數:<div id="result33" class="rs" style="border:3px solid #F75000;">無資料</div></div></div>			 
+			</div>
+			
+			<div style="display:flex;margin:20px;">
+				<div style="margin:20px 20px 10px 40px;"><div class="rst" style="font-size:30px;text-align:center">國內檢驗總計</div></div>
+				<div><div class="rst" style="margin:10px 70px 10px 130px;">累計人次:<div id="result11" class="rs">無資料</div></div></div>
+				<div><div class="rst" style="margin:10px 100px 10px 100px;">累計件數:<div id="result12" class="rs">無資料</div></div></div>
+				<div><div class="rst" style="margin:10px 70px 50px 70px;">更新時間:<div id="result13" class="rs">無資料</div></div></div>
+ 
+			</div>
+		</div>		
+			
+	
+	
 		<div style="width:550px;height:500px;float:right;">
 			<div style="text-align:center;width:550px;height:50px;"><h2>疫情相關資訊</h2></div>
 			<div class="container">
@@ -227,27 +341,35 @@
 					<div class="mhw"><a role="button" href='https://www.mohw.gov.tw/np-15-1.html' target="_blank" style='color:white'>最新消息</a></div>	
 					<div class="mhw"><a role="button" href='https://covid19.mohw.gov.tw/ch/np-5187-205.html' target="_blank" style='color:white'>紓困4.0</a></div>	
 				</div>
-				<div style="text-align:center;width:550px;height:50px;float:right;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
+				<div style="text-align:center;width:550px;height:50px;float:right;margin-bottom:20px;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
 			</div>			
-		</div>
+		</div>		
+	<div>
 		<div>			
 			<br>
 			<h2>歡迎大家來填問卷</h2>
 			<input type="button" value="填問卷" id='questionnaire'
 			onclick="location.href='<c:url value="/Coupon/questionnaire" />'">
+		</div>
+			<br>	
+		<div>
 			
-			
-			<h2>管理員專用</h2>
-			<input type="button" id="admin" value="功能" /> 
+			<h2>管理員管理</h2>
+			<input type="button" id="admin" value="管理" /> 
 			<%-- 	onclick="location.href='<c:url value='/Coupon/admin' />'"> --%>
-			
+		</div>		
 			<br>
-			
+		<div style="margin-bottom:20px;">	
 			<h2>回美食地圖首頁</h2>
 			<input type="button" value="首頁"
 			onclick="location.href='<c:url value='/' />'">		
 		</div>		
 	</div>
+	
+	
+	
+
+	
 	<!-- end 防疫專區 -->
 
 	<!-- footer -->
@@ -288,7 +410,7 @@
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-							<li><a href="<c:url value='/Recipe/user'/>">食譜養成</a></li>
+							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 						</ul>
 					</div>
 				</div>
