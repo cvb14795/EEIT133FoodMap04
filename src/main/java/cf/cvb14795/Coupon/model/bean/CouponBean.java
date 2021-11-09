@@ -21,16 +21,17 @@ public class CouponBean {
 	private String value;
 	private String description;
 	private String status;
+	private int price_floor;
+	private int discount;
 	
 	public CouponBean() {
 		
 	}
 
+
 	public CouponBean(String id, String name, String start_time, String end_time, String value, String description,
-			String status) {
+			String status, int price_floor, int discount) {
 		super();
-		
-		
 		this.id = id;
 		this.name = name;
 		this.start_time = start_time;
@@ -38,9 +39,12 @@ public class CouponBean {
 		this.value = value;
 		this.description = description;
 		this.status = status;
+		this.price_floor = price_floor;
+		this.discount = discount;
 	}
 
-	
+
+
 
 	public String getId() {
 		return id;
@@ -97,12 +101,37 @@ public class CouponBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	
+
+	public int getPrice_floor() {
+		return price_floor;
+	}
+
+
+	public void setPrice_floor(int price_floor) {
+		this.price_floor = price_floor;
+	}
+
+
+	public int getDiscount() {
+		return discount;
+	}
+
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
 
 	@Override
 	public String toString() {
 		return "CouponBean [id=" + id + ", name=" + name + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", value=" + value + ", description=" + description + ", status=" + status + "]";
+				+ ", value=" + value + ", description=" + description + ", status=" + status + ", price_floor="
+				+ price_floor + ", discount=" + discount + "]";
 	}
+
+
 	
 	
 }

@@ -241,6 +241,18 @@
 						</td>
 					</tr>
 					<tr>
+						<td align='right'>消費下限：<br>&nbsp;</td>
+						<td><form:input path="price_floor"  size="25" /><br>&nbsp;
+							<form:errors path="price_floor" cssClass="error" />
+						</td>
+					</tr>
+					<tr>
+						<td align='right'>折數：<br>&nbsp;</td>
+						<td><form:input path="discount"  size="25" /><br>&nbsp;
+							<form:errors path="discount" cssClass="error" />
+						</td>
+					</tr>
+					<tr>
 						<td align='right'>敘述：<br>&nbsp;</td>
 						<td><form:input path="description" size="60" /><br>&nbsp;
 							<form:errors path="description" cssClass="error" />
