@@ -4,13 +4,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import cf.cvb14795.Food.model.MapDataBean;
+import cf.cvb14795.Food.model.UserMapDataBean;
 
 public class CustomerValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return MapDataBean.class.isAssignableFrom(clazz);
+		return UserMapDataBean.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class CustomerValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "mapxy", "mapDataBean.mapxy.empty", "座標欄位不能空白");
 		ValidationUtils.rejectIfEmpty(errors, "mapcheck", "mapDataBean.mapcheck.empty", "請選擇");
 
-		MapDataBean mdb = (MapDataBean) target;
+		UserMapDataBean mdb = (UserMapDataBean) target;
 
 		if (mdb.getMapname() != null && mdb.getMapname().length() < 2 || mdb.getMapname().length() > 30) {
 			if (errors.getFieldError("mapname") == null) {
@@ -30,19 +30,19 @@ public class CustomerValidator implements Validator {
 			}	
 		}
 
-		if (mdb.getMapku() != null && mdb.getMapku().contains(" ")) {
-			errors.rejectValue("mapku", "mapDataBean.mapku.space", "地址欄位不能空白");
+		if (mdb.getMapku() != null && mdb.getMapku().contains(".")) {
+			errors.rejectValue("mapku", "mapDataBean.mapku.space", "地址欄位格式錯誤");
 		}
 		
-		if (mdb.getMapnb() != null && mdb.getMapnb().contains(" ")) {
-			errors.rejectValue("mapnb", "mapDataBean.mapnb.space", "電話欄位不能空白");
+		if (mdb.getMapnb() != null && mdb.getMapnb().contains(".")) {
+			errors.rejectValue("mapnb", "mapDataBean.mapnb.space", "電話欄位格式錯誤");
 		}
 		
-		if (mdb.getMapxy() != null && mdb.getMapxy().contains(" ")) {
-			errors.rejectValue("mapxy", "mapDataBean.mapxy.space", "座標欄位不能空白");
+		if (mdb.getMapxy() != null && mdb.getMapxy().contains(".")) {
+			errors.rejectValue("mapxy", "mapDataBean.mapxy.space", "座標欄位格式錯誤");
 		}		
 
-		if (mdb.getMapcheck() != null && mdb.getMapcheck().contains(" ")) {
+		if (mdb.getMapcheck() != null && mdb.getMapcheck().contains(".")) {
 			errors.rejectValue("mapcheck", "mapDataBean.mapcheck.space", "請選擇");
 		}	
 	}

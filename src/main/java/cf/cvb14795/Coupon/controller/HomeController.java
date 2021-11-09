@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 import cf.cvb14795.Coupon.model.service.IQuestionnaireService;
 
 @Controller

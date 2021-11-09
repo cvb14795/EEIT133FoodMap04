@@ -421,6 +421,43 @@
     </Parameters>
   </DoAction>
     
+  <Capture>
+    <ServiceAddress>
+        <url type="Production">https://payment.ecpay.com.tw/Cashier/Capture</url>
+        <url type="Test">https://payment-stage.ecpay.com.tw/Cashier/Capture</url>
+    </ServiceAddress>
+    <Config>
+        <switchparam>
+        </switchparam>
+        <optparam>
+        </optparam>
+    </Config>
+    <Parameters>
+      <param  type="String"  require="1" name="MerchantID">
+        <pattern>^\d{7,10}$</pattern>
+      </param>
+      <param  type="String"  require="1" name="MerchantTradeNo">
+        <pattern>^\w{4,20}$</pattern>
+      </param>
+      <param  type="Int"  require="1" name="CaptureAMT">
+        <mode>GE</mode> <!--BETWEEN, GE, LE, EXCLUDE  -->
+        <maximum></maximum>
+        <minimal>0</minimal>
+      </param>
+      <param  type="Int"  require="1" name="UserRefundAMT">
+        <mode>GE</mode> <!--BETWEEN, GE, LE, EXCLUDE  -->
+        <maximum></maximum>
+        <minimal>0</minimal>
+      </param>
+      <param  type="String"  require="0" name="PlatformID">
+        <pattern>^(\d{7,10}|)$</pattern>
+      </param>
+      <param  type="String"  require="0" name="Remark">
+        <pattern>^.{0,30}$</pattern>
+      </param>
+    </Parameters>
+  </Capture>
+  
   <TradeNoAio>
     <ServiceAddress>
         <url type="Production">https://vendor.ecpay.com.tw/PaymentMedia/TradeNoAio</url>
