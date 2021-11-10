@@ -274,7 +274,7 @@ public class ShopController {
 		while (it.hasNext()) {
 			OrderItem orderItem = (OrderItem) it.next();
 			orderItem.setOrder(order);
-			System.out.println("***id: "+orderItem.getOrder().getOrderId());
+			System.out.println(orderItem.toString()+"***id: "+orderItem.getOrder().getOrderId());
 			orderService.addOrderItem(orderItem);
 		}
 		

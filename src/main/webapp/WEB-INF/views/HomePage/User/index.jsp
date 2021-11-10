@@ -143,13 +143,13 @@
 										  	<i class="fas fa-shopping-cart"></i>
 										  </a>
 										</li>
-										<li>
-											<a>
-												淺色模式
-	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> -->
-												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-											</a>
-										</li>
+<!-- 										<li> -->
+<!-- 											<a> -->
+<!-- 												淺色模式 -->
+<!-- 	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> --> 
+<!-- 												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!-- 											</a> -->
+<!-- 										</li> -->
 									</div>
 								</li>
 							</ul>
@@ -400,12 +400,12 @@
 // 	        });
 			 $(".wrap").vegas({
 				 overlay: true,
-				 transition: 'fade', 
+				 transition: ['blur', 'zoomOut', 'swirlLeft'], 
 				 transitionDuration: 2000,
 				 delay: 6000,
 				 color: '-',
 				 cover: true,
-				 animation: 'fade',
+				 animation: "random",
 				 animationDuration: 8000,
 				 slides: [
 					 { src: "./image/question.jpeg" },
