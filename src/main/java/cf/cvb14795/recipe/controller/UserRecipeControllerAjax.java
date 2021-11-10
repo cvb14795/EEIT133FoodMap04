@@ -48,9 +48,6 @@ public class UserRecipeControllerAjax {
 
 	private final static String PREFIX = "Recipe/";
 
-//	@Autowired
-//	ServletContext context;
-
 	IUserRecipeService uRecipeService;
 	IAdminRecipeService aRecipeService;
 	IMemberService memberService;

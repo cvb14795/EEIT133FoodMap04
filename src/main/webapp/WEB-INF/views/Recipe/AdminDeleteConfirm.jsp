@@ -81,8 +81,7 @@ table {
 	<header>
 		<h1>請確認以下將刪除之資料</h1>
 	</header>
-<%-- 	<jsp:useBean id="recipe" class="com.web.model.AdminRecipeBean" scope="session"></jsp:useBean> --%>
-	<form:form action="./AdminDeleteRecipeAction" modelAttribute="recipe" method="POST">
+	<form action="<c:url value='/Recipe/admin/AdminDeleteRecipeAction/${recipe.id}'/>" method="POST">
 		<table>
 			<tr bgcolor="#FFFFE1">
 				<td>品項:${recipe.name}</td>
@@ -115,12 +114,12 @@ table {
 				<td>照片:<img src="data:image/jpg;base64,${base64String}" width="100" height="100"></td>
 			</tr>
 			<div>
-				<input type="text" name="id" value="${param.id}" hidden>
+				<input type="text" name="id" value="${param.id}" hidden="true">
 			</div>
 		</table>
 		<div class="sub">
 			<input type="submit" name="submit" value="確認刪除">
 		</div>
-	</form:form>
+	</form>
 </body>
 </html>
