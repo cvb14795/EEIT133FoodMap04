@@ -67,12 +67,10 @@ ecpay\payment\integration\AllInOne.class
 ecpay\payment\integration\domain\AioCheckOutWebATM.class
 cf\cvb14795\IndexController.class
 ecpay\payment\integration\AllInOneBase.class
-cf\cvb14795\Food\controller\MapDataQueryController.class
 ecpay\payment\integration\domain\AioCheckOutATM.class
 cf\cvb14795\recipe\controller\UserRecipeControllerAjax.class
 cf\cvb14795\Coupon\controller\CouponUsageController.class
 cf\cvb14795\Coupon\controller\HomeController.class
-cf\cvb14795\Food\service\CustomerService.class
 ecpay\payment\integration\verification\VerifyAioCheckOut.class
 ecpay\payment\integration\domain\InvoiceObj.class
 cf\cvb14795\shop\model\OrderItem.class
@@ -81,7 +79,6 @@ cf\cvb14795\member\controller\ForgetPassword.class
 cf\cvb14795\recipe\dao\AdminRecipeRepository.class
 cf\cvb14795\Coupon\model\util\CouponUsageUtil.class
 ecpay\payment\integration\errorMsg\ErrorMessage.class
-cf\cvb14795\Food\service\impl\CustomerServiceImpl.class
 cf\cvb14795\member\service\MemberService.class
 cf\cvb14795\Coupon\model\dao\QuestionnaireRepository.class
 cf\cvb14795\shop\model\Order.class
@@ -89,7 +86,6 @@ ecpay\payment\integration\domain\AioCheckOutPeriod.class
 ecpay\payment\integration\verification\VerifyQueryTradeInfo.class
 cf\cvb14795\Comment\service\CommentService.class
 util\azure\AzureFileUtil.class
-cf\cvb14795\Food\controller\MapDataController.class
 cf\cvb14795\Food\model\MapDataBean.class
 ecpay\payment\integration\ecpayOperator\EcpayFunction$1.class
 cf\cvb14795\member\oauth2\OAuth2Login.class
@@ -100,14 +96,12 @@ cf\cvb14795\recipe\controller\UserHomePageController.class
 ecpay\payment\integration\config\EcpayConfig.class
 cf\cvb14795\recipe\controller\RecipePhotoController.class
 cf\cvb14795\shop\controller\ShopController.class
-cf\cvb14795\Food\controller\BaseController.class
 ecpay\payment\integration\domain\CreateServerOrderObj.class
 cf\cvb14795\shop\service\OrderService.class
 util\ParseUrlPath.class
 ecpay\payment\integration\verification\VerifyFundingReconDetail.class
 ecpay\payment\integration\domain\AioCheckOutDevide.class
 cf\cvb14795\member\controller\LineBotWebhook.class
-cf\cvb14795\Food\dao\CustomerRepository.class
 cf\cvb14795\member\service\IMemberService.class
 ecpay\payment\integration\exception\EcpayException.class
 ecpay\payment\integration\domain\QueryCreditCardPeriodInfoObj.class
