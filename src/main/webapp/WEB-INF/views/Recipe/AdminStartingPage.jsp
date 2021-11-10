@@ -271,7 +271,13 @@ legend {
 			<!-- 			<input type="submit" name="submit" value="食譜查詢"> -->
 			<div class="container"
 				style="display: flex; justify-content: center; align-items: center; bottom: 20px;">
-				<button type="submit">食譜查詢</button>
+				<button type="submit">查詢管理者食譜</button>
+			</div>
+		</form>
+		<form action="admin/AdminManageMembersRecipe" method="post">
+			<div class="container"
+				style="display: flex; justify-content: center; align-items: center; bottom: 20px;">
+				<button type="submit">管理會員食譜</button>
 			</div>
 		</form>
 		<form id="form">

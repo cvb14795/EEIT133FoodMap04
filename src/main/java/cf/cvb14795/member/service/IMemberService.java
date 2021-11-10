@@ -28,6 +28,9 @@ public interface IMemberService {
 	
 	// 刪除資料
 	void deleteMemberByAccount(String userAccount);
+	
+	// 查詢會員人數
+	Long findMemberCount();
 
 
 }

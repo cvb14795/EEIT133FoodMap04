@@ -69,7 +69,7 @@ header {
 </head>
 <body>
 	<header>
-		<h1>官方食譜</h1>
+		<h1>管理會員食譜</h1>
 	</header>
 	<form>
 		<input type ="button" onclick="history.back()" value="首頁">
@@ -78,12 +78,13 @@ header {
 	<table id="myTable" class="display">
 		<thead>
 			<th>編號</th>
-			<th width="10%">品項</th>
+			<th>會員姓名</th>
+			<th width="5%">品項</th>
 			<th width="5%">分類</th>
-			<th>食材1</th>
-			<th>食材2</th>
-			<th>食材3</th>
-			<th>食材4</th>
+			<th width="5%">食材1</th>
+			<th width="5%">食材2</th>
+			<th width="5%">食材3</th>
+			<th width="5%">食材4</th>
 			<th width="10%">調味料1</th>
 			<th width="10%">調味料2</th>
 			<th width="10%">調味料3</th>
@@ -97,7 +98,8 @@ header {
 					<c:forEach var="i" begin="0" end="${lists.size()-1 }">
 						<tr bgcolor="#FFFFE1">
 							<td>${lists.get(i).id}</td>
-							<td>${lists.get(i).name}</td>
+							<td>${lists.get(i).userName}</td>
+							<td>${lists.get(i).foodName}</td>
 							<td><c:out value="${lists.get(i).category}" /></td>
 							<td><c:out value="${lists.get(i).food1}" /></td>
 							<td><c:out value="${lists.get(i).food2}" /></td>
@@ -108,8 +110,9 @@ header {
 							<td><c:out value="${lists.get(i).sauce3}" /></td>
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
 							<td><c:out value="${lists.get(i).step}" /></td>
-							<td><a id="edit" href="./AdminViewRecipe/${lists.get(i).id}"><i class="fas fa-edit"></i></a>
-								<a id="delete" href="./AdminShowDeleteRecipe/${lists.get(i).id}"><i class="fas fa-trash-alt"></i></a></td>
+							<td>
+								<a id="delete" href="./AdminManageMembersRecipe/${lists.get(i).id}"><i class="fas fa-skull"></i></a>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:when>

@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.checkerframework.checker.units.qual.m;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,18 +78,25 @@ public class IndexController {
 	}
 	
 	@GetMapping("/admin")
-	private String adminHome(Model model, @CookieValue("user") String user) {
+	private String adminHome(Model model, 
+			@CookieValue("user") String user,
+			@ModelAttribute("statMap") Map<String, Long> statMap,
+			@ModelAttribute("imageMap") Map<String, String> imageMap) {
 		if (!mService.isAdmin(user)) {
 			System.out.println("權限不足，無法登入管理員後台，將導回使用者首頁!");
 			return "redirect:/Home";
 		}
 		List<Member> memberList = mService.selectAllMember();
-		Map<String, String> imageMap = new HashMap<>();
+		
 		for (Member m : memberList) {
 			imageMap.put(m.getAccount(), Base64.getEncoder().encodeToString(m.getImgBytes()));
 		}			
+		statMap.put("商城商品銷售額",  mService.findMemberCount());
+		statMap.put("商城商品總數",  mService.findMemberCount());
+		statMap.put("評論區留言總數",  mService.findMemberCount());
+		statMap.put("會員註冊人數",  mService.findMemberCount());
 		
-		model.addAttribute("imageMap", imageMap);
+		
 		model.addAttribute("members", memberList);
 		return "HomePage/Admin/index";
 	}
@@ -100,7 +108,13 @@ public class IndexController {
 	
 	@ModelAttribute
 	private void setUserAndAdmin(Model model, HttpServletRequest request) {
+		Map<String, String> imageMap = new HashMap<>();
+		Map<String, Long> statMap = new HashMap<>();
 		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
 		model.addAttribute("isAdmin", false);
+		model.addAttribute("imageMap", imageMap);
+		model.addAttribute("statMap", statMap);
 	}
+	
+	
 }

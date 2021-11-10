@@ -203,8 +203,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text">$<span class="count">23569</span></div>
-                                            <div class="stat-heading">Revenue</div>
+                                            <div class="stat-text">$<span class="count">9999</span></div>
+                                            <div class="stat-heading">商城商品銷售額</div>
                                         </div>
                                     </div>
                                 </div>
@@ -221,8 +221,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">3435</span></div>
-                                            <div class="stat-heading">Sales</div>
+                                            <div class="stat-text"><span class="count">9999</span></div>
+                                            <div class="stat-heading">商城商品總數</div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,8 +239,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">349</span></div>
-                                            <div class="stat-heading">Templates</div>
+                                            <div class="stat-text"><span class="count">9999</span></div>
+                                            <div class="stat-heading">評論區留言總數</div>
                                         </div>
                                     </div>
                                 </div>
@@ -257,8 +257,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">2986</span></div>
-                                            <div class="stat-heading">Clients</div>
+                                            <div class="stat-text"><span class="count">9999</span></div>
+                                            <div class="stat-heading">會員註冊人數</div>
                                         </div>
                                     </div>
                                 </div>

@@ -43,19 +43,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 	<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <style>
-/* body { */
-/* 	font-size: 20px; */
-/* 	font-family: Arial, Helvetica, sans-serif; */
-/* 	background-color: white; */
-/* 	line-height: 1.5em; */
-/* } */
-
-/* .insertForm { */
-/* 	width: 90%; */
-/* 	margin: auto; */
-/* 	padding: 10px; */
-/* } */
-
 fieldset {
 	/*因為是包住 div 所以要比 div 大*/
 	width: 500px;
@@ -197,49 +184,49 @@ legend {
 					</div>
 				</div>
 			</div>
-	<div class="insertForm">
+	<div>
 		<form id="form">	
 			<fieldset>
 				<legend>新增</legend>
 				<div class="st1">
 					<label for="" class="t1">品項:</label>
-					<input type="text" id="" name="foodName" required>
+					<input type="text" id="foodName" name="foodName" required>
 				</div>
 				<div class="st1">
 					<label for="" class="t1">分類:</label>
-					<input type="text" id="" name="category" required>
+					<input type="text" id="category" name="category" required>
 				</div>
 				<div class="st1">
 					<label for="" class="t1">食材1:</label>
-					<input type="text" id="" name="food1" />
+					<input type="text" id="food1" name="food1" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">食材2:</label>
-					<input type="text" id="" name="food2" />
+					<input type="text" id="food2" name="food2" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">食材3:</label>
-					<input type="text" id="" name="food3" />
+					<input type="text" id="food3" name="food3" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">食材4:</label>
-					<input type="text" id="" name="food4" />
+					<input type="text" id="food4" name="food4" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">調味料1:</label>
-					<input type="text" id="" name="sauce1" />
+					<input type="text" id="sauce1" name="sauce1" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">調味料2:</label>
-					<input type="text" id="" name="sauce2" />
+					<input type="text" id="sauce2" name="sauce2" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">調味料3:</label>
-					<input type="text" id="" name="sauce3" />
+					<input type="text" id="sauce3" name="sauce3" />
 				</div>
 				<div class="st1">
 					<label for="" class="t1">步驟:</label>
-					<textarea id="" name="step" rows="5" cols="33"></textarea>
+					<textarea id="step" name="step" rows="5" cols="33"></textarea>
 				</div>
 				<div class="st1">
 					<img src="" width="450" height="300" alt="請選擇照片"  id="showPic">
@@ -253,6 +240,7 @@ legend {
 			<div class="sub">
 				<input type="reset" name="reset" value="清除"> 
 				<input type="submit" name="submit" value="確認">
+				<input type="button" name="submit" value="一鍵輸入" id="btn">
 			</div>
 
 		</form>
@@ -357,6 +345,27 @@ legend {
 	<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
 	
 	<script type="text/javascript">
+		
+		$("#btn").on("click",function (e) {
+			$("#foodName").val("日式醬油鰹魚片味增湯");
+			$("#category").val("湯類");
+			$("#food1").val("蔥3條");
+			$("#food2").val("洋蔥1顆");
+			$("#food3").val("豆腐1盒");
+			$("#food4").val("柴魚2包");
+			$("#sauce1").val("日式昆布柴魚醬油高湯半鍋");
+			$("#sauce2").val("日式淬釀鰹魚醬油3匙");
+			$("#sauce3").val("味增1匙、水1/4鍋");
+			$("#step").val("1.豆腐切丁、蔥切成蔥花狀、洋蔥切塊。\n"+
+						   "2.接著準備日式淬釀鰹魚醬油。\n"+
+						   "3.將3匙日式淬釀鰹魚醬油加入鍋中。\n"+
+						   "4.準備半鍋的日式昆布柴魚醬油高湯，加水至4分之3鍋"+
+						   "5.將1匙味增加入熱水攪拌至無結塊。\n"+
+						   "6.將攪拌好的味增倒入鍋中煮滾。\n"+
+						   "7.接著依序倒入蔥花，再來倒入洋蔥、豆腐，最後倒入柴魚。\n"+
+						   "8.蓋上鍋蓋，轉小火煮5分鐘。\n");
+		})
+			
 		$(function(){
 			userNameMain();
 		})
