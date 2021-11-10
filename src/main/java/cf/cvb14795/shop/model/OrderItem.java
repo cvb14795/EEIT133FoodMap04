@@ -40,15 +40,15 @@ public class OrderItem {
 	@Column
 	private Double discount = 1.0;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="orderFkId",insertable = false, updatable = false)
+	@JoinColumn(name="orderId")
 	private Order order;
-	@GenericGenerator(
-		name = "generator",
-		strategy = "foreign",
-		parameters = @Parameter(name="property", value = "order")
-	)
-	@GeneratedValue(generator = "generator")
-	private String orderFkId;
+//	@GenericGenerator(
+//		name = "generator",
+//		strategy = "foreign",
+//		parameters = {@Parameter(name="property", value = "order")}
+//	)
+//	@GeneratedValue(generator = "generator")
+//	private String orderFkId;
 	
 	public OrderItem(Integer qty, Integer subTotal, Item item, Double discount, Order order) {
 		this.qty = qty;
@@ -102,5 +102,11 @@ public class OrderItem {
 	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderItem [qty=" + qty + ", subTotal=" + subTotal + ", item=" + item + ", discount=" + discount + "]";
+	}
+	
 	
 }
