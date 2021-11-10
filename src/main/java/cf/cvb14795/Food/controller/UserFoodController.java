@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -45,6 +46,14 @@ public class UserFoodController {
 	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
 		return PREFIX + "UserFood";
 	}
+	
+	@GetMapping("info/{id}")
+	public String userRecipe(@PathVariable("id") String id , Model model) {
+		AdminMapDataBean mapData = aFoodService.updateId(Integer.valueOf(id));
+		model.addAttribute("mapData", mapData);
+		return PREFIX + "RestaurantInfo";
+	}
+	
 
 	// ===============使用者查詢===============
 	@PostMapping("UserViewAdminFood")
@@ -61,7 +70,7 @@ public class UserFoodController {
 
 		return PREFIX + "UserViewAdminFood";
 	}
-
+	//==================無視區====================//
 	@PostMapping("UserViewMembersFood")
 	public String UserViewMembersFood(Model model) {
 

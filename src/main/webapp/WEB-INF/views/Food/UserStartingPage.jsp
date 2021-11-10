@@ -8,7 +8,7 @@ response.setContentType("text/html;charset=UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>使用者起始畫面</title>
+<title>商家資訊</title>
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
 <!-- google font -->
@@ -42,7 +42,18 @@ response.setContentType("text/html;charset=UTF-8");
 <script src='<c:url value="/js/bootstrap.js"/>'></script>
 <script src='<c:url value="/js/memberAuth.js"/>'></script>
 <script>
+	var origDataFilter = []
 	$(function() {
+		// 儲存data-filter供搜尋完回復原狀
+		for (let i=0; i<$(".product-filters ul li").length; i++){ 
+		    if ($(".product-filters ul li").eq(i).data("filter")){
+		    	origDataFilter.push($(".product-filters ul li").eq(i).data("filter"))
+		    } else {
+		    	origDataFilter.push("")
+		    }
+		}
+		
+		
 		adminAuth();
 		// 將所有checkbox-switch改成IOS風格
 		var el = document.querySelector('.checkbox-switch');
@@ -102,12 +113,23 @@ response.setContentType("text/html;charset=UTF-8");
 	})
 </script>
 <style>
-    header {
+header {
 	background: #9393FF;
 	color: white;
 	padding: 20px;
 	text-align: center;
 	margin-bottom: 10px;
+}
+.search-wrap{
+	border: 1px solid #ddd;
+	color: #051922;
+	padding: 15px;
+	width: 100%;
+	border-radius: 5px;
+	font-size: 15px;
+	width:500px;
+	margin-bottom:20px;
+	margin-left:20px;
 }
 </style>
 </head>
@@ -206,20 +228,64 @@ response.setContentType("text/html;charset=UTF-8");
 	<!-- end breadcrumb section -->
 	
 	<div class="mt-150 mb-150">
-		<div class="memberDetail">
-			<div class="text-right">
-				會員：
-				<span id="userNameContainer"></span>
+	
+	<div class="row">
+				<div class="col-md-12">
+					<div class="product-filters">
+						<ul>
+							<li data-filter="*" class="active">All</li>
+							<li data-filter=".Y">安全商家</li>
+							<li data-filter=".N">非安全商家</li>
+							<!-- 
+								點"留言板"按鈕後 將店家區塊的背景變色(淺橘或其他顏色 以不與原先被景色撞色為主)
+								原先店家區塊的"詳細資料"按鈕 改成"留言板"按紐 且連結亦改成導向留言板jsp的網址
+								
+								以上需再做一個jsp 以呈現評論區+商家資訊的整合頁面
+							-->
+							<li >留言板</li>
+							<li>待更新</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div class="text-right">
-				身分：
-				<span id="isAdminContainer"></span>
-			</div>
+			
+<%-- 	    <form action='<c:url value="/Food/user/UserFood"/>'> --%>
+<!-- 	        <button type="submit">店家</button> -->
+<!-- 	    </form> -->
+		<span style="margin: auto 30px;">
+			<label for="myInput"><i class="fas fa-search fa-2x"></i></label>
+			<input class="search-wrap" type="text" id="myInput" onblur="searchByName()" placeholder="請輸入想查詢的店家名稱..">					
+			<a class="cart-btn" href="javascript:void(0)" onclick='$("#myInput").val("");doSearch();'>清除搜尋結果</a>
+		</span>
+	    <div class="row product-lists">
+				<c:choose>
+					<c:when test="${lists.size() != 0}">
+						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
+							<div class="col-lg-4 col-md-6 text-center ${lists.get(i).mapcheck}">
+								<div class="single-product-item">
+									<div class="product-image">
+										<a href="single-product.html">
+<%-- 											<img src="data:image/jpg;base64,${imgList.get(i)}"> --%>
+											<img src="<c:url value='/Food/user/photo/${lists.get(i).id}'/>" style="width:300px;height:300px;">
+										</a>
+									</div>
+									<h3>店家名稱:<span class="mapname">${lists.get(i).mapname}</span></h3>
+									<p class="product-price"><span>地區:${lists.get(i).category}</span></p>
+									<h6>是否為安全店家:
+										<p>
+											<span>
+												${lists.get(i).mapcheck}
+											</span>
+										</p>
+									</h6>
+									<a href="<c:url value='/Food/user/info/${lists.get(i).id}'/>" class="cart-btn">詳細資料</a>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 		</div>
-		
-	    <form action='<c:url value="/Food/user/UserFood"/>'>
-	        <button type="submit">店家</button>
-	    </form>
+			
 	</div>
     
     <!-- footer -->
@@ -311,6 +377,44 @@ response.setContentType("text/html;charset=UTF-8");
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
-	
+	<script>
+		function searchByName() {
+			var input, filter, i, txtValue;
+			var mapLists = document.getElementsByClassName("product-lists");
+			var mapname = mapLists[0].getElementsByClassName("mapname");
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			for (i = 0; i < mapname.length; i++) {
+				if (mapname) {
+					txtValue = mapname[i].textContent || mapname[i].innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						// mapLists[0].children[i].style.display = "";
+						mapLists[0].children[i].classList.add("showMap");
+					} else {
+						// mapLists[0].children[i].style.display = "none";				
+					}
+				}
+			}
+			$(".product-filters ul li.active ").attr("data-filter", ".showMap")
+			
+			doSearch();
+			for (i = 0; i < mapname.length; i++) {
+				//將受搜尋影響的class回復搜尋前的樣子
+				mapLists[0].children[i].classList.remove("showMap");
+			}
+			clearSearch();
+		}
+		
+		function doSearch(){
+			$(".product-filters ul li.active ").click()
+		}
+		
+		function clearSearch(){
+			for(let i = 0; i < origDataFilter.length; i++){
+				$(".product-filters ul li ").eq(i).attr("data-filter", origDataFilter[i]);				
+			}
+		}
+		
+	</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import cf.cvb14795.Food.model.UserMapDataBean;
 
 @Repository
 public interface UserMapDataRepository extends JpaRepository<UserMapDataBean, Integer>{
+
 	@Query("from UserMapDataBean ur where ur.mapname=:mapname")
 	List<UserMapDataBean> findByName(String mapname);
 }

@@ -37,6 +37,7 @@ public class UserMapDataServiceImpl implements UserMapDataService{
 		List<UserMapDataBean> list = uMapDAO.findByName(mapname);
 		return list;
 	}
+	
 
 //	@Override
 //	public userMapDataBean UpdataId(int id) {
@@ -52,4 +53,6 @@ public class UserMapDataServiceImpl implements UserMapDataService{
 //	public void deleteById(int id) {
 //		uMapDAO.deleteById(id);
 //	}
+	
+	
 }
