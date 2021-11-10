@@ -287,10 +287,22 @@ public class ShopController {
 		String baseUrl = util.ParseUrlPath.getFullContextPath(request)+"/";
 		
 		// 發送付款資訊的網址(POST)
-//		System.out.println("base網址:"+baseUrl+prefix);
-//		System.out.println("完整ReturnURL網址:"+baseUrl+prefix+"listenPayResult");
-		obj.setReturnURL("https://fcdb-140-115-236-39.ngrok.io/FoodMap04/Shop/listenPayResult");
-//		obj.setReturnURL(baseUrl+prefix+"listenPayResult");
+		System.out.println("base網址:"+baseUrl+prefix);
+		System.out.println("完整ReturnURL網址:"+baseUrl+prefix+"listenPayResult");
+		if (baseUrl.contains("localhost") || !baseUrl.contains("eeit133-foodmap04.herokuapp.com")) {
+			// 暫定使用heroku接收回調
+			
+			// for ngrok測試用
+			// 注意網址會更新 
+			/* 待更新成由txt或cfg檔讀取本機ngrok路徑 也要考慮其他人電腦ngrok網址不同或開了ngrok沒run eclipse server的問題*/
+//			obj.setReturnURL("https://fcdb-140-115-236-39.ngrok.io/FoodMap04/Shop/listenPayResult");
+			
+			// 暫定使用heroku接收回調
+			obj.setReturnURL("https://eeit133-foodmap04.herokuapp.com/FoodMap04/Shop/listenPayResult");
+		} else{
+			// 從非heroku也非localhost的地方連線 (azure or 其他)
+			obj.setReturnURL(baseUrl+prefix+"listenPayResult");			
+		}
 		obj.setNeedExtraPaidInfo("N");
 		// 付款成功後將用戶導向的網址（返回商店）
 		obj.setClientBackURL(baseUrl+prefix+""); // 檢查ContextPath是否為/結尾
