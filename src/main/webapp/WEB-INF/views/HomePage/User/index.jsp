@@ -96,10 +96,10 @@
 	<!--PreLoader Ends-->
 	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
+	<div class="top-header-area " id="sticker">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
+				<div class="col-xl-12 col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
 						<!-- logo -->
 						<div class="site-logo">
@@ -110,22 +110,19 @@
 						<!-- logo -->
 
 						<!-- menu start -->
-						<nav class="main-menu">
+						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
+<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href=""><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+										<li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -142,14 +139,17 @@
 											</ul>
 										</li>
 										<li>
-										  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-																  <i class="fas fa-shopping-cart"></i> 已購票券
+										  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+										  	<i class="fas fa-shopping-cart"></i>
 										  </a>
 										</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
+										<li>
+											<a>
+												淺色模式
+	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> -->
+												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
+											</a>
+										</li>
 									</div>
 								</li>
 							</ul>
@@ -403,8 +403,9 @@
 				 transition: 'fade', 
 				 transitionDuration: 2000,
 				 delay: 6000,
-				 color: 'red',
-				 animation: 'random',
+				 color: '-',
+				 cover: true,
+				 animation: 'fade',
 				 animationDuration: 8000,
 				 slides: [
 					 { src: "./image/question.jpeg" },

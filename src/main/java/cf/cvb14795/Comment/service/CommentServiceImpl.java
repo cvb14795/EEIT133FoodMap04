@@ -71,7 +71,7 @@ public class CommentServiceImpl implements CommentService {
 		List<Comment> results = null;
 				
 		if (theMapName != null && (theMapName.trim().length() > 0)) {
-			results = commentRepository.findByMapNameContainsAllIgnoreCase(theMapName);
+			results = commentRepository.findByMapName(theMapName);
 		}
 		else {
 			results = findAll();
@@ -85,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
 	public List<Comment> searchByUserAccount(String theUserAccount) {
 		List<Comment> results = null;
 		
-		results = commentRepository.findByUserAccountContainsAllIgnoreCase(theUserAccount);
+		results = commentRepository.findByUserAccount(theUserAccount);
 		
 		return results;
 	}

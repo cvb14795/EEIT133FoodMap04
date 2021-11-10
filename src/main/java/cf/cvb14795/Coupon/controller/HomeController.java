@@ -39,7 +39,10 @@ public class HomeController {
 		return PREFIX+"admin";
 	}
 	
-	
+	@GetMapping("/adminforCoupon")
+	public String CouponAction(Model model) {
+		return PREFIX+"adminforCoupon";
+	}
 	
 	
 	

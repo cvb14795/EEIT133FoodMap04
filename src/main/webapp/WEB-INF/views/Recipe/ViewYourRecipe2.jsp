@@ -97,14 +97,16 @@
 											</ul>
 										</li>
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
+											<a class="shopping-cart" href="<c:url value='/Cart/'/>">
+												<i class="fas fa-shopping-cart"></i> 已購票券
+											</a>
+										</li>
+										<li>
+											<a>
+												<label for="checkbox-switch" style="">淺色模式</label>
+												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
+											</a>
+										</li>
 									</div>
 								</li>
 							</ul>
@@ -143,10 +145,10 @@
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
-							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
 							<li>我的最愛</li>
 						</ul>
 					</div>
@@ -162,7 +164,6 @@
 									<div class="product-image">
 										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
 									</div>
-									<h3>會員:${lists.get(i).userName}</h3>
 									<h3>品名:${lists.get(i).foodName}</h3>
 									<h6>食材:
 										<p>
@@ -180,32 +181,53 @@
 											</span>
 										</p>
 									</h6>
-									<a href="<c:url value="/Recipe/user/ViewYourRecipe2/${lists.get(i).id}"/>" class="cart-btn"><i class="fas fa-edit"></i> 修改</a>
-									<a href="#" class="cart-btn"><i class="fas fa-trash-alt"></i></i> 刪除</a>
+									<h6>步驟:
+										<p>
+											<span>
+												${lists.get(i).step}
+											</span>
+										</p>
+									</h6>
+									<a href="<c:url value='/Recipe/user/ViewYourRecipe2/${lists.get(i).id}'/>" class="cart-btn"><i class="fas fa-edit"></i> 修改</a>
+									<a href="javascript:void(0)" onclick="doDelete('${lists.get(i).id}', '${lists.get(i).foodName}')" class="cart-btn"><i class="fas fa-trash-alt"></i> 刪除</a>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<td colspan=11 style="text-align: center;">無資料!</td>
-						<td><a id="edit" href="<c:url value='/'/>">回首頁</a></td>
+						<div class="container">
+							<div style="text-align: center;">
+								<h2>無資料!</h2>
+								<div class="pagination-wrap" style="display: inline;" >
+									<ul style="display: inline;">
+										<li>
+											<a href="<c:url value='/Recipe/user/UserInsertRecipe2'/>">
+												<span style="font-size: large;">新增食譜Go <i class="fas fa-arrow-right"></i></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
 
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">前一頁</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">下一頁</a></li>
-						</ul>
+			<c:if test="${lists.size() != 0}">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="pagination-wrap">
+							<ul>
+								<li><a href="#">前一頁</a></li>
+								<li><a href="#">1</a></li>
+								<li><a class="active" href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">下一頁</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 	</div>
 	<!-- end products -->
@@ -305,11 +327,33 @@
 	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
+	<!-- sweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 	<script>
 		$(function(){
 			userNameMain();
 		})
+		
+		function doDelete(id, name){
+			let isAccept = confirm("您確認要從食譜中移除 "+ name +" 嗎？")
+			if (isAccept) {
+				let url = "<c:url value='/Recipe/user/ViewYourRecipe2/'/>"+id;
+				
+				$.ajax({
+					url: url,
+					method: "delete",
+					success: function () {
+						Swal.fire({
+							position : 'center',
+							icon : 'success',
+							title : '刪除成功'
+						})
+						location.reload();
+					}
+				})
+			}
+		}
 	</script>
 
 </body>

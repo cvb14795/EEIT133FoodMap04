@@ -70,7 +70,9 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
+
 <link rel="stylesheet" href="<c:url value='/css/comment-style.css'/>">
+
 <!-- vegas -->
 <link rel="stylesheet" href="<c:url value='/css/vegas.css'/>"/>
 
@@ -143,13 +145,10 @@
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
+<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
@@ -170,10 +169,10 @@
 											</ul>
 										</li>
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
+										  <a class="shopping-cart" href="<c:url value='/Shop/Cart/'/>">
+											 <i class="fas fa-shopping-cart"></i>
+										  </a>
+										</li>
 										<li><a>
 											<label for="checkbox-switch" style="">淺色模式</label>
 											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
@@ -301,7 +300,7 @@
      
             <div class="card">
                 <div class="row d-flex">
-                    <div class=""> <img class="profile-pic" src="https://randomuser.me/api/portraits/women/44.jpg"> </div>
+                    <div class=""> <img class="profile-pic" src="${tempComment.userPhotoTest}"> </div>
                     <div class="d-flex flex-column">
                         <h3 class="text-left"><a href="sortByUserAccount?userAccount=${tempComment.userAccount}">${tempComment.userName}</a></h3>
                         <div class="rating">
@@ -536,37 +535,7 @@
 		})
 	</script>
 	
-	<script>
-	var clicks = 0;
-	var userLikes = clicks;
-	var userLikes = $("#userLikes").val()
 	
-	<!-- like button js -->
-	
-	var hasClicked = false;
-	
-	
-		
-    function onClick() 
-    {
-        if(!hasClicked)
-        {
-           clicks += 1;
-           document.getElementById("heartnum").innerHTML = clicks;
-           hasClicked = true;
-           userLikes = clicks;
-           
-        }else {
-        	clicks -= 1;
-            document.getElementById("heartnum").innerHTML = clicks;
-        	hasClicked = false;
-        	userLikes = clicks;
-        }
-
-    }
-		
-	
-    </script>
     
     <script>
     // 計算有幾則評論
@@ -578,10 +547,9 @@
     
     <script>
     // 統計分數
+    var matches = 10;
     
-    
-    var matches = 0;
-    $('.rating').each(function(i, val) {
+    $(tempComment.score).each(function(i, val) {
       if ($(this).val() == '1') {
         matches++;
       }
@@ -589,12 +557,14 @@
     document.getElementById("star1").innerHTML = matches;
     </script>
     
+    
+    <!-- 計算讚數 -->    
     <script>
     $(function() {
 		
-		var clicks = 0;
-		var userLikes = clicks;
-		var userLikes = $("#userLikes").val()
+		var clicks = $("#heartnum").val();
+		// var userLikes = clicks;
+		// var userLikes = $("#heartnum").val()
 		
 		<!-- like button js -->
 		
@@ -603,21 +573,22 @@
 		  $(".heart").on("click", function() {
 			  if(!hasClicked)
 		        {
-				  clicks += 1;
-				  document.getElementById("heartnum").innerHTML = clicks;
-				  hasClicked = true;
-				  userLikes = clicks;
-		           $(this).toggleClass("is-active");
+					  clicks += 1;
+					  document.getElementById("heartnum").innerHTML = clicks;
+					  hasClicked = true;
+					  // userLikes = clicks;
+			          $(this).toggleClass("is-active");
 		           
 		        }else {
 		        	 clicks -= 1;
 		        	 document.getElementById("heartnum").innerHTML = clicks;
 		        	 hasClicked = false;
-		        	 userLikes = clicks;
+		        	 // userLikes = clicks;
 		        	 $(this).toggleClass("is-active");
 		        }
 		   
 		  });
+		  
 		});
 	</script>
 	
@@ -653,7 +624,6 @@
 	
 </body>
 </html>
-
 
 
 

@@ -150,13 +150,10 @@
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
+<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
@@ -177,10 +174,10 @@
 											</ul>
 										</li>
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
+										  <a class="shopping-cart" href="<c:url value='/Shop/Cart/'/>">
+											 <i class="fas fa-shopping-cart"></i>
+										  </a>
+										</li>
 										<li><a>
 											<label for="checkbox-switch" style="">淺色模式</label>
 											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
@@ -241,11 +238,13 @@
 					class="form-control mb-4 col-4" placeholder="姓名(1.不可空白 2.10字以內)" onblur="'checkname()'"/>
 			<span id="idsp"></span><br />
 			
+			<!-- 測試用 -->
 			<form:input type="text" path="mapName" 
 					class="form-control mb-4 col-4" placeholder="店家名稱"/>
 					
 			<form:input type="text" path="userAccount" 
 					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
+		
 					
 			<!-- Ratting system -->
 			<label>評分(不可空白)：</label>	<br>
