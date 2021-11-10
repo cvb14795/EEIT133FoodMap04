@@ -18,4 +18,7 @@ public interface IShopService {
 	void reviseItem(Item item);
 
 	void deleteById(Integer id);
+	
+	//上架商品總數(不同組商品視為同一筆 即不計庫存數量)
+	Long findItemCount();
 }

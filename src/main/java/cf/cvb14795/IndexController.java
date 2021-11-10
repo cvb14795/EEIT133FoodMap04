@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingRequestCookieException;
@@ -16,10 +17,16 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
+
+import cf.cvb14795.Comment.service.CommentService;
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
+import cf.cvb14795.shop.service.IOrderService;
+import cf.cvb14795.shop.service.IShopService;
 import util.MemberStatus;
 
 @Controller
@@ -29,10 +36,20 @@ import util.MemberStatus;
 public class IndexController {
 
 	IMemberService mService;
+	IShopService shopService;
+	IOrderService orderService;
+	CommentService commentService;
 
 	@Autowired
-	public IndexController(IMemberService mService) {
+	public IndexController(
+			IMemberService mService,
+			IShopService shopService,
+			IOrderService orderService,
+			CommentService commentService) {
 		this.mService = mService;
+		this.shopService = shopService;
+		this.orderService = orderService;
+		this.commentService = commentService;
 	}
 
 	public IndexController() {
@@ -81,7 +98,6 @@ public class IndexController {
 	@GetMapping("/admin")
 	private String adminHome(Model model, 
 			@CookieValue("user") String user,
-			@ModelAttribute("statMap") Map<String, Long> statMap,
 			@ModelAttribute("imageMap") Map<String, String> imageMap) {
 		if (!mService.isAdmin(user)) {
 			System.out.println("權限不足，無法登入管理員後台，將導回使用者首頁!");
@@ -92,15 +108,21 @@ public class IndexController {
 		for (Member m : memberList) {
 			imageMap.put(m.getAccount(), Base64.getEncoder().encodeToString(m.getImgBytes()));
 		}			
-		statMap.put("商城商品銷售額",  mService.findMemberCount());
-		statMap.put("商城商品總數",  mService.findMemberCount());
-		statMap.put("評論區留言總數",  mService.findMemberCount());
-		statMap.put("會員註冊人數",  mService.findMemberCount());
-		
 		
 		model.addAttribute("members", memberList);
 		return "HomePage/Admin/index";
 	}
+	
+	@GetMapping(path = "/statCount", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	private String statCount(@ModelAttribute("statMap") Map<String, Long> statMap) {
+		statMap.put("商城商品銷售額", orderService.calcOrderTotalPrice());
+		statMap.put("商城商品總數",  shopService.findItemCount());
+		statMap.put("評論區留言總數",  commentService.findCommentCount());
+		statMap.put("會員註冊人數",  mService.findMemberCount());
+		return new Gson().toJson(statMap);
+	}
+	
 	
 	@GetMapping("/aboutUs")
 	private String aboutUs() {
@@ -116,6 +138,12 @@ public class IndexController {
 	private void setUserAndAdmin(Model model, HttpServletRequest request) {
 		Map<String, String> imageMap = new HashMap<>();
 		Map<String, Long> statMap = new HashMap<>();
+		
+		statMap.put("商城商品銷售額", orderService.calcOrderTotalPrice());
+		statMap.put("商城商品總數",  shopService.findItemCount());
+		statMap.put("評論區留言總數",  commentService.findCommentCount());
+		statMap.put("會員註冊人數",  mService.findMemberCount());
+		
 		model.addAttribute("user", new MemberStatus(request.getCookies()).getCurrentUserAccount());
 		model.addAttribute("isAdmin", false);
 		model.addAttribute("imageMap", imageMap);

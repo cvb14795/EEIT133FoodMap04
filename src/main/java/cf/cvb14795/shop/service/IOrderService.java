@@ -17,11 +17,13 @@ public interface IOrderService {
 	 Optional<Order> findByOrderId(String trackNo);
 	 
 	 Order findByMemberAccount(String memberAccount);
-	
-	//修改訂單
+	 
+	 //修改訂單
 	 void reviseOrder(Order order);
 	
 	 void deleteById(String trackNo);
+	 
+	 //計算銷售總額(僅計算狀態為"已付款"的訂單)
+	 Long calcOrderTotalPrice();
 
-	
 }

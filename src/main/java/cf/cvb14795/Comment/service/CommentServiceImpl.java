@@ -110,5 +110,11 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.findAllByOrderByUserLikesDesc();
 	}
 
+	@Override
+	public Long findCommentCount() {
+		// TODO Auto-generated method stub
+		return commentRepository.count();
+	}
+
 
 }
