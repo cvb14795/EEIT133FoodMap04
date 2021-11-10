@@ -289,7 +289,7 @@ public class ShopController {
 		// 發送付款資訊的網址(POST)
 //		System.out.println("base網址:"+baseUrl+prefix);
 //		System.out.println("完整ReturnURL網址:"+baseUrl+prefix+"listenPayResult");
-		obj.setReturnURL("https://fcdb-140-115-236-39.ngrok.io/FoodMap04/Shop/listenPayResult");
+		obj.setReturnURL("https://eeit133-foodmap04.herokuapp.com/FoodMap04/Shop/listenPayResult");
 //		obj.setReturnURL(baseUrl+prefix+"listenPayResult");
 		obj.setNeedExtraPaidInfo("N");
 		// 付款成功後將用戶導向的網址（返回商店）
