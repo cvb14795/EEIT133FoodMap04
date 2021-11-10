@@ -9,6 +9,7 @@ import ecpay.payment.integration.exception.EcpayException;
 
 public class OrderStatusUtil {
 	private AllInOne all;
+
 	private QueryTradeInfoObj queryTradeInfoObj = new QueryTradeInfoObj();
 	private AioCheckOutALL checkOutObj = new AioCheckOutALL();
 	
@@ -29,6 +30,14 @@ public class OrderStatusUtil {
 		return form;
 	}
 	
+	public AllInOne getAll() {
+		return all;
+	}
+	
+	public void setAll(AllInOne all) {
+		this.all = all;
+	}
+
 	public String queryTradeInfo() {
 		return all.queryTradeInfo(queryTradeInfoObj);
 	}
@@ -54,5 +63,8 @@ public class OrderStatusUtil {
 		queryTradeInfoObj.setMerchantTradeNo(checkOutObj.getMerchantTradeNo());
 	}
 	
+	public OrderStatusUtil() {
+		
+	}
 	
 }

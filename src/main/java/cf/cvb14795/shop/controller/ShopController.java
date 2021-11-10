@@ -52,7 +52,7 @@ import util.ecpay.OrderStatusUtil;
 public class ShopController {
 //	private static Logger log = LoggerFactory.getLogger(ShopController.class);
 	private String prefix = "Shop/";
-	private OrderStatusUtil orderStatus;
+	private OrderStatusUtil orderStatus = new OrderStatusUtil(null);
 	Map<Integer, OrderItem> cart = new LinkedHashMap<>();
 	// 運費先固定60 有折價再扣
 	private Integer shippingFee = 60;
@@ -244,7 +244,7 @@ public class ShopController {
 		order.setStatus("未付款");
 		
 		AllInOne all = new AllInOne("");
-		orderStatus = new OrderStatusUtil(all);
+		orderStatus.setAll(all);
 		AioCheckOutALL obj = orderStatus.getCheckOutObj();
 		
 		// ATM: 測試用 網路ATM (使用台新銀行測試)
