@@ -18,4 +18,6 @@ public interface IAdminRecipeService {
 	public void deleteById(int id);
 	
 	Optional<AdminRecipeBean> findById(int id);
+	
+	Long countByCategory(String category);
 }

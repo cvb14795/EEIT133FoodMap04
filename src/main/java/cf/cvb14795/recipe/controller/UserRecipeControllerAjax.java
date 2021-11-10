@@ -212,7 +212,7 @@ public class UserRecipeControllerAjax {
 //	}
 
 	// ============== 資料刪除 ==============
-	@DeleteMapping(path = "ViewYourRecipe2/{id}")
+	@DeleteMapping("ViewYourRecipe2/{id}")
 	public ResponseEntity<String> UserDeleteRecipeAction(@PathVariable("id") Integer id) {
 		Optional<UserRecipeBean> opt= uRecipeService.findById(id);
 		if (opt.isPresent()) {
@@ -245,14 +245,14 @@ public class UserRecipeControllerAjax {
 		return PREFIX + "SingleMembersRecipe";
 	}
 	
-	// ============== 我的最愛 ==============
-	@GetMapping("/myfavorites/{id}")
-    public ResponseEntity<?> goToMyfavorites(@PathVariable("id") Integer id, @ModelAttribute("member") Member userName, Model model) {
+	// ============== 我的最愛寫進資料庫 ==============
+	@GetMapping("myfavorites/{id}")
+    public ResponseEntity<?> goToMyfavorites(@PathVariable("id") Integer id, @ModelAttribute("member") Member member, Model model) {
 		MyFavoritesBean myFavBean = new MyFavoritesBean();
 		
 		AdminRecipeBean aRecipeId = aRecipeService.getId(id);
 		myFavBean.setaRecipeId(aRecipeId);
-		myFavBean.setUserAccount(userName);
+		myFavBean.setMember(member);
 		
 //		HttpHeaders responseHeaders = new HttpHeaders();
 //		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -269,6 +269,23 @@ public class UserRecipeControllerAjax {
 		}
 
 //		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(myFavBean));
+	}
+	
+	// ============== 前端顯示我的最愛 ==============
+	@GetMapping("showMyfavorites")
+	public String showMyfavorites(@CookieValue("user") String userName, Model model) {
+		List<MyFavoritesBean> lists = favoritesService.findByName(userName);
+		List<AdminRecipeBean> recipeBeans = new ArrayList<AdminRecipeBean>();
+		List<String> imgList = new ArrayList<String>();
+		for (MyFavoritesBean favoritesBean : lists) {
+			AdminRecipeBean idBean = aRecipeService.getId(favoritesBean.getaRecipeId().getId());
+			recipeBeans.add(idBean);
+			String base64String = Base64.getEncoder().encodeToString(favoritesBean.getaRecipeId().getPhoto());
+			imgList.add(base64String);
+		}
+		model.addAttribute("recipeBeans", recipeBeans);
+		model.addAttribute("imgList", imgList);
+		return PREFIX + "MyFavoriteAdmin";
 	}
 	
 	@ModelAttribute

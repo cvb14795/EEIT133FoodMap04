@@ -1,0 +1,49 @@
+body {
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: white;
+	line-height: 1.5em;
+}
+
+.container {
+	width: 90%;
+	/* 外距:元素跟元素的間距 */
+	margin: auto;
+	/* 內距:元素內跟邊界的間距 */
+	padding: 10px;
+}
+
+fieldset {
+	/*因為是包住 div 所以要比 div 大*/
+	width: 500px;
+	margin: 15px;
+	border: 3px solid #FF0080;
+	border-radius: 20px;
+	margin: auto;
+}
+
+legend {
+	font-size: 24px;
+	color: #66B3FF;
+	/* text-align: center; */
+	margin-left: 10px;
+}
+
+.st1 {
+	width: 450px;
+	border-bottom: 2px dashed #FF95CA;
+	margin: 20px;
+	padding-bottom: 20px;
+}
+
+.sub {
+	width: 450px;
+	margin: auto;
+	text-align: center;
+}
+
+.t1 {
+	width: 100px;
+	float: left;
+	text-align: right;
+}

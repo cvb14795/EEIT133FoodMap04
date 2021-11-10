@@ -136,7 +136,7 @@
 	<!-- end breadcrumb section -->
 
 	<!-- products -->
-	<div class="product-section mt-150 mb-150">
+	<div class="product-section mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -147,7 +147,7 @@
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li><a>我的最愛</a></li>
+							<li><a href="<c:url value="/Recipe/user/showMyfavorites"/>">我的最愛</a></li>
 						</ul>
 					</div>
 				</div>
@@ -182,7 +182,7 @@
 									</h6>
 									
 									<c:choose>
-										<c:when test="${i < favList.size() && lists.get(i).id == favList.get(i).aRecipeId.id}">
+										<c:when test="${favMap.size() > 0 && favMap.containsKey(lists.get(i).id)}">
 											<a href="javascript:void(0)" onclick="addToFavorite(${lists.get(i).id}, ${status.index})" class="cart-btn fav isFav" style="background-color: red;"><i class="fas fa-heart"></i> 移除我的最愛</a>
 										</c:when>
 										<c:otherwise>

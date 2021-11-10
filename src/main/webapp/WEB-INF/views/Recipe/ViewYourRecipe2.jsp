@@ -137,7 +137,7 @@
 	<!-- end breadcrumb section -->
 
 	<!-- products -->
-	<div class="product-section mt-150 mb-150">
+	<div class="product-section mb-150">
 		<div class="container">
 
 			<div class="row">
@@ -149,7 +149,7 @@
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li class="active"><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li>我的最愛</li>
+							<li><a href="<c:url value="/Recipe/user/showMyfavorites"/>">我的最愛</a></li>
 						</ul>
 					</div>
 				</div>

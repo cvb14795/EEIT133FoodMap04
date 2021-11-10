@@ -2,8 +2,6 @@ package cf.cvb14795.recipe.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,18 +24,26 @@ public class MyFavoritesBean implements Serializable{
 	private int favoriteId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userAccount")
-	private Member userAccount;
+	@JoinColumn(name = "account")
+	private Member member;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
 	private AdminRecipeBean aRecipeId;
 	
+//	@GenericGenerator(
+//		parameters = {@Parameter(name = "property", value = "member")},
+//		name = "generator",
+//		strategy = "foreign"
+//	)
+//	@GeneratedValue(generator = "generator")
+//	private String userAccount;
+	
 	public MyFavoritesBean() {
 	}
 
-	public MyFavoritesBean(Member userAccount, AdminRecipeBean aRecipeId) {
-		this.userAccount = userAccount;
+	public MyFavoritesBean(Member member, AdminRecipeBean aRecipeId) {
+		this.member = member;
 		this.aRecipeId = aRecipeId;
 	}
 
@@ -49,12 +55,12 @@ public class MyFavoritesBean implements Serializable{
 		this.favoriteId = favoriteId;
 	}
 
-	public Member getUserAccount() {
-		return userAccount;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setUserAccount(Member userAccount) {
-		this.userAccount = userAccount;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public AdminRecipeBean getaRecipeId() {
@@ -67,7 +73,7 @@ public class MyFavoritesBean implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MyFavoritesBean [favoriteId=" + favoriteId + ", userAccount=" + userAccount + ", aRecipeId=" + aRecipeId.getId()
+		return "MyFavoritesBean [favoriteId=" + favoriteId + ", userAccount=" + member + ", aRecipeId=" + aRecipeId.getId()
 				+ "]";
 	}
 

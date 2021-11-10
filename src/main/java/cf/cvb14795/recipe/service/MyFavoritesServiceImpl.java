@@ -32,14 +32,17 @@ public class MyFavoritesServiceImpl implements IMyFavoriteService {
 
 	@Override
 	public List<MyFavoritesBean> findAll() {
-		// TODO Auto-generated method stub
 		return favoritesDao.findAll();
 	}
 
 	@Override
 	public void deleteByRecipeId(Integer id) {
-		// TODO Auto-generated method stub
 		favoritesDao.deleteByRecipeId(id);
+	}
+
+	@Override
+	public List<MyFavoritesBean> findByName(String member) {
+		return favoritesDao.findByName(member);
 	}
 
 }
