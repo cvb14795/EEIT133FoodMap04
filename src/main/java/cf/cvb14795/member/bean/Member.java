@@ -53,7 +53,7 @@ public class Member {
 	@Column(name = "isAdmin")
 	private boolean admin;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userAccount", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "member", cascade = CascadeType.ALL)
     Set<MyFavoritesBean> fBeans = new HashSet<MyFavoritesBean>();
 
 	public String getAccount() {

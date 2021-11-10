@@ -78,7 +78,7 @@
     <header>
         <h1>修改食譜</h1>
     </header>
-    <form id="form" modelAttribute="updateRecipe" method="POST" enctype="multipart/form-data">
+    <form id="form"  method="POST" enctype="multipart/form-data">
 <%--     <form id="form"> --%>
         <fieldset>
             <legend>官方食譜</legend>

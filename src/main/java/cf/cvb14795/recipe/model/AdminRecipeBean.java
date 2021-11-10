@@ -51,7 +51,7 @@ public class AdminRecipeBean implements Serializable {
 	@Column
 	private String step;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userAccount", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aRecipeId", cascade = CascadeType.ALL)
 	Set<MyFavoritesBean> adminFavRecipe = new HashSet<MyFavoritesBean>(); 
 
 	@Override

@@ -13,7 +13,6 @@
 
 	<!-- title -->
 	<title>食譜規劃</title>
-
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
 	<!-- google font -->
@@ -39,7 +38,9 @@
 	<!-- 開關改成IOS風格(左右滑動按鈕) -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
 	<script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
+
 </head>
+
 <body>
 	
 	<!--PreLoader-->
@@ -125,7 +126,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>會員食譜</p>
+						<p>我的最愛</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
@@ -137,17 +138,16 @@
 	<!-- products -->
 	<div class="product-section mb-150">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
 							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
-							<li class="active"><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
+							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li>我的最愛</li>
+							<li class="active"><a href="<c:url value="/Recipe/user/showMyfavorites"/>">我的最愛</a></li>
 						</ul>
 					</div>
 				</div>
@@ -155,40 +155,57 @@
 
 			<div class="row product-lists">
 				<c:choose>
-					<c:when test="${lists.size() != 0}">
-						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
+					<c:when test="${recipeBeans.size() != 0}">
+						<c:forEach var="i" begin="0" end="${recipeBeans.size()-1 }">
 							<div class="col-lg-4 col-md-6 text-center">
 								<div class="single-product-item">
 									<div class="product-image">
 										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
 									</div>
-									<h3>會員:${lists.get(i).userName}</h3>
-									<h3>品名:${lists.get(i).foodName}</h3>
+									<h3>品名:${recipeBeans.get(i).name}</h3>
+									<p class="product-price"><span>類別:${recipeBeans.get(i).category}</span></p>
 									<h6>食材:
 										<p>
 											<span>
-												${lists.get(i).food1}<br /> ${lists.get(i).food2}<br />
-												${lists.get(i).food3}<br /> ${lists.get(i).food4}
+												${recipeBeans.get(i).food1}<br /> ${recipeBeans.get(i).food2}<br />
+												${recipeBeans.get(i).food3}<br /> ${recipeBeans.get(i).food4}
 											</span>
 										</p>
 									</h6>
 									<h6>調味料:
 										<p>
 											<span>
-												${lists.get(i).sauce1}<br /> ${lists.get(i).sauce2}<br />
-												${lists.get(i).sauce3}
+												${recipeBeans.get(i).sauce1}<br /> ${recipeBeans.get(i).sauce2}<br />
+												${recipeBeans.get(i).sauce3}
 											</span>
 										</p>
 									</h6>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-									<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2/${lists.get(i).id}'/>" class="cart-btn">詳細資訊</a>
+									<h6>步驟:
+										<p>
+											<span>
+												${recipeBeans.get(i).step}
+											</span>
+										</p>
+									</h6>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<td colspan=11 style="text-align: center;">無資料!</td>
-						<td><a id="edit" href="<c:url value='/'/>">回首頁</a></td>
+						<div class="container">
+							<div style="text-align: center;">
+								<h2>無資料!</h2>
+								<div class="pagination-wrap" style="display: inline;" >
+									<ul style="display: inline;">
+										<li>
+											<a href="<c:url value='/Recipe/user/'/>">
+												<span style="font-size: large;">加入我的最愛Go <i class="fas fa-arrow-right"></i></span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -306,11 +323,5 @@
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	
-	<script>
-		$(function(){
-			userNameMain();
-		})
-	</script>
-
 </body>
 </html>

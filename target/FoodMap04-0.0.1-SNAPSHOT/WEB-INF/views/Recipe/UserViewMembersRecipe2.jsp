@@ -97,14 +97,16 @@
 											</ul>
 										</li>
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
+											<a class="shopping-cart" href="<c:url value='/Cart/'/>">
+												<i class="fas fa-shopping-cart"></i> 已購票券
+											</a>
+										</li>
+										<li>
+											<a>
+												<label for="checkbox-switch" style="">淺色模式</label>
+												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
+											</a>
+										</li>
 									</div>
 								</li>
 							</ul>
@@ -125,7 +127,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>會員食譜</p>
+						<p>詳細資訊</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
@@ -134,10 +136,9 @@
 	</div>
 	<!-- end breadcrumb section -->
 
-	<!-- products -->
-	<div class="product-section mt-150 mb-150">
+	<!-- single product -->
+	<div class="single-product mb-150">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-filters">
@@ -151,63 +152,83 @@
 						</ul>
 					</div>
 				</div>
-			</div>
-
-			<div class="row product-lists">
-				<c:choose>
-					<c:when test="${lists.size() != 0}">
-						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
-							<div class="col-lg-4 col-md-6 text-center">
-								<div class="single-product-item">
-									<div class="product-image">
-										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
-									</div>
-									<h3>會員:${lists.get(i).userName}</h3>
-									<h3>品名:${lists.get(i).foodName}</h3>
-									<h6>食材:
-										<p>
-											<span>
-												${lists.get(i).food1}<br /> ${lists.get(i).food2}<br />
-												${lists.get(i).food3}<br /> ${lists.get(i).food4}
-											</span>
-										</p>
-									</h6>
-									<h6>調味料:
-										<p>
-											<span>
-												${lists.get(i).sauce1}<br /> ${lists.get(i).sauce2}<br />
-												${lists.get(i).sauce3}
-											</span>
-										</p>
-									</h6>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
-								</div>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<td colspan=11 style="text-align: center;">無資料!</td>
-						<td><a id="edit" href="<c:url value='/'/>">回首頁</a></td>
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">前一頁</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">下一頁</a></li>
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img src="data:image/jpg;base64,${base64String}" alt="" height="400">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3>${recipe.name}</h3>
+						<p class="single-product-pricing"><span>一人份調理包</span> $50</p>
+						<p><strong>步驟: </strong>${recipe.step}</p>
+						<div class="single-product-form">
+							<form action="index.html">
+								<input type="number" placeholder="0">
+							</form>
+							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> 加入購物車</a>
+							<p><strong>分類: </strong>${recipe.category}</p>
+						</div>
+						<h4>分享:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end products -->
+	<!-- end single product -->
+
+	<!-- more products -->
+	<div class="more-products mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Related</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+						</div>
+						<h3>Strawberry</h3>
+						<p class="product-price"><span>Per Kg</span> 85$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
+						</div>
+						<h3>Berry</h3>
+						<p class="product-price"><span>Per Kg</span> 70$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
+						</div>
+						<h3>Lemon</h3>
+						<p class="product-price"><span>Per Kg</span> 35$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end more products -->
 
 		<!-- footer -->
 	<div class="footer-area">
@@ -304,12 +325,8 @@
 	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
+	<!-- sweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
-	<script>
-		$(function(){
-			userNameMain();
-		})
-	</script>
-
 </body>
 </html>

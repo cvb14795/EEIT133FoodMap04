@@ -2,6 +2,7 @@ package cf.cvb14795.recipe.controller;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,13 +50,18 @@ public class UserHomePageController {
 		List<AdminRecipeBean> lists = aRecipeService.selectAll();
 		List<String> imgList = new ArrayList<String>();
 		List<MyFavoritesBean> favList = favoritesService.findAll();
-		for (AdminRecipeBean bean : lists) {
-			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
+		HashMap<Integer, MyFavoritesBean> favMap = new HashMap<>();
+		for (int i = 0; i < lists.size(); i++) {
+			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
 			imgList.add(base64String);
+			if (i < favList.size()) {
+				favMap.put(favList.get(i).getaRecipeId().getId(), favList.get(i));				
+			}
 		}
+//		Integer max = favMap.keySet().stream().max(Integer::compareTo).orElse(0);
 		model.addAttribute("lists", lists);
 		model.addAttribute("imgList", imgList);
-		model.addAttribute("favList", favList);
+		model.addAttribute("favMap", favMap);
 
 		return "Recipe/UserViewAdminRecipe2";
 	}

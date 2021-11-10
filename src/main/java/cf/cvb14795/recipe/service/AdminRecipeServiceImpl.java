@@ -50,4 +50,9 @@ public class AdminRecipeServiceImpl implements IAdminRecipeService{
 	public Optional<AdminRecipeBean> findById(int id) {
 		return recipeDao.findById(id);
 	}
+
+	@Override
+	public Long countByCategory(String category) {
+		return recipeDao.countByCategory(category);
+	}
 }

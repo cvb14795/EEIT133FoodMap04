@@ -97,7 +97,7 @@
                         <a href="./comments/admin-list"> <i class="menu-icon ti-email"></i>評論專區 </a>
                     </li>
                     <li>
-                        <a href="./Recipe/admin"> <i class="menu-icon ti-email"></i>營養資訊 </a>
+                        <a href="./Recipe/admin"> <i class="menu-icon ti-email"></i>食譜規劃 </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>帳號功能</a>

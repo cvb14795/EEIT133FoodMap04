@@ -2,17 +2,12 @@ package cf.cvb14795.recipe.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -55,14 +50,6 @@ public class UserRecipeBean implements Serializable{
 //	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userRecipe", cascade = CascadeType.ALL)
 //	private Set<MyFavoritesBean> userFavRecipe = new HashSet<MyFavoritesBean>();
 
-//	@Override
-//	public String toString() {
-//		return "UserRecipeBean [id=" + id + ", userName=" + userName + ", foodName=" + foodName + ", category="
-//				+ category + ", food1=" + food1 + ", food2=" + food2 + ", food3=" + food3 + ", food4=" + food4
-//				+ ", sauce1=" + sauce1 + ", sauce2=" + sauce2 + ", sauce3=" + sauce3 + ", photo="
-//				+ Arrays.toString(photo) + "]";
-//	}
-	
 	@Override
 	public String toString() {
 		return "UserRecipeBean [id=" + id + ", userName=" + userName + ", foodName=" + foodName + ", category="
@@ -220,6 +207,4 @@ public class UserRecipeBean implements Serializable{
 		this.step = step;
 	}
 	
-	
-
 }
