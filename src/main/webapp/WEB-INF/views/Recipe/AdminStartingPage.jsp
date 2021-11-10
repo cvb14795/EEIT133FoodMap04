@@ -242,15 +242,11 @@ legend {
 					<input type="text" id="" name="sauce3" placeholder="ex:鹽1匙">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">步驟:</label>
-					<textarea id="" name="step" rows="5" cols="33"></textarea>
-				</div>
-				<div class="st1">
-					<img src="" width="450" height="300" alt="請選擇照片"  id="showPic">
+					<img src="" width="450" height="300" alt="請選擇照片">
 				</div>
 				<div class="st1">
 					<label for="" class="t1">照片:</label> 
-					<input type="file" name="photo" id="projectImage">
+					<input type="file" name="photo">
 				</div>
 
 			</fieldset>
@@ -262,26 +258,15 @@ legend {
 		</form>
 	</div>
 	<script type="text/javascript">
-// 		var x = new FileReader;
-// 		var src;
-// 		document.forms[2].elements[10].onchange = function() {
-// 			x.readAsDataURL(this.files[0]);
-// 		}
-// 		x.onloadend = function() {
-// 			src = this.result;
-// 			document.images[2].src = src;
-// 		}
-		
-		var img;
-		$('#projectImage').change(function() {
-            var projectImage = $("#projectImage")[0].files[0];
-            var reader = new FileReader;
-            reader.onload = function(e) {
-                $('#showPic').attr('src', e.target.result);
-                img = e.target.result;
-            }
-            reader.readAsDataURL(projectImage);
-        })
+		var x = new FileReader;
+		var src;
+		document.forms[2].elements[10].onchange = function() {
+			x.readAsDataURL(this.files[0]);
+		}
+		x.onloadend = function() {
+			src = this.result;
+			document.images[2].src = src;
+		}
 
 		var form = document.getElementById("form");
 		$("#form").on("submit", function(e){
@@ -292,21 +277,12 @@ legend {
 			
 			var html = "";
 			var inputData = $(".st1 input").slice(0, 9);
-			var recipeStep = $(".st1 textarea").val();
 			// html += + "name" + $("#name").val() + "<br/>";
 			for (let i = 0; i < inputData.length; i++) {
 				let name = inputData.eq(i).attr("name");
 				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
 				html += name+": "+value+"</br>";
 			}
-			
-			//步驟:
-			let stepList = recipeStep.split("\n");
-			html += "步驟:</br>"
-			//照每個步驟換行
-			stepList.forEach(element => {
-				html += element+"</br>"
-			});
 			console.log(html);
 			
 			//改用ajax傳送 棄用原本的form傳送
@@ -316,7 +292,7 @@ legend {
 				title: '確定要新增嗎？',
 				icon: 'question',
 				html: html,
-				imageUrl: img,
+				imageUrl: src,
 				imageWidth: 400,
 				imageHeight: 200,
 				showCancelButton: true,

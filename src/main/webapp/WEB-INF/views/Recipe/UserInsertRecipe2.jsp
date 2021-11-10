@@ -188,9 +188,9 @@ legend {
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
-							<li class="active"><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
+							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
 							<li data-filter=".lemon">我的最愛</li>
 						</ul>
@@ -236,10 +236,6 @@ legend {
 				<div class="st1">
 					<label for="" class="t1">調味料3:</label>
 					<input type="text" id="" name="sauce3" />
-				</div>
-				<div class="st1">
-					<label for="" class="t1">步驟:</label>
-					<textarea id="" name="step" rows="5" cols="33"></textarea>
 				</div>
 				<div class="st1">
 					<img src="" width="450" height="300" alt="請選擇照片"  id="showPic">
@@ -395,21 +391,12 @@ legend {
 			
 			var html = "";
 			var inputData = $(".st1 input").slice(0, 9);
-			var recipeStep = $(".st1 textarea").val();
 			// html += + "name" + $("#name").val() + "<br/>";
 			for (let i = 0; i < inputData.length; i++) {
 				let name = inputData.eq(i).attr("name");
 				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
 				html += name+": "+value+"</br>";
 			}
-			
-			//步驟:
-			let stepList = recipeStep.split("\n");
-			html += "步驟:</br>"
-			//照每個步驟換行
-			stepList.forEach(element => {
-				html += element+"</br>"
-			});
 			console.log(html);
 			
 			//改用ajax傳送 棄用原本的form傳送
@@ -451,7 +438,11 @@ legend {
 									html1 += key+": "+val;
 									html1 += "<br/>";
 								} 
+								// else if (key == "base64String"){
+								// 	html += "<img src='data:image;base64,"+jsonData.base64String+"'/>";
+								// }
 							};
+							// console.log(html);
 
 							Swal.fire({
 								title: '已新增成功！',
@@ -461,7 +452,7 @@ legend {
 								imageWidth: 400,
 								imageHeight: 200,
 							})
-							setTimeout("window.location.pathname = 'FoodMap04/Recipe/user/ViewYourRecipe2'",1500);
+							setTimeout("window.location.pathname = 'FoodMap04/Recipe/user'",1500);
 						},
 						error: function(e){
 							console.log(e);

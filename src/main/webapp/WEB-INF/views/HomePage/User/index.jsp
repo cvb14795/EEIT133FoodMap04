@@ -113,7 +113,7 @@
 						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 <%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>

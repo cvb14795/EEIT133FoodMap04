@@ -188,10 +188,10 @@ legend {
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
-							<li class="active"><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
+							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
 							<li data-filter=".lemon">我的最愛</li>
 						</ul>
 					</div>
@@ -202,7 +202,10 @@ legend {
 <%--     <form id="form"> --%>
         <fieldset>
             <legend>官方食譜</legend>
-            <input type="hidden" name="userName" value="${updateRecipe.userName}">
+            <div class="st1">
+                <label for="" class="t1">會員姓名:</label>
+                <input id="name" name="userName" value="${updateRecipe.userName}"/>
+            </div>
             <div class="st1">
                 <label for="" class="t1">品項:</label>
                 <input id="name" name="foodName" value="${updateRecipe.foodName}"/>
@@ -239,10 +242,6 @@ legend {
                 <label for="" class="t1">調味料3:</label>
                 <input id="name" name="sauce3" value="${updateRecipe.sauce3}"/>
             </div>
-            <div class="st1">
-					<label for="" class="t1">步驟:</label>
-					<textarea name="step" rows="5" cols="33">${updateRecipe.step}</textarea>
-			</div>
             <div class="st1">
                 <label for="" class="t1">照片:</label>
                 
@@ -363,7 +362,6 @@ legend {
 		})
 		
 		var form = document.getElementById("form");
-		
     	$("#form").on("submit", function(e){
 			/* =====for formData&MultipartFile =====*/
 			var formData = new FormData(form);
@@ -372,23 +370,15 @@ legend {
 			
 			var html = "";
 			var inputData = $(".st1 input").slice(0, 10);
-			var recipeStep = $(".st1 textarea").val();
 			// html += + "name" + $("#name").val() + "<br/>";
-			for (let i = 0; i < inputData.length; i++) {				
-				let name = inputData.eq(i).attr("name");
-				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
+			for (let i = 0; i < inputData.length; i++) {
+					let name = inputData.eq(i).attr("name");
+					let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
 				if (name  != "photo"){
 					html += name+": "+value+"</br>";					
 				}
 			}
-			//步驟:
-			let stepList = recipeStep.split("\n");
-			html += "步驟:</br>"
-			//照每個步驟換行
-			stepList.forEach(element => {
-				html += element+"</br>"
-			});
-			console.log(html)
+			console.log(html);
 			
 			//改用ajax傳送 棄用原本的form傳送
 			e.preventDefault();
@@ -437,7 +427,7 @@ legend {
 								imageWidth: 400,
 								imageHeight: 200,
 							})
-							setTimeout("window.location.pathname = 'FoodMap04/Recipe/user/ViewYourRecipe2'",1500);
+							setTimeout("window.location.pathname = 'FoodMap04/Recipe/user'",1500);
 						},
 						error: function(e){
 							console.log(e);

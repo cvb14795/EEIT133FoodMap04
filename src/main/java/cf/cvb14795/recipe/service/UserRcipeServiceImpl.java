@@ -1,7 +1,6 @@
 package cf.cvb14795.recipe.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,9 +54,9 @@ public class UserRcipeServiceImpl implements IUserRecipeService{
 		uRecipeDao.deleteById(id);		
 	}
 
-	@Override
-	public Optional<UserRecipeBean> findById(int id) {
-		return uRecipeDao.findById(id);
-	}
-
+//	@Override
+//	public List<UserRecipeBean> findAll() {
+//		return null;
+//	}
+//	
 }

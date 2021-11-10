@@ -85,7 +85,7 @@
                     <li class="menu-title">Icons</li><!-- /.menu-title -->
                     
                     <li>
-                        <a href="./Food/FoodMap"> <i class="menu-icon ti-email"></i>商家資訊 </a>
+                        <a href="./Food/admin"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
                         <a href="./Coupon/frontpage"> <i class="menu-icon ti-email"></i>防疫專區 </a>

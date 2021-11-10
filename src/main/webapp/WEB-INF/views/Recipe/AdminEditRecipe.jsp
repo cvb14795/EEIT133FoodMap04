@@ -128,10 +128,6 @@
                 <input id="name" name="sauce3" value="${updateRecipe.sauce3}"/>
             </div>
             <div class="st1">
-					<label for="" class="t1">步驟:</label>
-					<textarea name="step" rows="5" cols="33">${updateRecipe.step}</textarea>
-			</div>
-            <div class="st1">
                 <label for="" class="t1">照片:</label>
                 
                 <img id="src" src="data:image/jpg;base64,${base64String}" width="100" height="100" >
@@ -157,21 +153,12 @@
 			
 			var html = "";
 			var inputData = $(".st1 input").slice(0, 9);
-			var recipeStep = $(".st1 textarea").val();
 			// html += + "name" + $("#name").val() + "<br/>";
 			for (let i = 0; i < inputData.length; i++) {
 				let name = inputData.eq(i).attr("name");
 				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
 				html += name+": "+value+"</br>";
 			}
-			
-			//步驟:
-			let stepList = recipeStep.split("\n");
-			html += "步驟:</br>"
-			//照每個步驟換行
-			stepList.forEach(element => {
-				html += element+"</br>"
-			});
 			console.log(html);
 			
 			//改用ajax傳送 棄用原本的form傳送

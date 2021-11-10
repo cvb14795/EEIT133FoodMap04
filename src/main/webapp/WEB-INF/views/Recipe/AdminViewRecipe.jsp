@@ -63,7 +63,6 @@ thead {
 			<th width="10%">調味料2</th>
 			<th width="10%">調味料3</th>
 			<th>照片</th>
-			<th>步驟</th>
 			<th>選項</th>
 		</thead>
 		<tbody>
@@ -82,15 +81,14 @@ thead {
 							<td><c:out value="${lists.get(i).sauce2}" /></td>
 							<td><c:out value="${lists.get(i).sauce3}" /></td>
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
-							<td><c:out value="${lists.get(i).step}" /></td>
 							<td><a id="edit" href="./AdminViewRecipe/id=${lists.get(i).id}">修改</a>
-								<a id="delete" href="./AdminShowDeleteRecipe?id=${lists.get(i).id}"><br/>刪除</a></td>
+								<a id="delete" href="./AdminShowDeleteRecipe?id=${lists.get(i).id}">刪除</a></td>
 						</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<td colspan=11 style="text-align: center;">無資料!</td>
-					<td><a id="edit" href="<a href="<c:url value='/Recipe/admin/AdminStartingPage'/>">">回首頁</a></td>
+					<td><a id="edit" href="./">回首頁</a></td>
 				</c:otherwise>
 			</c:choose>
 		</tbody>

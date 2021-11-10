@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="mapData" class="cf.cvb14795.Food.model.MapDataBean" scope="request"/>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,27 +10,29 @@
 
 <body>
     <div>
-        <img src="../images/${mapData.imgName}.jpg" />
+        <img src="<c:url value='/Food/user/photo/${mapData.id}'/>">
     </div>
 
     <fieldset>
         <legend>店家資料</legend>
-        <!--em  strong s 語意標籤 用來強調-->
-        <label>店名:<em> <jsp:getProperty name="mapData" property="mapname"/> </em></label>
+	
+        <label>店名:<em> ${mapData.mapname} </em></label>
         <hr>
 
-        <label>地址:<em> <jsp:getProperty name="mapData" property="mapku"/> </em></label>
+        <label>地址:<em> ${mapData.mapku}" </em></label>
         <hr>
 
-        <label>電話:<em> <jsp:getProperty name="mapData" property="mapnb"/></em></label>
+        <label>電話:<em> ${mapData.mapnb}"</em></label>
         <hr>
 
-        <label>經緯度:<em> <jsp:getProperty name="mapData" property="mapxy"/></em></label>
+        <label>經緯度:<em> ${mapData.mapxy}"</em></label>
         <hr>
 
-        <label>是否為安全商家:<em> <jsp:getProperty name="mapData" property="mapcheck"/></em></label>
+        <label>是否為安全商家:<em> ${mapData.mapcheck}" </em></label>
         <hr>
-        <!-- <input type="button" id="idbut" value="checkPassword" onclick="checkPwd(); checkid(); checkDate()" /> -->
+
+        <label>分類:<em> ${mapData.category}" </em></label>
+        <hr>
 
     </fieldset> 
 
@@ -40,7 +41,7 @@
     <script>
         var backBtn = document.getElementById("backBtn");
         backBtn.addEventListener("click", function (e) {
-            location.href = "./FoodMap";
+            location.href = "<c:url value='/Food/user'/>";
         })
     </script>
 </body>

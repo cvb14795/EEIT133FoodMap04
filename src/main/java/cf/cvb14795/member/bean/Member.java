@@ -1,18 +1,10 @@
 package cf.cvb14795.member.bean;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import cf.cvb14795.recipe.model.MyFavoritesBean;
 
 /**
  * @author cvb14795
@@ -52,9 +44,6 @@ public class Member {
 
 	@Column(name = "isAdmin")
 	private boolean admin;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userAccount", cascade = CascadeType.ALL)
-    Set<MyFavoritesBean> fBeans = new HashSet<MyFavoritesBean>();
 
 	public String getAccount() {
 		return account;
