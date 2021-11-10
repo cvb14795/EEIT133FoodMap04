@@ -235,8 +235,8 @@ legend {
 			data: {
 				labels: ['飯類', '麵類', '肉類', '湯類', '小菜類', '炸物類'],
 				datasets: [{
-					label: '# of Votes',
-					data: [12, 19, 3, 5, 2, 3],
+					label: '統計表',
+					data: [${category}],
 					backgroundColor: [
 						'rgba(255, 99, 132, 0.2)',
 						'rgba(54, 162, 235, 0.2)',
@@ -278,44 +278,44 @@ legend {
 			<fieldset>
 				<legend>新增官方食譜</legend>
 				<div class="st1">
-					<label for="" class="t1">品項:</label> <input type="text" id=""
+					<label for="" class="t1">品項:</label> <input type="text" id="name"
 						name="name" required>
 				</div>
 				<div class="st1">
-					<label for="" class="t1">分類:</label> <input type="text" id=""
+					<label for="" class="t1">分類:</label> <input type="text" id="category"
 						name="category" required>
 				</div>
 				<div class="st1">
-					<label for="" class="t1">食材1:</label> <input type="text" id=""
+					<label for="" class="t1">食材1:</label> <input type="text" id="food1"
 						name="food1" placeholder="ex:牛肉1斤">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">食材2:</label> <input type="text" id=""
+					<label for="" class="t1">食材2:</label> <input type="text" id="food2"
 						name="food2" placeholder="ex:牛肉1斤">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">食材3:</label> <input type="text" id=""
+					<label for="" class="t1">食材3:</label> <input type="text" id="food3"
 						name="food3" placeholder="ex:牛肉1斤">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">食材4:</label> <input type="text" id=""
+					<label for="" class="t1">食材4:</label> <input type="text" id="food4"
 						name="food4" placeholder="ex:牛肉1斤">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">調味料1:</label> <input type="text" id=""
+					<label for="" class="t1">調味料1:</label> <input type="text" id="sauce1"
 						name="sauce1" placeholder="ex:鹽1匙">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">調味料2:</label> <input type="text" id=""
+					<label for="" class="t1">調味料2:</label> <input type="text" id="sauce2"
 						name="sauce2" placeholder="ex:鹽1匙">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">調味料3:</label> <input type="text" id=""
+					<label for="" class="t1">調味料3:</label> <input type="text" id="sauce3"
 						name="sauce3" placeholder="ex:鹽1匙">
 				</div>
 				<div class="st1">
 					<label for="" class="t1">步驟:</label>
-					<textarea id="" name="step" rows="5" cols="33"></textarea>
+					<textarea id="step" name="step" rows="5" cols="33"></textarea>
 				</div>
 				<div class="st1">
 					<img src="" width="450" height="300" alt="請選擇照片" id="showPic">
@@ -327,121 +327,139 @@ legend {
 
 			</fieldset>
 			<div class="sub">
-				<input type="reset" name="reset" value="清除"> <input
-					type="submit" name="submit" value="確認">
+				<input type="reset" name="reset" value="清除"> 
+				<input type="submit" name="submit" value="確認">
+				<input type="button" name="submit" value="一鍵輸入" id="btn">
 			</div>
 
 		</form>
 	</div>
 	<script type="text/javascript">
-							// 		var x = new FileReader;
-							// 		var src;
-							// 		document.forms[2].elements[10].onchange = function() {
-							// 			x.readAsDataURL(this.files[0]);
-							// 		}
-							// 		x.onloadend = function() {
-							// 			src = this.result;
-							// 			document.images[2].src = src;
-							// 		}
+			$("#btn").on("click",function (e) {
+				$("#name").val("麻油松阪豬+ 麵線");
+				$("#category").val("麵類");
+				$("#food1").val("松阪豬肉2斤");
+				$("#food2").val("老薑500 g");
+				$("#food3").val("麵線 1把1把");
+				$("#food4").val("枸杞*1大匙");
+				$("#sauce1").val("麻油雞中藥包1包");
+				$("#sauce2").val("麻油1/3碗、米酒4瓶");
+				$("#sauce3").val("沙拉油少許、鹽少許");
+				$("#step").val("1.每塊松阪豬肉上面的肥油要細心用刀慢慢剃除掉, 在逆紋切片狀\n"+
+							   "2.加點雞粉及啤酒醃製一下.\n"+
+							   "3.起鍋, 放沙拉油再放入老薑炒至薑快捲曲\n"+
+							   "4.再加入麻油拌炒一下, 加入中藥包和純米酒慢火煮(讓酒精發揮)");
+			})
 
-							var img;
-							$('#projectImage').change(function () {
-								var projectImage = $("#projectImage")[0].files[0];
-								var reader = new FileReader;
-								reader.onload = function (e) {
-									$('#showPic').attr('src', e.target.result);
-									img = e.target.result;
-								}
-								reader.readAsDataURL(projectImage);
-							})
 
-							var form = document.getElementById("form");
-							$("#form").on("submit", function (e) {
-								/* =====for formData&MultipartFile =====*/
-								var formData = new FormData(form);
+			// 		var x = new FileReader;
+			// 		var src;
+			// 		document.forms[2].elements[10].onchange = function() {
+			// 			x.readAsDataURL(this.files[0]);
+			// 		}
+			// 		x.onloadend = function() {
+			// 			src = this.result;
+			// 			document.images[2].src = src;
+			// 		}
 
-								/* =====for JSON =====*/
+			var img;
+			$('#projectImage').change(function () {
+				var projectImage = $("#projectImage")[0].files[0];
+				var reader = new FileReader;
+				reader.onload = function (e) {
+					$('#showPic').attr('src', e.target.result);
+					img = e.target.result;
+				}
+				reader.readAsDataURL(projectImage);
+			})
 
-								var html = "";
-								var inputData = $(".st1 input").slice(0, 9);
-								var recipeStep = $(".st1 textarea").val();
-								// html += + "name" + $("#name").val() + "<br/>";
-								for (let i = 0; i < inputData.length; i++) {
-									let name = inputData.eq(i).attr("name");
-									let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
-									html += name + ": " + value + "</br>";
-								}
+			var form = document.getElementById("form");
+			$("#form").on("submit", function (e) {
+				/* =====for formData&MultipartFile =====*/
+				var formData = new FormData(form);
 
-								//步驟:
-								let stepList = recipeStep.split("\n");
-								html += "步驟:</br>"
-								//照每個步驟換行
-								stepList.forEach(element => {
-									html += element + "</br>"
-								});
-								console.log(html);
+				/* =====for JSON =====*/
 
-								//改用ajax傳送 棄用原本的form傳送
-								e.preventDefault();
+			var html = "";
+			var inputData = $(".st1 input").slice(0, 9);
+			var recipeStep = $(".st1 textarea").val();
+			// html += + "name" + $("#name").val() + "<br/>";
+			for (let i = 0; i < inputData.length; i++) {
+				let name = inputData.eq(i).attr("name");
+				let value = (inputData.eq(i).val() != "") ? inputData.eq(i).val() : "無";
+				html += name + ": " + value + "</br>";
+			}
 
-								Swal.fire({
-									title: '確定要新增嗎？',
-									icon: 'question',
-									html: html,
-									imageUrl: img,
-									imageWidth: 400,
-									imageHeight: 200,
-									showCancelButton: true,
-								}).then((result) => {
-									if (result.isConfirmed) {
-										$.ajax({
-											type: "post",
-											url: "<c:url value='/Recipe/admin/adminInsertToDB'/>",
-											data: formData,
-											contentType: false, //required
-											processData: false, // required
-											/*一定要加*/
-											mimeType: 'multipart/form-data', //有圖片就要加這行
-											/*一定要加*/
-											success: function (data) {
-												var jsonData = JSON.parse(data);
-												console.log("Success:" + "\nID:" + jsonData.id + "\nName:" + jsonData.name);
+			//步驟:
+			let stepList = recipeStep.split("\n");
+			html += "步驟:</br>"
+			//照每個步驟換行
+			stepList.forEach(element => {
+				html += element + "</br>"
+			});
+			console.log(html);
 
-												var html1 = "";
-												for (const key in jsonData) {
-													console.log(key);
-													console.log(jsonData[key]);
-													let val = (jsonData[key] != "") ? jsonData[key] : "無";
-													if (!(key == "base64String" || key == "photo")) {
-														html1 += key + ": " + val;
-														html1 += "<br/>";
-													}
-												};
+			//改用ajax傳送 棄用原本的form傳送
+			e.preventDefault();
 
-												Swal.fire({
-													title: '新增成功！',
-													icon: 'success',
-													html: html1,
-													imageUrl: 'data:image;base64,' + jsonData.base64String,
-													imageWidth: 400,
-													imageHeight: 200,
-												})
-												setTimeout("window.location.pathname = 'FoodMap04/Recipe/admin'", 1500);
-											},
-											error: function (e) {
-												console.log(e);
-											}
-										})
-									} else if (result.dismiss === Swal.DismissReason.cancel) {
-										Swal.fire({
-											icon: 'error',
-											title: '已取消送出請求',
-											text: '您的變更將不會被儲存!'
-										})
-									}
-								})
-							})
-						</script>
+			Swal.fire({
+				title: '確定要新增嗎？',
+				icon: 'question',
+				html: html,
+				imageUrl: img,
+				imageWidth: 400,
+				imageHeight: 200,
+				showCancelButton: true,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "post",
+						url: "<c:url value='/Recipe/admin/adminInsertToDB'/>",
+						data: formData,
+						contentType: false, //required
+						processData: false, // required
+						/*一定要加*/
+						mimeType: 'multipart/form-data', //有圖片就要加這行
+						/*一定要加*/
+						success: function (data) {
+							var jsonData = JSON.parse(data);
+							console.log("Success:" + "\nID:" + jsonData.id + "\nName:" + jsonData.name);
+
+				var html1 = "";
+				for (const key in jsonData) {
+					console.log(key);
+					console.log(jsonData[key]);
+					let val = (jsonData[key] != "") ? jsonData[key] : "無";
+					if (!(key == "base64String" || key == "photo")) {
+						html1 += key + ": " + val;
+						html1 += "<br/>";
+					}
+				};
+
+						Swal.fire({
+							title: '新增成功！',
+							icon: 'success',
+							html: html1,
+							imageUrl: 'data:image;base64,' + jsonData.base64String,
+							imageWidth: 400,
+							imageHeight: 200,
+						})
+						setTimeout("window.location.pathname = 'FoodMap04/Recipe/admin'", 1500);
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				})
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				Swal.fire({
+					icon: 'error',
+					title: '已取消送出請求',
+					text: '您的變更將不會被儲存!'
+				})
+			}
+		})
+	})
+	</script>
 
 	<!-- Scripts -->
 	<script
