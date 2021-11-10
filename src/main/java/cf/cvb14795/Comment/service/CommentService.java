@@ -27,6 +27,8 @@ public interface CommentService {
 	public List<Comment> findAllByUserScoreAsc();
 
 	public List<Comment> findAllByUserLikes();
+	
+	public Long findCommentCount();
 
 	
 }

@@ -63,6 +63,7 @@
         }
     </style>
    	<script src='<c:url value="/js/memberAuth.js"/>'></script>
+    <script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
 	<script>
 		$(function() {
 			adminAuth();
@@ -798,6 +799,45 @@
             });
             // Bar Chart #flotBarChart End
         });
+        
+        
+//         stat-heading stat-text
+        function updateStat() {
+            console.log("更新stat-text統計, 時間:"+ new Date().toLocaleString());
+            $.ajax({
+                url: "<c:url value='/statCount'/>", 
+                method: "get",
+                success: function(data){
+                    console.log(data)
+                    var queryList = $(".stat-heading")
+                    var countList = $(".stat-text .count")
+                    var query;
+                    var oldCountElem;
+                    for (let i = 0; i < queryList.length; i++) {
+                        query = queryList.eq(i).text()
+                        oldCountElem = countList.eq(i)
+                        for (const key in data) {
+                            newCount = data[key]
+                            if (key == query) {
+                                console.log("「" + key + "」 由" + oldCountElem.text() + "更新為:" + newCount);
+                                oldCountElem.text(newCount);
+                            }
+                        }
+                    }
+                    
+                }
+            })
+        }
+
+    
+        //等動畫完全跳完到大概3秒左右
+        //第一次進首頁先2秒就更新
+        setTimeout(updateStat, 2000)
+        
+        //之後每10秒更新一次
+        setInterval(updateStat, 10000)
+        
+        
     </script>
 </body>
 

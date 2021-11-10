@@ -57,4 +57,10 @@ public class ShopService implements IShopService{
 		// TODO Auto-generated method stub
 		shopRepository.deleteById(id);
 	}
+
+	@Override
+	public Long findItemCount() {
+		// TODO Auto-generated method stub
+		return shopRepository.count();
+	}
 }

@@ -65,6 +65,19 @@ public class OrderService implements IOrderService{
 		orderRepository.deleteById(trackNo);
 	}
 
+	@Override
+	public Long calcOrderTotalPrice() {
+		// TODO Auto-generated method stub
+		Long sum = 0L;
+		List<Order> all = orderRepository.findAll();
+		for (Order order : all) {
+			if (order.getStatus().equals("已付款")) {
+				sum += order.getTotalPrice();				
+			}
+		}
+		return sum;
+	}
+
 
 	
 	

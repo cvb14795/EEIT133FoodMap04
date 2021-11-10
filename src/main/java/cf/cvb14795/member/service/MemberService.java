@@ -75,9 +75,6 @@ public class MemberService implements IMemberService {
 	@Override
 	public Long findMemberCount() {
 		// TODO Auto-generated method stub
-		return Long.valueOf(mDao.count());
+		return mDao.count();
 	}
-
-	
-
 }
