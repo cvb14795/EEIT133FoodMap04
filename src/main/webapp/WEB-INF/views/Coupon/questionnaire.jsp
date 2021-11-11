@@ -473,7 +473,7 @@ header {
 		   $("#idcode").val("T123456789");
 		   $("#birthday").val("20020801");
 		   $("#phone").val("0988465365");  
-		  })
+	})
 </script>
  	
  	</div>
