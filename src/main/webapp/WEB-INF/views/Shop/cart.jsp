@@ -193,15 +193,15 @@
 							<tbody>
 								<tr class="total-data">
 									<td><strong>小計: </strong></td>
-									<td id="subTotal">$${total}</td>
+									<td >$<span id="subTotal">${total}</span></td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>運費: </strong></td>
-									<td id="shippingFee">$${shippingFee}</td>
+									<td >$<span id="shippingFee">${shippingFee}</span></td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>總計: </strong></td>
-									<td id="total">$${total + shippingFee}</td>
+									<td >$<span id="total">${total + shippingFee}</span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -337,7 +337,6 @@
 				qty: qtyElem.value,
 				orderItemId: orderItemIdElem.value,
 			};
-			console.log(data)
 			console.log(JSON.stringify(data))
 			$.ajax({
 				url: "<c:url value='/Shop/Cart/update/'/>",
@@ -347,11 +346,15 @@
 				contentType: 'application/json; charset=UTF-8',
 				success: function (data, textStatus, jqXHR) {
 					console.log(data);
+					console.log(JSON.stringify(data));
+					//商品小計
 					orderItemSubTotalElem.innerText = data.subTotal;
 					//小計
 					$("#subTotal").text(data.total)
-					//總計
-					$("#total").text(data.total)
+					//總計(小計+運費)
+					// parseInt(x, 10): 將字串轉10進位數字
+					var total = parseInt(data.total, 10) + parseInt($("#shippingFee").text(), 10);
+					$("#total").text(total)
 				}
 			})
 		})
