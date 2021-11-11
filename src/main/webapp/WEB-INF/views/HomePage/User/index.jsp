@@ -83,7 +83,7 @@
 	img.user-avatar {
 		width:40px;
 	}
-	</style>
+</style>
 </head>
 
 <body>
@@ -98,24 +98,25 @@
 	<!-- header -->
 	<div class="top-header-area " id="sticker">
 		<div class="container">
+			<!-- logo -->
+			<div class="site-logo">
+				<a href="<c:url value='/'/>">
+					<img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+				</a>
+			</div>
+			<!-- end logo -->
+		</div>
+		<div>
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="<c:url value='/'/>">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
 						<!-- menu start -->
 						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
+								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
@@ -138,10 +139,16 @@
 														登出</a></li>
 											</ul>
 										</li>
+										
 										<li>
-										  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
-										  	<i class="fas fa-shopping-cart"></i>
-										  </a>
+											<div class="header-icons">
+											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+											  	<i class="fas fa-heart"></i>
+											  </a>
+											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+											  	<i class="fas fa-shopping-cart"></i>
+											  </a>
+											</div>
 										</li>
 <!-- 										<li> -->
 <!-- 											<a> -->
@@ -284,7 +291,6 @@
 						</div>
 						<h3>Strawberry</h3>
 						<p class="product-price"><span>Per Kg</span> 85$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 text-center">
@@ -294,7 +300,6 @@
 						</div>
 						<h3>Berry</h3>
 						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
@@ -304,7 +309,6 @@
 						</div>
 						<h3>Lemon</h3>
 						<p class="product-price"><span>Per Kg</span> 35$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
 					</div>
 				</div>
 			</div>
@@ -346,11 +350,12 @@
 						<ul>
 							<li><a href="<c:url value='/'/>">首頁</a></li>
 							<li><a href="<c:url value='/aboutUs'/>">關於我們</a></li>
-							<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+							<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+							<li><a href="<c:url value='/Shop'/>">美食商城</a></li>
 						</ul>
 					</div>
 				</div>
