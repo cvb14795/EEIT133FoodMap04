@@ -467,15 +467,6 @@ header {
 
  	</form> 
  	
-<script>
-	$("#btn").on("click",function (e) {
-		   $("#realname").val("帥葛格");
-		   $("#idcode").val("T123456789");
-		   $("#birthday").val("20020801");
-		   $("#phone").val("0988465365");  
-	})
-</script>
- 	
  	</div>
 	<!-- end 防疫專區 -->
 
@@ -564,35 +555,6 @@ header {
 					location.href = "<c:url value='/Member/Login'/>";						
 				}
 			})
-// 			 $("#header").vegas({
-// 	             slides: [
-// 	                 { src: "./image/question.jpeg" },
-// 	                 { src: "./image/salad.jpg" },
-// 	                 { src: "./image/food1.jpeg" },
-// 	                 { src: "./image/food2.jpeg" },
-// 	                 { src: "./image/food3.jpeg" },
-// 	                 { src: "./image/coupon.jpg" }
-// 	             ],
-// 	             transition: ['blur', 'zoomOut', 'swirlLeft'],
-// 	             delay: 5000
-// 	        });
-			 $(".wrap").vegas({
-				 overlay: true,
-				 transition: 'fade', 
-				 transitionDuration: 2000,
-				 delay: 6000,
-				 color: 'red',
-				 animation: 'random',
-				 animationDuration: 8000,
-				 slides: [
-					 { src: "./image/question.jpeg" },
-					 { src: "./image/salad.jpg" },
-					 { src: "./image/food1.jpeg" },
-					 { src: "./image/food2.jpeg" },
-					 { src: "./image/food3.jpeg" },
-					 { src: "./image/coupon.jpg" }
-				 ],
-			});
 		})
 	</script>
 	<!-- count down -->
@@ -615,6 +577,15 @@ header {
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+	
+	<script>
+	$("#btn").on("click",function (e) {
+		   $("#realname").val("帥葛格");
+		   $("#idcode").val("A123456789");
+		   $("#birthday").val("20020801");
+		   $("#phone").val("0988465365");  
+	})
+</script>
 	
 </body>
 </html>

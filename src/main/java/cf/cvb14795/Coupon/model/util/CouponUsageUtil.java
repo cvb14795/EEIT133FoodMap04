@@ -10,11 +10,11 @@ import util.gmail.Mail;
 public class CouponUsageUtil {
     // u.getAuthority(): localhost:8080
     // request.getContextPath(): /FoodMap04
-	private CouponService cService;
     private String baseUrl;
+    private CouponService cService;
     
     
-    public void setBaseUrl(String baseUrl) {
+	public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
     
@@ -56,10 +56,11 @@ public class CouponUsageUtil {
         return String.valueOf((int)(Math.random() * Math.pow(10, degit)));
     }
 
-    public CouponUsageUtil(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
+    public CouponUsageUtil(CouponService cService, String baseUrl) {
+		this.cService = cService;
+		this.baseUrl = baseUrl;
+	}
 
-    public CouponUsageUtil() {
+	public CouponUsageUtil() {
     }
 }
