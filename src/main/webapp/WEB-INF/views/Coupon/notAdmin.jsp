@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +48,7 @@
 		padding-right: 150px;
 	}
 </style>
-<title>防疫專區</title>
+<title>成功送出表單</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
@@ -185,8 +182,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>新增一筆折價券資訊</p>
-						<h1>折價券專區</h1>
+						<p>防疫生活 人人有責</p>
+						<h1>防疫專區</h1>
 					</div>
 				</div>
 			</div>
@@ -198,100 +195,18 @@
 	<input type="hidden" id="userName" value="${user}">
 	
 	<!-- 防疫專區 -->
-	<div align="center">
-		<form:form method='POST' modelAttribute="couponBean" action='coupons'>
-			<fieldset class="fieldset-auto-width">
-				<legend>折價券資料</legend>
-				<table>
-					<tr>
-						<td align='right'>名稱：<br>&nbsp;</td>
-						<td width='280'><form:input path="name" size="25"/><br>&nbsp;
-							<form:errors path="name" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>折價券代碼：<br>&nbsp;
-						</td>
-						<td><form:input path="id" size="25" /><br>&nbsp;
-						    <form:errors path="id" cssClass="error" />
-						</td>
-					</tr>
-					
-					<tr>
-						<td align='right'>生效時間<font size='-3' color='blue'>
-						(yyyy-MM-dd HH:mm:ss)</font>：<br>&nbsp;
-						</td>
-						<td><form:input path="start_time" size="25" /><br>&nbsp;
-							<form:errors path="start_time" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>失效時間<font size='-3' color='blue'>(yyyy-MM-dd
-								HH:mm:ss)</font>：<br>&nbsp;
-						</td>
-						<td><form:input path="end_time" size="25" /><br>&nbsp;
-							<form:errors path="end_time" cssClass="error" />
-						</td>
-					</tr>
-					
-					<tr>
-						<td align='right'>折價券內容：<br>&nbsp;</td>
-						<td><form:input path="value"  size="60" /><br>&nbsp;
-							<form:errors path="value" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>消費下限：<br>&nbsp;</td>
-						<td><form:input path="price_floor"  size="25" /><br>&nbsp;
-							<form:errors path="price_floor" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>是否為折數折價券(1:是, 0:否)：<br>&nbsp;</td>
-						<td><form:input path="isdiscount" size="25" /><br>&nbsp;
-							<form:errors path="isdiscount" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>折數：<br>&nbsp;</td>
-						<td><form:input path="discount"  size="25" /><br>&nbsp;
-							<form:errors path="discount" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>是否為扣減折價券(1:是, 0:否)：<br>&nbsp;</td>
-						<td><form:input path="isdeduct" size="25" /><br>&nbsp;
-							<form:errors path="isdeduct" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>扣除金額：<br>&nbsp;</td>
-						<td><form:input path="deduct"  size="25" /><br>&nbsp;
-							<form:errors path="deduct" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>敘述：<br>&nbsp;</td>
-						<td><form:input path="description" size="60" /><br>&nbsp;
-							<form:errors path="description" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td align='right'>狀態：<br>&nbsp;</td>
-						<td><form:input path="status" size="10" /><br>&nbsp;
-							<form:errors path="status" cssClass="error" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan='2' align='center'>
-						<input type='submit' value='提交'></td>
-					</tr>
-				</table>
-			</fieldset>
-		</form:form>
-		<br> <a href="<c:url value='/Coupon/adminforCoupon' />">回前頁</a>
-	</div>	
-		
+	<div style="display:flex;margin:20px;">	
+		<div>
+			<h1>您不是管理員</h1>
+			<h1>不具權限</h1>
+			<h1>無法使用此功能</h1>
+			<br>
+			<br>
+			<br>
+			<input type="button" value="回上頁" onclick="location.href='frontpage'">
+		</div>
+	</div>
+	
 	<!-- end 防疫專區 -->
 
 	<!-- footer -->

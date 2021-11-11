@@ -123,9 +123,85 @@
 <script>
 	$(function() {
 		adminAuth();
+		// 將所有checkbox-switch改成IOS風格
+		var el = document.querySelector('.checkbox-switch');
+		var nav = document.querySelector("nav");
+		var mySwitch = new Switch(el, {
+			size: 'small',
+			checked:false,
+			onChange: function(){
+// 					darkmode.toggle();
+				nav.classList.toggle("navbar-default");
+				nav.classList.toggle("navbar-dark");
+				nav.classList.toggle("bg-dark");
+
+				if (mySwitch.getChecked()) {
+					console.log("nav:深色模式");
+					$(".navbar").css("background-color", "#ffc078");
+					$("ul.nav li a").css("color", "#333")
+					$("ul.nav li a:hover").css("color", "#EA7500")
+					$("ul.nav li a:hover").css("background-color", "#333")
+					$("label[for='checkbox-switch']").text("深色模式")
+				} else {
+					console.log("nav:淺色模式");
+					$(".navbar").css("background-color", "#333");
+					$("ul.nav li a").css("color", "#ffc078");
+					$("ul.nav li a:hover").css("color", "#333")
+					$("ul.nav li a:hover").css("background-color", "#EA7500")
+					$("label[for='checkbox-switch']").text("淺色模式")
+				}
+			}														
+		});
+		// 獲取使用者資訊
+		const cookies = document.cookie;
+		console.log("cookies:" + cookies);
+		let userName = cookies.split("user=")[1];
+		if (userName === undefined) {
+			console.log("使用者名稱:未定義 ");
+			// 未登入狀態下(登出後)顯示登入按鈕及註冊按鈕
+			$("#loginNavBtn").show();
+			$("#registerNavBtn").show();
+			// 未登入狀態下(登出後)隱藏登出按鈕及編輯按鈕
+			$("#logoutNavBtn").hide();
+			$("#editNavBtn").hide();
+			// 未登入顯示為Guest
+			$("#user").text("Guest");
+			console.log(document.getElementById("user").outerHTML);
+		} else {
+			console.log(`使用者名稱:${userName}`);
+			// 已登入狀態下(登入後)隱藏登入按鈕及註冊按鈕
+			$("#loginNavBtn").hide();
+			$("#registerNavBtn").hide();
+			// 已登入狀態下(登入後)顯示登出按鈕及編輯按鈕
+			$("#logoutNavBtn").show();
+			$("#editNavBtn").show();
+			// 登入後顯示用戶名稱
+			$("#user").text(userName);
+		}
 	})
 </script>
+<style>
+header {
+	background: #9393FF;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.search-wrap{
+	border: 1px solid #ddd;
+	color: #051922;
+	padding: 15px;
+	width: 100%;
+	border-radius: 5px;
+	font-size: 15px;
+	width:500px;
+	margin-bottom:20px;
+	margin-left:20px;
+}
+</style>
 <script>
+	
 	function chk() {
 		var cnt = 0;
 
@@ -302,15 +378,16 @@
 
 				<div class='pd1'>
 					姓名:
-					<label><input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='account1'
-                            name='name' required></label>
+					<input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='realname'
+                            name='name' required>
+<!--                             <label></label> -->
                 </div>
 
 				<div class='pd1'>
 					性別:
-						<label> <input type='radio' name='gender' value='男'>男</label> 
-						<label> <input type='radio' name='gender' value='女'>女</label> 
-						<label> <input type='radio' name='gender' value='其他'>其他</label>
+						<label> <input id='gender' type='radio' name='gender' value='男'>男</label> 
+						<label> <input id='gender' type='radio' name='gender' value='女'>女</label> 
+						<label> <input id='gender' type='radio' name='gender' value='其他'>其他</label>
 					
 				</div>
 
@@ -318,7 +395,7 @@
 
 				<div class='pd1'>
 					身分證字號: 
-					<label><input type='text' name='id'
+					<label><input type='text' name='id' id='idcode'
 						placeholder='請輸入身份證字號' maxlength='10'
 						pattern='^[A-Z]{1}[1-2]{1}[0-9]{8}$' required></label>
 				</div>
@@ -332,7 +409,7 @@
 				</div>
 
 				<div class='pd1'>
-					聯絡電話: <label><input class="inputstyle" type='text' name='phone' required></label>
+					聯絡電話: <label><input id='phone' class="inputstyle" type='text' name='phone' required></label>
 				</div>
 
 			</div>
@@ -342,20 +419,20 @@
 			<div class='str1'>
 				<div class='pd1'>最近14天是否有出國紀錄:
 					<div>
-						<label><input class="inputstyle" type='radio' name='abroad' value='1'>是</label>		
-						<label><input class="inputstyle" type='radio' name='abroad' value='0'>否</label>
+						<label><input class="inputstyle" id='abroad' type='radio' name='abroad' value='1'>是</label>		
+						<label><input class="inputstyle" id='abroad' type='radio' name='abroad' value='0'>否</label>
 					</div>
 				</div>
 				<div class='pd1'>最近14天是否有跨縣市移動:
 					<div>
-						<labe><input class="inputstyle" type='radio' name='moving' value='1'>是</label>
-						<label><input class="inputstyle" type='radio' name='moving' value='0'>否</label>
+						<labe><input class="inputstyle" type='radio' id='moving' name='moving' value='1'>是</label>
+						<label><input class="inputstyle" type='radio' id='moving' name='moving' value='0'>否</label>
 					</div>
 				</div>
 				<div class='pd1'>同住親友是否有收到居家隔離通知單:
 					<div>
-						<label><input  type='radio' name='family' value='1'>是</label>
-						<label><input  type='radio' name='family' value='0'>否</label>
+						<label><input  type='radio' id='family' name='family' value='1'>是</label>
+						<label><input  type='radio' id='family' name='family' value='0'>否</label>
 					</div>
 				</div>
 			</div>
@@ -366,14 +443,14 @@
 
 				<div class='pd1'>過去 14 天是否有發燒、咳嗽或呼吸急促症狀？（已服藥者亦須勾選「是」）:
 					<div>
-		 				<label><input type='radio' name='fever' value='1'>是</label> 
-		 				<label><input type='radio' name='fever' value='0'>否 </label> 
+		 				<label><input type='radio' id='fever' name='fever' value='1'>是</label> 
+		 				<label><input type='radio' id='fever' name='fever' value='0'>否 </label> 
 	 				</div>
  				</div> 
  				<div class='pd1'>是否有接種過疫苗:
 	 				<div>
-		 				<label><input type='radio' name='vaccine' value='1'>是 </label> 
-		 				<label><input type='radio' name='vaccine' value='0'>否 </label>
+		 				<label><input type='radio' id='vaccine' name='vaccine' value='1'>是 </label> 
+		 				<label><input type='radio' id='vaccine' name='vaccine' value='0'>否 </label>
 	 				</div>
 				</div> 
 
@@ -385,9 +462,19 @@
 		<div class='sub'>
 			<input type='submit' style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;" value='送出'>
 			<input type='reset' style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;"  value='清除'>
+			<input type="button" style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;" name="submit" value="一鍵輸入" id="btn">
 		</div>
 
  	</form> 
+ 	
+<script>
+	$("#btn").on("click",function (e) {
+		   $("#realname").val("帥葛格");
+		   $("#idcode").val("T123456789");
+		   $("#birthday").val("20020801");
+		   $("#phone").val("0988465365");  
+		  })
+</script>
  	
  	</div>
 	<!-- end 防疫專區 -->

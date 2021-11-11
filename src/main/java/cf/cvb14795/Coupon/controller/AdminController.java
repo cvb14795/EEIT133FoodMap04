@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import cf.cvb14795.Coupon.model.bean.CouponBean;
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 import cf.cvb14795.Coupon.model.service.QuestionnaireService;
 import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
@@ -89,8 +89,7 @@ public class AdminController {
 				Optional<Member> member = mService.selectMemberByIdNum(b.getId());
 				// 產生優惠券代碼(預設為6位數)
 //				String couponCode = couponUsage.generateCouponCode(6);
-				String radomCode = couponUsage.generateCouponCode(3);
-				String couponCode = "VCCP15"+radomCode;
+				String couponCode = "VCCP15";
 				// 發送優惠券Email
 				couponUsage.sendMail(member, couponCode);
 

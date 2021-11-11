@@ -182,8 +182,8 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>管理者操作折價券的頁面</p>
-						<h1>折價券管理</h1>
+						<p>管理折價券頁面</p>
+						<h1>折價券專區</h1>
 					</div>
 				</div>
 			</div>
@@ -195,13 +195,14 @@
 	<input type="hidden" id="userName" value="${user}">
 	
 	<!-- 顯示頁面 -->
-	<div align='center'>
-		<h3>折價券資料</h3>
-		
-		<a href='insertCoupon'>新增折價券資料</a><br>
-		<a href='showCoupons'>顯示折價券資料</a><br> 
+
+	<div align='center' style="height:500px; width:500;padding:100px;">
+		<div style="magin-top:100px"><h1>折價券資料</h1></div>
+		<br>
+		<h4><a href='insertCoupon'>新增折價券資料</a></h4><br>
+		<h4><a href='showCoupons'>顯示折價券資料</a></h4><br> 
 		<hr>
-		<a onclick="location.href='<c:url value='/' />'">首頁</a><br>
+		<h4><a onclick="location.href='<c:url value='/' />'">首頁</a></h4><br>
 	</div>	
 	
 	<!-- end 顯示頁面 -->

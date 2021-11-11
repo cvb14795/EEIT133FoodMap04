@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cf.cvb14795.Coupon.model.bean.CouponBean;
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
+import cf.cvb14795.Coupon.model.service.CouponService;
 import cf.cvb14795.Coupon.model.service.QuestionnaireService;
 import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
 import cf.cvb14795.member.bean.Member;
@@ -24,6 +26,7 @@ import cf.cvb14795.member.service.MemberService;
 public class QuestionnaireController {
 	QuestionnaireService qService;
 	MemberService mService;
+	CouponService cService;
 	URL u;
 
 	@Autowired
@@ -67,11 +70,9 @@ public class QuestionnaireController {
 			CouponUsageUtil couponUsage = new CouponUsageUtil(baseUrl);
 			System.out.println("================正在寄送Email...==================");
 			Optional<Member> m = mService.selectMemberByAccount(account);
-			// 產生優惠券代碼(預設為6位數)
-//			String couponCode = couponUsage.generateCouponCode(6);
-//			String radomCode = couponUsage.generateCouponCode(3);
-			String couponCode = "QNCP15";
+			
 			// 發送優惠券Email
+			String couponCode = "QNCP15";
 			couponUsage.sendMail(m, couponCode);
 
 		} else {
