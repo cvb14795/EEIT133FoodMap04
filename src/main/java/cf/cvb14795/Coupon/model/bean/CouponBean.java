@@ -32,7 +32,7 @@ public class CouponBean {
 	}
 
 	public CouponBean(String id, String name, String start_time, String end_time, String value, String description,
-			String status, int price_floor, double discount, int isdiscount, int isdeduct, int deduct) {
+			String status, int price_floor, double discount, int isdiscount, int deduct, int isdeduct) {
 		super();
 		this.id = id;
 		this.name = name;

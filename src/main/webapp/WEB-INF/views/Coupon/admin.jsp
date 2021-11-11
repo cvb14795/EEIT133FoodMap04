@@ -211,7 +211,7 @@ table {
 			<input type="button"
 				value="回首頁" onclick="location.href='<c:url value="/Coupon/frontpage"/>'">
 			<input type="button"
-				value="管理" onclick="location.href='<c:url value="/Coupon/adminforCoupon"/>'">
+				value="管理折價券" onclick="location.href='<c:url value="/Coupon/adminforCoupon"/>'">
 		</div>
 
 	</form>

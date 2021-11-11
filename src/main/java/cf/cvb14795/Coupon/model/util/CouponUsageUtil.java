@@ -2,12 +2,15 @@ package cf.cvb14795.Coupon.model.util;
 
 import java.util.Optional;
 
+import cf.cvb14795.Coupon.model.bean.CouponBean;
+import cf.cvb14795.Coupon.model.service.CouponService;
 import cf.cvb14795.member.bean.Member;
 import util.gmail.Mail;
 
 public class CouponUsageUtil {
     // u.getAuthority(): localhost:8080
     // request.getContextPath(): /FoodMap04
+	private CouponService cService;
     private String baseUrl;
     
     
@@ -27,9 +30,18 @@ public class CouponUsageUtil {
             // 郵件內文的優惠券超連結
             String href = String.format("<a href=%s>點擊這裡</a>", url);
             // 郵件內文
+            CouponBean coupon = cService.getCouponById(couponCode);
             String text = String.format("您好，%s<br/>這是您的優惠券代碼: %s<br/>請%s或以下連結以使用該優惠券:<br/>%s",
             		m.getAccount(), couponCode, href, url);
-            Mail.SendGmail(from, to, subject, text);
+            String value = String.format("優惠券用途: %s", coupon.getValue());
+//            //格式
+//            SimpleDateFormat dateParser = new SimpleDateFormat("MM-dd-yy HH:mm:ss");
+//            //生效時間
+//            Date start_time = dateParser.parse(coupon.getStart_time());
+//            //結束時間
+//            Date end_time = dateParser.parse(coupon.getEnd_time());
+
+            Mail.SendGmail(from, to, subject, text+value);
             System.out.println("Ｏ發送優惠券：成功! 收件者:" + to);
             return true;
         } else {
