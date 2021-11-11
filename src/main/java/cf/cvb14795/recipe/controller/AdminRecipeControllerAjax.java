@@ -176,11 +176,11 @@ public class AdminRecipeControllerAjax {
 	}
 	
 	// ============== 刪除會員食譜 ==============
-	@DeleteMapping("AdminManageMembersRecipe/{id}")
+	@DeleteMapping("AdminDeleteMembersRecipe/{id}")
 	public ResponseEntity<String> AdminDeleteMembersRecipe(@PathVariable("id") Integer id){
-		Optional<AdminRecipeBean> opt = aRecipeService.findById(id);
+		Optional<UserRecipeBean> opt = uRecipeService.findById(id);
 		if (opt.isPresent()) {
-			aRecipeService.deleteById(id);
+			uRecipeService.deleteById(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);

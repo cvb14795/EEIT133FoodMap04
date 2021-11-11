@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import cf.cvb14795.member.service.IMemberService;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.model.MyFavoritesBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
@@ -31,12 +32,15 @@ public class UserHomePageController {
 	IUserRecipeService uRecipeService;
 	IAdminRecipeService aRecipeService;
 	IMyFavoriteService favoritesService;
+	IMemberService memberService;
 	
 	@Autowired
-	public UserHomePageController(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,IMyFavoriteService favoritesService) {
+	public UserHomePageController(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,
+			IMyFavoriteService favoritesService, IMemberService memberService) {
 		this.uRecipeService = uRecipeService;
 		this.aRecipeService = aRecipeService;
 		this.favoritesService = favoritesService;
+		this.memberService = memberService;
 	}
 
 	// ==============使用者查詢官方食譜==============
@@ -54,7 +58,7 @@ public class UserHomePageController {
 		for (int i = 0; i < lists.size(); i++) {
 			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
 			imgList.add(base64String);
-			if (i < favList.size()) {
+			if (i < favList.size() && favList.get(i).getMember().getAccount().equals(userAccount)) {
 				favMap.put(favList.get(i).getaRecipeId().getId(), favList.get(i));				
 			}
 		}

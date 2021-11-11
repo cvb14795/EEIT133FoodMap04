@@ -111,7 +111,7 @@ header {
 							<td><img src="data:image/jpg;base64,${imgList.get(i)}" width="100" height="100"></td>
 							<td><c:out value="${lists.get(i).step}" /></td>
 							<td>
-								<a id="delete" href="./AdminManageMembersRecipe/${lists.get(i).id}"><i class="fas fa-skull"></i></a>
+								<a href="javascript:void(0)" onclick="doDelete('${lists.get(i).id}', '${lists.get(i).userName}', '${lists.get(i).foodName}')"><i class="fas fa-skull"></i></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -133,6 +133,27 @@ header {
 			        ]
 			});
 		});
+		
+			function doDelete(id, userName, foodName){
+				let isAccept = confirm("您確認要從食譜中移除會員："+ userName +"的食譜："+foodName+" 嗎？")
+				if (isAccept) {
+					let url = "<c:url value='/Recipe/admin/AdminDeleteMembersRecipe/'/>"+id;
+					console.log(url);
+					$.ajax({
+						url: url,
+						method: "delete",
+						success: function () {
+							Swal.fire({
+								position : 'center',
+								icon : 'success',
+								title : '刪除成功'
+							})
+							location.reload();
+						}
+					})
+				}
+			}
+		
 	</script>
 </body>
 </html>
