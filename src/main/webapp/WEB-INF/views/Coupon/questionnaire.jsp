@@ -201,6 +201,7 @@ header {
 }
 </style>
 <script>
+	
 	function chk() {
 		var cnt = 0;
 
@@ -377,15 +378,16 @@ header {
 
 				<div class='pd1'>
 					姓名:
-					<label><input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='account1'
-                            name='name' required></label>
+					<input type='text' autofocus autocomplete='off' placeholder='請輸入姓名' id='realname'
+                            name='name' required>
+<!--                             <label></label> -->
                 </div>
 
 				<div class='pd1'>
 					性別:
-						<label> <input type='radio' name='gender' value='男'>男</label> 
-						<label> <input type='radio' name='gender' value='女'>女</label> 
-						<label> <input type='radio' name='gender' value='其他'>其他</label>
+						<label> <input id='gender' type='radio' name='gender' value='男'>男</label> 
+						<label> <input id='gender' type='radio' name='gender' value='女'>女</label> 
+						<label> <input id='gender' type='radio' name='gender' value='其他'>其他</label>
 					
 				</div>
 
@@ -393,7 +395,7 @@ header {
 
 				<div class='pd1'>
 					身分證字號: 
-					<label><input type='text' name='id'
+					<label><input type='text' name='id' id='idcode'
 						placeholder='請輸入身份證字號' maxlength='10'
 						pattern='^[A-Z]{1}[1-2]{1}[0-9]{8}$' required></label>
 				</div>
@@ -407,7 +409,7 @@ header {
 				</div>
 
 				<div class='pd1'>
-					聯絡電話: <label><input class="inputstyle" type='text' name='phone' required></label>
+					聯絡電話: <label><input id='phone' class="inputstyle" type='text' name='phone' required></label>
 				</div>
 
 			</div>
@@ -417,20 +419,20 @@ header {
 			<div class='str1'>
 				<div class='pd1'>最近14天是否有出國紀錄:
 					<div>
-						<label><input class="inputstyle" type='radio' name='abroad' value='1'>是</label>		
-						<label><input class="inputstyle" type='radio' name='abroad' value='0'>否</label>
+						<label><input class="inputstyle" id='abroad' type='radio' name='abroad' value='1'>是</label>		
+						<label><input class="inputstyle" id='abroad' type='radio' name='abroad' value='0'>否</label>
 					</div>
 				</div>
 				<div class='pd1'>最近14天是否有跨縣市移動:
 					<div>
-						<labe><input class="inputstyle" type='radio' name='moving' value='1'>是</label>
-						<label><input class="inputstyle" type='radio' name='moving' value='0'>否</label>
+						<labe><input class="inputstyle" type='radio' id='moving' name='moving' value='1'>是</label>
+						<label><input class="inputstyle" type='radio' id='moving' name='moving' value='0'>否</label>
 					</div>
 				</div>
 				<div class='pd1'>同住親友是否有收到居家隔離通知單:
 					<div>
-						<label><input  type='radio' name='family' value='1'>是</label>
-						<label><input  type='radio' name='family' value='0'>否</label>
+						<label><input  type='radio' id='family' name='family' value='1'>是</label>
+						<label><input  type='radio' id='family' name='family' value='0'>否</label>
 					</div>
 				</div>
 			</div>
@@ -441,14 +443,14 @@ header {
 
 				<div class='pd1'>過去 14 天是否有發燒、咳嗽或呼吸急促症狀？（已服藥者亦須勾選「是」）:
 					<div>
-		 				<label><input type='radio' name='fever' value='1'>是</label> 
-		 				<label><input type='radio' name='fever' value='0'>否 </label> 
+		 				<label><input type='radio' id='fever' name='fever' value='1'>是</label> 
+		 				<label><input type='radio' id='fever' name='fever' value='0'>否 </label> 
 	 				</div>
  				</div> 
  				<div class='pd1'>是否有接種過疫苗:
 	 				<div>
-		 				<label><input type='radio' name='vaccine' value='1'>是 </label> 
-		 				<label><input type='radio' name='vaccine' value='0'>否 </label>
+		 				<label><input type='radio' id='vaccine' name='vaccine' value='1'>是 </label> 
+		 				<label><input type='radio' id='vaccine' name='vaccine' value='0'>否 </label>
 	 				</div>
 				</div> 
 
@@ -460,9 +462,19 @@ header {
 		<div class='sub'>
 			<input type='submit' style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;" value='送出'>
 			<input type='reset' style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;"  value='清除'>
+			<input type="button" style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;color:white;" name="submit" value="一鍵輸入" id="btn">
 		</div>
 
  	</form> 
+ 	
+<script>
+	$("#btn").on("click",function (e) {
+		   $("#realname").val("帥葛格");
+		   $("#idcode").val("T123456789");
+		   $("#birthday").val("20020801");
+		   $("#phone").val("0988465365");  
+		  })
+</script>
  	
  	</div>
 	<!-- end 防疫專區 -->
