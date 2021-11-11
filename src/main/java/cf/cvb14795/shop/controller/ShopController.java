@@ -134,8 +134,9 @@ public class ShopController {
 	}
 	
 	/* 移除購物車內某商品*/
-	@GetMapping("/Cart/Remove/{idStr}")
-	public ResponseEntity<HttpStatus> removeCartItem(
+	
+	@GetMapping(path = "/Cart/Remove/{idStr}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> removeCartItem(
 			Model model,
 			@PathVariable String idStr) {
 		try {
@@ -143,7 +144,10 @@ public class ShopController {
 			Optional<Item> opt = shopService.findById(id);
 			if (opt.isPresent()) {
 				cart.remove(id);
-				return new ResponseEntity<>(HttpStatus.OK);
+				// 計算總計 
+				JsonObject result = new JsonObject();
+				result.addProperty("total", getTotal());
+				return ResponseEntity.ok().body(new Gson().toJson(result));
 			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
