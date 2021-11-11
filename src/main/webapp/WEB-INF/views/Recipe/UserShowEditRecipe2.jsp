@@ -90,6 +90,10 @@ legend {
 	float: left;
 	text-align: right;
 }
+
+img.user-avatar {
+	width:40px;
+}
 </style>
 </head>
 <body>
@@ -103,7 +107,8 @@ legend {
 	
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
-		<div class="container">
+<!-- 		<div class="container"> -->
+		<div>
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
@@ -116,22 +121,19 @@ legend {
 						<!-- logo -->
 
 						<!-- menu start -->
-						<nav class="main-menu">
+						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
+										<li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -147,15 +149,24 @@ legend {
 														登出</a></li>
 											</ul>
 										</li>
+										
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
+											<div class="header-icons">
+											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+											  	<i class="fas fa-heart"></i>
+											  </a>
+											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+											  	<i class="fas fa-shopping-cart"></i>
+											  </a>
+											</div>
+										</li>
+<!-- 										<li> -->
+<!-- 											<a> -->
+<!-- 												淺色模式 -->
+<!-- 	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> --> 
+<!-- 												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!-- 											</a> -->
+<!-- 										</li> -->
 									</div>
 								</li>
 							</ul>
@@ -295,11 +306,12 @@ legend {
 						<ul>
 							<li><a href="<c:url value='/'/>">首頁</a></li>
 							<li><a href="<c:url value='/aboutUs'/>">關於我們</a></li>
-							<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+							<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-							<li><a href="<c:url value='/Recipe/user'/>">食譜養成</a></li>
+							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+							<li><a href="<c:url value='/Shop'/>">美食商城</a></li>
 						</ul>
 					</div>
 				</div>
@@ -359,7 +371,8 @@ legend {
 	
 	<script type="text/javascript">
 		$(function(){
-			userNameMain();
+			var src = "<c:url value='/Member/user/${user}/photo'/>";
+			userNameMain(src);
 		})
 		
 		var form = document.getElementById("form");

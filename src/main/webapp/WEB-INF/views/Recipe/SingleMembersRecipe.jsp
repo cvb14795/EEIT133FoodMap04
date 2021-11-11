@@ -13,6 +13,7 @@
 
 	<!-- title -->
 	<title>食譜規劃</title>
+
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
 	<!-- google font -->
@@ -43,9 +44,7 @@
 			width:40px;
 		}
 	</style>
-
 </head>
-
 <body>
 	
 	<!--PreLoader-->
@@ -138,7 +137,7 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>我的最愛</p>
+						<p>詳細資訊</p>
 						<h1>食譜規劃</h1>
 					</div>
 				</div>
@@ -147,97 +146,99 @@
 	</div>
 	<!-- end breadcrumb section -->
 
-	<!-- products -->
-	<div class="product-section mb-150">
+	<!-- single product -->
+	<div class="single-product mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-filters">
 						<ul>
 <!-- 							<li class="active" data-filter="*">官方食譜</li> -->
-							<li><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
+							<li class="active"><a href="<c:url value="/Recipe/user"/>">官方食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li class="active"><a href="<c:url value="/Recipe/user/showMyfavorites"/>">我的最愛</a></li>
+							<li>我的最愛</li>
 						</ul>
 					</div>
 				</div>
-			</div>
-
-			<div class="row product-lists">
-				<c:choose>
-					<c:when test="${recipeBeans.size() != 0}">
-						<c:forEach var="i" begin="0" end="${recipeBeans.size()-1 }">
-							<div class="col-lg-4 col-md-6 text-center">
-								<div class="single-product-item">
-									<div class="product-image">
-										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
-									</div>
-									<h3>品名:${recipeBeans.get(i).name}</h3>
-									<p class="product-price"><span>類別:${recipeBeans.get(i).category}</span></p>
-									<h6>食材:
-										<p>
-											<span>
-												${recipeBeans.get(i).food1}<br /> ${recipeBeans.get(i).food2}<br />
-												${recipeBeans.get(i).food3}<br /> ${recipeBeans.get(i).food4}
-											</span>
-										</p>
-									</h6>
-									<h6>調味料:
-										<p>
-											<span>
-												${recipeBeans.get(i).sauce1}<br /> ${recipeBeans.get(i).sauce2}<br />
-												${recipeBeans.get(i).sauce3}
-											</span>
-										</p>
-									</h6>
-									<h6>步驟:
-										<p>
-											<span>
-												${recipeBeans.get(i).step}
-											</span>
-										</p>
-									</h6>
-								</div>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<div class="container">
-							<div style="text-align: center;">
-								<h2>無資料!</h2>
-								<div class="pagination-wrap" style="display: inline;" >
-									<ul style="display: inline;">
-										<li>
-											<a href="<c:url value='/Recipe/user/'/>">
-												<span style="font-size: large;">加入我的最愛Go <i class="fas fa-arrow-right"></i></span>
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img src="data:image/jpg;base64,${base64String}" alt="" height="400">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3>${recipe.foodName}</h3>
+						<p class="single-product-pricing"><span>一人份調理包</span> $50</p>
+						<p><strong>步驟: </strong>${recipe.step}</p>
+						<div class="single-product-form">
+							<form action="index.html">
+								<input type="number" placeholder="0">
+							</form>
+							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> 加入購物車</a>
+							<p><strong>分類: </strong>${recipe.category}</p>
 						</div>
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">前一頁</a></li>
-							<li><a href="#">1</a></li>
-							<li><a class="active" href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">下一頁</a></li>
+						<h4>分享:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end products -->
+	<!-- end single product -->
+
+	<!-- more products -->
+	<div class="more-products mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">	
+						<h3><span class="orange-text">Related</span> Products</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+						</div>
+						<h3>Strawberry</h3>
+						<p class="product-price"><span>Per Kg</span> 85$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
+						</div>
+						<h3>Berry</h3>
+						<p class="product-price"><span>Per Kg</span> 70$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
+						</div>
+						<h3>Lemon</h3>
+						<p class="product-price"><span>Per Kg</span> 35$ </p>
+						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end more products -->
 
 		<!-- footer -->
 	<div class="footer-area">
@@ -260,12 +261,10 @@
 					<div class="footer-box">
 						<h2 class="widget-title">Line 智慧客服</h2>
 						<ul>
-							<li>
-								<a href="" id="lineLoginHref">
-									<input type="button"class="lineLogin" style="width: 151px; height: 44px; border: none" />
-								</a>
-			  				</li>
-							<li><img src="<c:url value='/image/lineFoodMap04QR.png'/>"alt=""></li>
+							<li><a href="" id="lineLoginHref"><input type="button"
+									class="lineLogin"
+									style="width: 151px; height: 44px; border: none" /></a></li>
+							<li><img src="<c:url value='/image/lineFoodMap04QR.png'/>" alt=""></li>
 						</ul>
 					</div>
 				</div>
@@ -335,12 +334,14 @@
 	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
+	<!-- sweetAlert js -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 	<script>
-		$(function(){
-			var src = "<c:url value='/Member/user/${user}/photo'/>";
-			userNameMain(src);
-		})
+		$(function() {
+				var src = "<c:url value='/Member/user/${user}/photo'/>";
+				userNameMain(src);
+		}
 	</script>
 	
 </body>
