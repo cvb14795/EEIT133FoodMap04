@@ -30,9 +30,11 @@ public class QuestionnaireController {
 	URL u;
 
 	@Autowired
-	public QuestionnaireController(QuestionnaireService qService, MemberService mService) {
+	public QuestionnaireController(QuestionnaireService qService, MemberService mService, CouponService cService) {
+		super();
 		this.qService = qService;
 		this.mService = mService;
+		this.cService = cService;
 	}
 
 	// 將問卷內容存入資料庫
@@ -67,7 +69,7 @@ public class QuestionnaireController {
 			sb.append(request.getContextPath()); // request.getContextPath(): /FoodMap04
 			String baseUrl = sb.toString();
 
-			CouponUsageUtil couponUsage = new CouponUsageUtil(baseUrl);
+			CouponUsageUtil couponUsage = new CouponUsageUtil(cService, baseUrl);
 			System.out.println("================正在寄送Email...==================");
 			Optional<Member> m = mService.selectMemberByAccount(account);
 			
@@ -88,5 +90,7 @@ public class QuestionnaireController {
 
 		return send_page;
 	}
+
+	
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cf.cvb14795.Coupon.model.bean.CouponBean;
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
+import cf.cvb14795.Coupon.model.service.CouponService;
 import cf.cvb14795.Coupon.model.service.QuestionnaireService;
 import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
 import cf.cvb14795.member.bean.Member;
@@ -29,11 +30,13 @@ public class AdminController {
 
 	QuestionnaireService qService;
 	MemberService mService;
+	CouponService cService;
 
 	@Autowired
-	public AdminController(QuestionnaireService qService, MemberService mService) {
+	public AdminController(QuestionnaireService qService, MemberService mService, CouponService cService) {
 		this.qService = qService;
 		this.mService = mService;
+		this.cService = cService;
 	}
 
 	@PostMapping("/admincontroller")
@@ -77,7 +80,7 @@ public class AdminController {
 			String baseUrl = sb.toString();
 
 			/* =====寄信===== */
-			CouponUsageUtil couponUsage = new CouponUsageUtil(baseUrl);
+			CouponUsageUtil couponUsage = new CouponUsageUtil(cService, baseUrl);
 
 			System.out.println("================正在寄送Email...==================");
 			for (QuestionnaireBean b : beans) {
