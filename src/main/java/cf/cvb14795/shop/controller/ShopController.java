@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,6 +36,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import cf.cvb14795.shop.model.Item;
 import cf.cvb14795.shop.model.Order;
@@ -151,7 +153,7 @@ public class ShopController {
 	}
 	
 	/* 更新購物車小計&總價 */
-	@PostMapping("/Cart/update")
+	@PostMapping(path = "/Cart/update", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> updateCart(
 			@RequestBody String json
@@ -160,20 +162,22 @@ public class ShopController {
 		System.out.println(json);
 		JSONObject obj = new JSONObject(json);
 		
+		int newQty = obj.getInt("qty");
+		
 		OrderItem orderItem = cart.get(obj.getInt("orderItemId"));
-		orderItem.setQty(obj.getInt("qty"));
+		// 更新訂單的商品數量
+		orderItem.setQty(newQty);
+		// 重新計算小計
+		Integer subTotal = newQty*orderItem.getItem().getPrice();
+		// 更新訂單的小計
+		orderItem.setSubTotal(subTotal);
 		
-		//計算總計 其中會重新計算到各商品的小計
-		//因此不用再setSubTotal
-		obj = new JSONObject();
-		obj.append("subTotal", orderItem.getSubTotal());
-		obj.append("total", getTotal());
-		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		// 計算總計 
+		JsonObject result = new JsonObject();
+		result.addProperty("subTotal", subTotal);
+		result.addProperty("total", getTotal());
 
-		return ResponseEntity.ok().headers(responseHeaders).body(obj.toString());
+		return ResponseEntity.ok().body(new Gson().toJson(result));
 	}
 	
 	/* 結帳&回調 */
@@ -217,6 +221,9 @@ public class ShopController {
 
 		System.out.println("===== 以上為綠界付款成功後回調 =====");
 		
+		//清空購物車
+		cart.clear();
+				
 		return "1|OK";
 	}
 	
@@ -324,9 +331,8 @@ public class ShopController {
 			double discount = orderItem.getDiscount();
 			int qty      = orderItem.getQty();
 			int subTotal = Long.valueOf(Math.round(price * discount * qty)).intValue();
-			orderItem.setSubTotal(subTotal);
 			total += subTotal;
-			System.out.println("小計 "+ orderItem.getItem().getName() +":"+subTotal);
+			System.out.println("小計: "+ orderItem.getItem().getName() +":"+subTotal);
 		}
 		System.out.println("總計:"+total);
 		//四捨五入折扣後的金額
