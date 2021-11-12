@@ -147,8 +147,9 @@ public class CRUD {
 
 		System.out.println("註冊帳號: " + account);
 
+		Optional<Member> alreadyRegisterdMember = mService.selectMemberByAccount(account);
 		// 若此筆帳號沒註冊過(不存在資料庫) 才能進行註冊
-		if (mService.selectMemberByAccount(account) == null) {
+		if (alreadyRegisterdMember.isEmpty()) {
 			// 密碼+10位鹽值hash
 			String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
 			// 獲取圖片檔名

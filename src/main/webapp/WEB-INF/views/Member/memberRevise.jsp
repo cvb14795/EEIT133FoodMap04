@@ -36,6 +36,7 @@
 			<input type="hidden" name="_method" value="PUT"/>
 			<fieldset>
 				<legend>註冊表單</legend>
+				<button type="button" id="oneClick" onclick="autoInput()">一鍵輸入</button>
 				<div class="st1">
 					<label for="name" class="t1">姓名：</label>
 					<form:input path="name" id="name" class="formElem" />
@@ -186,6 +187,11 @@
 				})
 			}
 		})
+		
+		function autoInput(){
+			$("#password").val("eeit133group4")
+			$("#passwordConfirm").val("eeit133group4")
+		}
 	</script>
 </body>
 

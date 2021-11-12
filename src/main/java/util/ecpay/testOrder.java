@@ -10,7 +10,7 @@ public class testOrder {
 		OrderStatusUtil orderStatus = new OrderStatusUtil(new AllInOne(""));
 		QueryTradeInfoObj infoObj = new QueryTradeInfoObj();
 		infoObj.setMerchantID("2000132");
-		infoObj.setMerchantTradeNo("EEIT1331636517946286");
+		infoObj.setMerchantTradeNo("EEIT1331636563991091");
 //		infoObj.setMerchantTradeNo("item1636034635409");
 		orderStatus.setQueryTradeInfoObj(infoObj);
 		String[] params = orderStatus.queryTradeInfo().split("&");

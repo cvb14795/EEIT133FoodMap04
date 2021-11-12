@@ -35,20 +35,14 @@ public class OrderItem {
 	//小計
 	@Column
 	private Integer subTotal;	
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="itemId")	
 	private Item item;
 	@Column
 	private Double discount = 1.0;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="orderId")
 	private Order order;
-//	@GenericGenerator(
-//		name = "generator",
-//		strategy = "foreign",
-//		parameters = {@Parameter(name="property", value = "order")}
-//	)
-//	@GeneratedValue(generator = "generator")
-//	private String orderFkId;
 	
 	public OrderItem(Integer qty, Integer subTotal, Item item, Double discount, Order order) {
 		this.qty = qty;

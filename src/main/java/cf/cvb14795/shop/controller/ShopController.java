@@ -221,7 +221,7 @@ public class ShopController {
 	
 		Hashtable<String, String> dict = new Hashtable<String, String>();
 		dict.put("CheckMacValue", checkMacValue);
-		System.out.println(orderStatus.checkMacValue(dict)); 
+//		System.out.println(orderStatus.checkMacValue(dict)); 
 
 		System.out.println("===== 以上為綠界付款成功後回調 =====");
 		
@@ -287,6 +287,7 @@ public class ShopController {
 			orderItem.setOrder(order);
 			System.out.println(orderItem.toString()+"***id: "+orderItem.getOrder().getOrderId());
 			orderService.addOrderItem(orderItem);
+			orderItem.getItem().setOrderItemList(order.getOrderItemList());
 		}
 		
 		// 商品明細

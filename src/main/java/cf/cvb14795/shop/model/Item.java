@@ -1,12 +1,17 @@
 package cf.cvb14795.shop.model;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,6 +41,8 @@ public class Item {
 	@Column
 	private byte[] photo;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item",cascade = CascadeType.ALL)
+	Set<OrderItem> orderItemList = new LinkedHashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -77,6 +84,13 @@ public class Item {
 		this.photo = photo;
 	}
 
+	public Set<OrderItem> getOrderItemList() {
+		return orderItemList;
+	}
+
+	public void setOrderItemList(Set<OrderItem> orderItemList) {
+		this.orderItemList = orderItemList;
+	}
 	
 	public Item() {
 	}

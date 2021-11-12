@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -81,7 +82,6 @@ public class IndexController {
 			
 			if (isAdmin) {
 				status = "管理者";
-				nextPage = "redirect:/admin";
 			}
 			
 			System.out.println("用戶: '"+user+"' 登入");
@@ -91,8 +91,6 @@ public class IndexController {
 			System.out.println("經由該cookie找不到此帳號!將返回首頁...");
 			return "redirect:/";
 		}
-			
-		
 	}
 	
 	@GetMapping("/admin")
@@ -100,8 +98,9 @@ public class IndexController {
 			@CookieValue("user") String user,
 			@ModelAttribute("imageMap") Map<String, String> imageMap) {
 		if (!mService.isAdmin(user)) {
-			System.out.println("權限不足，無法登入管理員後台，將導回使用者首頁!");
-			return "redirect:/Home";
+			String msg = "權限不足，無法登入管理員後台，將導回使用者首頁!";
+			System.out.println(msg);
+			return "redirect:/loginAlert?msg="+msg;
 		}
 		List<Member> memberList = mService.selectAllMember();
 		
@@ -130,7 +129,7 @@ public class IndexController {
 	}
 	
 	@GetMapping("/loginAlert")
-	private String alertToLoginPage() {
+	private String alertToLoginPage(@RequestParam(required = false, name = "msg") String msg) {
 		return "HomePage/loginAlert";
 	}
 	

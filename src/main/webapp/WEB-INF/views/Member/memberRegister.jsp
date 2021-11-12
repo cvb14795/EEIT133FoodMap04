@@ -26,6 +26,7 @@
 			enctype="multipart/form-data">
 			<fieldset>
 				<legend>註冊表單</legend>
+				<button type="button" id="oneClick" onclick="autoInput()">一鍵輸入</button>
 				<div class="st1">
 					<label for="name" class="t1">姓名：</label> <input type="text"
 						name="name" id="name" class="formElem"> <label for="name"
@@ -122,6 +123,18 @@
 				})
 			}
 		})
+		
+		function autoInput(){
+			$("#name").val("王小明")
+			$("#account").val("eeit133group4")
+			$("#password").val("eeit133group4")
+			$("#passwordConfirm").val("eeit133group4")
+			$("#ID").val("H134029606")
+			$("#email").val("foodmap04@gmail.com")
+			$("#address").val("桃園市中壢區中大路300號")
+			$("#phone").val("0968676882")
+		}
+
 	</script>
 </body>
 </html>

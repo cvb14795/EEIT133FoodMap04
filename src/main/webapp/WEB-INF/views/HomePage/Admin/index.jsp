@@ -833,8 +833,8 @@
 
     
         //等動畫完全跳完到大概3秒左右
-        //第一次進首頁先2秒就更新
-        setTimeout(updateStat, 2000)
+        //第一次進首頁先1秒就更新
+        setTimeout(updateStat, 1000)
         
         //之後每10秒更新一次
         setInterval(updateStat, 10000)

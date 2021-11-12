@@ -43,10 +43,11 @@
 			<form action="./Login" method="post" id="form" >
 				<input type="text" id="account" name="account" placeholder="請輸入帳號">
 				<input type="password" id="password" name="password" placeholder="請輸入密碼" autocomplete="on">
-                <input type="submit" id="loginBtn" value="登入">
+               	<input type="submit" id="loginBtn" value="登入">
+				<input type="button" id="oneClick" value="一鍵輸入" onclick="autoInput()" style="background-color:#F28123">
 			</form>
 
-			<div id="my-signin2"></div>
+<!-- 			<div id="my-signin2"></div> -->
 
 			<!-- Remind Passowrd -->
 			<div id="formFooter">
@@ -146,6 +147,11 @@
                 'onsuccess': onSuccess,
                 'onfailure': onFailure
             });
+        }
+        
+        function autoInput(){
+        	$("#account").val("eeit133group4")
+        	$("#password").val("eeit133group4")
         }
     </script>
 </body>
