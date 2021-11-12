@@ -30,6 +30,7 @@
 	<form>
 		<fieldset>
 			<legend>發送重設密碼驗證信</legend>
+			<button type="button" id="oneClick" onclick="autoInput()">一鍵輸入</button>
 			<div class="st1">
 				<label for="account" class="t1">帳號：</label> <input type="text"
 					name="account" id="account" placeholder="請輸入註冊時的帳號"> <label
@@ -123,7 +124,11 @@
              })
             e.preventDefault();
         })
-
+        
+		function autoInput(){
+			$("#account").val("foodmap04")
+			$("#email").val("foodmap04@gmail.com")
+		}
     </script>
 	<!-- <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script> -->
 </body>

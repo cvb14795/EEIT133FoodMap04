@@ -207,10 +207,9 @@
 						</table>
 						<div class="cart-buttons">
 <!-- 							<a href="cart.html" class="boxed-btn">更新</a> -->
-							<a href="<c:url value='/Shop/checkout'/>" class="boxed-btn black">結帳</a>
+							<a href="javascript:void(0)" onclick="checkout()" class="boxed-btn black">結帳</a>
 						</div>
 					</div>
-
 					<div class="coupon-section">
 						<h3>您有優惠券嗎？</h3>
 						<div class="coupon-form-wrap">
@@ -367,8 +366,11 @@
 			$.ajax({
 				url: url,
 				method: "get",
-				success: function(){
+				success: function(data){
 					$(".table-body-row").eq(index).remove();
+					$("#subTotal").text(data.total)
+					var total = parseInt(data.total, 10) + parseInt($("#shippingFee").text(), 10);
+					$("#total").text(total)
 					console.log("移除成功")
 				},
 				error: function(){
@@ -391,6 +393,16 @@
 					$("#couponStatusMsg").text("此優惠券無效，可能已過期或輸入了不正確的優惠碼!");
 				}
 			})
+		}
+		
+		function checkout(){
+			var total = parseInt($("#total").text(), 10)
+			var shippingFee = parseInt($("#shippingFee").text(), 10)
+			if( shippingFee > 0 && total > shippingFee){
+				location.href = "<c:url value='/Shop/checkout'/>";				
+			} else {
+				alert("您尚未購買商品，無法結帳！");
+			}
 		}
 	</script>
 

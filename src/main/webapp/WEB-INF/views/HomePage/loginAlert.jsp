@@ -9,7 +9,11 @@
 </head>
 <body>
 	<script>
-		alert('請先登入!')
+		var msg = "請先登入！";
+		if("${param.msg}" != ""){
+			msg = "${param.msg}";	
+		}
+		alert(msg);
 		location.href = "<c:url value='/Member/Login' />";
 	</script>
 </body>
