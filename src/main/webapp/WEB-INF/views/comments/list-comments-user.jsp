@@ -216,7 +216,7 @@
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
-            <div class="card">
+            <div class="card" id="rate-header">
                 <div class="row justify-content-left d-flex">
                     <div class="col-md-4 d-flex flex-column">
                         <div class="rating-box">

@@ -30,6 +30,7 @@
 	<style>
     #weatherWidget .currentDesc {
         color: #ffffff!important;
+
     }
         .traffic-chart {
             min-height: 335px;
@@ -581,6 +582,7 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+    
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
