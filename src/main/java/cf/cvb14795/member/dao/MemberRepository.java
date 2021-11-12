@@ -29,6 +29,8 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	// 拿PK來找因此只有單筆
 	@Query("select admin from Member m where m.account=:account")
 	boolean isAdmin(@Param("account") String userAccount);
+	
+	
 //
 //	// 更新資料(除密碼之外)
 //	// 若沒有要更新的資料(屬性) m的屬性請留空

@@ -127,47 +127,53 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
-								<li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
-								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
-								<li>
-									<div class="header-icons">
-										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
-											<ul class="sub-menu">
-												<li id="editNavBtn"><a
-													href="<c:url value='/Member/Revise'/>"><i
-														class="fas fa-edit"></i> 修改個人資料</a></li>
-												<li id="registerNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
-														註冊會員</a></li>
-												<li id="loginNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
-														登入</a></li>
-												<li id="logoutNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
-														登出</a></li>
-											</ul>
-										</li>
-										<li>
-										  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-																  <i class="fas fa-shopping-cart"></i> 已購票券
-										  </a>
-										</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
-									</div>
-								</li>
-							</ul>
+                                <li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
+                                <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+                                <li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+                                <li><a href="<c:url value='/Event/'/>">活動總覽</a>
+                                <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+                                <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+                                <li><a href="<c:url value='/Shop/'/>">美食商城</a>
+                                <li>
+                                    <div class="header-icons">
+                                        <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+                                        <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+                                            <ul class="sub-menu">
+                                                <li id="editNavBtn"><a
+                                                    href="<c:url value='/Member/Revise'/>"><i
+                                                        class="fas fa-edit"></i> 修改個人資料</a></li>
+                                                <li id="registerNavBtn"><a class="nav-link"
+                                                    href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
+                                                        註冊會員</a></li>
+                                                <li id="loginNavBtn"><a class="nav-link"
+                                                    href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
+                                                        登入</a></li>
+                                                <li id="logoutNavBtn"><a class="nav-link"
+                                                    href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
+                                                        登出</a></li>
+                                            </ul>
+                                        </li>
+                                        
+                                        <li>
+                                            <div class="header-icons">
+                                              <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+                                                  <i class="fas fa-heart"></i>
+                                              </a>
+                                              <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+                                                  <i class="fas fa-shopping-cart"></i>
+                                              </a>
+                                            </div>
+                                        </li>
+<!--                                         <li> -->
+<!--                                             <a> -->
+<!--                                                 淺色模式 -->
+<!--     <!--                                             <label for="checkbox-switch" style="">淺色模式</label> --> 
+<!--                                                 <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!--                                             </a> -->
+<!--                                         </li> -->
+                                    </div>
+                                </li>
+                            </ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 						<div class="mobile-menu"></div>
@@ -205,14 +211,14 @@
 				<table>
 					<tr>
 						<td align='right'>名稱：<br>&nbsp;</td>
-						<td width='280'><form:input path="name" size="25"/><br>&nbsp;
+						<td width='280'><form:input path="name" size="25" id="name"/><br>&nbsp;
 							<form:errors path="name" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td align='right'>折價券代碼：<br>&nbsp;
 						</td>
-						<td><form:input path="id" size="25" /><br>&nbsp;
+						<td><form:input path="id" size="25" id="code"/><br>&nbsp;
 						    <form:errors path="id" cssClass="error" />
 						</td>
 					</tr>
@@ -221,7 +227,7 @@
 						<td align='right'>生效時間<font size='-3' color='blue'>
 						(yyyy-MM-dd HH:mm:ss)</font>：<br>&nbsp;
 						</td>
-						<td><form:input path="start_time" size="25" /><br>&nbsp;
+						<td><form:input path="start_time" size="25" id="start_time" /><br>&nbsp;
 							<form:errors path="start_time" cssClass="error" />
 						</td>
 					</tr>
@@ -229,20 +235,20 @@
 						<td align='right'>失效時間<font size='-3' color='blue'>(yyyy-MM-dd
 								HH:mm:ss)</font>：<br>&nbsp;
 						</td>
-						<td><form:input path="end_time" size="25" /><br>&nbsp;
+						<td><form:input path="end_time" size="25" id="end_time"/><br>&nbsp;
 							<form:errors path="end_time" cssClass="error" />
 						</td>
 					</tr>
 					
 					<tr>
 						<td align='right'>折價券內容：<br>&nbsp;</td>
-						<td><form:input path="value"  size="60" /><br>&nbsp;
+						<td><form:input path="value"  size="60" id="value" /><br>&nbsp;
 							<form:errors path="value" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td align='right'>消費下限：<br>&nbsp;</td>
-						<td><form:input path="price_floor"  size="25" /><br>&nbsp;
+						<td><form:input path="price_floor"  size="25"/><br>&nbsp;
 							<form:errors path="price_floor" cssClass="error" />
 						</td>
 					</tr>
@@ -260,30 +266,32 @@
 					</tr>
 					<tr>
 						<td align='right'>是否為扣減折價券(1:是, 0:否)：<br>&nbsp;</td>
-						<td><form:input path="isdeduct" size="25" /><br>&nbsp;
+						<td><form:input path="isdeduct" size="25" id="isdeduct" /><br>&nbsp;
 							<form:errors path="isdeduct" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td align='right'>扣除金額：<br>&nbsp;</td>
-						<td><form:input path="deduct"  size="25" /><br>&nbsp;
+						<td><form:input path="deduct"  size="25" id="deduct" /><br>&nbsp;
 							<form:errors path="deduct" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td align='right'>敘述：<br>&nbsp;</td>
-						<td><form:input path="description" size="60" /><br>&nbsp;
+						<td><form:input path="description" size="60" id="description"/><br>&nbsp;
 							<form:errors path="description" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td align='right'>狀態：<br>&nbsp;</td>
-						<td><form:input path="status" size="10" /><br>&nbsp;
+						<td><form:input path="status" size="10" id="status" /><br>&nbsp;
 							<form:errors path="status" cssClass="error" />
 						</td>
 					</tr>
 					<tr>
 						<td colspan='2' align='center'>
+						<input type="button" style="border-radius: 10px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;" name="submit" value="一鍵輸入" id="btn">
+						
 						<input type='submit' value='提交'></td>
 					</tr>
 				</table>
@@ -430,6 +438,21 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+		<script>
+		$("#btn").on("click",function (e) {
+		   $("#name").val("測試折價券");
+		   $("#code").val("TEST123");
+		   $("#start_time").val("2021-11-01 12:00:00");
+		   $("#end_time").val("2021-12-31 12:00:00");  
+		   $("#value").val("測試折價券，使用此券直接折一百");  
+		   $("#end_time").val("2021-12-31 24:00:00");  
+		   $("#isdeduct").val(1);  
+		   $("#deduct").val(100);  
+		   $("#description").val("測試用折價券");  
+		   $("#status").val("1");  
+		   
+		})
+	</script>
 	
 </body>
 </html>

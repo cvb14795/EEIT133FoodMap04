@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cf.cvb14795.Coupon.model.bean.CouponBean;
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
 import cf.cvb14795.Coupon.model.service.CouponService;
 import cf.cvb14795.Coupon.model.service.QuestionnaireService;
@@ -46,6 +45,7 @@ public class QuestionnaireController {
 		bean.setAccount(account);
 		System.out.println("cookie user: " + account);
 
+		// 判斷是否尚未填過
 		if (qService.checkAccount(bean.getAccount())) {
 			qService.addNewData(bean);
 			send_page = "Coupon/send_success";
@@ -71,7 +71,7 @@ public class QuestionnaireController {
 
 			CouponUsageUtil couponUsage = new CouponUsageUtil(cService, baseUrl);
 			System.out.println("================正在寄送Email...==================");
-			Optional<Member> m = mService.selectMemberByAccount(account);
+			Optional<Member> m = mService.selectMemberByAccount(account);  // 帳號 -> email 寄
 			
 			// 發送優惠券Email
 			String couponCode = "QNCP15";
@@ -80,11 +80,7 @@ public class QuestionnaireController {
 		} else {
 			send_page = "Coupon/send_error";
 		}
-
-		
-
-		
-		
+	
 
 		System.out.println("================寄送Email完成！==================");
 
