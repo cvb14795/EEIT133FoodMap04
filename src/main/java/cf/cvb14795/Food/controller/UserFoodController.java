@@ -46,14 +46,20 @@ public class UserFoodController {
 	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
 		return PREFIX + "UserFood";
 	}
-	
+
 	@GetMapping("info/{id}")
-	public String userRecipe(@PathVariable("id") String id , Model model) {
+	public String userRecipe(@PathVariable("id") String id, Model model) {
 		AdminMapDataBean mapData = aFoodService.updateId(Integer.valueOf(id));
 		model.addAttribute("mapData", mapData);
 		return PREFIX + "RestaurantInfo";
 	}
-	
+
+	@GetMapping("/FoodBoardInfo/{id}")
+	public String foodBoardInfo(@PathVariable("id") String id, Model model) {
+		AdminMapDataBean mapData = aFoodService.updateId(Integer.valueOf(id));
+		model.addAttribute("mapData", mapData);
+		return PREFIX + "FoodBoardInfo";
+	}
 
 	// ===============使用者查詢===============
 	@PostMapping("UserViewAdminFood")
@@ -70,7 +76,8 @@ public class UserFoodController {
 
 		return PREFIX + "UserViewAdminFood";
 	}
-	//==================無視區====================//
+
+	// ==================無視區====================//
 	@PostMapping("UserViewMembersFood")
 	public String UserViewMembersFood(Model model) {
 

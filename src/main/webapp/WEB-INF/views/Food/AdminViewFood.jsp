@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>店家資料查詢</title>
 <link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
 <script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
 <script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>

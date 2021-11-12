@@ -47,6 +47,10 @@ response.setContentType("text/html;charset=UTF-8");
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
+
+<!-- 語君評論區css -->
+<link rel="stylesheet" href="/FoodMap04/css/comment-style.css">
+
 <script
 	src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
@@ -121,9 +125,28 @@ header {
 	margin-bottom: 10px;
 }
 
-.col img {
+.wrap {
+	margin-top: 50px;
+}
+
+.mapHeader {
+	margin-bottom: 50px;
+}
+
+#mapImg {
 	width: 100%;
 	height: 100%;
+	/* margin-top: 30px; */
+	padding-top: 55px;
+	/* padding-bottom: 30px */
+}
+
+#comments {
+	text-align: center;
+}
+
+img.user-avatar {
+	width: 40px;
 }
 
 fieldset {
@@ -132,10 +155,6 @@ fieldset {
 	background-color: #ffffcc;
 	border: 1px solid #cccccc;
 	padding: 4px 2px;
-}
-
-img.user-avatar {
-	width: 40px;
 }
 </style>
 </head>
@@ -235,7 +254,7 @@ img.user-avatar {
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
 						<p>商家資訊</p>
-						<h1>店家詳細資料</h1>
+						<h1>店家評價</h1>
 					</div>
 				</div>
 			</div>
@@ -243,17 +262,16 @@ img.user-avatar {
 	</div>
 	<!-- end breadcrumb section -->
 
-	<div class="mt-150 mb-150">
-		<div class="container">
+	<div class="mb-150 wrap">
+		<div class="container mapHeader">
 			<div class="row">
-				<div class="col">
+				<div class="col-lg-4 col-md-12" id="mapImg">
 					<img src="<c:url value='/Food/user/photo/${mapData.id}'/>">
 				</div>
-				<div class="col">
-					<div id="map" style="width: 500px; height: 500px;"></div>
-				</div>
+				<div class="col-lg-8 col-md-12" id="comments"></div>
 			</div>
 		</div>
+
 
 		<div class="container mb-150">
 			<fieldset>
@@ -262,8 +280,7 @@ img.user-avatar {
 				<label>店名:<em> ${mapData.mapname} </em></label>
 				<hr>
 
-				<label>地址:<em id="mapku"> ${mapData.mapku} </em></label> <input
-					id="GPS" type="button" name="gps" value="定位(在地圖上顯示標記)">
+				<label>地址:<em> ${mapData.mapku} </em></label>
 				<hr>
 
 				<label>電話:<em> ${mapData.mapnb}</em></label>
@@ -279,85 +296,9 @@ img.user-avatar {
 				<hr>
 
 			</fieldset>
-
-			<input id="backBtn" type="button" name="back" value="回首頁">
-
-		</div>
-
-		<script>
-			var backBtn = document.getElementById("backBtn");
-			backBtn.addEventListener("click", function(e) {
-				location.href = "<c:url value='/Food/user'/>";
-			})
-		</script>
-
-
-		<input id="address" type='text' class='form:input-large formelem' />
-		<script>
-			//===輸入地址===//
-			var address = "";
-
-			//===地址轉經緯度結果===//
-			var data = {
-				lat : "",
-				lng : ""
-			}
-			var map;
-			var geocoder;
-			function initMap() {
-				//建立geocoder實例
-				address = $("#mapku").text()
-				map = new google.maps.Map(document.getElementById('map'), {
-					center : {
-						lat : 25.04,
-						lng : 121.512
-					},
-					zoom : 18
-				});
-				geocoder = new google.maps.Geocoder();
-				geocoder.geocode({
-					'address' : address
-				}, function(results, status) {
-					if (status == 'OK') {
-						//若轉換成功...
-						data.lat = results[0].geometry.location.lat();
-						data.lng = results[0].geometry.location.lng();
-						map.setCenter({
-							lat : data.lat,
-							lng : data.lng
-						})
-						console.log("lat" + data.lat + ", lng:" + data.lng);
-
-					} else {
-						//轉換失敗...
-						console.log(status)
-					}
-				});
-			}
-
-			$("#address").on("change", function(e) {
-				address = $("#address").val()
-				console.log("輸入地址:" + address);
-
-				var marker = new google.maps.Marker({
-					map : map,
-					position : data
-				});
-			})
-		</script>
-		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZ9QTUwXbcsHp5Fx_LbD-HVbPMw8uzBig&callback=initMap">
 			
-		</script>
-
-		<script>
-			$('#address').hide()
-			$('#GPS').on("click", function(e) {
-				$('#address').val($('#mapku').text());
-				$('#address').change();
-			})
-		</script>
-
+			<input id="backBtn" type="button" name="back" value="回首頁">
+		</div>
 
 
 		<!-- footer -->
@@ -459,6 +400,15 @@ img.user-avatar {
 		<script src="<c:url value='/js/userNameMain.js'/>"></script>
 		<!-- vegas js -->
 		<script src="<c:url value='/js/vegas.js'/>"></script>
+
+		<script>
+			var backBtn = document.getElementById("backBtn");
+			backBtn.addEventListener("click", function(e) {
+				location.href = "<c:url value='/Food/user'/>";
+			})
+
+			$("#comments").load("<c:url value='/comments/list'/> #rate-header")
+		</script>
 
 		<script>
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
