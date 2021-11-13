@@ -2176,19 +2176,27 @@ a.video-play-btn {
 }
 
 .team-bg-1 {
-  background-image: url(../../../image/user/team/team-1.jpg);
+  background-image: url(../../../image/hao.png);
 }
 
 .team-bg-2 {
-  background-image: url(../../../image/user/team/team-2.jpg);
+  background-image: url(../../../image/hong.png);
 }
 
 .team-bg-3 {
-  background-image: url(../../../image/user/team/team-3.jpg);
+  background-image: url(../../../image/chung.png);
 }
 
 .team-bg-4 {
-  background-image: url(../../../image/user/team/team-4.jpg);
+  background-image: url(../../../image/jing.png);
+}
+
+.team-bg-5 {
+  background-image: url(../../../image/geng.png);
+}
+
+.team-bg-6 {
+  background-image: url(../../../image/wu.png);
 }
 
 .team-bg {

@@ -14,14 +14,14 @@ import cf.cvb14795.recipe.model.MyFavoritesBean;
 
 @Repository
 public interface MyFavoritesRepository extends JpaRepository<MyFavoritesBean, Integer> {
-	@Query("from MyFavoritesBean f where f.aRecipeId.id = ?1")
-	public Optional<MyFavoritesBean> findByRecipeId(Integer id);
+	@Query("from MyFavoritesBean f where f.aRecipeId.id = ?1 and f.member.account = ?2")
+	public Optional<MyFavoritesBean> findByRecipeIdAndAccount(Integer id, String account);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "delete from myFavorites where myFavorites.id = ?1",
+	@Query(value = "delete from myFavorites where myFavorites.id = ?1 and myFavorites.account = ?2",
 			nativeQuery = true)
-	public void deleteByRecipeId(Integer id);
+	public void deleteByRecipeIdAndAccount(Integer id, String member);
 	
 	@Query("from MyFavoritesBean f where f.member.account=?1")
 	List<MyFavoritesBean> findByName(String member);

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,9 +37,11 @@ import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.model.MyFavoritesBean;
+import cf.cvb14795.recipe.model.ReportBean;
 import cf.cvb14795.recipe.model.UserRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.recipe.service.IMyFavoriteService;
+import cf.cvb14795.recipe.service.IReportService;
 import cf.cvb14795.recipe.service.IUserRecipeService;
 
 @Controller
@@ -52,21 +57,23 @@ public class UserRecipeControllerAjax {
 	IAdminRecipeService aRecipeService;
 	IMemberService memberService;
 	IMyFavoriteService favoritesService;
+	IReportService reportService;
 
 	@Autowired
 	public UserRecipeControllerAjax(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,
-			IMemberService memberService, IMyFavoriteService favoritesService) {
+			IMemberService memberService, IMyFavoriteService favoritesService, IReportService reportService) {
 		this.uRecipeService = uRecipeService;
 		this.aRecipeService = aRecipeService;
 		this.memberService = memberService;
 		this.favoritesService = favoritesService;
+		this.reportService = reportService;
 	}
 
 //	@GetMapping("UserRecipe")
 //	public String userRecipe(@ModelAttribute("user") String user, @ModelAttribute("isAdmin") boolean isAdmin) {
 //		return PREFIX + "UserViewAdminRecipe2";
 //	}
-
+	
 	@GetMapping("UserInsertRecipe2")
 	public String recipe(Model model) {
 		UserRecipeBean userRecipe = new UserRecipeBean();
@@ -135,15 +142,29 @@ public class UserRecipeControllerAjax {
 	// ============== 使用者查詢所有會員食譜 ==============
 	@GetMapping("UserViewMembersRecipe2")
 	public String UserViewMembersRecipe(Model model) {
-
+		
 		List<UserRecipeBean> lists = uRecipeService.findMembersRecipe();
 		List<String> imgList = new ArrayList<String>();
+		HashMap<Integer, ReportBean> reportMap = new HashMap<>();
+		
 		for (UserRecipeBean bean : lists) {
 			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
+			imgList.add(base64String);
+			// 已檢舉待審核: 當本人檢舉時
+			// 已被 xxx 檢舉待審核: 當非本人檢舉時 顯示該食譜被哪個會員檢舉
+			Optional<ReportBean> opt = reportService.findByRecipeId(bean.getId());
+			if (opt.isPresent()) {
+				reportMap.put(bean.getId(), opt.get());				
+			}
+		}
+		
+		for (int i = 0; i < lists.size(); i++) {
+			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
 			imgList.add(base64String);
 		}
 		model.addAttribute("lists", lists);
 		model.addAttribute("imgList", imgList);
+		model.addAttribute("reportMap", reportMap);
 
 		return PREFIX + "UserViewMembersRecipe2";
 	}
@@ -223,6 +244,16 @@ public class UserRecipeControllerAjax {
 	// ============== 官方食譜詳細資料 ==============
 	@GetMapping("UserViewAdminRecipe2/{id}")
 	public String AdminRecipeDetails(@PathVariable("id") Integer id, Model model) {
+		
+		List<AdminRecipeBean> lists = aRecipeService.selectAll();
+		List<String> imgList = new ArrayList<String>();
+		for (AdminRecipeBean bean : lists) {
+			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
+			imgList.add(base64String);
+		}
+		model.addAttribute("lists", lists);
+		model.addAttribute("imgList", imgList);
+		
 		AdminRecipeBean recipe = aRecipeService.getId(id);
 		String base64String = Base64.getEncoder().encodeToString(recipe.getPhoto());
 
@@ -234,6 +265,16 @@ public class UserRecipeControllerAjax {
 	// ============== 會員食譜詳細資料 ==============
 	@GetMapping("UserViewMembersRecipe2/{id}")
 	public String MembersRecipeDetails(@PathVariable("id") Integer id, Model model) {
+		
+		List<UserRecipeBean> lists = uRecipeService.findMembersRecipe();
+		List<String> imgList = new ArrayList<String>();
+		for (UserRecipeBean bean : lists) {
+			String base64String = Base64.getEncoder().encodeToString(bean.getPhoto());
+			imgList.add(base64String);
+		}
+		model.addAttribute("lists", lists);
+		model.addAttribute("imgList", imgList);
+		
 		UserRecipeBean recipe = uRecipeService.getUpdateId(id);
 		String base64String = Base64.getEncoder().encodeToString(recipe.getPhoto());
 
@@ -247,25 +288,20 @@ public class UserRecipeControllerAjax {
     public ResponseEntity<?> goToMyfavorites(@PathVariable("id") Integer id, @ModelAttribute("member") Member member, Model model) {
 		MyFavoritesBean myFavBean = new MyFavoritesBean();
 		
-		AdminRecipeBean aRecipeId = aRecipeService.getId(id);
-		myFavBean.setaRecipeId(aRecipeId);
+		AdminRecipeBean aRecipe = aRecipeService.getId(id);
+		myFavBean.setaRecipeId(aRecipe);
 		myFavBean.setMember(member);
 		
-//		HttpHeaders responseHeaders = new HttpHeaders();
-//		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-		
-		Optional<MyFavoritesBean> opt = favoritesService.findByRecipeId(id);
+		Optional<MyFavoritesBean> opt = favoritesService.findByRecipeIdAndAccount(id, member.getAccount());
 		if (!opt.isPresent()) {
 			//當此筆ID沒有被加進去的時候 才給新增 避免重複
 			favoritesService.insert(myFavBean);			
 			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 		} else {
-			favoritesService.deleteByRecipeId(id);
+			favoritesService.deleteByRecipeIdAndAccount(id, member.getAccount());
 			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 		}
 
-//		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(myFavBean));
 	}
 	
 	// ============== 前端顯示我的最愛 ==============
@@ -285,6 +321,27 @@ public class UserRecipeControllerAjax {
 		return PREFIX + "MyFavoriteAdmin";
 	}
 	
+	
+	// ============== 會員檢舉食譜 ==============
+	@GetMapping("report/{id}")
+	public ResponseEntity<HttpStatus> reportRecipe(@PathVariable("id") Integer id, @ModelAttribute("member") Member member, Model model) {
+		
+		ReportBean reportBean = new ReportBean();
+		UserRecipeBean userRecipe = uRecipeService.getUpdateId(id);
+		reportBean.setUserRecipe(userRecipe);
+		reportBean.setMember(member);
+		
+		Optional<ReportBean> opt = reportService.findByRecipeId(id);
+		if (!opt.isPresent()) {
+			reportService.save(reportBean);			
+			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		} else {
+			reportService.deleteByRecipeId(id);
+			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	//預防沒進首頁直接連進來會找不到user的問題
 	@ModelAttribute
 	public void initMember (Model model, @CookieValue("user") String user) {
 		Optional<Member> opt = memberService.selectMemberByAccount(user);
@@ -292,4 +349,10 @@ public class UserRecipeControllerAjax {
 			model.addAttribute("member", opt.get());			
 		}
 	}
+	//若找不到cookie(使用者沒登入)則提示登入
+	@ExceptionHandler(MissingRequestCookieException.class)
+	private String handleMissingCookieError(Model model) {
+		return "redirect:/loginAlert";
+	}
+	
 }

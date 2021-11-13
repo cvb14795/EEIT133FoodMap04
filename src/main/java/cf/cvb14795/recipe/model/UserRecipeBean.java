@@ -2,12 +2,17 @@ package cf.cvb14795.recipe.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -47,9 +52,9 @@ public class UserRecipeBean implements Serializable{
 	@Column
 	private String step;
 	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "userRecipe", cascade = CascadeType.ALL)
-//	private Set<MyFavoritesBean> userFavRecipe = new HashSet<MyFavoritesBean>();
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRecipe", cascade = CascadeType.ALL)
+	Set<ReportBean> userRecipe = new HashSet<ReportBean>();
+	
 	@Override
 	public String toString() {
 		return "UserRecipeBean [id=" + id + ", userName=" + userName + ", foodName=" + foodName + ", category="

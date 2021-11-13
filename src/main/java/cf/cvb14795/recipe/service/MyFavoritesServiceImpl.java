@@ -25,9 +25,8 @@ public class MyFavoritesServiceImpl implements IMyFavoriteService {
 	}
 
 	@Override
-	public Optional<MyFavoritesBean> findByRecipeId(Integer id) {
-		return favoritesDao.findByRecipeId(id);
-		
+	public Optional<MyFavoritesBean> findByRecipeIdAndAccount(Integer id, String account) {
+		return favoritesDao.findByRecipeIdAndAccount(id, account);
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class MyFavoritesServiceImpl implements IMyFavoriteService {
 	}
 
 	@Override
-	public void deleteByRecipeId(Integer id) {
-		favoritesDao.deleteByRecipeId(id);
+	public void deleteByRecipeIdAndAccount(Integer id, String account) {
+		favoritesDao.deleteByRecipeIdAndAccount(id, account);
 	}
 
 	@Override

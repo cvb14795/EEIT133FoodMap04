@@ -83,6 +83,11 @@
 	img.user-avatar {
 		width:40px;
 	}
+	
+	.aboutUs {
+		font-size: 25px;
+		background-color:#BEBEBE;
+	}
 </style>
 </head>
 
@@ -172,7 +177,6 @@
 	<!-- end header -->
 	
   <div class="wrap">
-	<!-- <a class="aboutUs" href="#contact">關 於 我 們</a> -->
 	<a class="aboutUs" href="<c:url value='/aboutUs'/>">關 於 我 們</a>
 	<div class="title">
 	  <h1>想食</h1>
@@ -278,39 +282,51 @@
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
 						<h3><span class="orange-text">食譜</span>規劃</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<p>下廚就來想食what</p>
+						<p>萬中選一的神救援</p>
 					</div>
 				</div>
 			</div>
-
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-1.jpg'/>" alt=""></a>
+				<c:choose>
+					<c:when test="${lists.size() != 0}">
+						<c:forEach var="i" begin="0" end="2">
+							<div class="col-lg-4 col-md-6 text-center">
+								<div class="single-product-item">
+									<div class="product-image">
+										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
+									</div>
+									<h3>品名:${lists.get(i).name}</h3>
+									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
+									<h6>食材:
+										<p>
+											<span>
+												${lists.get(i).food1}<br /> ${lists.get(i).food2}<br />
+												${lists.get(i).food3}<br /> ${lists.get(i).food4}
+											</span>
+										</p>
+									</h6>
+									<h6>調味料:
+										<p>
+											<span>
+												${lists.get(i).sauce1}<br /> ${lists.get(i).sauce2}<br />
+												${lists.get(i).sauce3}
+											</span>
+										</p>
+									</h6>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				<c:otherwise>
+					<div class="container">
+						<div style="text-align: center;">
+							<h2>無資料!</h2>
 						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-2.jpg'/>" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-3.jpg'/>" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-					</div>
-				</div>
+				</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 	</div>

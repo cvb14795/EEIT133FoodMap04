@@ -92,7 +92,7 @@
                         <a href="./Coupon/frontpage"> <i class="menu-icon ti-email"></i>防疫專區 </a>
                     </li>
                     <li>
-                        <a href="./Event/eventjava"> <i class="menu-icon ti-email"></i>活動報名 </a>
+                        <a href="./Event"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
                         <a href="./comments/admin-list"> <i class="menu-icon ti-email"></i>評論專區 </a>

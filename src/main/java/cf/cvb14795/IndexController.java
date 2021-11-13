@@ -1,5 +1,6 @@
 package cf.cvb14795;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,8 @@ import com.google.gson.Gson;
 import cf.cvb14795.Comment.service.CommentService;
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
+import cf.cvb14795.recipe.model.AdminRecipeBean;
+import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.shop.service.IOrderService;
 import cf.cvb14795.shop.service.IShopService;
 import util.MemberStatus;
@@ -39,17 +42,20 @@ public class IndexController {
 	IShopService shopService;
 	IOrderService orderService;
 	CommentService commentService;
+	IAdminRecipeService aRecipeService;
 
 	@Autowired
 	public IndexController(
 			IMemberService mService,
 			IShopService shopService,
 			IOrderService orderService,
-			CommentService commentService) {
+			CommentService commentService,
+			IAdminRecipeService aRecipeService) {
 		this.mService = mService;
 		this.shopService = shopService;
 		this.orderService = orderService;
 		this.commentService = commentService;
+		this.aRecipeService = aRecipeService;
 	}
 
 	public IndexController() {
@@ -70,6 +76,15 @@ public class IndexController {
 
 	@GetMapping({ "/Home" })
 	private String home(Model model, @CookieValue("user") String user) {
+		List<AdminRecipeBean> lists = aRecipeService.selectAll();
+		List<String> imgList = new ArrayList<String>();
+		for (int i = 0; i < lists.size(); i++) {
+			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
+			imgList.add(base64String);
+		}
+		model.addAttribute("lists", lists);
+		model.addAttribute("imgList", imgList);
+		
 		Optional<Member> member = mService.selectMemberByAccount(user); 	
 		if (member.isPresent()) {
 			boolean isAdmin = member.get().isAdmin(); 	
