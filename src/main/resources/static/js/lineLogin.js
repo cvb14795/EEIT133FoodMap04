@@ -3,6 +3,7 @@ function setLineOAuthUrl() {
 	url += "response_type=code"
 	url += "&client_id=1656572191"
 	const redirect_uri = encodeURI("https://eeit133-foodmap04.herokuapp.com/FoodMap04/api/oauth2callback");
+//	const redirect_uri = encodeURI("https://518c-49-216-222-99.ngrok.io/FoodMap04/api/oauth2callback");
 	url += "&redirect_uri="+redirect_uri
 	url += "&state=12345abcde"
 	url += "&scope=profile%20openid"
