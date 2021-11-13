@@ -96,70 +96,80 @@ table {
 	</div>
 	<!--PreLoader Ends-->
 	
+	<body>
+	<!--PreLoader-->
+	<div class="loader">
+		<div class="loader-inner">
+			<div class="circle"></div>
+		</div>
+	</div>
+	<!--PreLoader Ends-->
+	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
+	<div class="top-header-area " id="sticker">
 		<div class="container">
+			<!-- logo -->
+			<div class="site-logo">
+				<a href="<c:url value='/'/>">
+					<img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+				</a>
+			</div>
+			<!-- end logo -->
+		</div>
+		<div>
 			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
+				<div class="col-xl-12 col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
 						<!-- menu start -->
-						<nav class="main-menu">
+						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
-                                <li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-                                <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
-                                <li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-                                <li><a href="<c:url value='/Event/'/>">活動總覽</a>
-                                <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-                                <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
-                                <li><a href="<c:url value='/Shop/'/>">美食商城</a>
-                                <li>
-                                    <div class="header-icons">
-                                        <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-                                        <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
-                                            <ul class="sub-menu">
-                                                <li id="editNavBtn"><a
-                                                    href="<c:url value='/Member/Revise'/>"><i
-                                                        class="fas fa-edit"></i> 修改個人資料</a></li>
-                                                <li id="registerNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
-                                                        註冊會員</a></li>
-                                                <li id="loginNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
-                                                        登入</a></li>
-                                                <li id="logoutNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
-                                                        登出</a></li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li>
-                                            <div class="header-icons">
-                                              <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
-                                                  <i class="fas fa-heart"></i>
-                                              </a>
-                                              <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
-                                                  <i class="fas fa-shopping-cart"></i>
-                                              </a>
-                                            </div>
-                                        </li>
-<!--                                         <li> -->
-<!--                                             <a> -->
-<!--                                                 淺色模式 -->
-<!--     <!--                                             <label for="checkbox-switch" style="">淺色模式</label> --> 
-<!--                                                 <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
-<!--                                             </a> -->
-<!--                                         </li> -->
-                                    </div>
-                                </li>
-                            </ul>
+								<li><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+								<li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
+								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
+								<li>
+									<div class="header-icons">
+										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+										<li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+											<ul class="sub-menu">
+												<li id="editNavBtn"><a
+													href="<c:url value='/Member/Revise'/>"><i
+														class="fas fa-edit"></i> 修改個人資料</a></li>
+												<li id="registerNavBtn"><a class="nav-link"
+													href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
+														註冊會員</a></li>
+												<li id="loginNavBtn"><a class="nav-link"
+													href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
+														登入</a></li>
+												<li id="logoutNavBtn"><a class="nav-link"
+													href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
+														登出</a></li>
+											</ul>
+										</li>
+										
+										<li>
+											<div class="header-icons">
+											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+											  	<i class="fas fa-heart"></i>
+											  </a>
+											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+											  	<i class="fas fa-shopping-cart"></i>
+											  </a>
+											</div>
+										</li>
+<!-- 										<li> -->
+<!-- 											<a> -->
+<!-- 												淺色模式 -->
+<!-- 	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> --> 
+<!-- 												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!-- 											</a> -->
+<!-- 										</li> -->
+									</div>
+								</li>
+							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 						<div class="mobile-menu"></div>
