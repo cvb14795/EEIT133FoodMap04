@@ -1,8 +1,10 @@
-package cf.cvb14795.member.controller;
+package cf.cvb14795.linebot.controller;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.linecorp.bot.liff.LiffApp;
 
 import cf.cvb14795.recipe.model.UserRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
@@ -49,18 +49,24 @@ public class LineBotWebhook {
 	    // 查詢某帳號之個人食譜名稱
 	    // {"text": {"text": ["查詢食譜類型：個人"]}}
 	    JSONObject fulfillmentMessages = new JSONObject();
-	    
-	    UserRecipeBean bean = uRecipeService.findByName("cvb14795").get(0);
-	    String foodName = bean.getFoodName();
+	    String foodName = "";
 	    String responseStr = String.format("[{'text': {'text': ['查詢到了：%s']}}]", foodName);
+	    JSONArray thisFulfillmentMessages = new JSONArray(responseStr);
+
+	    List<UserRecipeBean> recipeList = uRecipeService.findByName("cvb14795");
+	    for (UserRecipeBean recipe : recipeList) {
+	    	foodName = recipe.getFoodName();
+	    	System.out.println(thisFulfillmentMessages.getJSONObject(0).getJSONArray("text").toString(2));
+	    	
 //	    JSONObject origObj = obj.getJSONObject("queryResult")
 //	    		.getJSONArray("fulfillmentMessages")
 //	    		.getJSONObject(0);	 
-	    JSONArray thisFulfillmentMessages = new JSONArray(responseStr);
-	    fulfillmentMessages.put("fulfillmentMessages", thisFulfillmentMessages);
+			
+		}
 	    
 	    // 附加傳回內容進linebot
 	    // {fulfillmentMessages:thisFulfillmentMessages}
+	    fulfillmentMessages.put("fulfillmentMessages", thisFulfillmentMessages);
 	    System.out.println(fulfillmentMessages.toString());
 		return ResponseEntity.ok(fulfillmentMessages.toString());
 	}

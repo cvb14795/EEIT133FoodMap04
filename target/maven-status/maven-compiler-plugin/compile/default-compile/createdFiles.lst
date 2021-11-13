@@ -101,7 +101,6 @@ cf\cvb14795\shop\service\OrderService.class
 util\ParseUrlPath.class
 ecpay\payment\integration\verification\VerifyFundingReconDetail.class
 ecpay\payment\integration\domain\AioCheckOutDevide.class
-cf\cvb14795\member\controller\LineBotWebhook.class
 cf\cvb14795\member\service\IMemberService.class
 ecpay\payment\integration\exception\EcpayException.class
 ecpay\payment\integration\domain\QueryCreditCardPeriodInfoObj.class
