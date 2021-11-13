@@ -8,15 +8,19 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import cf.cvb14795.Coupon.model.bean.CouponBean;
 import cf.cvb14795.Coupon.model.bean.QuestionnaireBean;
+import cf.cvb14795.Coupon.model.service.CouponService;
 import cf.cvb14795.Coupon.model.service.QuestionnaireService;
 import cf.cvb14795.Coupon.model.util.CouponUsageUtil;
 import cf.cvb14795.member.bean.Member;
@@ -29,11 +33,13 @@ public class AdminController {
 
 	QuestionnaireService qService;
 	MemberService mService;
+	CouponService cService;
 
 	@Autowired
-	public AdminController(QuestionnaireService qService, MemberService mService) {
+	public AdminController(QuestionnaireService qService, MemberService mService, CouponService cService) {
 		this.qService = qService;
 		this.mService = mService;
+		this.cService = cService;
 	}
 
 	@PostMapping("/admincontroller")
@@ -77,7 +83,7 @@ public class AdminController {
 			String baseUrl = sb.toString();
 
 			/* =====寄信===== */
-			CouponUsageUtil couponUsage = new CouponUsageUtil(baseUrl);
+			CouponUsageUtil couponUsage = new CouponUsageUtil(cService, baseUrl);
 
 			System.out.println("================正在寄送Email...==================");
 			for (QuestionnaireBean b : beans) {
@@ -86,7 +92,7 @@ public class AdminController {
 				/* 待修改成問卷表格與會員表格join的形式 */
 
 				// 由問卷表格查詢該身分證對應的會員
-				Optional<Member> member = mService.selectMemberByIdNum(b.getId());
+				Optional<Member> member = mService.selectMemberByAccount(b.getAccount());   //填問券的帳號 -> email 寄
 				// 產生優惠券代碼(預設為6位數)
 //				String couponCode = couponUsage.generateCouponCode(6);
 				String couponCode = "VCCP15";
@@ -111,7 +117,7 @@ public class AdminController {
 			label = "show_page";
 
 		} else if ("D".equals(action)) {
-			qService.deleteDataById("T123456789");
+			qService.deleteDataById("A123456789");
 			label = "deleted_page";
 		}
 		return PREFIX + label;

@@ -10,11 +10,11 @@ import util.gmail.Mail;
 public class CouponUsageUtil {
     // u.getAuthority(): localhost:8080
     // request.getContextPath(): /FoodMap04
-	private CouponService cService;
     private String baseUrl;
+    private CouponService cService;
     
     
-    public void setBaseUrl(String baseUrl) {
+	public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
     }
     
@@ -41,7 +41,8 @@ public class CouponUsageUtil {
 //            //結束時間
 //            Date end_time = dateParser.parse(coupon.getEnd_time());
 
-            Mail.SendGmail(from, to, subject, text+value);
+            String ftext = text+value;
+            Mail.SendGmail(from, to, subject, ftext);
             System.out.println("Ｏ發送優惠券：成功! 收件者:" + to);
             return true;
         } else {
@@ -56,10 +57,11 @@ public class CouponUsageUtil {
         return String.valueOf((int)(Math.random() * Math.pow(10, degit)));
     }
 
-    public CouponUsageUtil(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
+    public CouponUsageUtil(CouponService cService, String baseUrl) {
+		this.cService = cService;
+		this.baseUrl = baseUrl;
+	}
 
-    public CouponUsageUtil() {
+	public CouponUsageUtil() {
     }
 }

@@ -213,7 +213,7 @@
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
 						<h3><span class="orange-text">活動</span>總覽</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<p></p>
 					</div>
 				</div>
 			</div>
@@ -228,8 +228,8 @@
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<p class="excerpt"></p>
+							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -242,8 +242,8 @@
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<p class="excerpt"></p>
+							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -256,8 +256,8 @@
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<p class="excerpt"></p>
+							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -278,7 +278,7 @@
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
 						<h3><span class="orange-text">食譜</span>規劃</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<p></p>
 					</div>
 				</div>
 			</div>
@@ -337,7 +337,7 @@
 					<div class="footer-box">
 						<h2 class="widget-title">Line 智慧客服</h2>
 						<ul>
-							<li><a href="" id="lineLoginHref"><input type="button"
+							<li><a href="javascript:void(0)" id="lineLoginHref"><input type="button"
 									class="lineLogin"
 									style="width: 151px; height: 44px; border: none" /></a></li>
 							<li><img src="<c:url value='/image/lineFoodMap04QR.png'/>" alt=""></li>
@@ -391,6 +391,7 @@
 		$(function() {
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
+			setLineOAuthUrl();
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },

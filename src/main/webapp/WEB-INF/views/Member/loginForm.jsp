@@ -47,7 +47,7 @@
 				<input type="button" id="oneClick" value="一鍵輸入" onclick="autoInput()" style="background-color:#F28123">
 			</form>
 
-<!-- 			<div id="my-signin2"></div> -->
+			<div id="my-signin2"></div>
 
 			<!-- Remind Passowrd -->
 			<div id="formFooter">

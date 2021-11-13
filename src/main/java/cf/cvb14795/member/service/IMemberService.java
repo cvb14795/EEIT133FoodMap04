@@ -31,6 +31,8 @@ public interface IMemberService {
 	
 	// 查詢會員人數
 	Long findMemberCount();
+	
+	
 
 
 }

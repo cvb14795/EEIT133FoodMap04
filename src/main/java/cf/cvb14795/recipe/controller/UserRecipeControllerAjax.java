@@ -16,8 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingRequestCookieException;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -249,21 +251,29 @@ public class UserRecipeControllerAjax {
 		
 		AdminRecipeBean aRecipeId = aRecipeService.getId(id);
 		myFavBean.setaRecipeId(aRecipeId);
-		myFavBean.setMember(member);
+		System.out.println("有無COOKIE帳號: "+member != null);
+		if (member != null) {
+			myFavBean.setMember(member);			
+			Optional<MyFavoritesBean> opt = favoritesService.findByRecipeId(id);
+			if (!opt.isPresent()) {
+				//當此筆ID沒有被加進去的時候 才給新增 避免重複
+				favoritesService.insert(myFavBean);			
+				return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+			} else {
+				favoritesService.deleteByRecipeId(id);
+				return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			//沒登入卻加入我的最愛
+			return new ResponseEntity<HttpStatus>(HttpStatus.UNAUTHORIZED);
+		}
+		
 		
 //		HttpHeaders responseHeaders = new HttpHeaders();
 //		responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 //		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
 		
-		Optional<MyFavoritesBean> opt = favoritesService.findByRecipeId(id);
-		if (!opt.isPresent()) {
-			//當此筆ID沒有被加進去的時候 才給新增 避免重複
-			favoritesService.insert(myFavBean);			
-			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
-		} else {
-			favoritesService.deleteByRecipeId(id);
-			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
-		}
+		
 
 //		return ResponseEntity.ok().headers(responseHeaders).body(new Gson().toJson(myFavBean));
 	}
@@ -291,5 +301,10 @@ public class UserRecipeControllerAjax {
 		if (opt.isPresent()) {
 			model.addAttribute("member", opt.get());			
 		}
+	}
+	
+	@ExceptionHandler(MissingRequestCookieException.class)
+	private String handleMissingCookieError(Model model) {
+		return "redirect:/loginAlert";
 	}
 }

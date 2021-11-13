@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>here</title>
+<title>新增店家資料</title>
 <link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/admin/css/cs-skin-elastic.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/admin/css/style.css'/>">
@@ -206,28 +206,29 @@ legend {
 			<fieldset>
 				<legend>店家資料</legend>
 				<div class="st1">
-					<label for="" class="t1">店家名稱:</label> 
-					<input type="text" id="" name="mapname" required>
+					<label for="" class="t1" >店家名稱:</label> 
+					<input type="text" name="mapname" id="mapname" required>
 				</div>
 				<div class="st1">
-					<label for="" class="t1">店家地址:</label> 
-					<input type="text" id="" name="mapku" required>
+					<label for="" class="t1" >店家地址:</label> 
+					<input type="text" name="mapku" id="mapku" required>
 				</div>
 				<div class="st1">
-					<label for="" class="t1">店家電話:</label> 
-					<input type="text" id="" name="mapnb">
+					<label for="" class="t1" >店家電話:</label> 
+					<input type="text" name="mapnb" id="mapnb">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">店家座標位置:</label> 
-					<input type="text" id="" name="mapxy">
+					<label for="" class="t1" >座標位置:</label> 
+					<input type="text" name="mapxy" id="mapxy">
 				</div>
 				<div class="st1">
-					<label for="" class="t1">是否為安全店家:</label> 
-					<input type="text" id="" name="mapcheck">
+					<label for="" class="t1">安全店家:</label> 
+					<input type="radio" name="mapcheck" value="是(可內用/外帶)" id="mapcheck"> 是(可內用/外帶)
+					<input type="radio" name="mapcheck" value="否(僅可外帶)" id="mapcheck"> 否(僅可外帶)<br>
 				</div>
 				<div class="st1">
-					<label for="" class="t1">分類:</label> 
-					<input type="text" id="" name="category">
+					<label for="" class="t1" >分類:</label> 
+					<input type="text" name="category" id="category">
 				</div>
 				<div class="st1">
 					<img src="" width="450" height="300" alt="請選擇照片" id="showPic">
@@ -241,6 +242,7 @@ legend {
 			<div class="sub">
 				<input type="reset" name="reset" value="清除"> 
 				<input type="submit" name="submit" value="確認">
+				<input type="button" name="submit" value="一鍵輸入" id="btn">
 			</div>
 
 		</form>
@@ -341,5 +343,15 @@ legend {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="<c:url value='/js/admin/js/main.js'/>"></script>
+    
+    <script>
+    $("#btn").on("click",function (e) {
+    	   $("#mapname").val("蘿塔塔 塔羅廚房");
+    	   $("#mapku").val("320桃園市中壢區義民路137號");
+    	   $("#mapnb").val("+88634952568");
+    	   $("#mapxy").val("X638+55 中壢區 桃園市");
+    	   $("#category").val("桃園市");
+    	  })
+    </script>
 </body>
 </html>

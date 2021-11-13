@@ -48,7 +48,7 @@
 		padding-right: 150px;
 	}
 </style>
-<title>成功送出表單</title>
+<title>管理員頁面</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
@@ -197,9 +197,9 @@
 	<!-- 防疫專區 -->
 	<div style="display:flex;margin:20px;">	
 		<div>
-			<h1>您不是管理員</h1>
-			<h1>不具權限</h1>
-			<h1>無法使用此功能</h1>
+			<h1>	您不是管理員</h1>
+			<h1>	不具權限</h1>
+			<h1>	無法使用此功能</h1>
 			<br>
 			<br>
 			<br>

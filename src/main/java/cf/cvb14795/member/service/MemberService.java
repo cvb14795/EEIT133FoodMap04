@@ -77,4 +77,9 @@ public class MemberService implements IMemberService {
 		// TODO Auto-generated method stub
 		return mDao.count();
 	}
+
+	
+	
+	
+	
 }
