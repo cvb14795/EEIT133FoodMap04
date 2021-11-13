@@ -60,7 +60,7 @@ public class OAuth2Login {
             LinkedMultiValueMap<String, String> body=new LinkedMultiValueMap<>();
             body.add("grant_type", "authorization_code");
     		body.add("code", code);
-    		String nextPage = URLEncoder.encode("https://640d-180-217-233-211.ngrok.io/FoodMap04/api/oauth2callback", "utf-8");
+    		String nextPage = URLEncoder.encode("https://eeit133-foodmap04.herokuapp.com/FoodMap04/api/token", "utf-8");
     		System.out.println("next: "+nextPage);
     		body.add("redirect_uri", nextPage);
     		body.add("client_id", "1656572191");
