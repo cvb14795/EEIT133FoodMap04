@@ -234,16 +234,27 @@
 			<input type="hidden" name="userLikes" value="0">
 					
 			 
-			<form:input type="text" path="userName" id="name"
-					class="form-control mb-4 col-4" placeholder="姓名(1.不可空白 2.10字以內)" onblur="'checkname()'"/>
+			<form:input type="hidden" path="userName" id="name"
+					class="form-control mb-4 col-4" value="阿宏" />
 			<span id="idsp"></span><br />
 			
 			<!-- 測試用 -->
+<<<<<<< Updated upstream
 			<form:input type="text" path="mapName" 
 					class="form-control mb-4 col-4" placeholder="店家名稱"/>
 					
 			<form:input type="text" path="userAccount" 
 					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
+=======
+			<form:input type="hidden" path="mapName" id="mapName"
+					class="form-control mb-4 col-4" />
+					
+			<form:input type="hidden" path="userAccount" 
+					class="form-control mb-4 col-4" value="test"/>
+					
+			<form:input type="hidden" path="userPhotoTest" 
+					class="form-control mb-4 col-4" value="https://imgur.dcard.tw/tn729YT.gif"/>
+>>>>>>> Stashed changes
 		
 					
 			<!-- Ratting system -->
@@ -274,10 +285,12 @@
 		 	 <br><br><br>
 			
 			<input type="hidden" id="userComment" value="${comment.userComment}"/>
-			<form:textarea  id="commentarea" path="userComment" class="form-control input-sm" rows="5" placeholder="評論區(100字以內)" onblur="'checkcommentarea'" />
+			<form:textarea  id="commentarea" path="userComment" class="form-control input-sm" rows="5" placeholder="寫下你的想法吧！" onblur="'checkcommentarea'" />
 			<span id="idsp3"></span><br /><br /><br />			
 			
 			<button type="submit" class="btn btn-info col-2">送出</button>
+			
+			<input type="button" class="btn btn-info col-2" name="submit" value="一鍵輸入" id="btn">
 		
 		</form:form >
 		
@@ -437,6 +450,14 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+	
+	<script>
+		$("#btn").on("click",function (e) {
+		   $("#mapName").val("信義霸味薑母鴨（原松仁店）");
+		   $("#commentarea").val("比想像中還好吃 肉不柴！");
+		})
+	</script>
+	
 	
 </body>
 </html>

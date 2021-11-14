@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <meta name="google-signin-client_id"
 		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
-<style>
+<style> 
 	.mhw {
 		text-align:center;
 		width:150px;height:50px;
@@ -278,8 +278,11 @@
                 </div>
             </div>
             
-            
-            
+            <c:if test="${user == 'test'}">
+            <a href="<c:url value='/comments/showFormForAdd'/>" class="btn btn-primary btn-sm mb-3">
+				新增評論
+			</a>
+            </c:if>
             
  			<a href="<c:url value='/comments/sortByUserDate'/>" class="btn btn-primary btn-sm mb-3">
 			按時間排序
@@ -290,9 +293,17 @@
 			<a href="<c:url value='/comments/sortByUserScoreAsc'/>" class="btn btn-primary btn-sm mb-3">
 			低分至高分
 			</a>
-          	<a href="<c:url value='/comments/sortByUserLikes'/>" class="btn btn-primary btn-sm mb-3">
-			依關聯性排序
-			</a>
+			
+          	<form:form action="" class="form-inline" id="searchForm" method="get">
+								
+				<input class="form-control  ml-10 mr-sm-2 mb-3" type="search" name="commentName" placeholder="輸入關鍵字" />
+			
+					<button class="btn btn-success mb-3" type="submit">搜尋</button>
+				
+				<br>
+				
+			</form:form>		
+				
           
           
  
@@ -327,72 +338,10 @@
                		<div class="heart"></div><p class = "heartnum" id = heartnum>${tempComment.userLikes}</p>
                    	<input type="hidden" name="userLikes" value="${tempComment.userLikes}">
                 	</form:form>
-            </div>
-        </c:forEach>
-        
-        
-        
-        
-        </div>
-    </div>
-</div>
-
-<!-- ends here -->
-	
-	<!-- show comments from user side -->
-	
-	<div class="container">
-
-	<h3>評論區</h3>
-	<hr>
-	<form:form action="" class="form-inline" id="searchForm" method="get">
-	<a href="<c:url value='/comments/showFormForAdd'/>" class="btn btn-primary btn-sm mb-3">
-		新增評論
-	</a>
-	
-	<input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="commentName" placeholder="輸入關鍵字" />
-
-		<button class="btn btn-success mb-3" type="submit">搜尋</button>
-	
-	<br>
-	
-	</form:form>		
-	
-	<!-- 
-	排序方式： <select class="form-control" name="sortingType" id="sortingType" th:action="@{/comments/sorting}">
-                <option th:value="''">請選擇排序方式</option>
-                <option th:value="'high'">評分高 → 低</option>
-    			<option th:value="'lowToHigh'">評分低 → 高</option>
-    			<option th:value="'new'" >時間新 → 舊</option>
-    			<option th:value="'oldToNew'" >時間舊 → 新</option>
-            	</select>
-     -->        	
-            	
-            	
-    <br><br>
-	
-	<table class="table table-bordered table-striped">
-		<thead class="thead-dark">
-			<tr>
-				<th>姓名</th>
-				<th>評分</th>
-				<th>評論</th>
-				<th>評論時間</th>
-				<th>編輯/刪除</th>
-			</tr>
-		</thead>	
-		<tbody>
-			<c:forEach items="${comments}" var="tempComment">
-				<tr>
-					<td>${tempComment.userName}</td>
-					<!-- <td th:text="${tempComment.score}" />  -->
-					
-					<td><img src="<c:url value='/image/star${tempComment.score}.png'/>" /></td>
-					<td>${tempComment.userComment}</td>
-					<td>${tempComment.userDate}</td>
-					
-					<td>
-						<!-- Add "update" button/link -->
+                   	
+                   	<c:if test="${tempComment.userAccount == 'test'}">
+                   	
+                	<div id="updateDelete">
 						<a href="<c:url value='/comments/showFormForUpdate/${tempComment.id}'/>"
 							class="btn btn-info btn-sm">
 							更新					
@@ -404,16 +353,24 @@
 							onclick="if (!(confirm('確定要刪除嗎？'))) return false">
 							刪除					
 						</a>
-						
-					</td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
+                	</div>
+                	</c:if>
+                	
+            </div>
+            
+            
+        </c:forEach>
+        
+        
+        
+        
+        </div>
+    </div>
 </div>
 
-
+<!-- ends here -->
+	
+	
 
 
 	
@@ -596,7 +553,6 @@
 	
 	
 	<script>
-	function
 	 $("#searchForm").attr("action", "<c:url value='/comments/search'/>")
 	</script>
 	
@@ -629,4 +585,7 @@
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

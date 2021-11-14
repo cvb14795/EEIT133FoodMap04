@@ -234,17 +234,21 @@
 			<input type="hidden" name="userLikes" value="${comment.userLikes}">
 					
 			 
-			<form:input type="text" path="userName" id="name"
-					class="form-control mb-4 col-4" placeholder="姓名(1.不可空白 2.10字以內)" onblur="'checkname()'"/>
+			<form:input type="hidden" path="userName" id="name"
+					class="form-control mb-4 col-4" />
 			<span id="idsp"></span><br />
 			
-			<form:input type="text" path="mapName" 
+			<form:input type="hidden" path="mapName" 
 					class="form-control mb-4 col-4" placeholder="店家名稱"/>
 					
-			<form:input type="text" path="userAccount" 
+			<form:input type="hidden" path="userAccount" 
 					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
 					
+<<<<<<< Updated upstream
 			<form:input type="text" path="userPhotoTest" 
+=======
+			<form:input type="hidden" path="userPhotoTest" 
+>>>>>>> Stashed changes
 					class="form-control mb-4 col-4" placeholder="照片連結"/>
 			
 					
@@ -267,6 +271,7 @@
 			<span id="idsp3"></span><br /><br /><br />			
 			
 			<button type="submit" class="btn btn-info col-2">送出</button>
+			<input type="button" class="btn btn-info col-2" name="submit" value="一鍵輸入" id="btn">
 		
 		</form:form >
 		
@@ -426,6 +431,12 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+	
+	<script>
+		$("#btn").on("click",function (e) {
+		   $("#commentarea").val("這次再回訪炸雞是冷的...有點失望...");
+		})
+	</script>
 	
 </body>
 </html>
