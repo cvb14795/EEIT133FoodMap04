@@ -244,12 +244,8 @@
 			<form:input type="hidden" path="userAccount" 
 					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
 					
-<<<<<<< Updated upstream
-			<form:input type="text" path="userPhotoTest" 
-=======
-			<form:input type="hidden" path="userPhotoTest" 
->>>>>>> Stashed changes
-					class="form-control mb-4 col-4" placeholder="照片連結"/>
+
+			<form:input type="hidden" path="userPhotoTest" class="form-control mb-4 col-4" />
 			
 					
 			<!-- Ratting system -->

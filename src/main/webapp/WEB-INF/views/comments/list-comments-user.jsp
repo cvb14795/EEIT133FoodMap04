@@ -581,11 +581,3 @@
 </body>
 </html>
 
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes

@@ -239,13 +239,10 @@
 			<span id="idsp"></span><br />
 			
 			<!-- 測試用 -->
-<<<<<<< Updated upstream
-			<form:input type="text" path="mapName" 
-					class="form-control mb-4 col-4" placeholder="店家名稱"/>
+
 					
-			<form:input type="text" path="userAccount" 
-					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
-=======
+			
+
 			<form:input type="hidden" path="mapName" id="mapName"
 					class="form-control mb-4 col-4" />
 					
@@ -254,7 +251,7 @@
 					
 			<form:input type="hidden" path="userPhotoTest" 
 					class="form-control mb-4 col-4" value="https://imgur.dcard.tw/tn729YT.gif"/>
->>>>>>> Stashed changes
+
 		
 					
 			<!-- Ratting system -->
@@ -452,7 +449,7 @@
 	<script src="<c:url value='/js/vegas.js'/>"></script>
 	
 	<script>
-		$("#btn").on("click",function (e) {
+		$("#btn").on("click", function (e) {
 		   $("#mapName").val("信義霸味薑母鴨（原松仁店）");
 		   $("#commentarea").val("比想像中還好吃 肉不柴！");
 		})
