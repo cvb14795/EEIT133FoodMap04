@@ -16,7 +16,7 @@ public interface IUserRecipeService {
 
 	List<UserRecipeBean> findByName(String userName);
 
-	UserRecipeBean getUpdateId(int id);
+	Optional<UserRecipeBean> getUpdateId(int id);
 
 	void saveRecipe(UserRecipeBean userRecipe);
 

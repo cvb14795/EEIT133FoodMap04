@@ -170,8 +170,8 @@ public class UserRecipeControllerAjax {
 	// ============== 根據ID讀取資料庫資料:更新 ==============
 	@GetMapping(path = "ViewYourRecipe2/{id}")
 	public String ViewYourRecipe(@PathVariable("id") int id, Model model) {
-		UserRecipeBean updateRecipe = uRecipeService.getUpdateId(id);
-		String base64String = Base64.getEncoder().encodeToString(updateRecipe.getPhoto());
+		Optional<UserRecipeBean> updateRecipe = uRecipeService.getUpdateId(id);
+		String base64String = Base64.getEncoder().encodeToString(updateRecipe.get().getPhoto());
 
 		model.addAttribute("updateRecipe", updateRecipe);
 		model.addAttribute("base64String", base64String);
@@ -236,8 +236,8 @@ public class UserRecipeControllerAjax {
 	// ============== 會員食譜詳細資料 ==============
 	@GetMapping("UserViewMembersRecipe2/{id}")
 	public String MembersRecipeDetails(@PathVariable("id") Integer id, Model model) {
-		UserRecipeBean recipe = uRecipeService.getUpdateId(id);
-		String base64String = Base64.getEncoder().encodeToString(recipe.getPhoto());
+		Optional<UserRecipeBean> recipe = uRecipeService.getUpdateId(id);
+		String base64String = Base64.getEncoder().encodeToString(recipe.get().getPhoto());
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("base64String", base64String);

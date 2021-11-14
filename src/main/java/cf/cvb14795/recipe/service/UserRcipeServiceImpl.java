@@ -41,8 +41,8 @@ public class UserRcipeServiceImpl implements IUserRecipeService{
 	}
 
 	@Override
-	public UserRecipeBean getUpdateId(int id) {
-		return uRecipeDao.getById(id);
+	public Optional<UserRecipeBean> getUpdateId(int id) {
+		return uRecipeDao.findById(id);
 	}
 
 	@Override
