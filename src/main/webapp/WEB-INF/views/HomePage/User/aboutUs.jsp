@@ -251,7 +251,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
 					<div class="single-team-item">
-						<div class="team-bg team-bg-3"></div>
+						<div class="team-bg team-bg-4"></div>
 						<h4>張晉豪<span>組員</span></h4>
 						<ul class="social-link-team">
 							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -262,7 +262,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
 					<div class="single-team-item">
-						<div class="team-bg team-bg-3"></div>
+						<div class="team-bg team-bg-5"></div>
 						<h4>張耿豪<span>組員</span></h4>
 						<ul class="social-link-team">
 							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -273,7 +273,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
 					<div class="single-team-item">
-						<div class="team-bg team-bg-3"></div>
+						<div class="team-bg team-bg-6"></div>
 						<h4>伍玴辰<span>組員</span></h4>
 						<ul class="social-link-team">
 							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
@@ -295,12 +295,19 @@
 					<div class="testimonial-sliders">
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar1.png'/>" alt="">
+								<img src="<c:url value='/image/hao.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>鄧峻豪<span>食譜養成</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.主題發想
+									  2.簡報製作
+									  3.網站模板設計
+									  4.食譜CRUD
+									  5.我的最愛
+									  6.檢舉功能
+									  7.後臺食譜管理
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -309,12 +316,22 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar2.png'/>" alt="">
+								<img src="<c:url value='/image/hong.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>陳貴宏<span>會員系統</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.登入/登出/註冊功能
+									  2.後臺會員管理
+									  3.Line智慧客服
+									  4.忘記密碼
+									  5.購物車
+									  6.綠界金流
+									  7.團隊技術指導
+									  8.主題發想
+									  9.網站模板設計
+									  10.專案整合(版本控制：Git)
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -323,12 +340,15 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar3.png'/>" alt="">
+								<img src="<c:url value='/image/chung.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>林語君<span>評論專區</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.主題發想
+									  2.後臺評論區管理
+									  3.評論區CRUD
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -337,12 +357,17 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar3.png'/>" alt="">
+								<img src="<c:url value='/image/jing.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>張晉豪<span>商家資訊</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.主題發想
+									  2.商家資訊
+									  3.留言板
+									  4.Google Map
+									  5.後臺商家管理
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -351,12 +376,16 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar3.png'/>" alt="">
+								<img src="<c:url value='/image/geng.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>張耿豪<span>防疫專區</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.主題發想
+									  2.問卷調查
+									  3.發送優惠代碼
+									  4.後臺管理
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -365,12 +394,15 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="<c:url value='/image/user/avaters/avatar3.png'/>" alt="">
+								<img src="<c:url value='/image/wu.png'/>" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>伍玴辰<span>活動總覽</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" 1.主題發想
+									  2.活動報名系統
+									  3.後臺活動管理
+									"
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>

@@ -8,9 +8,9 @@ import cf.cvb14795.recipe.model.MyFavoritesBean;
 public interface IMyFavoriteService {
 	public void insert(MyFavoritesBean myFavoritesBean);
 	
-	public Optional<MyFavoritesBean> findByRecipeId(Integer id);
+	public Optional<MyFavoritesBean> findByRecipeIdAndAccount(Integer id, String account);
 	
-	public void deleteByRecipeId(Integer id);
+	public void deleteByRecipeIdAndAccount(Integer id, String account);
 	
 	public List<MyFavoritesBean> findAll();
 	

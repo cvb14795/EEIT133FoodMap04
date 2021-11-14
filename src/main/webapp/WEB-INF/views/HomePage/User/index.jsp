@@ -83,6 +83,17 @@
 	img.user-avatar {
 		width:40px;
 	}
+	
+	.aboutUs {
+		font-size: 25px;
+		background-color:#BEBEBE;
+		opacity: .9;
+	}
+	
+	body {
+		background-color:#FFFCEC;
+	}
+	
 </style>
 </head>
 
@@ -172,7 +183,6 @@
 	<!-- end header -->
 	
   <div class="wrap">
-	<!-- <a class="aboutUs" href="#contact">關 於 我 們</a> -->
 	<a class="aboutUs" href="<c:url value='/aboutUs'/>">關 於 我 們</a>
 	<div class="title">
 	  <h1>想食</h1>
@@ -186,18 +196,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
-					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-					</div>
+					<a href="<c:url value='/aboutUs'/>">
+						<img src="<c:url value='/image/user/logo.png'/>" alt="">
+					</a>
 				</div>
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-text">
 						<p class="top-sub">EEIT133—跨域Java班—第四組期末專題</p>
 						<h2>網站<span class="orange-text">發想</span></h2>
 						<p>每次想要查詢美食時，都會耗費太多時間，希望有一個平台能夠找出各地美食資訊，也藉由大家的評論來了解當地人推薦的道地美食。</p>
-			<p>因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。</p>
-			<p>現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
-						<a href="about.jsp" class="boxed-btn mt-4">詳細資訊</a>
+						<p>因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。</p>
+						<p>現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
+						<a href="<c:url value='/aboutUs'/>" class="boxed-btn mt-4">詳細資訊</a>
 					</div>
 				</div>
 			</div>
@@ -205,71 +215,52 @@
 	</div>
 	<!-- end 網站發想 section -->
 
-	<!-- 活動總覽 -->
+	<!-- 商家預覽 -->
 	<div class="latest-news pt-150 pb-150">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">活動</span>總覽</h3>
-						<p></p>
+						<h3><span class="orange-text">商家</span>預覽</h3>
+						<p>有了商家資訊？</p>
+						<p>真是太剛好了！</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt"></p>
-							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt"></p>
-							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt"></p>
-							<a href="single-news.html" class="read-more-btn">查看更多 <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
+			<div class="row product-lists">
+				<c:choose>
+					<c:when test="${mapDatalists.size() != 0}">
+						<c:forEach var="i" begin="0" end="2">
+							<div class="col-lg-4 col-md-6 text-center ${mapDatalists.get(i).mapcheck}">
+								<div class="single-product-item">
+									<div class="product-image">
+										<a href="single-product.html">
+<%-- 											<img src="data:image/jpg;base64,${imgList.get(i)}"> --%>
+											<img src="<c:url value='/Food/user/photo/${mapDatalists.get(i).id}'/>" style="width:300px;height:300px;">
+										</a>
+									</div>
+									<h3>店家名稱:<span class="mapname">${mapDatalists.get(i).mapname}</span></h3>
+									<p class="product-price"><span>地區:${mapDatalists.get(i).category}</span></p>
+									<h6>是否為安全店家:
+										<p>
+											<span>
+												${mapDatalists.get(i).mapcheck}
+											</span>
+										</p>
+									</h6>
+									<a href="<c:url value='/Food/user/info/${mapDatalists.get(i).id}'/>" class="cart-btn">詳細資料</a>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">More News</a>
+					<a href="<c:url value='/Food/user'/>" class="boxed-btn">更多商家</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end 活動總覽 -->
+	<!-- end 商家預覽 -->
 
   <!-- 食譜 -->
 	<div class="product-section mb-150">
@@ -278,38 +269,54 @@
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
 						<h3><span class="orange-text">食譜</span>規劃</h3>
-						<p></p>
+						<p>下廚就來想食what</p>
+						<p>萬中選一的神救援</p>
 					</div>
 				</div>
 			</div>
-
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-1.jpg'/>" alt=""></a>
+				<c:choose>
+					<c:when test="${lists.size() != 0}">
+						<c:forEach var="i" begin="0" end="2">
+							<div class="col-lg-4 col-md-6 text-center">
+								<div class="single-product-item">
+									<div class="product-image">
+										<img src="data:image/jpg;base64,${imgList.get(i)}">
+									</div>
+									<h3>品名:${lists.get(i).name}</h3>
+									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
+									<h6>食材:
+										<p>
+											<span>
+												${lists.get(i).food1}<br /> ${lists.get(i).food2}<br />
+												${lists.get(i).food3}<br /> ${lists.get(i).food4}
+											</span>
+										</p>
+									</h6>
+									<h6>調味料:
+										<p>
+											<span>
+												${lists.get(i).sauce1}<br /> ${lists.get(i).sauce2}<br />
+												${lists.get(i).sauce3}
+											</span>
+										</p>
+									</h6>
+									<a href="<c:url value='/Recipe/user/UserViewAdminRecipe2/${lists.get(i).id}'/>" class="read-more-btn">詳細資料 <i class="fas fa-angle-right"></i></a>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				<c:otherwise>
+					<div class="container">
+						<div style="text-align: center;">
+							<h2>無資料!</h2>
 						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-2.jpg'/>" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="<c:url value='/image/user/products/product-img-3.jpg'/>" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-					</div>
+				</c:otherwise>
+				</c:choose>
+				
+				<div class="col-lg-12 text-center">
+					<a href="<c:url value='/Recipe/user'/>" class="boxed-btn">更多食譜</a>
 				</div>
 			</div>
 		</div>
@@ -337,7 +344,7 @@
 					<div class="footer-box">
 						<h2 class="widget-title">Line 智慧客服</h2>
 						<ul>
-							<li><a href="javascript:void(0)" id="lineLoginHref"><input type="button"
+							<li><a href="" id="lineLoginHref"><input type="button"
 									class="lineLogin"
 									style="width: 151px; height: 44px; border: none" /></a></li>
 							<li><img src="<c:url value='/image/lineFoodMap04QR.png'/>" alt=""></li>
@@ -391,7 +398,6 @@
 		$(function() {
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
-			setLineOAuthUrl();
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },

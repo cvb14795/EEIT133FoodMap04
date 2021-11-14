@@ -177,7 +177,7 @@
 			<div class="row product-lists">
 				<c:choose>
 					<c:when test="${lists.size() != 0}">
-						<c:forEach var="i" begin="0" end="${lists.size()-1 }">
+						<c:forEach var="i" begin="0" end="${lists.size()-1}" varStatus="status">
 							<div class="col-lg-4 col-md-6 text-center">
 								<div class="single-product-item">
 									<div class="product-image">
@@ -201,7 +201,25 @@
 											</span>
 										</p>
 									</h6>
-									<a href="cart.html" class="cart-btn"><i class="fas fa-heart"></i> 加入我的最愛</a>
+									<c:choose>
+										<%-- 該食譜有被任何一個會員檢舉時 --%>
+										<c:when test="${reportMap.size() > 0 && reportMap.containsKey(lists.get(i).id)}">
+											<c:choose>
+	 											<%-- 已檢舉待審核: 當本人檢舉時 --%>
+												<c:when test="${reportMap.get(lists.get(i).id).member.account.equals(user)}">
+	 												<a href="javascript:void(0)" class="cart-btn rp isReport" style="background-color: red;"><i class="fas fa-exclamation-triangle"></i> 已檢舉，待審核</a>
+	 											</c:when>
+	 											<%-- 已被 xxx 檢舉待審核: 當非本人檢舉時 顯示該食譜被哪個會員檢舉  --%>
+	 											<c:otherwise>
+		 											<a href="javascript:void(0)" class="cart-btn rp 0" style="background-color: red;"><i class="fas fa-exclamation-triangle"></i> 已被 ${reportMap.get(lists.get(i).id).member.account} 檢舉待審核</a>
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<%-- 已被 xxx 檢舉待審核: 當非本人檢舉時 顯示該食譜被哪個會員檢舉 --%> 
+										<c:otherwise>
+											<a href="javascript:void(0)" onclick="report(${lists.get(i).id}, ${status.index})" class="cart-btn rp notReport"><i class="fas fa-exclamation-triangle"></i> 檢舉</a>
+										</c:otherwise>
+									</c:choose>
 									<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2/${lists.get(i).id}'/>" class="cart-btn">詳細資訊</a>
 								</div>
 							</div>
@@ -333,6 +351,26 @@
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
 		})
+		
+		function report(id, index){
+			console.log(id);
+			var rp = $(".rp").eq(index)
+			if (rp.hasClass("notReport")){
+				$.ajax({
+					url: "<c:url value='/Recipe/user/report/'/>"+id,
+					method: "get",
+					success: function(){
+						if (rp.hasClass("notReport")){
+							rp.removeClass("notReport")
+							rp.addClass("isReport")
+							rp.css("background-color", "red")
+							rp.html('<i class="fas fa-exclamation-triangle"></i> 已檢舉，待審核')
+						}
+						alert("已檢舉");
+					}
+				})
+			}
+		}
 	</script>
 
 </body>

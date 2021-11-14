@@ -26,6 +26,7 @@ body {
   line-height: 1.8;
   color: #051922;
   overflow-x: hidden;
+  background-color:#FFFCEC;
 }
 
 body img {
@@ -1324,6 +1325,8 @@ ul.product-share li:hover a {
 .single-product-item:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
+  /* color:#E8E8D0; */
+  background-color: #FFF8D7;
 }
 
 .search-bar-tablecell button[type=submit] {
@@ -2176,19 +2179,27 @@ a.video-play-btn {
 }
 
 .team-bg-1 {
-  background-image: url(../../../image/user/team/team-1.jpg);
+  background-image: url(../../../image/hao.png);
 }
 
 .team-bg-2 {
-  background-image: url(../../../image/user/team/team-2.jpg);
+  background-image: url(../../../image/hong.png);
 }
 
 .team-bg-3 {
-  background-image: url(../../../image/user/team/team-3.jpg);
+  background-image: url(../../../image/chung.png);
 }
 
 .team-bg-4 {
-  background-image: url(../../../image/user/team/team-4.jpg);
+  background-image: url(../../../image/jing.png);
+}
+
+.team-bg-5 {
+  background-image: url(../../../image/geng.png);
+}
+
+.team-bg-6 {
+  background-image: url(../../../image/wu.png);
 }
 
 .team-bg {
@@ -2723,6 +2734,7 @@ table.order-details tbody td {
   box-shadow: 0 0 20px #e4e4e4;
   padding-bottom: 50px;
   border-radius: 5px;
+  background-color:  #FFFFFF;
 }
 
 /* -----------------------------------------------------------------------------

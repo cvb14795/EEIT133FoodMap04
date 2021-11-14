@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import cf.cvb14795.recipe.model.MyFavoritesBean;
+import cf.cvb14795.recipe.model.ReportBean;
 
 /**
  * @author cvb14795
@@ -53,8 +54,11 @@ public class Member {
 	@Column(name = "isAdmin")
 	private boolean admin;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "member", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
     Set<MyFavoritesBean> fBeans = new HashSet<MyFavoritesBean>();
+	
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<ReportBean>  reports;
 
 	public String getAccount() {
 		return account;
@@ -127,6 +131,14 @@ public class Member {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public Set<ReportBean>  getReports() {
+		return reports;
+	}
+
+	public void setReports(Set<ReportBean>  reports) {
+		this.reports = reports;
 	}
 
 	public Member() {

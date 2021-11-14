@@ -109,12 +109,12 @@ img.user-avatar {
 						<!-- menu start -->
 						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
-								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li class="current-list-item"><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">

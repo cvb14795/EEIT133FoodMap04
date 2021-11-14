@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import cf.cvb14795.recipe.model.AdminRecipeBean;
 
-
 public interface IAdminRecipeService {
 	public void insert(AdminRecipeBean recipe);
 

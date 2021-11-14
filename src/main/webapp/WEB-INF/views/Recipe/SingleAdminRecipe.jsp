@@ -73,12 +73,12 @@
 						<!-- menu start -->
 						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
-								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
 								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li class="current-list-item"><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
@@ -158,7 +158,7 @@
 							<li><a href="<c:url value="/Recipe/user/UserViewMembersRecipe2"/>">所有會員食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/UserInsertRecipe2"/>">新增專屬食譜</a></li>
 							<li><a href="<c:url value="/Recipe/user/ViewYourRecipe2"/>">查詢您的食譜</a></li>
-							<li>我的最愛</li>
+							<li><a href="<c:url value="/Recipe/user/showMyfavorites"/>">我的最愛</a></li>
 						</ul>
 					</div>
 				</div>
@@ -173,9 +173,6 @@
 						<p class="single-product-pricing"><span>一人份調理包</span> $50</p>
 						<p><strong>步驟: </strong>${recipe.step}</p>
 						<div class="single-product-form">
-							<form action="index.html">
-								<input type="number" placeholder="0">
-							</form>
 							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> 加入購物車</a>
 							<p><strong>分類: </strong>${recipe.category}</p>
 						</div>
@@ -199,41 +196,39 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">Related</span> Products</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<h3><span class="orange-text">相關</span>食譜</h3>
+						<p>下廚就來想食what</p>
+						<p>萬中選一的神救援。</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-1.jpg" alt=""></a>
+				<c:choose>
+					<c:when test="${lists.size() != 0}">
+						<c:forEach var="i" begin="3" end="5">
+							<div class="col-lg-4 col-md-6 text-center">
+								<div class="single-product-item">
+									<div class="product-image">
+										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
+									</div>
+									<h3>品名:${lists.get(i).name}</h3>
+									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="container">
+							<div style="text-align: center;">
+								<h2>無資料!</h2>
+							</div>
 						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> 85$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-2.jpg" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> 70$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/product-img-3.jpg" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> 35$ </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<a href="<c:url value='/Recipe/user'/>" class="boxed-btn">更多食譜</a>
 				</div>
 			</div>
 		</div>
