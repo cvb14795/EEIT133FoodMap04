@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.google.gson.Gson;
 
 import cf.cvb14795.Comment.service.CommentService;
+import cf.cvb14795.Food.model.AdminMapDataBean;
+import cf.cvb14795.Food.service.AdminMapDataService;
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
 import cf.cvb14795.recipe.model.AdminRecipeBean;
@@ -43,6 +45,7 @@ public class IndexController {
 	IOrderService orderService;
 	CommentService commentService;
 	IAdminRecipeService aRecipeService;
+	AdminMapDataService aFoodService;
 
 	@Autowired
 	public IndexController(
@@ -50,12 +53,14 @@ public class IndexController {
 			IShopService shopService,
 			IOrderService orderService,
 			CommentService commentService,
-			IAdminRecipeService aRecipeService) {
+			IAdminRecipeService aRecipeService,
+			AdminMapDataService aFoodService) {
 		this.mService = mService;
 		this.shopService = shopService;
 		this.orderService = orderService;
 		this.commentService = commentService;
 		this.aRecipeService = aRecipeService;
+		this.aFoodService = aFoodService;
 	}
 
 	public IndexController() {
@@ -76,6 +81,18 @@ public class IndexController {
 
 	@GetMapping({ "/Home" })
 	private String home(Model model, @CookieValue("user") String user) {
+		
+		//商家資訊
+		List<AdminMapDataBean> mapDatalists = aFoodService.selectAll();
+		List<String> imageList = new ArrayList<String>();
+		for (AdminMapDataBean bean : mapDatalists) {
+			String base64String = Base64.getEncoder().encodeToString(bean.getFilename());
+			imageList.add(base64String);
+		}
+		model.addAttribute("mapDatalists", mapDatalists);
+		model.addAttribute("imageList", imageList);
+		
+		//recipe
 		List<AdminRecipeBean> lists = aRecipeService.selectAll();
 		List<String> imgList = new ArrayList<String>();
 		for (int i = 0; i < lists.size(); i++) {

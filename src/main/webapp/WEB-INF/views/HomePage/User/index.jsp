@@ -215,71 +215,52 @@
 	</div>
 	<!-- end 網站發想 section -->
 
-	<!-- 活動總覽 -->
+	<!-- 商家預覽 -->
 	<div class="latest-news pt-150 pb-150">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">活動</span>總覽</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+						<h3><span class="orange-text">商家</span>預覽</h3>
+						<p>有了商家資訊？</p>
+						<p>真是太剛好了！</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
-					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
-						<div class="news-text-box">
-							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>
-							<p class="blog-meta">
-								<span class="author"><i class="fas fa-user"></i> Admin</span>
-								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
-							</p>
-							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
+			<div class="row product-lists">
+				<c:choose>
+					<c:when test="${mapDatalists.size() != 0}">
+						<c:forEach var="i" begin="0" end="2">
+							<div class="col-lg-4 col-md-6 text-center ${mapDatalists.get(i).mapcheck}">
+								<div class="single-product-item">
+									<div class="product-image">
+										<a href="single-product.html">
+<%-- 											<img src="data:image/jpg;base64,${imgList.get(i)}"> --%>
+											<img src="<c:url value='/Food/user/photo/${mapDatalists.get(i).id}'/>" style="width:300px;height:300px;">
+										</a>
+									</div>
+									<h3>店家名稱:<span class="mapname">${mapDatalists.get(i).mapname}</span></h3>
+									<p class="product-price"><span>地區:${mapDatalists.get(i).category}</span></p>
+									<h6>是否為安全店家:
+										<p>
+											<span>
+												${mapDatalists.get(i).mapcheck}
+											</span>
+										</p>
+									</h6>
+									<a href="<c:url value='/Food/user/info/${mapDatalists.get(i).id}'/>" class="cart-btn">詳細資料</a>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">More News</a>
+					<a href="<c:url value='/Food/user'/>" class="boxed-btn">更多商家</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end 活動總覽 -->
+	<!-- end 商家預覽 -->
 
   <!-- 食譜 -->
 	<div class="product-section mb-150">
@@ -334,8 +315,6 @@
 				</c:otherwise>
 				</c:choose>
 				
-			</div>
-			<div class="row">
 				<div class="col-lg-12 text-center">
 					<a href="<c:url value='/Recipe/user'/>" class="boxed-btn">更多食譜</a>
 				</div>
