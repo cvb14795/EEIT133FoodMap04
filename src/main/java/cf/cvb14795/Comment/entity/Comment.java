@@ -39,6 +39,8 @@ public class Comment {
 	@Column(name="mapname")
 	private String mapName;
 	
+	@Column(name="userPhotoTest")
+	private String userPhotoTest;
 	
 	
 	public Comment() {
@@ -87,6 +89,23 @@ public class Comment {
 		this.mapName = mapName;
 	}
 	
+		
+
+	
+
+	public Comment(int id, String userName, String score, String userComment, String userDate, String userLikes,
+			String userAccount, String mapName, String userPhotoTest) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.score = score;
+		this.userComment = userComment;
+		this.userDate = userDate;
+		this.userLikes = userLikes;
+		this.userAccount = userAccount;
+		this.mapName = mapName;
+		this.userPhotoTest = userPhotoTest;
+	}
 
 	public int getId() {
 		return id;
@@ -136,8 +155,9 @@ public class Comment {
 		this.userLikes = userLikes;
 	}
 	
-	// 測試頁面用
 	
+	
+	// 測試頁面用	
 
 	public String getUserAccount() {
 		return userAccount;
@@ -155,7 +175,14 @@ public class Comment {
 		this.mapName = mapName;
 	}
 	
-	
+
+	public String getUserPhotoTest() {
+		return userPhotoTest;
+	}
+
+	public void setUserPhotoTest(String userPhotoTest) {
+		this.userPhotoTest = userPhotoTest;
+	}
 
 	@Override
 	public String toString() {

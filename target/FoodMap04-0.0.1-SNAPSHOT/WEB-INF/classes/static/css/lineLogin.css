@@ -1,0 +1,12 @@
+/* 原始 */
+.lineLogin {
+	background-image: url("../image/Line_Login_Button_Image/btn_login_base.png");
+}
+/* 滑入 */
+.lineLogin:hover {
+	background-image: url("../image/Line_Login_Button_Image/btn_login_hover.png");
+}
+/* 按下 */
+.lineLogin:active {
+	background-image: url("../image/Line_Login_Button_Image/btn_login_press.png");
+}

@@ -150,13 +150,10 @@
 								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
 								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
+<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
@@ -177,10 +174,10 @@
 											</ul>
 										</li>
 										<li>
-					  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-											  <i class="fas fa-shopping-cart"></i> 已購票券
-					  </a>
-					</li>
+										  <a class="shopping-cart" href="<c:url value='/Shop/Cart/'/>">
+											 <i class="fas fa-shopping-cart"></i>
+										  </a>
+										</li>
 										<li><a>
 											<label for="checkbox-switch" style="">淺色模式</label>
 											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
@@ -234,18 +231,22 @@
 <%-- 			<input type="hidden" value="${#dates.format(now, 'yyyy-MM-dd')}" name="userDate" > --%>
 			<form:input type="hidden" path="userDate" id="userDate"/>
 			<input type="hidden" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${now}"/>' id="now"/>
-			<input type="hidden" name="userLikes" value="0">
+			<input type="hidden" name="userLikes" value="${comment.userLikes}">
 					
 			 
-			<form:input type="text" path="userName" id="name"
-					class="form-control mb-4 col-4" placeholder="姓名(1.不可空白 2.10字以內)" onblur="'checkname()'"/>
+			<form:input type="hidden" path="userName" id="name"
+					class="form-control mb-4 col-4" />
 			<span id="idsp"></span><br />
 			
-			<form:input type="text" path="mapName" 
+			<form:input type="hidden" path="mapName" 
 					class="form-control mb-4 col-4" placeholder="店家名稱"/>
 					
-			<form:input type="text" path="userAccount" 
+			<form:input type="hidden" path="userAccount" 
 					class="form-control mb-4 col-4" placeholder="帳戶名稱"/>
+					
+
+			<form:input type="hidden" path="userPhotoTest" class="form-control mb-4 col-4" />
+			
 					
 			<!-- Ratting system -->
 			<label>評分(不可空白)：</label>	<br>
@@ -266,6 +267,7 @@
 			<span id="idsp3"></span><br /><br /><br />			
 			
 			<button type="submit" class="btn btn-info col-2">送出</button>
+			<input type="button" class="btn btn-info col-2" name="submit" value="一鍵輸入" id="btn">
 		
 		</form:form >
 		
@@ -425,6 +427,12 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+	
+	<script>
+		$("#btn").on("click",function (e) {
+		   $("#commentarea").val("這次再回訪炸雞是冷的...有點失望...");
+		})
+	</script>
 	
 </body>
 </html>

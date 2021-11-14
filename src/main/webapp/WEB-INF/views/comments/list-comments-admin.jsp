@@ -200,15 +200,7 @@ legend {
 
 	<h3>評論區-管理者頁面</h3>
 	<hr><br>
-	<form:form action="" class="form-inline" id="searchForm" method="get">
 		
-	<input class="form-control mr-sm-2 mb-3" type="search" name="commentName" placeholder="輸入評論編號" />
-
-		<button class="btn btn-success mb-3" type="submit">搜尋</button>
-	
-	<br>
-	
-	</form:form>		
 	
 	<!-- 
 	排序方式： <select class="form-control" name="sortingType" id="sortingType" th:action="@{/comments/sorting}">

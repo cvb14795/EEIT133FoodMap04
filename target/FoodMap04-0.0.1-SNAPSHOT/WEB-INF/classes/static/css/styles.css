@@ -1,0 +1,51 @@
+body { 
+/*   background-color: #e1efbb; */
+  background-color: #fff5d7;
+  font-family: verdana;
+  font-size: 15pt;
+}
+.center { margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          margin-left: 10px;
+          margin-right: 10px;
+          text-align: center; 
+}
+.center > div, .center > table /* insert any other block-level elements here */ {
+    margin-left: auto;
+    margin-right: auto;
+}   
+.servlet { 
+  background-color: #FF851B;
+  font-family: verdana;
+  font-size: 16pt;
+}  
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: e1efbb;
+  color: red;
+  text-align: center;
+}
+td, select, input { 
+  font-family: verdana;
+  font-size: 14pt;
+} 
+
+legend {
+	font-weight: bold;
+	color: black;
+	background-color: white;
+	border: 1px solid #cccccc;
+	padding: 4px 2px;
+}
+
+fieldset legend {
+	background: #FF851B;
+	color: #FFF;
+	font-weight: 700;
+	text-align: left;
+	white-space:nowrap;
+}

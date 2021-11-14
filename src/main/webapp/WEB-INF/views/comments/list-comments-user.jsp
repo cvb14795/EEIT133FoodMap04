@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <meta name="google-signin-client_id"
 		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
-<style>
+<style> 
 	.mhw {
 		text-align:center;
 		width:150px;height:50px;
@@ -70,7 +70,9 @@
 <!-- bootstrap -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
+
 <link rel="stylesheet" href="<c:url value='/css/comment-style.css'/>">
+
 <!-- vegas -->
 <link rel="stylesheet" href="<c:url value='/css/vegas.css'/>"/>
 
@@ -123,44 +125,34 @@
 	</div>
 	<!--PreLoader Ends-->
 	
-	<body>
-	<!--PreLoader-->
-	<div class="loader">
-		<div class="loader-inner">
-			<div class="circle"></div>
-		</div>
-	</div>
-	<!--PreLoader Ends-->
-	
 	<!-- header -->
-	<div class="top-header-area " id="sticker">
+	<div class="top-header-area" id="sticker">
 		<div class="container">
-			<!-- logo -->
-			<div class="site-logo">
-				<a href="<c:url value='/'/>">
-					<img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
-				</a>
-			</div>
-			<!-- end logo -->
-		</div>
-		<div>
 			<div class="row">
-				<div class="col-xl-12 col-lg-12 col-sm-12 text-center">
+				<div class="col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="<c:url value='/'/>">
+								<img src="<c:url value='/image/user/logo.png'/>" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
 						<!-- menu start -->
-						<nav class="main-menu navbar navbar-expand-lg">
+						<nav class="main-menu">
 							<ul>
-								<li><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-								<li class="current-list-item"><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
+								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+										<li><a href="">會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -176,24 +168,15 @@
 														登出</a></li>
 											</ul>
 										</li>
-										
 										<li>
-											<div class="header-icons">
-											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
-											  	<i class="fas fa-heart"></i>
-											  </a>
-											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
-											  	<i class="fas fa-shopping-cart"></i>
-											  </a>
-											</div>
+										  <a class="shopping-cart" href="<c:url value='/Shop/Cart/'/>">
+											 <i class="fas fa-shopping-cart"></i>
+										  </a>
 										</li>
-<!-- 										<li> -->
-<!-- 											<a> -->
-<!-- 												淺色模式 -->
-<!-- 	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> --> 
-<!-- 												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
-<!-- 											</a> -->
-<!-- 										</li> -->
+										<li><a>
+											<label for="checkbox-switch" style="">淺色模式</label>
+											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
+										</a></li>
 									</div>
 								</li>
 							</ul>
@@ -232,7 +215,7 @@
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
-            <div class="card" id="rate-header">
+            <div class="card">
                 <div class="row justify-content-left d-flex">
                     <div class="col-md-4 d-flex flex-column">
                         <div class="rating-box">
@@ -295,8 +278,11 @@
                 </div>
             </div>
             
-            
-            
+            <c:if test="${user == 'test'}">
+            <a href="<c:url value='/comments/showFormForAdd'/>" class="btn btn-primary btn-sm mb-3">
+				新增評論
+			</a>
+            </c:if>
             
  			<a href="<c:url value='/comments/sortByUserDate'/>" class="btn btn-primary btn-sm mb-3">
 			按時間排序
@@ -307,9 +293,17 @@
 			<a href="<c:url value='/comments/sortByUserScoreAsc'/>" class="btn btn-primary btn-sm mb-3">
 			低分至高分
 			</a>
-          	<a href="<c:url value='/comments/sortByUserLikes'/>" class="btn btn-primary btn-sm mb-3">
-			依關聯性排序
-			</a>
+			
+          	<form:form action="" class="form-inline" id="searchForm" method="get">
+								
+				<input class="form-control  ml-10 mr-sm-2 mb-3" type="search" name="commentName" placeholder="輸入關鍵字" />
+			
+					<button class="btn btn-success mb-3" type="submit">搜尋</button>
+				
+				<br>
+				
+			</form:form>		
+				
           
           
  
@@ -317,7 +311,7 @@
      
             <div class="card">
                 <div class="row d-flex">
-                    <div class=""> <img class="profile-pic" src="https://randomuser.me/api/portraits/women/44.jpg"> </div>
+                    <div class=""> <img class="profile-pic" src="${tempComment.userPhotoTest}"> </div>
                     <div class="d-flex flex-column">
                         <h3 class="text-left"><a href="sortByUserAccount?userAccount=${tempComment.userAccount}">${tempComment.userName}</a></h3>
                         <div class="rating">
@@ -344,72 +338,10 @@
                		<div class="heart"></div><p class = "heartnum" id = heartnum>${tempComment.userLikes}</p>
                    	<input type="hidden" name="userLikes" value="${tempComment.userLikes}">
                 	</form:form>
-            </div>
-        </c:forEach>
-        
-        
-        
-        
-        </div>
-    </div>
-</div>
-
-<!-- ends here -->
-	
-	<!-- show comments from user side -->
-	
-	<div class="container">
-
-	<h3>評論區</h3>
-	<hr>
-	<form:form action="" class="form-inline" id="searchForm" method="get">
-	<a href="<c:url value='/comments/showFormForAdd'/>" class="btn btn-primary btn-sm mb-3">
-		新增評論
-	</a>
-	
-	<input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="commentName" placeholder="輸入關鍵字" />
-
-		<button class="btn btn-success mb-3" type="submit">搜尋</button>
-	
-	<br>
-	
-	</form:form>		
-	
-	<!-- 
-	排序方式： <select class="form-control" name="sortingType" id="sortingType" th:action="@{/comments/sorting}">
-                <option th:value="''">請選擇排序方式</option>
-                <option th:value="'high'">評分高 → 低</option>
-    			<option th:value="'lowToHigh'">評分低 → 高</option>
-    			<option th:value="'new'" >時間新 → 舊</option>
-    			<option th:value="'oldToNew'" >時間舊 → 新</option>
-            	</select>
-     -->        	
-            	
-            	
-    <br><br>
-	
-	<table class="table table-bordered table-striped">
-		<thead class="thead-dark">
-			<tr>
-				<th>姓名</th>
-				<th>評分</th>
-				<th>評論</th>
-				<th>評論時間</th>
-				<th>編輯/刪除</th>
-			</tr>
-		</thead>	
-		<tbody>
-			<c:forEach items="${comments}" var="tempComment">
-				<tr>
-					<td>${tempComment.userName}</td>
-					<!-- <td th:text="${tempComment.score}" />  -->
-					
-					<td><img src="<c:url value='/image/star${tempComment.score}.png'/>" /></td>
-					<td>${tempComment.userComment}</td>
-					<td>${tempComment.userDate}</td>
-					
-					<td>
-						<!-- Add "update" button/link -->
+                   	
+                   	<c:if test="${tempComment.userAccount == 'test'}">
+                   	
+                	<div id="updateDelete">
 						<a href="<c:url value='/comments/showFormForUpdate/${tempComment.id}'/>"
 							class="btn btn-info btn-sm">
 							更新					
@@ -421,16 +353,24 @@
 							onclick="if (!(confirm('確定要刪除嗎？'))) return false">
 							刪除					
 						</a>
-						
-					</td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-
+                	</div>
+                	</c:if>
+                	
+            </div>
+            
+            
+        </c:forEach>
+        
+        
+        
+        
+        </div>
+    </div>
 </div>
 
-
+<!-- ends here -->
+	
+	
 
 
 	
@@ -552,37 +492,7 @@
 		})
 	</script>
 	
-	<script>
-	var clicks = 0;
-	var userLikes = clicks;
-	var userLikes = $("#userLikes").val()
 	
-	<!-- like button js -->
-	
-	var hasClicked = false;
-	
-	
-		
-    function onClick() 
-    {
-        if(!hasClicked)
-        {
-           clicks += 1;
-           document.getElementById("heartnum").innerHTML = clicks;
-           hasClicked = true;
-           userLikes = clicks;
-           
-        }else {
-        	clicks -= 1;
-            document.getElementById("heartnum").innerHTML = clicks;
-        	hasClicked = false;
-        	userLikes = clicks;
-        }
-
-    }
-		
-	
-    </script>
     
     <script>
     // 計算有幾則評論
@@ -594,10 +504,9 @@
     
     <script>
     // 統計分數
+    var matches = 10;
     
-    
-    var matches = 0;
-    $('.rating').each(function(i, val) {
+    $(tempComment.score).each(function(i, val) {
       if ($(this).val() == '1') {
         matches++;
       }
@@ -605,12 +514,14 @@
     document.getElementById("star1").innerHTML = matches;
     </script>
     
+    
+    <!-- 計算讚數 -->    
     <script>
     $(function() {
 		
-		var clicks = 0;
-		var userLikes = clicks;
-		var userLikes = $("#userLikes").val()
+		var clicks = $("#heartnum").val();
+		// var userLikes = clicks;
+		// var userLikes = $("#heartnum").val()
 		
 		<!-- like button js -->
 		
@@ -619,21 +530,22 @@
 		  $(".heart").on("click", function() {
 			  if(!hasClicked)
 		        {
-				  clicks += 1;
-				  document.getElementById("heartnum").innerHTML = clicks;
-				  hasClicked = true;
-				  userLikes = clicks;
-		           $(this).toggleClass("is-active");
+					  clicks += 1;
+					  document.getElementById("heartnum").innerHTML = clicks;
+					  hasClicked = true;
+					  // userLikes = clicks;
+			          $(this).toggleClass("is-active");
 		           
 		        }else {
 		        	 clicks -= 1;
 		        	 document.getElementById("heartnum").innerHTML = clicks;
 		        	 hasClicked = false;
-		        	 userLikes = clicks;
+		        	 // userLikes = clicks;
 		        	 $(this).toggleClass("is-active");
 		        }
 		   
 		  });
+		  
 		});
 	</script>
 	
@@ -641,7 +553,6 @@
 	
 	
 	<script>
-	function
 	 $("#searchForm").attr("action", "<c:url value='/comments/search'/>")
 	</script>
 	
@@ -669,10 +580,4 @@
 	
 </body>
 </html>
-
-
-
-
-
-
 
