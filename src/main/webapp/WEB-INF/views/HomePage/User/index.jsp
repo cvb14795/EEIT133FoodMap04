@@ -87,7 +87,13 @@
 	.aboutUs {
 		font-size: 25px;
 		background-color:#BEBEBE;
+		opacity: .9;
 	}
+	
+	body {
+		background-color:#FFFCEC;
+	}
+	
 </style>
 </head>
 
@@ -190,18 +196,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
-					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-					</div>
+					<a href="<c:url value='/aboutUs'/>">
+						<img src="<c:url value='/image/user/logo.png'/>" alt="">
+					</a>
 				</div>
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-text">
 						<p class="top-sub">EEIT133—跨域Java班—第四組期末專題</p>
 						<h2>網站<span class="orange-text">發想</span></h2>
 						<p>每次想要查詢美食時，都會耗費太多時間，希望有一個平台能夠找出各地美食資訊，也藉由大家的評論來了解當地人推薦的道地美食。</p>
-			<p>因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。</p>
-			<p>現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
-						<a href="about.jsp" class="boxed-btn mt-4">詳細資訊</a>
+						<p>因為疫情關係，雖然部分餐廳已開放內用，但民眾還是並不放心，希望能在品嘗美食之前先了解餐廳的防疫措施做的好不好，免得發現不如預期而白跑一趟。</p>
+						<p>現代的人注重健康飲食，因此希望有一些健康食譜能提供參考，也能針對自己的需求來去做食譜的調配。</p>
+						<a href="<c:url value='/aboutUs'/>" class="boxed-btn mt-4">詳細資訊</a>
 					</div>
 				</div>
 			</div>
@@ -294,7 +300,7 @@
 							<div class="col-lg-4 col-md-6 text-center">
 								<div class="single-product-item">
 									<div class="product-image">
-										<a href="single-product.html"><img src="data:image/jpg;base64,${imgList.get(i)}"></a>
+										<img src="data:image/jpg;base64,${imgList.get(i)}">
 									</div>
 									<h3>品名:${lists.get(i).name}</h3>
 									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
@@ -314,6 +320,7 @@
 											</span>
 										</p>
 									</h6>
+									<a href="<c:url value='/Recipe/user/UserViewAdminRecipe2/${lists.get(i).id}'/>" class="read-more-btn">詳細資料 <i class="fas fa-angle-right"></i></a>
 								</div>
 							</div>
 						</c:forEach>
@@ -327,6 +334,11 @@
 				</c:otherwise>
 				</c:choose>
 				
+			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<a href="<c:url value='/Recipe/user'/>" class="boxed-btn">更多食譜</a>
+				</div>
 			</div>
 		</div>
 	</div>

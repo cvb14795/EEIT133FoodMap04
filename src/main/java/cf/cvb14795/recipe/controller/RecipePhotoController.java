@@ -20,7 +20,7 @@ import cf.cvb14795.recipe.service.IUserRecipeService;
 @RequestMapping("/Recipe")
 public class RecipePhotoController {
 	
-	private final static String PREFIX = "Recipe/"; 
+//	private final static String PREFIX = "Recipe/"; 
 	IAdminRecipeService aRecipeService;
 	IUserRecipeService uRecipeService;
 	

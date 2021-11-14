@@ -221,7 +221,9 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-
+			<div>
+				<input type="button" value="匯出資料" id="csv"/>
+			</div>
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="pagination-wrap">
@@ -335,12 +337,46 @@
 	<script src="<c:url value='/js/user/js/main.js'/>"></script>
 	<!-- userNameMain js -->
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	
 	<script>
 		$(function(){
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
 		})
+		
+		$('#csv').click(function () {
+	        var url = "<c:url value='/Recipe/user/csv'/>";
+	        $.ajax({
+	          url: url,
+	          type: 'get',
+	          contentType: "application/json; charset=utf-8",
+	          data: {},
+	          success: function (data) {
+	            Swal.fire({
+	              title: '匯出成功',
+	              icon: 'success',
+	              text: "已匯出我的最愛資料！",
+	              position: 'center',
+	
+	            }).then((result) => {
+	              /* Read more about isConfirmed, isDenied below */
+	              if (result.isConfirmed) {
+	                location.href = "<c:url value='/Recipe/user/showMyfavorites'/>";
+	              }
+	            })
+	          },
+	          error: function (xhr, text) {
+	            console.log("status code: " + xhr.status);
+	            console.log("error message: " + text);
+	            Swal.fire({
+	              title: '匯出失敗',
+	              icon: 'error'
+	            })
+	          }
+	        });
+	
+	      });
 	</script>
 	
 </body>

@@ -226,6 +226,11 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2'/>" class="boxed-btn">更多食譜</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- end more products -->
