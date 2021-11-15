@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="./css/admin/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="./css/admin/css/style.css">
     <link rel="stylesheet" href="<c:url value='/css/admin/css/admin.css'/>">
+    <!-- 半透明遮罩 for live-chat -->
+    <link rel="stylesheet" href="<c:url value='/css/mask.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/chat.css'/>" />
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -375,193 +378,52 @@
                 <!-- /.orders -->
                 <!-- To Do and Live Chat -->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title box-title">To Do List</h4>
-                                <div class="card-content">
-                                    <div class="todo-list">
-                                        <div class="tdl-holder">
-                                            <div class="tdl-content">
-                                                <ul>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox"><i class="check-box"></i><span>Conveniently fabricate interactive technology for ....</span>
-                                                            <a href='#' class="fa fa-times"></a>
-                                                            <a href='#' class="fa fa-pencil"></a>
-                                                            <a href='#' class="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox"><i class="check-box"></i><span>Creating component page</span>
-                                                            <a href='#' class="fa fa-times"></a>
-                                                            <a href='#' class="fa fa-pencil"></a>
-                                                            <a href='#' class="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked><i class="check-box"></i><span>Follow back those who follow you</span>
-                                                            <a href='#' class="fa fa-times"></a>
-                                                            <a href='#' class="fa fa-pencil"></a>
-                                                            <a href='#' class="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked><i class="check-box"></i><span>Design One page theme</span>
-                                                            <a href='#' class="fa fa-times"></a>
-                                                            <a href='#' class="fa fa-pencil"></a>
-                                                            <a href='#' class="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-
-                                                    <li>
-                                                        <label>
-                                                            <input type="checkbox" checked><i class="check-box"></i><span>Creating component page</span>
-                                                            <a href='#' class="fa fa-times"></a>
-                                                            <a href='#' class="fa fa-pencil"></a>
-                                                            <a href='#' class="fa fa-check"></a>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                <h4 class="card-title box-title">文字客服</h4>
+                                <div class="card-content" style="position: relative;">
+                                    <!-- 進入頁面 -->
+                                    <div id="username-page">
+                                        <div class="username-page-container">
+                                            <span class="title">輸入名稱</span>
+                                            
+                                            <form id="usernameForm" name="usernameForm">
+                                                <div class="form-group popup">
+                                                    <input type="text" id="name" placeholder="輸入名稱..."
+                                                        autocomplete="off" class="form-control popup" value="${user}"/>
+                                                    <span class="popuptext" id="hint">請輸入名稱</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="accent username-submit">開始聊天</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </div> <!-- /.todo-list -->
-                                </div>
-                            </div> <!-- /.card-body -->
-                        </div><!-- /.card -->
-                    </div>
+                                    </div>
+                                     <!-- 聊天室頁面 -->
+                                    <div id="chat-page" class="hidden">
+                                        <div class="chat-container">
+                                            <div class="connecting">Connecting...</div>
+                                            <ul id="messageArea">
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title box-title">Live Chat</h4>
-                                <div class="card-content">
-                                    <div class="messenger-box">
-                                        <ul>
-                                            <li>
-                                                <div class="msg-received msg-container">
-                                                    <div class="avatar">
-                                                       <img src="images/avatar/64-1.jpg" alt="">
-                                                       <div class="send-time">11.11 am</div>
+                                            </ul>
+                                            <form id="messageForm" name="messageForm">
+                                                <div class="form-group">
+                                                    <div class="input-group clearfix">
+                                                        <input type="text" id="message" placeholder="輸入訊息..."
+                                                            autocomplete="off" class="form-control" />
+                                                        <button type="submit" class="primary">送出<i class="pe-7s-paper-plane"></i></button>
                                                     </div>
-                                                    <div class="msg-box">
-                                                        <div class="inner-box">
-                                                            <div class="name">
-                                                                John Doe
-                                                            </div>
-                                                            <div class="meg">
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis sunt placeat velit ad reiciendis ipsam
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.msg-received -->
-                                            </li>
-                                            <li>
-                                                <div class="msg-sent msg-container">
-                                                    <div class="avatar">
-                                                       <img src="images/avatar/64-2.jpg" alt="">
-                                                       <div class="send-time">11.11 am</div>
-                                                    </div>
-                                                    <div class="msg-box">
-                                                        <div class="inner-box">
-                                                            <div class="name">
-                                                                John Doe
-                                                            </div>
-                                                            <div class="meg">
-                                                                Hay how are you doing?
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.msg-sent -->
-                                            </li>
-                                        </ul>
-                                        <div class="send-mgs">
-                                            <div class="yourmsg">
-                                                <input class="form-control" type="text">
-                                            </div>
-                                            <button class="btn msg-send-btn">
-                                                <i class="pe-7s-paper-plane"></i>
-                                            </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </div><!-- /.messenger-box -->
+                                    </div>
                                 </div>
                             </div> <!-- /.card-body -->
                         </div><!-- /.card -->
                     </div>
                 </div>
                 <!-- /To Do and Live Chat -->
-                <!-- Calender Chart Weather  -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- <h4 class="box-title">Chandler</h4> -->
-                                <div class="calender-cont widget-calender">
-                                    <div id="calendar"></div>
-                                </div>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-                </div>
-                <!-- /Calender Chart Weather -->
-                <!-- Modal - Calendar - Add New Event -->
-                <div class="modal fade none-border" id="event-modal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title"><strong>Add New Event</strong></h4>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /#event-modal -->
-                <!-- Modal - Calendar - Add Category -->
-                <div class="modal fade none-border" id="add-category">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title"><strong>Add a category </strong></h4>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="control-label">Category Name</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="control-label">Choose Category Color</label>
-                                            <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Success</option>
-                                                <option value="danger">Danger</option>
-                                                <option value="info">Info</option>
-                                                <option value="pink">Pink</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <!-- /#add-category -->
             </div>
             <!-- .animated -->
         </div>
@@ -572,10 +434,12 @@
             <div class="footer-inner bg-white">
                 <div class="row">
                     <div class="col-sm-6">
-                        Copyright &copy; 2018 Ela Admin
+                        <!-- Copyright &copy; 2018 Ela Admin -->
+                        2021/07~2021/11 跨域Java班期末專題
                     </div>
                     <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
+                        <!-- Designed by <a href="https://colorlib.com">Colorlib</a> -->
+                        By EEIT133 跨域Java班 第四組全體成員
                     </div>
                 </div>
             </div>
@@ -609,6 +473,11 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="./js/admin/js/init/fullcalendar-init.js"></script>
+
+    <!-- live chat聊天室 -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="<c:url value='/js/chat.js?version=1'/>"></script>
 
     <!--Local Stuff-->
     <script>
@@ -830,7 +699,6 @@
                 }
             })
         }
-
     
         //等動畫完全跳完到大概3秒左右
         //第一次進首頁先1秒就更新
@@ -839,7 +707,10 @@
         //之後每10秒更新一次
         setInterval(updateStat, 10000)
         
-        
+        // 切換蓋在chat上的loading視窗顯示
+        // function toggleLoading(show) {
+        //     document.querySelector('.loading').style.display =	show ? 'block' : 'none';
+        // } 
     </script>
 </body>
 

@@ -153,7 +153,7 @@
 										
 										<li>
 											<div class="header-icons">
-											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+											  <a class="shopping-cart" href="<c:url value='/Recipe/user/showMyfavorites'/>">
 											  	<i class="fas fa-heart"></i>
 											  </a>
 											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
@@ -190,6 +190,11 @@
 	</div>
   </div>
 
+  <div class="contactUs">
+	<a href="<c:url value='/chat/index'/>" class="rounded-circle" style="position: fixed;bottom: 2rem;right: 2em;">
+		<i class="fas fa-comments"></i>聯絡客服
+	</a>
+  </div>
 	
 	<!-- 網站發想 -->
 	<div class="abt-section mt-150">
