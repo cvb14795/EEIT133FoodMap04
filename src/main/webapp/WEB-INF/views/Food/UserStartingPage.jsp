@@ -36,8 +36,6 @@ response.setContentType("text/html;charset=UTF-8");
 <!-- mean menu css -->
 <link rel="stylesheet"
 	href="<c:url value='/css/user/css/meanmenu.min.css'/>">
-<!-- main style -->
-<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
 <!-- responsive -->
 <link rel="stylesheet"
 	href="<c:url value='/css/user/css/responsive.css'/>">
@@ -52,6 +50,8 @@ response.setContentType("text/html;charset=UTF-8");
 <script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>
 <script src='<c:url value="/js/bootstrap.js"/>'></script>
 <script src='<c:url value="/js/memberAuth.js"/>'></script>
+<!-- main style -->
+<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
 <script>
 	var origDataFilter = []
 	$(

@@ -132,9 +132,18 @@
 		</dependency>
 		<!-- javamail -->
 		<dependency>
-			<groupId>com.sun.mail</groupId>
+			<groupId>com.sun.mail</groupId> 
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>3.2.8.RELEASE</version>
 		</dependency>
 		<!-- google api -->
 		<dependency>
