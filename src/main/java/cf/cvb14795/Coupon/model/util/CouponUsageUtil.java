@@ -31,7 +31,7 @@ public class CouponUsageUtil {
             String href = String.format("<a href=%s>點擊這裡</a>", url);
             // 郵件內文
             CouponBean coupon = cService.getCouponById(couponCode);
-            String text = String.format("您好，%s<br/>這是您的優惠券代碼: %s<br/>請%s或以下連結以使用該優惠券:<br/>%s",
+            String text = String.format("您好，%s<br/>這是您的優惠券代碼: %s<br/>請%s或以下連結以使用該優惠券:<br/>%s<br/>",
             		m.getAccount(), couponCode, href, url);
             String value = String.format("優惠券用途: %s", coupon.getValue());
 //            //格式
@@ -41,7 +41,7 @@ public class CouponUsageUtil {
 //            //結束時間
 //            Date end_time = dateParser.parse(coupon.getEnd_time());
 
-            String ftext = text+value;
+            String ftext = text+"\r\n"+value;
             Mail.SendGmail(from, to, subject, ftext);
             System.out.println("Ｏ發送優惠券：成功! 收件者:" + to);
             return true;
