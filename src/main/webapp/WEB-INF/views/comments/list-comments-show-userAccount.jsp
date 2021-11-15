@@ -246,6 +246,26 @@
                		<div class="heart"></div><p class = "heartnum" id = heartnum>${tempComment.userLikes}</p>
                    	<input type="hidden" name="userLikes" value="${tempComment.userLikes}">
                 	</form:form>
+                	
+                	<c:if test="${user == 'test'}">
+                   	<c:if test="${tempComment.userAccount == 'test'}">
+                   	
+                	<div id="updateDelete">
+						<a href="<c:url value='/comments/showFormForUpdate/${tempComment.id}'/>"
+							class="btn btn-info btn-sm">
+							更新					
+						</a>
+						
+						<!-- Add "delete" button/link -->
+						<a href="<c:url value='/comments/delete/${tempComment.id}'/>"
+							class="btn btn-danger btn-sm"
+							onclick="if (!(confirm('確定要刪除嗎？'))) return false">
+							刪除					
+						</a>
+                	</div>
+                	</c:if>
+                	</c:if>
+                	
             </div>
         </c:forEach>
   </div>

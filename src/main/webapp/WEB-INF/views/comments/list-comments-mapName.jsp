@@ -215,79 +215,14 @@
         <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
             <div class="card">
                 <div class="row justify-content-left d-flex">
-                    <div class="col-md-4 d-flex flex-column">
-                        <div class="rating-box">
-                            <h1 class="pt-5">4.0</h1>
-                            <p class = "rating" id = "rating"></p>
-                        </div>
-                        <div> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-inactive mx-1"></span> </div>
+                    <div class="col-md-12 d-flex flex-column">
+                        <h2 class = "rating" id = "rating"></h2><br>
                     </div>
-                    <div class="col-md-8">
-                        <div class="rating-bar0 justify-content-center">
-                            <table class="text-left mx-auto">
-                                <tr>
-                                    <td class="rating-label">5<span class="fa fa-star star-active mx-1"></span></td>
-                                    <td class="rating-bar">
-                                        <div class="bar-container">
-                                            <div class="bar-5" style="width: 70%"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">123</td>
-                                </tr>
-                                <tr>
-                                    <td class="rating-label">4<span class="fa fa-star star-active mx-1"></span></td>
-                                    <td class="rating-bar">
-                                        <div class="bar-container">
-                                            <div class="bar-4" style="width: 30%"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">23</td>
-                                </tr>
-                                <tr>
-                                    <td class="rating-label">3<span class="fa fa-star star-active mx-1"></span></td>
-                                    <td class="rating-bar">
-                                        <div class="bar-container">
-                                            <div class="bar-3" style="width: 20%"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">10</td>
-                                </tr>
-                                <tr>
-                                    <td class="rating-label">2<span class="fa fa-star star-active mx-1"></span></td>
-                                    <td class="rating-bar">
-                                        <div class="bar-container">
-                                            <div class="bar-2" style="width: 10%"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right">3</td>
-                                </tr>
-                                <tr>
-                                    <td class="rating-label">1<span class="fa fa-star star-active mx-1"></span></td>
-                                    <td class="rating-bar">
-                                        <div class="bar-container">
-                                            <div class="bar-1" style="width: 5%"></div>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" id = "star1">0</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             
             
-            
-            
- 			<a href="<c:url value='/comments/sortByUserDate'/>" class="btn btn-primary btn-sm mb-3">
-			按時間排序
-			</a>
-			<a href="<c:url value='/comments/sortByUserScore'/>" class="btn btn-primary btn-sm mb-3">
-			高分至低分
-			</a>
-			<a href="<c:url value='/comments/sortByUserScoreAsc'/>" class="btn btn-primary btn-sm mb-3">
-			低分至高分
-			</a>
           
  
             <c:forEach items="${comments}" var="tempComment">

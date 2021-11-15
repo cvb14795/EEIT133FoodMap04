@@ -244,7 +244,7 @@
 			
 
 			<form:input type="hidden" path="mapName" id="mapName"
-					class="form-control mb-4 col-4" />
+					class="form-control mb-4 col-4"/>
 					
 			<form:input type="hidden" path="userAccount" 
 					class="form-control mb-4 col-4" value="test"/>
@@ -450,8 +450,8 @@
 	
 	<script>
 		$("#btn").on("click", function (e) {
-		   $("#mapName").val("信義霸味薑母鴨（原松仁店）");
-		   $("#commentarea").val("比想像中還好吃 肉不柴！");
+		   $("#mapName").val("起家雞韓式炸雞 中壢中美店Cheogajip");
+		   $("#commentarea").val("吃起來很帶勁，味道也很香，跟其他的炸雞很不一樣，吃幾個就吃不下了");
 		})
 	</script>
 	
