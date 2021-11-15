@@ -223,8 +223,8 @@ legend {
 				</div>
 				<div class="st1">
 					<label for="" class="t1">安全店家:</label> 
-					<input type="radio" name="mapcheck" value="是(可內用/外帶)" id="mapcheck"> 是(可內用/外帶)
-					<input type="radio" name="mapcheck" value="否(僅可外帶)" id="mapcheck"> 否(僅可外帶)<br>
+					<input name="mapcheck" value="" id="mapcheck">
+<!-- 					<input type="radio" name="mapcheck" value="否(僅可外帶)" id="mapcheck"> 否(僅可外帶)<br> -->
 				</div>
 				<div class="st1">
 					<label for="" class="t1" >分類:</label> 
@@ -350,6 +350,7 @@ legend {
     	   $("#mapku").val("320桃園市中壢區義民路137號");
     	   $("#mapnb").val("+88634952568");
     	   $("#mapxy").val("X638+55 中壢區 桃園市");
+    	   $("#mapcheck").val("N");
     	   $("#category").val("桃園市");
     	  })
     </script>

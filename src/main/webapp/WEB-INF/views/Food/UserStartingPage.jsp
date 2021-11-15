@@ -272,7 +272,7 @@ img.user-avatar {
 								以上需再做一個jsp 以呈現評論區+商家資訊的整合頁面
 							-->
 						<li id="comments-filters" data-filter="*">留言板</li>
-						<li>待更新</li>
+<!-- 						<li>待更新</li> -->
 					</ul>
 				</div>
 			</div>
@@ -462,23 +462,33 @@ img.user-avatar {
 			}
 		}
 
-		$("#comments-filters").on(
-				"click",
-				function(e) {
-					$(".single-product-item:eq(0)").css("background-color",
-							"rgba(255,230,111,0.8)")
-					$(".single-product-item:eq(0) a.cart-btn").css(
-							"background-color", "rgb(242,129,35)")
-					$(".single-product-item:eq(0) a.cart-btn").text("留言板");
-					$(".single-product-item:eq(0) a.cart-btn").attr("href",
-							"<c:url value='/Food/user/FoodBoardInfo/1'/>");
-
-				})
+				
 	</script>
 
 	<script>
 		var src = "<c:url value='/Member/user/${user}/photo'/>";
 		userNameMain(src);
+		
+		function commentsFilters (e) {
+			var id;
+			var mapLists = document.getElementsByClassName("single-product-item");
+//				var mapname = mapLists[0].getElementsByClassName("mapname");
+			for(let i = 0 ; i < mapLists.length ; i++){
+				var oldHref = $(".single-product-item a.cart-btn").eq(i).attr("href").split("/")
+				id = oldHref[oldHref.length-1]
+				console.log("id="+id)
+				$(".single-product-item").css("background-color",
+						"rgba(255,230,111,0.8)")
+				$(".single-product-item a.cart-btn")
+					.css("background-color", "rgb(242,129,35)")
+					.text("留言板")
+				
+				mapLists[i].getElementsByClassName("cart-btn")[0]
+					.setAttribute("href", "<c:url value='/Food/user/FoodBoardInfo/'/>"+id)
+			
+				}
+		}
+		$("#comments-filters").on("click",commentsFilters)
 	</script>
 
 

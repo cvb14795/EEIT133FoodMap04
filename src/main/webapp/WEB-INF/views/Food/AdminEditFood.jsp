@@ -98,12 +98,12 @@
                 <input id="name" name="mapnb" value="${updataFood.mapnb}"/>
             </div>
             <div class="st1">
-                <label for="" class="t1">店家座標位置:</label>
+                <label for="" class="t1">座標位置:</label>
 <%--                 <form:input id="" path="food2"/> --%>
                 <input id="name" name="mapxy" value="${updataFood.mapxy}"/>
             </div>
             <div class="st1">
-                <label for="" class="t1">是否為安全店家:</label>
+                <label for="" class="t1">安全店家:</label>
 <%--                 <form:input id="" path="food3"/> --%>
                 <input id="name" name="mapcheck" value="${updataFood.mapcheck}"/>
             </div>
