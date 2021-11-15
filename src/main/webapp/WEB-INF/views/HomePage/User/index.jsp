@@ -94,6 +94,33 @@
 		background-color:#FFFCEC;
 	}
 	
+	.contactUs a{
+		position: fixed;
+		bottom: 50%;
+		right: 2em;
+		color: black;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		font-size: large;
+		background-color: rgba(46, 235, 46, 0.9);
+		box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+		cursor: pointer;
+		text-decoration: none;
+		line-height: 20px;
+		text-align: center;
+		width: 80px;
+		height: 80px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		transition-property: all;
+		transition-duration: 0.5s;
+	}
+
+	.contactUs a:hover{
+		font-size: x-large;
+		line-height: 25px;
+		width: 90px;
+		height: 90px;
+	}
 </style>
 </head>
 
@@ -191,9 +218,11 @@
   </div>
 
   <div class="contactUs">
-	<a href="<c:url value='/chat/index'/>" class="rounded-circle" style="position: fixed;bottom: 2rem;right: 2em;">
-		<i class="fas fa-comments"></i>聯絡客服
-	</a>
+	<div class="container">
+		<a href="<c:url value='/chat/index'/>" class="rounded-circle">
+			<i class="fas fa-comments"></i><br/>聯絡<br/>客服
+		</a>
+	</div>
   </div>
 	
 	<!-- 網站發想 -->
