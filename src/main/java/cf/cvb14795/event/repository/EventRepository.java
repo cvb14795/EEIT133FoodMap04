@@ -1,8 +1,9 @@
-package cf.cvb14795.event.repository;
+package cf.cvb14795.Event.repository;
 
-import cf.cvb14795.event.entity.EventBean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import cf.cvb14795.Event.entity.EventBean;
 
 /**
  * @author

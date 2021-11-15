@@ -271,7 +271,7 @@ img.user-avatar {
 								
 								以上需再做一個jsp 以呈現評論區+商家資訊的整合頁面
 							-->
-						<li id="comments-filters" data-filter="*">留言板</li>
+						<li id="comments-filters" data-filter="*">評論專區</li>
 <!-- 						<li>待更新</li> -->
 					</ul>
 				</div>
@@ -481,7 +481,7 @@ img.user-avatar {
 						"rgba(255,230,111,0.8)")
 				$(".single-product-item a.cart-btn")
 					.css("background-color", "rgb(242,129,35)")
-					.text("留言板")
+					.text("評論專區")
 				
 				mapLists[i].getElementsByClassName("cart-btn")[0]
 					.setAttribute("href", "<c:url value='/Food/user/FoodBoardInfo/'/>"+id)

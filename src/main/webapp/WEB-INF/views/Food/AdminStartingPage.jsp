@@ -91,7 +91,7 @@ legend {
                     <li class="menu-title">功能總覽</li><!-- /.menu-title -->
                     
                     <li>
-                        <a href="<c:url value='/Food/FoodMap'/>"> <i class="menu-icon ti-email"></i>商家資訊 </a>
+                        <a href="<c:url value='/Food/admin'/>"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
                         <a href=<c:url value='/Coupon/frontpage'/>> <i class="menu-icon ti-email"></i>防疫專區 </a>

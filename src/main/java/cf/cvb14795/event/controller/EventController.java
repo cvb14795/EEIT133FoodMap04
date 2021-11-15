@@ -1,11 +1,17 @@
-package cf.cvb14795.event.controller;
+package cf.cvb14795.Event.controller;
 
-import cf.cvb14795.event.entity.EventBean;
-import cf.cvb14795.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cf.cvb14795.Event.entity.EventBean;
+import cf.cvb14795.Event.service.EventService;
 
 /**
  * @author
