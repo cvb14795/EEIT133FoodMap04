@@ -86,43 +86,43 @@ legend {
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="./Home"><i class="menu-icon fa fa-laptop"></i>會員系統 </a>
+                        <a href="<c:url value='/'/>"><i class="menu-icon fa fa-laptop"></i>首頁</a>
                     </li>
-                    <li class="menu-title">Icons</li><!-- /.menu-title -->
+                    <li class="menu-title">功能總覽</li><!-- /.menu-title -->
                     
                     <li>
-                        <a href="./Food/admin"> <i class="menu-icon ti-email"></i>商家資訊 </a>
+                        <a href="<c:url value='/Food/FoodMap'/>"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
-                        <a href="./Coupon/frontpage"> <i class="menu-icon ti-email"></i>防疫專區 </a>
+                        <a href=<c:url value='/Coupon/frontpage'/>> <i class="menu-icon ti-email"></i>防疫專區 </a>
                     </li>
                     <li>
-                        <a href="./Event/eventjava"> <i class="menu-icon ti-email"></i>活動報名 </a>
+                        <a href="<c:url value='/Event'/>"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
-                        <a href="./Comment/CommentControllerServlet"> <i class="menu-icon ti-email"></i>評論專區 </a>
+                        <a href="<c:url value='/comment/admin-list'/>"> <i class="menu-icon ti-email"></i>評論專區 </a>
                     </li>
                     <li>
-                        <a href="./Recipe/admin"> <i class="menu-icon ti-email"></i>營養資訊 </a>
+                        <a href="<c:url value='/Recipe/admin'/>"> <i class="menu-icon ti-email"></i>營養資訊 </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>帳號功能</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="./Member/Login">登入</a></li>
-                            <li><i class="menu-icon fas fa-sign-out-alt"></i><a href="./Member/Logout">登出</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="./Member/Register">管理者註冊</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="./Member/ForgetPassword">忘記密碼</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="<c:url value='/Member/Login'/>">登入</a></li>
+                            <li><i class="menu-icon fas fa-sign-out-alt"></i><a href="<c:url value='/Member/Logout'/>">登出</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="<c:url value='/Member/Register'/>">管理者註冊</a></li>
+                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="<c:url value='/Member/ForgetPassword'/>">忘記密碼</a></li>
                             <!-- 另外做一頁 修改所有會員  -->
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="./Member/Revise">修改所有會員資料</a></li>
+                            <li><i class="menu-icon fa fa-sign-in"></i><a href="<c:url value='/Member/Revise'/>">修改所有會員資料</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                            <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
-                        </ul>
-                    </li>
+<!--                     <li class="menu-item-has-children dropdown"> -->
+<!--                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a> -->
+<!--                         <ul class="sub-menu children dropdown-menu"> -->
+<!--                             <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li> -->
+<!--                             <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li> -->
+<!--                         </ul> -->
+<!--                     </li> -->
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

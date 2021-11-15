@@ -114,6 +114,7 @@ public class IndexController {
 			
 			if (isAdmin) {
 				status = "管理者";
+				nextPage = "redirect:/admin"; 
 			}
 			
 			System.out.println("用戶: '"+user+"' 登入");
