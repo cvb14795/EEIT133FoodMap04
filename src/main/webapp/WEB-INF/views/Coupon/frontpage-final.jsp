@@ -27,6 +27,7 @@
 		float:right;
 		margin: 8px; 
 		padding: 5px;
+		font-weight:bold;
 		border-radius: 10px;
 	}
 	.mhw:hover{
@@ -47,6 +48,9 @@
 		padding-left: 150px;
 		padding-right: 150px;
 	}
+	 img.user-avatar {
+	  width:40px;
+	 }
 </style>
 <title>防疫專區</title>
 
@@ -207,78 +211,79 @@
 	<!--PreLoader Ends-->
 	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
-						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-                                <li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-                                <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
-                                <li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-                                <li><a href="<c:url value='/Event/'/>">活動總覽</a>
-                                <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-                                <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
-                                <li><a href="<c:url value='/Shop/'/>">美食商城</a>
-                                <li>
-                                    <div class="header-icons">
-                                        <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-                                        <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
-                                            <ul class="sub-menu">
-                                                <li id="editNavBtn"><a
-                                                    href="<c:url value='/Member/Revise'/>"><i
-                                                        class="fas fa-edit"></i> 修改個人資料</a></li>
-                                                <li id="registerNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
-                                                        註冊會員</a></li>
-                                                <li id="loginNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
-                                                        登入</a></li>
-                                                <li id="logoutNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
-                                                        登出</a></li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li>
-                                            <div class="header-icons">
-                                              <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
-                                                  <i class="fas fa-heart"></i>
-                                              </a>
-                                              <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
-                                                  <i class="fas fa-shopping-cart"></i>
-                                              </a>
-                                            </div>
-                                        </li>
-<!--                                         <li> -->
-<!--                                             <a> -->
-<!--                                                 淺色模式 -->
-<!--     <!--                                             <label for="checkbox-switch" style="">淺色模式</label> --> 
-<!--                                                 <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
-<!--                                             </a> -->
-<!--                                         </li> -->
-                                    </div>
-                                </li>
-                            </ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
-						<!-- menu end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="top-header-area " id="sticker">
+  <div class="container">
+   <!-- logo -->
+   <div class="site-logo">
+    <a href="<c:url value='/'/>">
+     <img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+    </a>
+   </div>
+   <!-- end logo -->
+  </div>
+  <div>
+   <div class="row">
+    <div class="col-xl-12 col-lg-12 col-sm-12 text-center">
+     <div class="main-menu-wrap">
+      <!-- menu start -->
+      <nav class="main-menu navbar navbar-expand-lg">
+       <ul>
+        <li><a href="<c:url value='/'/>">首頁</a></li>
+        <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+        <li  class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+        <li><a href="<c:url value='/Event/'/>">活動總覽</a>
+        <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+        <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+        <li><a href="<c:url value='/Shop/'/>">美食商城</a>
+        <li>
+         <div class="header-icons">
+          <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+          <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+           <ul class="sub-menu">
+            <li id="editNavBtn"><a
+             href="<c:url value='/Member/Revise'/>"><i
+              class="fas fa-edit"></i> 修改個人資料</a></li>
+            <li id="registerNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
+              註冊會員</a></li>
+            <li id="loginNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
+              登入</a></li>
+            <li id="logoutNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
+              登出</a></li>
+           </ul>
+          </li>
+          
+          <li>
+           <div class="header-icons">
+             <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+              <i class="fas fa-heart"></i>
+             </a>
+             <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+              <i class="fas fa-shopping-cart"></i>
+             </a>
+           </div>
+          </li>
+<!--           <li> -->
+<!--            <a> -->
+<!--             淺色模式 -->
+<!--  <!--            <label for="checkbox-switch" style="">淺色模式</label> --> 
+<!--             <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!--            </a> -->
+<!--           </li> -->
+         </div>
+        </li>
+       </ul>
+      </nav>
+      <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+      <div class="mobile-menu"></div>
+      <!-- menu end -->
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 	<!-- end header -->
 	
 	<!-- breadcrumb-section -->
@@ -303,23 +308,23 @@
 		
 	<div class="main mt-150 mb-150">
 		<div>
-			<div style="display:flex;margin:10px;">
-				<div style="margin:20px 50px 10px 40px;"><div class="rst" style="font-size:30px;text-align:center">國內疫情總計數據</div></div>
+			<div style="display:flex;margin:10px;font-weight:bold;">
+				<div style="margin:20px 40px 10px 20px;"><div class="rst" style="font-size:30px;text-align:center">國內疫情總計數據</div></div>
 				<div style="margin:10px 50px 10px 50px;"><div class="rst">總通報人數:<div id="result21" class="rs">無資料</div></div></div>
 				<div style="margin:10px 50px 10px 50px;"><div class="rst">總排除人數:<div id="result22" class="rs">無資料</div></div></div>
 				<div style="margin:10px 50px 10px 50px;"><div class="rst">總確診人數:<div id="result23" class="rs">無資料</div></div></div>			 
 				<div style="margin:10px 50px 10px 50px;"><div class="rst">總死亡人數:<div id="result24" class="rs">無資料</div></div></div>				 
 			</div>
-			<div style="display:flex; margin:20px;">
-				<div style="margin:20px 50px 10px 80px;"><div class="rst" style="font-size:30px;text-align:center">   今日數據</div></div>
+			<div style="display:flex; margin:20px;font-weight:bold;">
+				<div style="margin:20px 50px 10px 50px;"><div class="rst" style="font-size:30px;text-align:center">今日數據</div></div>
 				<div style="margin:10px 100px 10px 150px;"><div class="rst">通報數:<div id="result31" class="rs">無資料</div></div></div>
 				<div style="margin:10px 100px 10px 100px;"><div class="rst">排除數:<div id="result32" class="rs">無資料</div></div></div>
 				<div style="margin:10px 70px 10px 70px;"><div class="rst" >確診人數:<div id="result33" class="rs" style="border:3px solid #F75000;">無資料</div></div></div>			 
 			</div>
 			
-			<div style="display:flex;margin:20px;">
-				<div style="margin:20px 20px 10px 40px;"><div class="rst" style="font-size:30px;text-align:center">國內檢驗總計</div></div>
-				<div><div class="rst" style="margin:10px 70px 10px 130px;">累計人次:<div id="result11" class="rs">無資料</div></div></div>
+			<div style="display:flex;margin:20px;font-weight:bold;">
+				<div style="margin:20px 10px 10px 10px;"><div class="rst" style="font-size:30px;text-align:center">國內檢驗總計</div></div>
+				<div><div class="rst" style="margin:10px 70px 10px 120px;">累計人次:<div id="result11" class="rs">無資料</div></div></div>
 				<div><div class="rst" style="margin:10px 100px 10px 100px;">累計件數:<div id="result12" class="rs">無資料</div></div></div>
 				<div><div class="rst" style="margin:10px 70px 50px 70px;">更新時間:<div id="result13" class="rs">無資料</div></div></div>
  
@@ -347,29 +352,34 @@
 					<div class="mhw"><a role="button" href='https://www.mohw.gov.tw/np-15-1.html' target="_blank" style='color:white'>最新消息</a></div>	
 					<div class="mhw"><a role="button" href='https://covid19.mohw.gov.tw/ch/np-5187-205.html' target="_blank" style='color:white'>紓困4.0</a></div>	
 				</div>
-				<div style="text-align:center;width:550px;height:50px;float:right;margin-bottom:20px;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
+				<div style="text-align:center;width:550px;height:50px;float:right;margin-bottom:20px;font-weight:bold;"> <h5>* 防疫專線: 1922， 國外民眾可撥打: +886-800-001922 </h5></div>
 			</div>			
 		</div>		
 	<div>
 		<div>			
 			<br>
 			<h2>歡迎大家來填問卷</h2>
-			<input type="button" value="填問卷" id='questionnaire'
+			<input type="button" value="問卷" id='questionnaire'
+			style="width:88px;height:60px;border-radius:30px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;font-weight:bold;"
 			onclick="location.href='<c:url value="/Coupon/questionnaire" />'">
 		</div>
 			<br>	
 		<div>
 			
 			<h2>管理員管理</h2>
-			<input type="button" id="admin" value="管理" /> 
+			<input type="button" id="admin" 
+			style="width:88px;height:60px;border-radius:30px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;font-weight:bold;"
+			 value="管理" /> 
 			<%-- 	onclick="location.href='<c:url value='/Coupon/admin' />'"> --%>
 		</div>		
 			<br>
 		<div style="margin-bottom:20px;">	
 			<h2>回美食地圖首頁</h2>
 			<input type="button" value="首頁"
+			style="width:88px;height:60px;border-radius:30px;border:3px solid #fd7e14;font-size:20px;background-color:#FF8000;font-weight:bold;"
 			onclick="location.href='<c:url value='/' />'">		
 		</div>		
+	</div>
 	</div>
 	
 	
@@ -514,6 +524,9 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
-	
+	<!-- 	<script> -->
+<%-- // 		var src = "<c:url value='/Member/user/${user}/photo'/>"; --%>
+<!-- // 		userNameMain(src); -->
+<!-- 	</script> -->
 </body>
 </html>

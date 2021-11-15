@@ -53,6 +53,7 @@ public class HomeController {
 			
 			response.addCookie(cookie);
 		} catch (Exception e) { 
+			e.printStackTrace();
 			return PREFIX+"frontpage-final";
 		}
 			

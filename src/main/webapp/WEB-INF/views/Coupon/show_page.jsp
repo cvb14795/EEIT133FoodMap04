@@ -22,12 +22,16 @@ td, th {
 	border: 1px solid;
 	width: 200px;
 	text-align: center;
+	font-size:20px;
 }
 
 table {
 	border: 1px;
 	border-collapse: collapse;
 }
+img.user-avatar {
+	  width:40px;
+	 }
 </style>
 
 <script>
@@ -97,78 +101,79 @@ table {
 	<!--PreLoader Ends-->
 	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
-						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-                                <li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-                                <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
-                                <li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-                                <li><a href="<c:url value='/Event/'/>">活動總覽</a>
-                                <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-                                <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
-                                <li><a href="<c:url value='/Shop/'/>">美食商城</a>
-                                <li>
-                                    <div class="header-icons">
-                                        <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-                                        <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
-                                            <ul class="sub-menu">
-                                                <li id="editNavBtn"><a
-                                                    href="<c:url value='/Member/Revise'/>"><i
-                                                        class="fas fa-edit"></i> 修改個人資料</a></li>
-                                                <li id="registerNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
-                                                        註冊會員</a></li>
-                                                <li id="loginNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
-                                                        登入</a></li>
-                                                <li id="logoutNavBtn"><a class="nav-link"
-                                                    href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
-                                                        登出</a></li>
-                                            </ul>
-                                        </li>
-                                        
-                                        <li>
-                                            <div class="header-icons">
-                                              <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
-                                                  <i class="fas fa-heart"></i>
-                                              </a>
-                                              <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
-                                                  <i class="fas fa-shopping-cart"></i>
-                                              </a>
-                                            </div>
-                                        </li>
-<!--                                         <li> -->
-<!--                                             <a> -->
-<!--                                                 淺色模式 -->
-<!--     <!--                                             <label for="checkbox-switch" style="">淺色模式</label> --> 
-<!--                                                 <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
-<!--                                             </a> -->
-<!--                                         </li> -->
-                                    </div>
-                                </li>
-                            </ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
-						<!-- menu end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="top-header-area " id="sticker">
+  <div class="container">
+   <!-- logo -->
+   <div class="site-logo">
+    <a href="<c:url value='/'/>">
+     <img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+    </a>
+   </div>
+   <!-- end logo -->
+  </div>
+  <div>
+   <div class="row">
+    <div class="col-xl-12 col-lg-12 col-sm-12 text-center">
+     <div class="main-menu-wrap">
+      <!-- menu start -->
+      <nav class="main-menu navbar navbar-expand-lg">
+       <ul>
+        <li><a href="<c:url value='/'/>">首頁</a></li>
+        <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+        <li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+        <li><a href="<c:url value='/Event/'/>">活動總覽</a>
+        <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+        <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+        <li><a href="<c:url value='/Shop/'/>">美食商城</a>
+        <li>
+         <div class="header-icons">
+          <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+          <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+           <ul class="sub-menu">
+            <li id="editNavBtn"><a
+             href="<c:url value='/Member/Revise'/>"><i
+              class="fas fa-edit"></i> 修改個人資料</a></li>
+            <li id="registerNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
+              註冊會員</a></li>
+            <li id="loginNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
+              登入</a></li>
+            <li id="logoutNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
+              登出</a></li>
+           </ul>
+          </li>
+          
+          <li>
+           <div class="header-icons">
+             <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+              <i class="fas fa-heart"></i>
+             </a>
+             <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+              <i class="fas fa-shopping-cart"></i>
+             </a>
+           </div>
+          </li>
+<!--           <li> -->
+<!--            <a> -->
+<!--             淺色模式 -->
+<!--  <!--            <label for="checkbox-switch" style="">淺色模式</label> --> 
+<!--             <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!--            </a> -->
+<!--           </li> -->
+         </div>
+        </li>
+       </ul>
+      </nav>
+      <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+      <div class="mobile-menu"></div>
+      <!-- menu end -->
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 	<!-- end header -->
 	
 	<!-- breadcrumb-section -->
@@ -188,36 +193,41 @@ table {
 
 	<input type="hidden" id="isAdmin" value="${isAdmin}">
 	<input type="hidden" id="userName" value="${user}">
-	<div class="memberDetail">
-		<div class="text-right">
-			會員： <span id="userNameContainer"></span>
-		</div>
-		<div class="text-right">
-			身分： <span id="isAdminContainer"></span>
-		</div>
-	</div>
+<!-- 	<div class="memberDetail"> -->
+<!-- 		<div class="text-right"> -->
+<!-- 			會員： <span id="userNameContainer"></span> -->
+<!-- 		</div> -->
+<!-- 		<div class="text-right"> -->
+<!-- 			身分： <span id="isAdminContainer"></span> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
 	<!-- 防疫專區 -->
 		<form action='admincontroller' method='post'>
+		<div>	
+			<h1 style="margin:30px 10px 15px 10px">管理者操作功能</h1>	
+		</div>
 		<div>
-			<p>
-				<label><input type='radio' name='action' value='R'>查詢疫苗接種者</label>
-				<label><input type='radio' name='action' value='U'>發放折價券</label>
-				<label><input type='radio' name='action' value='B'>撤回</label>
-				<label><input type='radio' name='action' value='D'>刪除</label>
+			<p  style="font-weight:bold;font-size:20px">
+				<label><input type='radio' name='action' value='R' style="font-size:15px; margin:30px 0px 15px 10px">查詢疫苗接種者</label>
+				<label><input type='radio' name='action' value='U' style="margin:30px 0px 15px 10px">發放</label>
+				<label><input type='radio' name='action' value='B' style="margin:30px 0px 15px 10px">撤回</label>
+				<label><input type='radio' name='action' value='D' style="margin:30px 0px 15px 10px">刪除</label>
 			</p>
 		</div>
-		<div>
-			<h6>	註: 撤回與刪除:為方便測試時使用，並非正式功能。</h6>
-			<h6>        刪除: 功能為刪除測試帳號 caterpillar123 </h6>
+		<div style="margin:30px 10px 15px 10px">
+			<h6>	( 註: 撤回與刪除:為方便測試時使用，並非正式功能。</h6>
+			<h6>        刪除: 功能為刪除測試帳號 caterpillar123 )</h6>
+			<br/>
 		</div>
 
-		<div>
-			<input type='submit' value='送出'> 
-			<input type="button"
-				value="回首頁" onclick="location.href='<c:url value="/Coupon/frontpage"/>'">
-			<input type="button"
+		<div style="margin-bottom:30px;">
+		<input type='submit' value='送出'> 
+			<input type="button" style="width:88px;height:55px;border-radius:30px;border:3px solid #fd7e14;font-size:15px;background-color:#FF8000;font-weight:bold"
+				value="首頁" onclick="location.href='<c:url value="/Coupon/frontpage"/>'">
+			<input type="button" style="width:90px;height:55px;border-radius:30px;border:3px solid #fd7e14;font-size:15px;background-color:#FF8000;font-weight:bold"
 				value="管理折價券" onclick="location.href='<c:url value="/Coupon/adminforCoupon"/>'">
+				
 		</div>
 
 	</form>
@@ -236,7 +246,7 @@ table {
 		%>
 		<table>
 			<thead>
-				<tr>
+				<tr bgcolor=#FFBB00>
 					<th>帳號</th>
 					<th>身份證字號</th>
 					<th>姓名</th>
@@ -253,7 +263,7 @@ table {
 			<tbody>
 				<tr>
 					<c:forEach items='${beans}' var='bean'>
-						<tr>
+						<tr bgcolor=#FFFFBB>
 							<td>${bean.account}</td>
 							<td>${bean.id}</td>
 							<td>${bean.name}</td>
@@ -446,6 +456,9 @@ table {
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
-	
+	<!-- 	<script> -->
+<%-- // 		var src = "<c:url value='/Member/user/${user}/photo'/>"; --%>
+<!-- // 		userNameMain(src); -->
+<!-- 	</script> -->
 </body>
 </html>

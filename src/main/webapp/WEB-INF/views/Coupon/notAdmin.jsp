@@ -47,6 +47,9 @@
 		padding-left: 150px;
 		padding-right: 150px;
 	}
+	 img.user-avatar {
+	  width:40px;
+	 }
 </style>
 <title>管理員頁面</title>
 
@@ -108,72 +111,79 @@
 	<!--PreLoader Ends-->
 	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
-					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
-						<!-- menu start -->
-						<nav class="main-menu">
-							<ul>
-								<li><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
-								<li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
-									<ul class="sub-menu">
-										<li><a href="<c:url value='/Event/buy'/>">付費活動購票</a></li>
-										<li><a href="<c:url value='/Event/entry'/>">免費活動報名</a></li>
-									</ul></li>
-								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
-								<li>
-									<div class="header-icons">
-										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
-											<ul class="sub-menu">
-												<li id="editNavBtn"><a
-													href="<c:url value='/Member/Revise'/>"><i
-														class="fas fa-edit"></i> 修改個人資料</a></li>
-												<li id="registerNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
-														註冊會員</a></li>
-												<li id="loginNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
-														登入</a></li>
-												<li id="logoutNavBtn"><a class="nav-link"
-													href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
-														登出</a></li>
-											</ul>
-										</li>
-										<li>
-										  <a class="shopping-cart" href="<c:url value='/Cart/'/>">
-																  <i class="fas fa-shopping-cart"></i> 已購票券
-										  </a>
-										</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
-									</div>
-								</li>
-							</ul>
-						</nav>
-						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-						<div class="mobile-menu"></div>
-						<!-- menu end -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="top-header-area " id="sticker">
+  <div class="container">
+   <!-- logo -->
+   <div class="site-logo">
+    <a href="<c:url value='/'/>">
+     <img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+    </a>
+   </div>
+   <!-- end logo -->
+  </div>
+  <div>
+   <div class="row">
+    <div class="col-xl-12 col-lg-12 col-sm-12 text-center">
+     <div class="main-menu-wrap">
+      <!-- menu start -->
+      <nav class="main-menu navbar navbar-expand-lg">
+       <ul>
+        <li><a href="<c:url value='/'/>">首頁</a></li>
+        <li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
+        <li class="current-list-item"><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
+        <li><a href="<c:url value='/Event/'/>">活動總覽</a>
+        <li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
+        <li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+        <li><a href="<c:url value='/Shop/'/>">美食商城</a>
+        <li>
+         <div class="header-icons">
+          <!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+          <li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
+           <ul class="sub-menu">
+            <li id="editNavBtn"><a
+             href="<c:url value='/Member/Revise'/>"><i
+              class="fas fa-edit"></i> 修改個人資料</a></li>
+            <li id="registerNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Register'/>"><i class="fas fa-user-plus"></i>
+              註冊會員</a></li>
+            <li id="loginNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Login'/>"><i class="fas fa-sign-in-alt"></i>
+              登入</a></li>
+            <li id="logoutNavBtn"><a class="nav-link"
+             href="<c:url value='/Member/Logout'/>"><i class="fas fa-sign-out-alt"></i>
+              登出</a></li>
+           </ul>
+          </li>
+          
+          <li>
+           <div class="header-icons">
+             <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+              <i class="fas fa-heart"></i>
+             </a>
+             <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+              <i class="fas fa-shopping-cart"></i>
+             </a>
+           </div>
+          </li>
+<!--           <li> -->
+<!--            <a> -->
+<!--             淺色模式 -->
+<!--  <!--            <label for="checkbox-switch" style="">淺色模式</label> --> 
+<!--             <input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!--            </a> -->
+<!--           </li> -->
+         </div>
+        </li>
+       </ul>
+      </nav>
+      <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+      <div class="mobile-menu"></div>
+      <!-- menu end -->
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 	<!-- end header -->
 	
 	<!-- breadcrumb-section -->
@@ -345,6 +355,9 @@
 	<script src="<c:url value='/js/userNameMain.js'/>"></script>
 	<!-- vegas js -->
 	<script src="<c:url value='/js/vegas.js'/>"></script>
+	<%-- // 		var src = "<c:url value='/Member/user/${user}/photo'/>"; --%>
+<!-- // 		userNameMain(src); -->
+<!-- 	</script> -->
 	
 </body>
 </html>
