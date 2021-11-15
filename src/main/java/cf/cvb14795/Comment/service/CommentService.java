@@ -29,6 +29,8 @@ public interface CommentService {
 	public List<Comment> findAllByUserLikes();
 	
 	public Long findCommentCount();
+	
+	public Long findCommentCountByMapName(String theMapName);
 
 	
 }

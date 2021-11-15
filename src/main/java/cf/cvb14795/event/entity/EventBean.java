@@ -1,5 +1,9 @@
-package cf.cvb14795.event.entity;
-import javax.persistence.*;
+package cf.cvb14795.Event.entity;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author

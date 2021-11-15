@@ -228,7 +228,7 @@
 
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
+        <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5" id="commentList">
             <div class="card">
                 <div class="row justify-content-left d-flex">
                     <div class="col-md-12 d-flex flex-column">

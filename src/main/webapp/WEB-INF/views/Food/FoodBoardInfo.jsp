@@ -141,7 +141,7 @@ header {
 	/* padding-bottom: 30px */
 }
 
-#comments {
+#rate-header {
 	text-align: center;
 }
 
@@ -155,6 +155,82 @@ fieldset {
 	background-color: #ffffcc;
 	border: 1px solid #cccccc;
 	padding: 4px 2px;
+}
+
+.card {
+	border-radius: 5px;
+	background-color: #fff;
+	padding-left: 60px;
+	padding-right: 60px;
+	margin-top: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px
+}
+
+.rating-box {
+	width: 130px;
+	height: 130px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #FBC02D;
+	color: #fff;
+	border-radius: 50%
+}
+
+.rating-label {
+	font-weight: bold
+}
+
+.rating-bar {
+	width: 300px;
+	padding: 8px;
+	border-radius: 5px
+}
+
+.bar-container {
+	width: 100%;
+	background-color: #f1f1f1;
+	text-align: center;
+	color: white;
+	border-radius: 20px;
+	cursor: pointer;
+	margin-bottom: 5px
+}
+
+.bar-5 {
+	height: 13px;
+	background-color: #FBC02D;
+	border-radius: 20px
+}
+
+.bar-4 {
+	height: 13px;
+	background-color: #FBC02D;
+	border-radius: 20px
+}
+
+.bar-3 {
+	height: 13px;
+	background-color: #FBC02D;
+	border-radius: 20px
+}
+
+.bar-2 {
+	height: 13px;
+	background-color: #FBC02D;
+	border-radius: 20px
+}
+
+.bar-1 {
+	height: 13px;
+	background-color: #FBC02D;
+	border-radius: 20px
+}
+
+.star-active {
+	color: #FBC02D;
+	margin-top: 10px;
+	margin-bottom: 10px
 }
 </style>
 </head>
@@ -268,11 +344,85 @@ fieldset {
 				<div class="col-lg-4 col-md-12" id="mapImg">
 					<img src="<c:url value='/Food/user/photo/${mapData.id}'/>">
 				</div>
-				<div class="col-lg-8 col-md-12" id="comments"></div>
+				<div class="col-lg-8 col-md-12">
+					<div class="card" id="rate-header">
+						<div class="row justify-content-left d-flex">
+							<div class="col-md-4 d-flex flex-column">
+								<div class="rating-box">
+									<h1 class="pt-5">${ratingAvg}</h1>
+									<p class="rating" id="rating">共${commentCount}則評論</p>
+								</div>
+								<div id="ratingAvg">
+									<span class="fa fa-star star-inactive mx-1"></span>
+									<span class="fa fa-star star-inactive mx-1"></span>
+									<span class="fa fa-star star-inactive mx-1"></span>
+									<span class="fa fa-star star-inactive mx-1"></span>
+									<span class="fa fa-star star-inactive mx-1"></span>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="rating-bar0 justify-content-center">
+									<table class="text-left mx-auto">
+										<c:forEach var="iAsc" begin="1" end="5">
+											<c:set var="iDesc" value="${String.valueOf(5 - iAsc + 1)}"></c:set>
+											<tr>
+												<td class="rating-label">${iDesc}<span class="fa fa-star star-active mx-1"></span></td>
+												<td class="rating-bar">
+													<div class="bar-container">
+														<div class="bar-${iDesc}" style='width: ${commentCountsByRating.get(iDesc)/commentCount*100}%'></div>
+													</div>
+												</td>
+												<td class="text-right">${commentCountsByRating.get(iDesc)}</td>
+											</tr>
+										</c:forEach>
+<!-- 										<tr> -->
+<!-- 											<td class="rating-label">4<span -->
+<!-- 												class="fa fa-star star-active mx-1"></span></td> -->
+<!-- 											<td class="rating-bar"> -->
+<!-- 												<div class="bar-container"> -->
+<!-- 													<div class="bar-4" style="width: 30%"></div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td class="text-right">23</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td class="rating-label">3<span -->
+<!-- 												class="fa fa-star star-active mx-1"></span></td> -->
+<!-- 											<td class="rating-bar"> -->
+<!-- 												<div class="bar-container"> -->
+<!-- 													<div class="bar-3" style="width: 20%"></div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td class="text-right">10</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td class="rating-label">2<span -->
+<!-- 												class="fa fa-star star-active mx-1"></span></td> -->
+<!-- 											<td class="rating-bar"> -->
+<!-- 												<div class="bar-container"> -->
+<!-- 													<div class="bar-2" style="width: 10%"></div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td class="text-right">3</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td class="rating-label">1<span -->
+<!-- 												class="fa fa-star star-active mx-1"></span></td> -->
+<!-- 											<td class="rating-bar"> -->
+<!-- 												<div class="bar-container"> -->
+<!-- 													<div class="bar-1" style="width: 5%"></div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td class="text-right" id="star1">0</td> -->
+<!-- 										</tr> -->
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
-
 		<div class="container mb-150">
 			<fieldset>
 				<legend>店家資料</legend>
@@ -296,6 +446,8 @@ fieldset {
 				<hr>
 
 			</fieldset>
+			
+			<div id="comments"></div>
 			
 			<input id="backBtn" type="button" name="back" value="回首頁">
 		</div>
@@ -406,11 +558,26 @@ fieldset {
 			backBtn.addEventListener("click", function(e) {
 				location.href = "<c:url value='/Food/user'/>";
 			})
+			
+			var url = encodeURI("<c:url value='/comments/sortByMapName?mapName=${mapData.mapname}'/>");
+			console.log(url);
+			$("#comments").load(url + " #commentList" , function(){
+				// 覆寫原先class 以符合現在頁面樣式
+				document.getElementById("commentList").classList = "col-12";
+			});
 
-			$("#comments").load("<c:url value='/comments/list'/> #rate-header")
-		</script>
+			// 將原本平均星數取到小數點後第1位 (toPrecision從整數位數開始算)
+			$(".rating-box h1").text(Number($(".rating-box h1").text()).toPrecision(2))
 
-		<script>
+			// 取四捨五入以計算1~5星打分制
+			var ratingAvgOfIntPart = Math.round($(".rating-box h1").text()).toPrecision(2)
+			// 平均幾星則點亮幾顆星 四捨五入小數部分 (3.4亮3星 3.5則亮4星 4.9亮5星 類推)
+			for (let i = 0; i < ratingAvgOfIntPart; i++) {
+				$("#ratingAvg span").eq(i).toggleClass("star-inactive");
+				$("#ratingAvg span").eq(i).toggleClass("star-active");
+				
+			}
+			
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
 		</script>
