@@ -350,6 +350,7 @@ legend {
     	   $("#mapku").val("320桃園市中壢區義民路137號");
     	   $("#mapnb").val("+88634952568");
     	   $("#mapxy").val("X638+55 中壢區 桃園市");
+    	   $("#mapcheck").val("N");
     	   $("#category").val("桃園市");
     	  })
     </script>
