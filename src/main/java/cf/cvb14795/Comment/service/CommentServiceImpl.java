@@ -116,5 +116,11 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.count();
 	}
 
+	@Override
+	public Long findCommentCountByMapName(String theMapName) {
+		// TODO Auto-generated method stub
+		return commentRepository.countByMapName(theMapName);
+	}
+
 
 }
