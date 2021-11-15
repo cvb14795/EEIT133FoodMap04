@@ -73,6 +73,8 @@ $(function() {
 	    }
 });
 </script>
+<!-- main style -->
+<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
 </head>
 <body>
 <!-- 	<div class="text-right memberDetail"> -->

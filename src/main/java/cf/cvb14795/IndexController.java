@@ -70,7 +70,28 @@ public class IndexController {
 	}
 
 	@GetMapping({ "/" })
-	private String index(@ModelAttribute String user, HttpServletRequest request) {
+	private String index(@ModelAttribute String user, HttpServletRequest request, Model model) {
+		
+		//商家資訊
+		List<AdminMapDataBean> mapDatalists = aFoodService.selectAll();
+		List<String> imageList = new ArrayList<String>();
+		for (AdminMapDataBean bean : mapDatalists) {
+			String base64String = Base64.getEncoder().encodeToString(bean.getFilename());
+			imageList.add(base64String);
+		}
+		model.addAttribute("mapDatalists", mapDatalists);
+		model.addAttribute("imageList", imageList);
+		
+		//recipe
+		List<AdminRecipeBean> lists = aRecipeService.selectAll();
+//		List<String> imgList = new ArrayList<String>();
+//		for (int i = 0; i < lists.size(); i++) {
+//			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
+//			imgList.add(base64String);
+//		}
+		model.addAttribute("lists", lists);
+//		model.addAttribute("imgList", imgList);
+		
 		MemberStatus status = new MemberStatus(request.getCookies());
 		if (!status.getLoginStatus()) {
 			System.out.println("使用者未登入，將跳轉至根目錄");
@@ -95,13 +116,7 @@ public class IndexController {
 		
 		//recipe
 		List<AdminRecipeBean> lists = aRecipeService.selectAll();
-		List<String> imgList = new ArrayList<String>();
-		for (int i = 0; i < lists.size(); i++) {
-			String base64String = Base64.getEncoder().encodeToString(lists.get(i).getPhoto());
-			imgList.add(base64String);
-		}
 		model.addAttribute("lists", lists);
-		model.addAttribute("imgList", imgList);
 		
 		Optional<Member> member = mService.selectMemberByAccount(user); 	
 		if (member.isPresent()) {

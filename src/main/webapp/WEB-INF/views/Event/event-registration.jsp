@@ -107,8 +107,6 @@
     <link rel="stylesheet" href="<c:url value='/css/user/css/animate.css'/>">
     <!-- mean menu css -->
     <link rel="stylesheet" href="<c:url value='/css/user/css/meanmenu.min.css'/>">
-    <!-- main style -->
-    <link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
     <!-- responsive -->
     <link rel="stylesheet" href="<c:url value='/css/user/css/responsive.css'/>">
     <!-- bootstrap -->
@@ -120,6 +118,8 @@
     <!-- <link href="./test/pre.css" rel="stylesheet" /> -->
     <!-- 開關改成IOS風格(左右滑動按鈕) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
     <script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
     <!-- 暗黑模式 -->
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>

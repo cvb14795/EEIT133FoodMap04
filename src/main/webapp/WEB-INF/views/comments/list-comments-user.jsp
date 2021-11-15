@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -63,22 +63,21 @@
 <link rel="stylesheet" href="<c:url value='/css/user/css/animate.css'/>">
 <!-- mean menu css -->
 <link rel="stylesheet" href="<c:url value='/css/user/css/meanmenu.min.css'/>">
-<!-- main style -->
-<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
+
 <!-- responsive -->
 <link rel="stylesheet" href="<c:url value='/css/user/css/responsive.css'/>">
 <!-- bootstrap -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
-
-<link rel="stylesheet" href="<c:url value='/css/comment-style.css'/>">
-
 <!-- vegas -->
 <link rel="stylesheet" href="<c:url value='/css/vegas.css'/>"/>
 
 <!-- <link href="./test/pre.css" rel="stylesheet" /> -->
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
+<!-- main style -->
+<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/comment-style.css'/>">
 <script src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <!-- 暗黑模式 -->
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
@@ -114,6 +113,11 @@
 	});
 	
 </script>
+<style>
+	img.user-avatar {
+		width:40px;
+	}
+</style>
 </head>
 
 <body>
@@ -126,33 +130,34 @@
 	<!--PreLoader Ends-->
 	
 	<!-- header -->
-	<div class="top-header-area" id="sticker">
+	<div class="top-header-area " id="sticker">
 		<div class="container">
+			<!-- logo -->
+			<div class="site-logo">
+				<a href="<c:url value='/'/>">
+					<img src="<c:url value='/image/user/logo.png'/>" alt="" width="65%" height="65%">
+				</a>
+			</div>
+			<!-- end logo -->
+		</div>
+		<div>
 			<div class="row">
-				<div class="col-lg-12 col-sm-12 text-center">
+				<div class="col-xl-12 col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
-						<!-- logo -->
-						<div class="site-logo">
-							<a href="<c:url value='/'/>">
-								<img src="<c:url value='/image/user/logo.png'/>" alt="">
-							</a>
-						</div>
-						<!-- logo -->
-
 						<!-- menu start -->
-						<nav class="main-menu">
+						<nav class="main-menu navbar navbar-expand-lg">
 							<ul>
-								<li class="current-list-item"><a href="<c:url value='/'/>">首頁</a></li>
-								<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
+								<li><a href="<c:url value='/'/>">首頁</a></li>
+								<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 								<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-<%-- 								<li><a href="<c:url value='/Event/'/>">活動總覽</a> --%>
+								<li><a href="<c:url value='/Event/'/>">活動總覽</a>
 								<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
-								<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
+								<li class="current-list-item"><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 								<li><a href="<c:url value='/Shop/'/>">美食商城</a>
 								<li>
 									<div class="header-icons">
 										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
-										<li><a href="">會員：<span id="user"></span></a>
+										<li><a><img class="user-avatar rounded-circle" src=""/> 會員：<span id="user"></span></a>
 											<ul class="sub-menu">
 												<li id="editNavBtn"><a
 													href="<c:url value='/Member/Revise'/>"><i
@@ -168,15 +173,24 @@
 														登出</a></li>
 											</ul>
 										</li>
+										
 										<li>
-										  <a class="shopping-cart" href="<c:url value='/Shop/Cart/'/>">
-											 <i class="fas fa-shopping-cart"></i>
-										  </a>
+											<div class="header-icons">
+											  <a class="shopping-cart" href="<c:url value="/Recipe/user/showMyfavorites"/>">
+											  	<i class="fas fa-heart"></i>
+											  </a>
+											  <a class="shopping-cart" href="<c:url value='/Shop/Cart'/>">
+											  	<i class="fas fa-shopping-cart"></i>
+											  </a>
+											</div>
 										</li>
-										<li><a>
-											<label for="checkbox-switch" style="">淺色模式</label>
-											<input type="checkbox" id="checkbox-switch" class="checkbox-switch" />
-										</a></li>
+<!-- 										<li> -->
+<!-- 											<a> -->
+<!-- 												淺色模式 -->
+<!-- 	<!-- 											<label for="checkbox-switch" style="">淺色模式</label> --> 
+<!-- 												<input type="checkbox" id="checkbox-switch" class="checkbox-switch" /> -->
+<!-- 											</a> -->
+<!-- 										</li> -->
 									</div>
 								</li>
 							</ul>
@@ -495,6 +509,10 @@
 	
     
     <script>
+    $(function(){
+		var src = "<c:url value='/Member/user/${user}/photo'/>";
+		userNameMain(src);
+	})
     // 計算有幾則評論
     
     var numItems = $('.rating').length;

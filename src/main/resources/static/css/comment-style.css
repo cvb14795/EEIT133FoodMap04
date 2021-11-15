@@ -178,3 +178,8 @@ td {
   	left:85px;
   	color: #0091EA;
 }
+
+.card .rating-box h1{
+	font-size: 2.5rem;
+	line-height: 1.5rem;
+}

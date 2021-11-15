@@ -20,6 +20,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingRequestCookieException;
@@ -63,15 +65,18 @@ public class UserRecipeControllerAjax {
 	IMemberService memberService;
 	IMyFavoriteService favoritesService;
 	IReportService reportService;
+	JavaMailSender mailSender;
 
 	@Autowired
 	public UserRecipeControllerAjax(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,
-			IMemberService memberService, IMyFavoriteService favoritesService, IReportService reportService) {
+			IMemberService memberService, IMyFavoriteService favoritesService, 
+			IReportService reportService, JavaMailSender mailSender) {
 		this.uRecipeService = uRecipeService;
 		this.aRecipeService = aRecipeService;
 		this.memberService = memberService;
 		this.favoritesService = favoritesService;
 		this.reportService = reportService;
+		this.mailSender = mailSender;
 	}
 
 //	@GetMapping("UserRecipe")
@@ -280,8 +285,12 @@ public class UserRecipeControllerAjax {
 		model.addAttribute("lists", lists);
 		model.addAttribute("imgList", imgList);
 
-		Optional<UserRecipeBean> recipe = uRecipeService.getUpdateId(id);
-		String base64String = Base64.getEncoder().encodeToString(recipe.get().getPhoto());
+		Optional<UserRecipeBean> opt = uRecipeService.getUpdateId(id);
+		UserRecipeBean recipe = new UserRecipeBean();
+		if (opt.isPresent()) {
+			recipe = opt.get();
+		}
+		String base64String = Base64.getEncoder().encodeToString(recipe.getPhoto());
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("base64String", base64String);
@@ -336,7 +345,7 @@ public class UserRecipeControllerAjax {
 		Optional<UserRecipeBean> userRecipe = uRecipeService.getUpdateId(id);
 		reportBean.setUserRecipe(userRecipe.get());
 		reportBean.setMember(member);
-
+		
 		Optional<ReportBean> opt = reportService.findByRecipeId(id);
 		if (!opt.isPresent()) {
 			reportService.save(reportBean);
@@ -346,6 +355,27 @@ public class UserRecipeControllerAjax {
 			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("sendReportMail/{id}")
+	public ResponseEntity<HttpStatus> sendReportMail(@PathVariable("id") Integer id, 
+			@CookieValue("user") String userName){
+		
+		Optional<UserRecipeBean> userRecipe = uRecipeService.getUpdateId(id);
+		
+		SimpleMailMessage message =new SimpleMailMessage();
+		message.setTo("foodmap04@gmail.com");  
+		message.setSubject("想食What! 會員檢舉信件");
+		message.setText(
+			"您好 : "+userName+"\r\n"
+			+"已收到您檢舉的食譜，我們會盡速審核。"+"\r\n"
+			+ "檢舉資訊如下:"+"\r\n"
+			+ "會員帳號:"+userRecipe.get().getUserName()+"\r\n"
+			+ "食譜名稱:"+userRecipe.get().getFoodName()+"\r\n"+"\r\n"
+		);
+		mailSender.send(message);
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	}
+	
 
 	// 預防沒進首頁直接連進來會找不到user的問題
 	@ModelAttribute

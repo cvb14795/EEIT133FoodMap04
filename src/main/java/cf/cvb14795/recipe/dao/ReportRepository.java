@@ -14,6 +14,7 @@ import cf.cvb14795.recipe.model.ReportBean;
 @Repository
 public interface ReportRepository extends JpaRepository<ReportBean, Integer> {
 	@Query("from ReportBean rb where rb.userRecipe.id = ?1")
+//	public Optional<ReportBean> findByRecipeId(Integer id);
 	public Optional<ReportBean> findByRecipeId(Integer id);
 	
 	@Modifying

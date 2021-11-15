@@ -36,8 +36,6 @@ response.setContentType("text/html;charset=UTF-8");
 <!-- mean menu css -->
 <link rel="stylesheet"
 	href="<c:url value='/css/user/css/meanmenu.min.css'/>">
-<!-- main style -->
-<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
 <!-- responsive -->
 <link rel="stylesheet"
 	href="<c:url value='/css/user/css/responsive.css'/>">
@@ -47,6 +45,8 @@ response.setContentType("text/html;charset=UTF-8");
 <!-- 開關改成IOS風格(左右滑動按鈕) -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.css">
+<!-- main style -->
+<link rel="stylesheet" href="<c:url value='/css/user/css/main.css'/>">
 <script
 	src="https://cdn.jsdelivr.net/npm/weatherstar-switch@1.0.7/dist/switch.min.js"></script>
 <script src='<c:url value="/js/jquery-3.6.0.js"/>'></script>

@@ -281,7 +281,8 @@
 							<div class="col-lg-4 col-md-6 text-center">
 								<div class="single-product-item">
 									<div class="product-image">
-										<img src="data:image/jpg;base64,${imgList.get(i)}">
+<%-- 										<img src="data:image/jpg;base64,${imgList.get(i)}"> --%>
+										<img src="<c:url value='/Recipe/admin/photo/${lists.get(i).id}'/>">
 									</div>
 									<h3>品名:${lists.get(i).name}</h3>
 									<p class="product-price"><span>類別:${lists.get(i).category}</span></p>
@@ -359,7 +360,7 @@
 							<li><a href="<c:url value='/aboutUs'/>">關於我們</a></li>
 							<li><a href="<c:url value='/Food/user'/>">商家資訊</a></li>
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
+							<li><a href="<c:url value='/Event'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 							<li><a href="<c:url value='/Shop'/>">美食商城</a></li>

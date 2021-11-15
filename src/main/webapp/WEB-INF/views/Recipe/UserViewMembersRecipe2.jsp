@@ -366,8 +366,13 @@
 							rp.css("background-color", "red")
 							rp.html('<i class="fas fa-exclamation-triangle"></i> 已檢舉，待審核')
 						}
-						alert("已檢舉");
 					}
+				}).then((result) => {
+					$.ajax({
+						url: "<c:url value='/Recipe/user/sendReportMail/'/>"+id,
+						method: "get"
+					})
+					alert("已檢舉並送出信件");
 				})
 			}
 		}

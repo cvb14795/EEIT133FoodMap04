@@ -90,10 +90,10 @@
                         <a href="./Food/admin"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
-                        <a href="./Coupon/frontpage"> <i class="menu-icon ti-email"></i>防疫專區 </a>
+                        <a href="./Coupon/adminforCoupon"> <i class="menu-icon ti-email"></i>折價券管理 </a>
                     </li>
                     <li>
-                        <a href="./Event"> <i class="menu-icon ti-email"></i>活動報名 </a>
+                        <a href="./Event/registration-list"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
                         <a href="./comments/admin-list"> <i class="menu-icon ti-email"></i>評論專區 </a>
