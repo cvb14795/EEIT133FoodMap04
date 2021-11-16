@@ -94,7 +94,7 @@ table {
 		<nav class="navbar navbar-expand-sm navbar-default">
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="./Home"><i
+					<li class="active"><a href="<c:url value='/Home'/>"><i
 							class="menu-icon fa fa-laptop"></i>會員系統 </a></li>
 					<li class="menu-title">Icons</li>
 					<!-- /.menu-title -->

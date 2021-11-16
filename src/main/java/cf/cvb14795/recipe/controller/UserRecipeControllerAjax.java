@@ -199,8 +199,12 @@ public class UserRecipeControllerAjax {
 	// ============== 根據ID讀取資料庫資料:更新 ==============
 	@GetMapping(path = "ViewYourRecipe2/{id}")
 	public String ViewYourRecipe(@PathVariable("id") int id, Model model) {
-		Optional<UserRecipeBean> updateRecipe = uRecipeService.getUpdateId(id);
-		String base64String = Base64.getEncoder().encodeToString(updateRecipe.get().getPhoto());
+		Optional<UserRecipeBean> opt = uRecipeService.getUpdateId(id);
+		UserRecipeBean updateRecipe = new UserRecipeBean();
+		if (opt.isPresent()) {
+			updateRecipe = opt.get();
+		}
+		String base64String = Base64.getEncoder().encodeToString(updateRecipe.getPhoto());
 
 		model.addAttribute("updateRecipe", updateRecipe);
 		model.addAttribute("base64String", base64String);

@@ -166,10 +166,10 @@ header {
 			<th width="5%">食材2</th>
 			<th width="5%">食材3</th>
 			<th width="5%">食材4</th>
-			<th width="10%">調味料1</th>
-			<th width="10%">調味料2</th>
-			<th width="10%">調味料3</th>
-			<th>照片</th>
+			<th width="5%">調味料1</th>
+			<th width="5%">調味料2</th>
+			<th width="5%">調味料3</th>
+			<th width="10%">照片</th>
 			<th>步驟</th>
 			<th width="5%">選項</th>
 		</thead>

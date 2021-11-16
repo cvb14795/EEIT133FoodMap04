@@ -85,7 +85,8 @@ public class HomeController {
 	
 	@GetMapping("/adminforCoupon")
 	public String CouponAction(Model model) {
-		return PREFIX+"adminforCoupon";
+//		return PREFIX+"adminforCoupon";
+		return PREFIX+"adminforCoupon-final";
 	}
 	
 	
