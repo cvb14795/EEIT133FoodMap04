@@ -146,9 +146,6 @@ legend {
 			<!-- /.navbar-collapse -->
 		</nav>
 	</aside>
-	<!-- <div class="header">
-		<h1>Recipe</h1>
-	</div> -->
 	<div id="right-panel" class="right-panel">
 		<!-- Header-->
 		<header id="header" class="header">
@@ -342,9 +339,9 @@ legend {
 	</div>
 	<script type="text/javascript">
 			$("#btn").on("click",function (e) {
-				$("#name").val("麻油松阪豬+ 麵線");
+				$("#name").val("麻油麵線");
 				$("#category").val("麵類");
-				$("#food1").val("松阪豬肉2斤");
+				$("#food1").val("豬肉2斤");
 				$("#food2").val("老薑500 g");
 				$("#food3").val("麵線 1把1把");
 				$("#food4").val("枸杞*1大匙");
