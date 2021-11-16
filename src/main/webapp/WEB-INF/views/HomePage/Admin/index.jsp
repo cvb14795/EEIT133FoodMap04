@@ -96,6 +96,9 @@
                         <a href="<c:url value='/Coupon/adminforCoupon'/>"> <i class="menu-icon ti-email"></i>折價券管理 </a>
                     </li>
                     <li>
+                        <a href="<c:url value='/Coupon/admin'/>"> <i class="menu-icon ti-email"></i>防疫專區 </a>
+                    </li>
+                    <li>
                         <a href="<c:url value='/Event/registration-list'/>"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>

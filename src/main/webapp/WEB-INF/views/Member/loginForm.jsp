@@ -51,9 +51,9 @@
 <!-- 			<div id="my-signin2"></div> -->
 			<div id="g_id_onload"
 			     data-client_id="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"
-			     data-context="signin"
+			     data-context="use"
 			     data-ux_mode="popup"
-			     data-login_uri="https://67bc-101-10-94-107.ngrok.io/FoodMap04/api/google/oauth2callback"
+			     data-login_uri="http://localhost:8080/FoodMap04/api/google/oauth2callback"
 			     data-auto_prompt="false">
 			</div>
 			
@@ -64,7 +64,8 @@
 			     data-text="signin_with"
 			     data-size="large"
 			     data-locale="zh-TW"
-			     data-logo_alignment="left">
+			     data-logo_alignment="left"
+			     style="display:flex;justify-content:center">
 			</div>
 
 			<!-- Remind Passowrd -->

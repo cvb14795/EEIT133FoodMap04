@@ -3,16 +3,15 @@ package util.gmail;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import javax.servlet.ServletContext;
+import org.springframework.core.io.Resource;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 public class googleUserAuthorization {
-	public static GoogleClientSecrets loadClientSecretsResource(JacksonFactory jsonFactory, ServletContext sc)
+	public static GoogleClientSecrets loadClientSecretsResource(JacksonFactory jsonFactory, Resource resource)
 			throws IOException {
-		System.out.println(sc.getContextPath());
-		System.out.println(sc.getResource("classpath:client_secrets.json"));
+		System.out.println(resource.getFile().getPath());
 //		StackTraceElement[] ste = new Throwable().getStackTrace();
 //		List.of(ste).forEach(System.out::println);
 //		Class<?> recentClassName = null;
@@ -29,6 +28,6 @@ public class googleUserAuthorization {
 //			e.printStackTrace();
 //		}
 		return GoogleClientSecrets.load(jsonFactory,
-				new InputStreamReader(sc.getResourceAsStream("classpath:client_secrets.json"), "UTF-8"));
+				new InputStreamReader(resource.getInputStream(), "UTF-8"));
 	}
 }

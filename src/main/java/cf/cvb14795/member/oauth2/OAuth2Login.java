@@ -2,20 +2,17 @@ package cf.cvb14795.member.oauth2;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +36,9 @@ import util.gmail.googleUserAuthorization;
 @Controller
 @RequestMapping("/api")
 public class OAuth2Login {
+	
+	@Value("classpath:static/client_secrets.json")
+    private Resource resource;
 	
 	/* line登入*/
 	@GetMapping("/oauth2callback")
@@ -73,7 +73,7 @@ public class OAuth2Login {
 
 			System.out.println("context path:\n"+request.getServletContext().getContextPath());
 			// 設置google認證參數(client_secret.json)
-			GoogleClientSecrets googleAuthorization = googleUserAuthorization.loadClientSecretsResource(new JacksonFactory(), request.getServletContext());
+			GoogleClientSecrets googleAuthorization = googleUserAuthorization.loadClientSecretsResource(new JacksonFactory(), resource);
 			String clientId = googleAuthorization.getDetails().getClientId(); 
 			String redirectUrl = googleAuthorization.getDetails().getRedirectUris().get(1);
 			System.out.println("clientId"+clientId);
@@ -88,11 +88,6 @@ public class OAuth2Login {
 				System.out.println("參數值：" + request.getParameter(queryParam));
 			}
 
-			List<String> scopeList = new ArrayList<String>();
-			for (String scope : scopes) {
-				scopeList.add(scope);
-			}
-			
 //			// accessType設為offline才能獲取離線令牌(Refresh Token)
 //			String url = new GoogleAuthorizationCodeRequestUrl(clientId, redirectUrl,
 //					Collections.singleton(GmailScopes.GMAIL_SEND)).setAccessType("offline").build();
@@ -113,7 +108,7 @@ public class OAuth2Login {
 						new NetHttpTransport(),
 						new JacksonFactory(),
 						googleAuthorization,
-						scopeList)
+						new ArrayList<>()) 
 					.setAccessType("offline").build();
 			GoogleAuthorizationCodeTokenRequest tokenRequest = googleAuthorizationCodeFlow
 					.newTokenRequest(authorizationCode);
