@@ -126,7 +126,7 @@
         })
         
 		function autoInput(){
-			$("#account").val("foodmap04")
+			$("#account").val("eeit133group4")
 			$("#email").val("foodmap04@gmail.com")
 		}
     </script>
