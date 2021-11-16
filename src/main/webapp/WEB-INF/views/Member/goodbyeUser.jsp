@@ -19,15 +19,15 @@
         function redirectCountDown() {
             var cd = document.getElementById("countDown");
 
-            if (time <= 0) {
+            if (time == 0) {
                 clearInterval(this);
                 location.href = <c:url value="/"/>;
             } else {
                 // 更新倒數秒數
                 cd.innerHTML = time;
+	            time--;
             }
 
-            time--;
         }
         setInterval(redirectCountDown, 1000);
 

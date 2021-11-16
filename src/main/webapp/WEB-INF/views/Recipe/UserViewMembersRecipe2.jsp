@@ -12,7 +12,7 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>食譜規劃</title>
+	<title>查詢會員食譜</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
