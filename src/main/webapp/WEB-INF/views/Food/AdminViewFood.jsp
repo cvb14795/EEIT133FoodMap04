@@ -34,7 +34,7 @@ table {
 }
 
 header {
-	background: #FFBB77;
+	background: #536e75;
 	color: white;
 	padding: 20px;
 	text-align: center;
@@ -128,9 +128,7 @@ thead {
 	<header>
 		<h1>店家資料查詢</h1>
 	</header>
-	<form>
-		<input type="button" onclick="history.back()" value="首頁">
-	</form>
+
 
 	<table>
 		<thead>
@@ -171,6 +169,9 @@ thead {
 			</c:choose>
 		</tbody>
 	</table>
+	<form>
+		<input type="button" onclick="history.back()" value="首頁">
+	</form>
 	<!-- Scripts -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

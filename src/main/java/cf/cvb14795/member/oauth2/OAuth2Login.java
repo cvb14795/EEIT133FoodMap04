@@ -1,22 +1,46 @@
 package cf.cvb14795.member.oauth2;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.googleapis.auth.oauth2.GoogleOAuthConstants;
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+
+import util.gmail.googleUserAuthorization;
+
 @Controller
 @RequestMapping("/api")
 public class OAuth2Login {
 	
+	/* line登入*/
 	@GetMapping("/oauth2callback")
 	public static String lineOAuth2(
 			@RequestParam String code,
@@ -37,6 +61,84 @@ public class OAuth2Login {
 		System.out.println("friendship_status_changed: "+friendship_status_changed);
 		
 		return "redirect:/";
+	}
+	
+	/* google登入*/
+	@PostMapping("/google/oauth2callback")
+	public void googleOAuth2(
+			HttpServletRequest request,
+			@RequestParam(name = "code", required = false) String authorizationCode,
+			@RequestParam(name = "scope", required = false) String[] scopes
+			) throws IOException, GeneralSecurityException{
+
+			System.out.println("context path:\n"+request.getServletContext().getContextPath());
+			// 設置google認證參數(client_secret.json)
+			GoogleClientSecrets googleAuthorization = googleUserAuthorization.loadClientSecretsResource(new JacksonFactory(), request.getServletContext());
+			String clientId = googleAuthorization.getDetails().getClientId(); 
+			String redirectUrl = googleAuthorization.getDetails().getRedirectUris().get(1);
+			System.out.println("clientId"+clientId);
+			System.out.println("redirectUrl"+redirectUrl);
+			System.out.println("\nredirectUrl列表:");
+			List.of(googleAuthorization.getDetails().getRedirectUris()).forEach(System.out::println);
+
+			System.out.println("接收到來自OAuth2.0之callback");
+			for (Enumeration<String> e = request.getParameterNames(); e.hasMoreElements();) {
+				String queryParam = e.nextElement();
+				System.out.println("參數名稱：" + queryParam);
+				System.out.println("參數值：" + request.getParameter(queryParam));
+			}
+
+			List<String> scopeList = new ArrayList<String>();
+			for (String scope : scopes) {
+				scopeList.add(scope);
+			}
+			
+//			// accessType設為offline才能獲取離線令牌(Refresh Token)
+//			String url = new GoogleAuthorizationCodeRequestUrl(clientId, redirectUrl,
+//					Collections.singleton(GmailScopes.GMAIL_SEND)).setAccessType("offline").build();
+			
+			// GoogleTokenResponse token =
+			// new GoogleAuthorizationCodeTokenRequest(
+			// new NetHttpTransport(),
+			// new JacksonFactory(),
+			// clientId,
+			// clientSecret,
+			// authorizationCode,
+			// redirectUrl)
+			// .execute();
+			
+			// accessType設為offline才能獲取離線令牌(Refresh Token)
+			GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow = 
+					new GoogleAuthorizationCodeFlow.Builder(
+						new NetHttpTransport(),
+						new JacksonFactory(),
+						googleAuthorization,
+						scopeList)
+					.setAccessType("offline").build();
+			GoogleAuthorizationCodeTokenRequest tokenRequest = googleAuthorizationCodeFlow
+					.newTokenRequest(authorizationCode);
+			tokenRequest.setRedirectUri(GoogleOAuthConstants.OOB_REDIRECT_URI);
+			// 发起授权请求，获得Token和Refresh Token
+			GoogleTokenResponse tokenResponse = tokenRequest.execute();
+			String token = tokenResponse.getAccessToken();
+			String refreshToken = tokenResponse.getRefreshToken();
+			// 获得email
+			String email = "";
+			System.out.println("\ntoken: "+ token);
+			System.out.println("refreshToken: "+ refreshToken);
+			if (StringUtils.isNotBlank(tokenResponse.getIdToken())) {
+				GoogleIdTokenVerifier idTokenVerifier = new GoogleIdTokenVerifier.Builder(
+						googleAuthorizationCodeFlow.getTransport(), googleAuthorizationCodeFlow.getJsonFactory())
+								.build();
+				GoogleIdToken googleIdToken = idTokenVerifier.verify(tokenResponse.getIdToken());
+				if (googleIdToken != null && googleIdToken.getPayload() != null) {
+					email = googleIdToken.getPayload().getEmail();
+					System.out.println("googleIdToken: "+ googleIdToken);
+					System.out.println("email: "+ email);
+				}
+			}
+		// todo 保留账号token、refreshToken、email信息
+		// 待更新
 	}
 	
 	@GetMapping("/token")
