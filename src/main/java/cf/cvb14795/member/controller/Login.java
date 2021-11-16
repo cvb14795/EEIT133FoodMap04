@@ -166,7 +166,7 @@ public class Login {
 		// 使cookie立即失效
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		return prefix+"goodbyeUser";
+		return "redirect:/";
 	}
 	
 }

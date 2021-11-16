@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>管理者食譜起始畫面</title>
+<title>管理者新增食譜</title>
 <link rel="stylesheet"
 	href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
 <link rel="stylesheet"
@@ -109,8 +109,8 @@ legend {
 					<li><a href="./Comment/CommentControllerServlet"> <i
 							class="menu-icon ti-email"></i>評論專區
 					</a></li>
-					<li><a href="./Recipe/admin"> <i
-							class="menu-icon ti-email"></i>營養資訊
+					<li><a href="<c:url value='/Recipe/admin'/>"> <i
+							class="menu-icon ti-email"></i>食譜規劃
 					</a></li>
 					<li class="menu-item-has-children dropdown"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"

@@ -12,8 +12,7 @@
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>食譜規劃</title>
-
+	<title>會員食譜詳細資料</title>
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="<c:url value='/image/user/favicon.png'/>">
 	<!-- google font -->
@@ -170,10 +169,16 @@
 				<div class="col-md-7">
 					<div class="single-product-content">
 						<h3>${recipe.foodName}</h3>
-						<p class="single-product-pricing"><span>一人份調理包</span> $50</p>
+						<p><strong>食材: </strong>${recipe.food1}</p>
+						<p>&emsp;&emsp;&nbsp;&nbsp;${recipe.food2}</p>
+						<p>&emsp;&emsp;&nbsp;&nbsp;${recipe.food3}</p>
+						<p>&emsp;&emsp;&nbsp;&nbsp;${recipe.food4}</p>
+						<p><strong>調味料: </strong>${recipe.sauce1}</p>
+						<p>&emsp;&emsp;&emsp;&nbsp;&nbsp;${recipe.sauce2}</p>
+						<p>&emsp;&emsp;&emsp;&nbsp;&nbsp;${recipe.sauce3}</p>
 						<p><strong>步驟: </strong>${recipe.step}</p>
 						<div class="single-product-form">
-							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> 按讚投票</a>
+<!-- 							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> 按讚投票</a> -->
 							<p><strong>分類: </strong>${recipe.category}</p>
 						</div>
 						<h4>分享:</h4>
@@ -228,7 +233,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2'/>" class="boxed-btn">更多食譜</a>
+					<a href="<c:url value='/Recipe/user/UserViewMembersRecipe2'/>" class="boxed-btn">更多會員食譜</a>
 				</div>
 			</div>
 		</div>
