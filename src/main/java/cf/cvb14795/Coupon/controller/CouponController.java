@@ -35,14 +35,14 @@ public class CouponController {
 	// 送空白表單
 	@GetMapping("/insertCoupon")
 	public String sendEmptyForm() {		
-		return PREFIX+"insert_page";		
+		return PREFIX+"insertpage-final";		
 	}
 	
 	@GetMapping("/showCoupons")
 	public String showCoupons(Model model) {		
 		List<CouponBean> beans = cService.getCoupons();
 		model.addAttribute("beans",beans);
-		return PREFIX+"showCoupons";
+		return PREFIX+"showCoupons-final";
 	}
 	
 	// 新增一筆資料
@@ -70,7 +70,7 @@ public class CouponController {
 			Model model) {
 		CouponBean bean = cService.getCouponById(id);
 		model.addAttribute("bean", bean);  
-		return PREFIX + "editCoupon";
+		return PREFIX + "editCoupon-final";
 	}
 
 	

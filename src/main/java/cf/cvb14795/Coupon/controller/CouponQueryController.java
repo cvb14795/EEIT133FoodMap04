@@ -27,7 +27,7 @@ public class CouponQueryController {
 		model.addAttribute("beans",beans);
 		// 若屬性物件為Bean型別的物件，則預設的識別字串 ==> Bean
 		// 若屬性物件為List<Bean>型別的物件，則預設的識別字串 ==> BeanList
-		return PREFIX + "showCoupons";
+		return PREFIX + "showCoupons-final";
 	}
 	
 	

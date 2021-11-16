@@ -117,7 +117,7 @@ public class AdminController {
 			label = "show_page";
 
 		} else if ("D".equals(action)) {
-			qService.deleteDataById("A123456789");
+			qService.deleteDataById("H134029606");
 			label = "deleted_page";
 		}
 		return PREFIX + label;
