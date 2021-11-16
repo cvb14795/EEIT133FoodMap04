@@ -341,7 +341,7 @@
 		$(function() {
 				var src = "<c:url value='/Member/user/${user}/photo'/>";
 				userNameMain(src);
-		}
+		})
 	</script>
 </body>
 </html>
