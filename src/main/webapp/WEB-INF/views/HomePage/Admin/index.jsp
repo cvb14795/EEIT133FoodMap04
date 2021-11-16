@@ -90,19 +90,19 @@
                     <li class="menu-title">Icons</li><!-- /.menu-title -->
                     
                     <li>
-                        <a href="./Food/admin"> <i class="menu-icon ti-email"></i>商家資訊 </a>
+                        <a href="<c:url value='/Food/admin'/>"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
-                        <a href="./Coupon/adminforCoupon"> <i class="menu-icon ti-email"></i>折價券管理 </a>
+                        <a href="<c:url value='/Coupon/adminforCoupon'/>"> <i class="menu-icon ti-email"></i>折價券管理 </a>
                     </li>
                     <li>
-                        <a href="./Event/registration-list"> <i class="menu-icon ti-email"></i>活動報名 </a>
+                        <a href="<c:url value='/Event/registration-list'/>"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
-                        <a href="./comments/admin-list"> <i class="menu-icon ti-email"></i>評論專區 </a>
+                        <a href="<c:url value='/comments/admin-list'/>"> <i class="menu-icon ti-email"></i>評論專區 </a>
                     </li>
                     <li>
-                        <a href="./Recipe/admin"> <i class="menu-icon ti-email"></i>食譜規劃 </a>
+                        <a href="<c:url value='/Recipe/admin'/>"> <i class="menu-icon ti-email"></i>食譜規劃 </a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>帳號功能</a>

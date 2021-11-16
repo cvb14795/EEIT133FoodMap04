@@ -1,4 +1,4 @@
-package cf.cvb14795.Event.entity;
+package cf.cvb14795.event.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

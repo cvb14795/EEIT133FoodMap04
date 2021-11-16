@@ -424,7 +424,7 @@
 							<li><a href="<c:url value='/aboutUs'/>">關於我們</a></li>
 							<li><a href="<c:url value='/Food/Fooddex'/>">商家資訊</a></li>
 							<li><a href="<c:url value='/Coupon/frontpage'/>">防疫專區</a></li>
-							<li><a href="<c:url value='/Event/'/>">活動總覽</a></li>
+							<li><a href="<c:url value='/Event/registration-list'/>">活動總覽</a></li>
 							<li><a href="<c:url value='/comments/list'/>">評論專區</a></li>
 							<li><a href="<c:url value='/Recipe/user'/>">食譜規劃</a></li>
 						</ul>

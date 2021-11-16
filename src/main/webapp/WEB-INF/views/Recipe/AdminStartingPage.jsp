@@ -97,16 +97,14 @@ legend {
 					<li class="menu-title">Icons</li>
 					<!-- /.menu-title -->
 
-					<li><a href="./Food/FoodMap"> <i
+					<li><a href="<c:url value='/Food/admin'/>"> <i
 							class="menu-icon ti-email"></i>商家資訊
 					</a></li>
-					<li><a href="./Coupon/frontpage"> <i
-							class="menu-icon ti-email"></i>防疫專區
-					</a></li>
-					<li><a href="./Event/eventjava"> <i
+					<li><a href="<c:url value='/Coupon/adminforCoupon'/>"> <i class="menu-icon ti-email"></i>折價券管理 </a></li>
+					<li><a href="<c:url value='/Event/registration-list'/>"> <i
 							class="menu-icon ti-email"></i>活動報名
 					</a></li>
-					<li><a href="./Comment/CommentControllerServlet"> <i
+					<li><a href="<c:url value='/comment/admin-list'/>"> <i
 							class="menu-icon ti-email"></i>評論專區
 					</a></li>
 					<li><a href="<c:url value='/Recipe/admin'/>"> <i

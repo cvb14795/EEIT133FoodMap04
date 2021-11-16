@@ -1,8 +1,8 @@
-package cf.cvb14795.Event.service;
+package cf.cvb14795.event.service;
 
 import java.util.List;
 
-import cf.cvb14795.Event.entity.EventBean;
+import cf.cvb14795.event.entity.EventBean;
 
 /**
  * @author

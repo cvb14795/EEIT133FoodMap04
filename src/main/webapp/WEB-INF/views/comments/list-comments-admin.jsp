@@ -92,10 +92,10 @@ legend {
                         <a href="<c:url value='/Food/FoodMap'/>"> <i class="menu-icon ti-email"></i>商家資訊 </a>
                     </li>
                     <li>
-                        <a href=<c:url value='/Coupon/frontpage'/>> <i class="menu-icon ti-email"></i>防疫專區 </a>
+                        <a href="<c:url value='/Coupon/adminforCoupon'/>"> <i class="menu-icon ti-email"></i>折價券管理 </a>
                     </li>
                     <li>
-                        <a href="<c:url value='/Event'/>"> <i class="menu-icon ti-email"></i>活動報名 </a>
+                        <a href="<c:url value='/Event/registration-list'/>"> <i class="menu-icon ti-email"></i>活動報名 </a>
                     </li>
                     <li>
                         <a href="<c:url value='/comment/admin-list'/>"> <i class="menu-icon ti-email"></i>評論專區 </a>
