@@ -10,7 +10,7 @@
 <title>店家確認</title>
 <style type="text/css">
 header {
-            background: #FFBB77;
+            background: #536e75;
             color: white;
             padding: 20px;
             text-align: center;
