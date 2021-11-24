@@ -1,6 +1,8 @@
 /* 原始 */
 .lineLogin {
 	background-image: url("../image/Line_Login_Button_Image/btn_login_base.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 /* 滑入 */
 .lineLogin:hover {
