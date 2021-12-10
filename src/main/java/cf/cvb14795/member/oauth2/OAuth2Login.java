@@ -71,7 +71,7 @@ public class OAuth2Login {
 	
 	/* google登入*/
 	@PostMapping("google")
-	public ResponseEntity<HttpStatus> googleOAuth2(
+	public Object googleOAuth2(
 			HttpServletRequest request,
 			@RequestParam(name = "g_csrf_token", required = false) String csrfTokenBody,
 			@RequestParam(name = "credential", required = false) String credential 
@@ -112,7 +112,7 @@ public class OAuth2Login {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);					
 			}
 			
-			return new ResponseEntity<>(HttpStatus.OK);	
+			return "redirect:/";	
 //			// accessType設為offline才能獲取離線令牌(Refresh Token)
 //			
 //			List<String> scopes = Arrays.asList("https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"); 
