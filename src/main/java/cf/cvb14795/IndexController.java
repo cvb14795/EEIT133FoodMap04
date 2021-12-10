@@ -137,7 +137,7 @@ public class IndexController {
 			return nextPage;
 		} else {
 			System.out.println("經由該cookie找不到此帳號!將返回首頁...");
-			return "redirect:/";
+			return "redirect:/Member/Logout";
 		}
 	}
 	

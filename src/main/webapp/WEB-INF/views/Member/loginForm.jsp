@@ -14,20 +14,21 @@
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
 	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/login.css">
-<link rel="stylesheet" href="../css/sweetalert2-9.17.2.css">
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/sweetalert2-9.17.2.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/login.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
 <style>
 #my-signin2 {
 	display: flex;
 	justify-content: center;
 }
 </style>
-<script src="../js/jquery-3.6.0.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/sweetalert2-9.17.2.js"></script>
-<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" -->
-<!-- 	async defer></script> -->
+<script src="<c:url value='/js/jquery-3.6.0.js'/>"></script>
+<script src="<c:url value='/js/bootstrap.js'/>"></script>
+<script src="<c:url value='/js/sweetalert2-9.17.2.js'/>"></script>
+<script src="<c:url value='/js/lineLogin.js'/>"></script>
+<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 </head>
 <body>
  	<script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -48,12 +49,12 @@
 				<input type="button" id="oneClick" value="一鍵輸入" onclick="autoInput()" style="background-color:#F28123">
 			</form>
 
-<!-- 			<div id="my-signin2"></div> -->
+			<div id="my-signin2"></div>
 			<div id="g_id_onload"
 			     data-client_id="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"
-			     data-context="use"
+			     data-context="signin"
 			     data-ux_mode="popup"
-			     data-login_uri="http://localhost:8080/FoodMap04/api/google/oauth2callback"
+			     data-login_uri="http://localhost:8080/FoodMap04/api/oauth2callback/google"
 			     data-auto_prompt="false">
 			</div>
 			
@@ -67,8 +68,10 @@
 			     data-logo_alignment="left"
 			     style="display:flex;justify-content:center">
 			</div>
-
-			<!-- Remind Passowrd -->
+			<a href="" id="lineLoginHref">
+				<input type="button" class="lineLogin" style="width: 151px; height: 44px; border: none" />
+			</a>
+			<!-- Remind Password -->
 			<div id="formFooter">
 				<a class="underlineHover" href="./ForgetPassword">忘記密碼?</a>
 			</div>
@@ -77,6 +80,7 @@
 	</div>
 
 	<script>
+		setLineOAuthUrl();
         var loginBtn = document.getElementById("loginBtn");
         var $account = $("#account");
         var $form = $("#form");
@@ -149,7 +153,13 @@
 	<script>
         var id_token;
 //         function onSuccess(googleUser) {
-//             console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+//         	var profile = googleUser.getBasicProfile();
+//         	console.log('Logged in as: ' + profile.getName());
+//         	console.log('Image URL: ' + profile.getImageUrl());
+//         	console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+//             //用於傳送到後端的token
+//         	id_token = googleUser.getAuthResponse().id_token;
+//             console.log('id_token: ' + id_token);            
 //         }
 
 //         function onFailure(error) {
@@ -167,18 +177,18 @@
 //                 'onfailure': onFailure
 //             });
 //         }
-        
+//         function signOut() {
+//     	    var auth2 = gapi.auth2.getAuthInstance();
+//     	    auth2.signOut().then(function () {
+//     	        console.log('User signed out.');
+//     	    });
+//     	}
+
         function autoInput(){
         	$("#account").val("eeit133group4")
         	$("#password").val("eeit133group4")
         }
         
-        function signOut() {
-    	    var auth2 = gapi.auth2.getAuthInstance();
-    	    auth2.signOut().then(function () {
-    	        console.log('User signed out.');
-    	    });
-    	}
     </script>
 </body>
 </html>

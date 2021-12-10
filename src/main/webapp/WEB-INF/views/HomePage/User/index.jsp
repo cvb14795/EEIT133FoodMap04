@@ -36,7 +36,6 @@
 <link rel="stylesheet" href="<c:url value='/css/user/css/responsive.css'/>">
 <!-- bootstrap -->
 <link rel="stylesheet" href="<c:url value='/css/bootstrap.min.css'/>">
-<link rel="stylesheet" href="<c:url value='/css/lineLogin.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/index.css'/>">
 <!-- vegas -->
 <link rel="stylesheet" href="<c:url value='/css/vegas.css'/>"/>
@@ -49,12 +48,9 @@
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <script src="<c:url value='/js/jquery-3.6.0.js"'/>"></script>
 <script src="<c:url value='/js/bootstrap.js'/>"></script>
-<script src="<c:url value='/js/lineLogin.js'/>"></script>
 <%-- <script src="<c:url value='/vegas/vegas.js'/>"></script> --%>
 <!-- aboutUs -->
 <!-- <script src="./js/aboutUs.js"></script> -->
-
-<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 
 <script>
 	/* 待完工 */
@@ -379,9 +375,6 @@
 					<div class="footer-box">
 						<h2 class="widget-title">Line 智慧客服</h2>
 						<ul>
-							<li><a href="" id="lineLoginHref"><input type="button"
-									class="lineLogin"
-									style="width: 151px; height: 44px; border: none" /></a></li>
 							<li><img src="<c:url value='/image/lineFoodMap04QR.png'/>" alt=""></li>
 						</ul>
 					</div>
@@ -433,6 +426,7 @@
 		$(function() {
 			var src = "<c:url value='/Member/user/${user}/photo'/>";
 			userNameMain(src);
+			
 // 			 $("#header").vegas({
 // 	             slides: [
 // 	                 { src: "./image/question.jpeg" },
@@ -463,6 +457,8 @@
 					 { src: "./image/coupon.jpg" }
 				 ],
 			});
+			 
+			
 		})
 	</script>
 	<!-- count down -->

@@ -72,7 +72,6 @@ public class Login {
 		System.out.println("isAlreadyLogin: " + isAlreadyLogin);
 		if (!isAlreadyLogin) {
 			// 沒有登入紀錄 導向登入頁面
-//			request.getRequestDispatcher(loginPage).forward(request, response);
 			return prefix+"loginForm";
 		}
 		// 有登入紀錄 回到首頁
@@ -99,11 +98,8 @@ public class Login {
 			e.printStackTrace();
 		}
 
-//		userName = request.getParameter("account");
 		userName = userAccount;
-//		Member m = mDAO.findAllByAccount(userName);
 		Optional<Member> m = mService.selectMemberByAccount(userName);
-//		String userPassword = request.getParameter("password");
 		System.out.println("正在驗證使用者:" + userName + "的登入...");
 		if (m.isPresent()) {
 			// 撈資料庫傳回的加密後密碼
@@ -132,15 +128,12 @@ public class Login {
 				// 密碼錯誤
 				// 改成JSON回傳 前端login接收並alert
 				System.out.println("密碼錯誤!");
-//					request.getRequestDispatcher(ERROR_VIEW).forward(request, response);
-//				response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			// 找不到此帳號
 			// 改成JSON回傳 前端login接收並alert
 			System.out.println("無此帳號!");
-//			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}	
