@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -149,12 +151,19 @@ public class CRUD {
 
 		Optional<Member> alreadyRegisterdMember = mService.selectMemberByAccount(account);
 		// 若此筆帳號沒註冊過(不存在資料庫) 才能進行註冊
+		InputStream is;
 		if (alreadyRegisterdMember.isEmpty()) {
 			// 密碼+10位鹽值hash
 			String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(10));
 			// 獲取圖片檔名
-//			String imgPath = Paths.get(imgPart.getSubmittedFileName()).getFileName().toString();
 			String imgPath = Paths.get(imgPart.getOriginalFilename()).getFileName().toString();
+			if(StringUtils.isBlank(imgPath)) {
+				ClassPathResource resource = new ClassPathResource("/static/image/default.jpg");
+				imgPath = resource.getPath();
+				is = resource.getInputStream();
+			} else {
+				is = imgPart.getInputStream();
+			}
 			String imgExt = FilenameUtils.getExtension(imgPath);
 			model.addAttribute("imgExt", imgExt);
 
@@ -171,7 +180,6 @@ public class CRUD {
 			// 加密圖片byte資料為base64編碼後之字串
 			String base64String;
 
-			InputStream is = imgPart.getInputStream();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 			int length = 0;
@@ -201,7 +209,7 @@ public class CRUD {
 //			request.getRequestDispatcher(SUCCESS_VIEW).forward(request, response);
 			return prefix + "registerSuccess";
 		} else {
-			System.out.println("會員: " + account + "已註冊！");
+			System.out.println("錯誤: 會員: " + account + "已註冊！");
 //			request.getRequestDispatcher(ERROR_VIEW).forward(request, response);
 			model.addAttribute("user", account);
 			return prefix + "registerFail";
