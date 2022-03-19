@@ -34,8 +34,8 @@
 //	private static final long serialVersionUID = 1L;
 //	/** Authorizes the installed application to access user's protected data. */
 //	// 改為由client_secret.json讀取 故棄用
-////	private static String clientId = "196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com";
-////	private static String clientSecret = "yFsWzDlb73AGyU0_yXNaeMhe";
+////	private static String clientId = "532249608397-co7fll33vdrk1l991fsco6ko85jrlpi1.apps.googleusercontent.com";
+////	private static String clientSecret = "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";
 //
 //	/**
 //	 * @see HttpServlet#HttpServlet()

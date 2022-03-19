@@ -58,6 +58,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+			  <exclusion>
+			    <artifactId>spring-boot-starter-tomcat</artifactId>
+			    <groupId>org.springframework.boot</groupId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -88,9 +94,22 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		<dependency>
+		     <groupId>javax.servlet</groupId>
+		     <artifactId>javax.servlet-api</artifactId>
+		     <!-- provided表明该包只在编译和测试的时候用 -->
+		     <scope>provided</scope>
+		</dependency>
+		<dependency>
+		     <groupId>javax.servlet.jsp</groupId>
+		     <artifactId>jsp-api</artifactId>
+		     <version>2.2</version>
+		     <scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
+<!-- 			<scope>provided</scope> -->
+			<!-- 如果不注释，你会发现main线程运行报404错误，必须使用 spring-boot:run这个命令运行才行。所以我们注释掉-->
 		</dependency>		
 		<!-- json -->
 		<dependency>
@@ -196,6 +215,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>FoodMap04</finalName>
 	</build>
 
 </project>

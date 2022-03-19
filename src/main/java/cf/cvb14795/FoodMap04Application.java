@@ -3,13 +3,21 @@ package cf.cvb14795;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
 @SpringBootApplication
 @LineMessageHandler
-public class FoodMap04Application {
+public class FoodMap04Application extends SpringBootServletInitializer{
 
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(FoodMap04Application.class);
+	}
+	
 	@Value("${line.bot.channel-token}")
 	private static String channelToken;
 	

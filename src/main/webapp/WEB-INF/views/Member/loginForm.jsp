@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-signin-client_id"
-	content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com">
+	content="532249608397-co7fll33vdrk1l991fsco6ko85jrlpi1.apps.googleusercontent.com">
 <title>用戶登入</title>
 <link rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -51,7 +51,7 @@
 
 			<div id="my-signin2"></div>
 			<div id="g_id_onload"
-			     data-client_id="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"
+			     data-client_id="532249608397-co7fll33vdrk1l991fsco6ko85jrlpi1.apps.googleusercontent.com"
 			     data-context="signin"
 			     data-ux_mode="popup"
 			     data-login_uri="http://localhost:8080/FoodMap04/api/oauth2callback/google"

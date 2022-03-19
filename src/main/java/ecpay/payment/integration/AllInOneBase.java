@@ -1,7 +1,9 @@
 package ecpay.payment.integration;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.io.IOException;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,12 +36,19 @@ public class AllInOneBase {
 //		try{
 			Document doc;
 			/* when using web project*/
-//			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
-//			doc = EcpayFunction.xmlParser(configPath);
+			Resource resources = new ClassPathResource("payment_conf.xml");
+			String configPath = "";
+			try {
+				if (resources != null){
+					configPath =  resources.getFile().getPath();
+				}
+			} catch (IOException e) {
+				configPath = "./src/main/resources/payment_conf.xml";
+			}
+			doc = EcpayFunction.xmlParser(configPath);
 			/* when using testing code*/
-			String paymentConfPath = "./src/main/resources/payment_conf.xml";
-			doc = EcpayFunction.xmlParser(paymentConfPath);
+//			String paymentConfPath = "./src/main/resources/payment_conf.xml";
+//			doc = EcpayFunction.xmlParser(paymentConfPath);
 			
 			doc.getDocumentElement().normalize();
 			//OperatingMode

@@ -11,7 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <meta name="google-signin-client_id"
-		content="196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com"> -->
+		content="532249608397-co7fll33vdrk1l991fsco6ko85jrlpi1.apps.googleusercontent.com"> -->
 <style>
 	.rs {
 		font-size:30px;

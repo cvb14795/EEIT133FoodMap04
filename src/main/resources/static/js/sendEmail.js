@@ -1,11 +1,11 @@
 
 var $form = $("#form");
-const CLIENT_ID = "196642336489-5j9n6rtmidbccrubh6vf406gve5cejrn.apps.googleusercontent.com";
+const CLIENT_ID = "532249608397-co7fll33vdrk1l991fsco6ko85jrlpi1.apps.googleusercontent.com";
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 const SCOPE = "https://www.googleapis.com/auth/userinfo.email " +
     "https://www.googleapis.com/auth/userinfo.profile " +
     "https://www.googleapis.com/auth/gmail.send ";
-const API_KEY = "AIzaSyAZ9QTUwXbcsHp5Fx_LbD-HVbPMw8uzBig";
+const API_KEY = "AIzaSyBIdVby1CoxTgVwk5QCFVTwbkg_F0BJyck";
 
 function handleClientLoad() {
     gapi.client.setApiKey(API_KEY);
@@ -89,7 +89,7 @@ $form.on("submit", function () {
 
 function sendEmail() {
     var testStr = "您好，" + document.getElementById('account').value + "！" + "\r\n" +
-        "<a href='http://localhost:8080/FoodMap04/Member/ForgetPassword?method=reset'>請點擊以下連結修改您的密碼</a>";
+        "<a href='"+document.location.origin+"/FoodMap04/Member/ForgetPassword?method=reset'>請點擊以下連結修改您的密碼</a>";
 
     sendMessage(
         {

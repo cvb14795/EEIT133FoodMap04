@@ -104,8 +104,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", photo="
-				+ Arrays.toString(photo) + "]";
+		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price;
 	}
 	
 	
