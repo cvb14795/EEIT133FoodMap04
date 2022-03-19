@@ -14,13 +14,11 @@ ecpay\payment\integration\domain\AioCheckOutOneTime.class
 cf\cvb14795\recipe\model\UserRecipeBean.class
 cf\cvb14795\shop\model\Item.class
 cf\cvb14795\recipe\service\IMyFavoriteService.class
-META-INF\maven\cf.cvb14795\FoodMap04\pom.properties
 cf\cvb14795\recipe\service\IUserRecipeService.class
 ecpay\payment\integration\verification\VerifyCapture.class
 cf\cvb14795\recipe\controller\UserRecipeControllerAjax.class
 cf\cvb14795\shop\model\OrderItem.class
 ecpay\payment\integration\errorMsg\ErrorMessage.class
-META-INF\maven\cf.cvb14795\FoodMap04\pom.xml
 cf\cvb14795\shop\model\Order.class
 cf\cvb14795\shop\controller\ShopController.class
 cf\cvb14795\recipe\model\ReportBean.class

@@ -190,6 +190,13 @@
 			<artifactId>google-api-services-gmail</artifactId>
 			<version>v1-rev110-1.25.0</version>
 		</dependency>
+		<!-- google OAuth2 -->
+		<dependency>
+		    <groupId>com.google.oauth-client</groupId>
+		    <artifactId>google-oauth-client-jetty</artifactId>
+		    <version>1.32.1</version>
+		</dependency>
+				
 		<dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

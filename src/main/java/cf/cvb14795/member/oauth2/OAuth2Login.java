@@ -4,19 +4,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,18 +25,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.googleapis.auth.oauth2.GoogleOAuthConstants;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.OAuth2Utils;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.gmail.GmailScopes;
 
+import cf.cvb14795.member.bean.Member;
+import cf.cvb14795.member.service.IMemberService;
 import util.gmail.googleUserAuthorization;
 
 @Controller
@@ -45,6 +44,26 @@ public class OAuth2Login {
 	
 	@Value("classpath:static/client_secrets.json")
     private Resource resource;
+	
+//	private static final List<String> SCOPES = Arrays.asList(
+//		 "https://www.googleapis.com/auth/userinfo.email",
+//		 "https://www.googleapis.com/auth/userinfo.profile"
+//	);
+	
+	final NetHttpTransport HTTP_TRANSPORT;
+	
+	/** Global instance of the JSON factory. */
+	private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+	
+
+	IMemberService mService;
+	
+	@Autowired
+	public OAuth2Login(IMemberService mService) throws GeneralSecurityException, IOException, NoSuchFieldException {
+		this.mService = mService;
+		HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+	}
+
 	
 	/* line登入*/
 	@GetMapping("line")
@@ -71,10 +90,11 @@ public class OAuth2Login {
 	
 	/* google登入*/
 	@PostMapping("google")
-	public Object googleOAuth2(
+	public String googleOAuth2(
 			HttpServletRequest request,
 			@RequestParam(name = "g_csrf_token", required = false) String csrfTokenBody,
-			@RequestParam(name = "credential", required = false) String credential 
+			@RequestParam(name = "credential", required = false) String idToken,
+			HttpServletResponse response
 			) throws IOException, GeneralSecurityException{
 
 			// 設置google認證參數(client_secret.json)
@@ -93,30 +113,30 @@ public class OAuth2Login {
 				System.out.println("參數值：" + request.getParameter(queryParam));
 			}
 
-			Cookie[] cookies = request.getCookies();
-			boolean isCsrfTokenCookieExist = false;
-			String csrfTokenCookie = "";
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("g_csrf_token")) {
-					isCsrfTokenCookieExist = true;
-					csrfTokenCookie = cookie.getValue();
-				}
-			}
+//			Cookie[] cookies = request.getCookies();
+//			boolean isCsrfTokenCookieExist = false;
+//			String csrfTokenCookie = "";
+//			for (Cookie cookie : cookies) {
+//				if (cookie.getName().equals("g_csrf_token")) {
+//					isCsrfTokenCookieExist = true;
+//					csrfTokenCookie = cookie.getValue();
+//				}
+//			}
 			
-			if (!isCsrfTokenCookieExist || csrfTokenBody == null || csrfTokenBody.equals("")) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);					
+			if (csrfTokenBody == null || StringUtils.isBlank(csrfTokenBody)) {
+				response.sendError(HttpStatus.BAD_REQUEST.value());
+				return "redirect:/login";
 //				'No CSRF token in post body.'
 			}
-			if (!csrfTokenCookie.equals(csrfTokenBody)){
-//				'Failed to verify double submit cookie.'
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);					
-			}
+//			if (!csrfTokenCookie.equals(csrfTokenBody)){
+////				'Failed to verify double submit cookie.'
+//				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);					
+//			}
 			
-			return "redirect:/";	
-//			// accessType設為offline才能獲取離線令牌(Refresh Token)
-//			
+			// accessType設為offline才能獲取離線令牌(Refresh Token)
+			
 //			List<String> scopes = Arrays.asList("https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"); 
-//			// accessType設為offline才能獲取離線令牌(Refresh Token)
+			// accessType設為offline才能獲取離線令牌(Refresh Token)
 //			GoogleAuthorizationCodeFlow googleAuthorizationCodeFlow = 
 //					new GoogleAuthorizationCodeFlow.Builder(
 //						new NetHttpTransport(),
@@ -127,26 +147,53 @@ public class OAuth2Login {
 //			GoogleAuthorizationCodeTokenRequest tokenRequest = googleAuthorizationCodeFlow
 //					.newTokenRequest(authorizationCode);
 //			tokenRequest.setRedirectUri(GoogleOAuthConstants.OOB_REDIRECT_URI);
-//			// 发起授权请求，获得Token和Refresh Token
+			// 发起授权请求，获得Token和Refresh Token
 //			GoogleTokenResponse tokenResponse = tokenRequest.execute();
 //			String token = tokenResponse.getAccessToken();
 //			String refreshToken = tokenResponse.getRefreshToken();
-//			// 获得email
-//			String email = "";
+
+			// 获得email
+			String email = "";
+			String userName = "";
+			String avatarUrl = "";
 //			System.out.println("\ntoken: "+ token);
 //			System.out.println("refreshToken: "+ refreshToken);
-//			if (StringUtils.isNotBlank(tokenResponse.getIdToken())) {
-//				GoogleIdTokenVerifier idTokenVerifier = new GoogleIdTokenVerifier.Builder(
-//						googleAuthorizationCodeFlow.getTransport(), googleAuthorizationCodeFlow.getJsonFactory())
-//								.build();
-//				GoogleIdToken googleIdToken = idTokenVerifier.verify(tokenResponse.getIdToken());
-//				if (googleIdToken != null && googleIdToken.getPayload() != null) {
-//					email = googleIdToken.getPayload().getEmail();
-//					System.out.println("googleIdToken: "+ googleIdToken);
-//					System.out.println("email: "+ email);
-//				}
-//			}
-		// todo 保留账号token、refreshToken、email信息
+			if (StringUtils.isNotBlank(idToken)) {
+				GoogleIdTokenVerifier idTokenVerifier = new GoogleIdTokenVerifier
+						.Builder(HTTP_TRANSPORT, JSON_FACTORY)
+						.build();
+				//該GoogleIdTokenVerifier.verify()方法驗證 JWT 簽名、aud聲明、iss聲明和 exp聲明。
+				GoogleIdToken googleIdToken = idTokenVerifier.verify(idToken);
+				if (googleIdToken != null && googleIdToken.getPayload() != null) {
+					email = googleIdToken.getPayload().getEmail();
+					userName = (String) googleIdToken.getPayload().get("name");
+					avatarUrl = (String) googleIdToken.getPayload().get("picture");
+					
+					System.out.println("googleIdToken: "+ googleIdToken);
+					System.out.println("email: "+ email);
+					System.out.println("userName: "+ userName);
+					System.out.println("avatarUrl: "+ avatarUrl);
+					
+					
+					Optional<Member> m = mService.selectMemberByEmail(email);
+					System.out.println("\n***Google OAuth2***\n正在驗證使用者"+userName+"之電子郵件:" + email + "是否已註冊...");
+					if (m.isPresent()) {
+						System.out.println("該用戶已用此email註冊過，將直接登入!");
+						Cookie cookie = new Cookie("user", m.get().getAccount());
+						cookie.setPath("/");
+						response.addCookie(cookie);
+						return "redirect:/Home";
+					} else {
+						// todo: 若未註冊 自動帶入註冊資料為該用戶email及頭貼網址(avatarUrl)
+						String msg = "您好，您的Email:"+email+"尚未在本網站註冊! 將回到登入畫面!";
+						String encodedMsg= URLEncoder.encode(msg, "utf-8");
+						return "redirect:/loginAlert?msg="+encodedMsg;
+					}
+				}
+			}
+			String msg = "驗證Google登入時發生錯誤，請稍後再試!";
+			String encodedMsg= URLEncoder.encode(msg, "utf-8");
+			return "redirect:/loginAlert?msg="+encodedMsg;
 		// 待更新
 	}
 	
