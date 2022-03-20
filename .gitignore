@@ -33,4 +33,6 @@ build/
 ### VS Code ###
 .vscode/
 bin/
-/target/
+/target/FoodMap04
+target/m2e-wtp/
+target/tomcat.8080/
