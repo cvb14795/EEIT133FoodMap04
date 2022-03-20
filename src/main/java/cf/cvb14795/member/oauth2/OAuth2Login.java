@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,6 @@ import util.gmail.googleUserAuthorization;
 @Controller
 @RequestMapping("/api/oauth2callback")
 public class OAuth2Login {
-	
-	@Value("classpath:static/client_secrets.json")
-    private Resource resource;
 	
 //	private static final List<String> SCOPES = Arrays.asList(
 //		 "https://www.googleapis.com/auth/userinfo.email",
@@ -98,6 +96,7 @@ public class OAuth2Login {
 			) throws IOException, GeneralSecurityException{
 
 			// 設置google認證參數(client_secret.json)
+			ClassPathResource resource = new ClassPathResource("/static/client_secret.json");
 			GoogleClientSecrets googleAuthorization = googleUserAuthorization.loadClientSecretsResource(new JacksonFactory(), resource);
 			String clientId = googleAuthorization.getDetails().getClientId(); 
 			String redirectUrl = googleAuthorization.getDetails().getRedirectUris().get(1);
