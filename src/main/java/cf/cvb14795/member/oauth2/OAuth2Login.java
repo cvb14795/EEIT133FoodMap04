@@ -1,6 +1,8 @@
 package cf.cvb14795.member.oauth2;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
@@ -14,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +33,9 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
 
 import cf.cvb14795.member.bean.Member;
 import cf.cvb14795.member.service.IMemberService;
-import util.gmail.googleUserAuthorization;
 
 @Controller
 @RequestMapping("/api/oauth2callback")
@@ -96,8 +94,8 @@ public class OAuth2Login {
 			) throws IOException, GeneralSecurityException{
 
 			// 設置google認證參數(client_secret.json)
-			ClassPathResource resource = new ClassPathResource("/static/client_secret.json");
-			GoogleClientSecrets googleAuthorization = googleUserAuthorization.loadClientSecretsResource(new JacksonFactory(), resource);
+			InputStream in = new ClassPathResource("/static/client_secrets.json").getInputStream();
+			GoogleClientSecrets googleAuthorization = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 			String clientId = googleAuthorization.getDetails().getClientId(); 
 			String redirectUrl = googleAuthorization.getDetails().getRedirectUris().get(1);
 			System.out.println("clientId: "+clientId);
