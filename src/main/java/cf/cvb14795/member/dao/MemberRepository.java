@@ -1,5 +1,6 @@
 package cf.cvb14795.member.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +25,7 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	//	// 由身分證字號(ID)查詢單筆資料
 //	public Member selectMemberById(String id);
 	Optional<Member> findByIdNum(String idNum);
-	Optional<Member> findByEmail(String email);
+	List<Member> findByEmail(String email);
 //	
 //	// 查詢該會員是否具有管理者權限
 	// 拿PK來找因此只有單筆

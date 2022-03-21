@@ -1,6 +1,7 @@
 package cf.cvb14795.member.bean;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -156,5 +157,36 @@ public class Member {
 		this.email = email;
 		this.admin = admin;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [account=" + account + ", name=" + name + ", idNum=" + idNum + ", address=" + address
+				+ ", phone=" + phone + ", email=" + email + ", admin=" + admin + "]";
+	}
+
+	// 除了頭像, 檢舉, 我的最愛以外 都符合才相等
+	@Override
+	public int hashCode() {
+		return Objects.hash(account, address, admin, email, idNum, name, password, phone);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Member)) {
+			return false;
+		}
+		Member other = (Member) obj;
+		return Objects.equals(account, other.account) && Objects.equals(address, other.address) && admin == other.admin
+				&& Objects.equals(email, other.email) && Objects.equals(idNum, other.idNum)
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
+				&& Objects.equals(phone, other.phone);
+	}
+	
+	
+	
+	
 	
 }

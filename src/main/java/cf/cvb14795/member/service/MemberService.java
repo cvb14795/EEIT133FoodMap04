@@ -51,7 +51,7 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public Optional<Member> selectMemberByEmail(String email) {
+	public List<Member> selectMemberByEmail(String email) {
 		// TODO Auto-generated method stub
 		return mDao.findByEmail(email);
 	}

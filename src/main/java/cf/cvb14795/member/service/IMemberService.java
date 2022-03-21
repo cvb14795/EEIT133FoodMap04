@@ -20,7 +20,7 @@ public interface IMemberService {
 	Optional<Member> selectMemberByIdNum(String idNum);
 	
 	// 由Email查詢單筆資料
-	Optional<Member> selectMemberByEmail(String email);
+	List<Member> selectMemberByEmail(String email);
 	
 	// 查詢會員是否具有管理者權限
 	boolean isAdmin(String userAccount);

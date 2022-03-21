@@ -33,6 +33,7 @@ import cf.cvb14795.recipe.model.AdminRecipeBean;
 import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.shop.service.IOrderService;
 import cf.cvb14795.shop.service.IShopService;
+import util.LoginAlertMessage;
 import util.MemberStatus;
 
 @Controller
@@ -148,7 +149,7 @@ public class IndexController {
 		if (!mService.isAdmin(user)) {
 			String msg = "權限不足，無法登入管理員後台，將導回使用者首頁!";
 			System.out.println(msg);
-			return "redirect:/loginAlert?msg="+msg;
+			return "redirect:/loginAlert?msg="+LoginAlertMessage.encode(msg);
 		}
 		List<Member> memberList = mService.selectAllMember();
 		
