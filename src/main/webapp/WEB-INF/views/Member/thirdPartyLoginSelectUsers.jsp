@@ -18,7 +18,9 @@ body {
 img.user-avatar {
 	width: 150px;
 }
-td {
+.table th, .table td {
+	text-align: center;
+	vertical-align: middle!important;
 	padding: 20px;
 }
 </style>
@@ -26,12 +28,12 @@ td {
 <body>
 	<div class="container">
 		<div style="width:700px;height:500px;margin:0px auto;">
-<%-- 			<form id="form" action="<c:url value='/'/>"> --%>
+				<span>您第三方登入時註冊的信箱為 ${email}<br/>以下為您使用此信箱註冊的帳號：</span>
 				<table  class="table table-hover table-striped">
 					<tr style="text-align:center;">
 						<th scope="col">頭像</th>
 						<th scope="col">帳號</th>
-						<th scope="col">名稱</th>
+						<th scope="col">會員暱稱</th>
 						<th scope="col"></th>
 					</tr>
 					<c:forEach var="m" items="${mList}">
@@ -40,12 +42,11 @@ td {
 							<td class="text-center account">${m.account}</td>
 							<td class="text-center">${m.name}</td>
 							<td class="text-center">
-								<button class="sltBtn btn btn-secondary" type="button">選擇</button>
+								<button class="sltBtn btn btn-secondary" type="button">登入</button>
 							</td>
 						</tr>
 					</c:forEach>	
 				</table>
-<!-- 			</form> -->
 		</div>
 	
 	</div>
@@ -80,8 +81,7 @@ td {
 			})
 			// 因為是開新視窗 所以是父頁面跳轉而不是本頁跳轉
 			if (isSuccess) {
-				window.opener.location.href = "<c:url value='/'/>";
-				window.close();
+				location.href = "<c:url value='/'/>";
 			}
 			
 		})

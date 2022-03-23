@@ -7,9 +7,10 @@ function setLineOAuthUrl() {
 	const redirect_uri = encodeURI(baseUrl+"/FoodMap04/api/oauth2callback/line");
 	url += "&redirect_uri="+redirect_uri
 	url += "&state=12345abcde"
-	url += "&scope=profile%20openid"
+	url += "&scope=profile%20openid%20email"
 	// 檢查是否加入官方帳號好友
-	url += "&bot_prompt=aggressive"
+	url += "&bot_prompt=normal"
+	url += "&prompt=consent"
 	console.log(url);
     var href = document.getElementById("lineLoginHref");
 	if (href) {
