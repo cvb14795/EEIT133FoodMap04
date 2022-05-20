@@ -1,1 +1,1 @@
-web: java -Djava.awt.headless=true -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintTenuringDistribution -XX:+UseConcMarkSweepGC -jar target/dependency/webapp-runner.jar --port $PORT --path /FoodMap04 target/*.war
+web: java -Xmx256m -Djava.awt.headless=true -Xlog:gc*=debug:stdout:time,tid,level,tags -jar target/dependency/webapp-runner.jar --port $PORT --path /FoodMap04 target/*.war
