@@ -212,7 +212,13 @@
 			<groupId> com.cloudinary </groupId> 
 	        <artifactId> cloudinary-taglib </artifactId> 
 	        <version>1.29.0</version>
-        </dependency> 
+        </dependency>
+		<dependency>
+			<groupId>co.elastic.clients</groupId>
+			<artifactId>elasticsearch-java</artifactId>
+			<version>8.1.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
