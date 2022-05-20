@@ -42,7 +42,8 @@ public class CouponUsageUtil {
 //            Date end_time = dateParser.parse(coupon.getEnd_time());
 
             String ftext = text+"\r\n"+value;
-            Mail.SendGmail(from, to, subject, ftext);
+            Mail mail = new Mail();
+			mail.SendGmail(to, subject, ftext, true);
             System.out.println("Ｏ發送優惠券：成功! 收件者:" + to);
             return true;
         } else {

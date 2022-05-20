@@ -113,8 +113,9 @@ public class ForgetPassword {
 					+"請點擊以下連結修改您的密碼</a>"
 					+ "<br/>有效期限為1小時，若過期請再重新接收新的驗證信!",
 					userAccount, url, token);
+			Mail mail = new Mail();
 			// 寄信
-			Mail.SendGmail("me", recipientEmail, subject, text);
+			mail.SendGmail(recipientEmail, subject, text, true);
 			System.out.println("送出成功");
 			message = "送出成功";
 			responseHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

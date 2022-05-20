@@ -50,6 +50,7 @@ import cf.cvb14795.recipe.service.IAdminRecipeService;
 import cf.cvb14795.recipe.service.IMyFavoriteService;
 import cf.cvb14795.recipe.service.IReportService;
 import cf.cvb14795.recipe.service.IUserRecipeService;
+import util.gmail.Mail;
 
 @Controller
 @RequestMapping("/Recipe/user")
@@ -65,18 +66,16 @@ public class UserRecipeControllerAjax {
 	IMemberService memberService;
 	IMyFavoriteService favoritesService;
 	IReportService reportService;
-	JavaMailSender mailSender;
 
 	@Autowired
 	public UserRecipeControllerAjax(IUserRecipeService uRecipeService, IAdminRecipeService aRecipeService,
 			IMemberService memberService, IMyFavoriteService favoritesService, 
-			IReportService reportService, JavaMailSender mailSender) {
+			IReportService reportService) {
 		this.uRecipeService = uRecipeService;
 		this.aRecipeService = aRecipeService;
 		this.memberService = memberService;
 		this.favoritesService = favoritesService;
 		this.reportService = reportService;
-		this.mailSender = mailSender;
 	}
 
 //	@GetMapping("UserRecipe")
@@ -366,17 +365,13 @@ public class UserRecipeControllerAjax {
 		
 		Optional<UserRecipeBean> userRecipe = uRecipeService.getUpdateId(id);
 		
-		SimpleMailMessage message =new SimpleMailMessage();
-		message.setTo("foodmap04@gmail.com");  
-		message.setSubject("想食What! 會員檢舉信件");
-		message.setText(
-			"您好 : "+userName+"\r\n"
-			+"已收到您檢舉的食譜，我們會盡速審核。"+"\r\n"
-			+ "檢舉資訊如下:"+"\r\n"
-			+ "會員帳號:"+userRecipe.get().getUserName()+"\r\n"
-			+ "食譜名稱:"+userRecipe.get().getFoodName()+"\r\n"+"\r\n"
-		);
-		mailSender.send(message);
+		Mail mail = new Mail();
+		String text = "您好 : "+userName+"\r\n"
+				+"已收到您檢舉的食譜，我們會盡速審核。"+"\r\n"
+				+ "檢舉資訊如下:"+"\r\n"
+				+ "會員帳號:"+userRecipe.get().getUserName()+"\r\n"
+				+ "食譜名稱:"+userRecipe.get().getFoodName()+"\r\n"+"\r\n";
+		mail.SendGmail("foodmap04@gmail.com", "想食What! 會員檢舉信件", text, true);
 		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 	
