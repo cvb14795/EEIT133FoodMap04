@@ -31,7 +31,7 @@ public class Mail {
 			// 傳送含有html標籤的訊息
 			mailSender.send(message);
 			System.out.println("郵件寄送成功! 訊息:"+message);
-			System.out.println(pwd);
+			System.out.println("pwd: "+pwd);
 			
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
