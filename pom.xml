@@ -121,32 +121,7 @@
 		    <artifactId>json</artifactId>
 		    <version>20160810</version>
 		</dependency>
-		<!-- Azure Blob Storage --> 
-		<dependency>
-			<groupId>com.azure</groupId>
-			<artifactId>azure-storage-file-share</artifactId>
-			<version>12.10.0</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>azure-data-lake-store-sdk</artifactId>
-			<version>2.1.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>azure-storage-blob</artifactId>
-			<version>11.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>azure-storage</artifactId>
-			<version>8.3.0</version>
-		</dependency>
+
 		<!-- filenameio -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -214,11 +189,11 @@
 	        <version>1.29.0</version>
         </dependency>
 		<dependency>
-			<groupId>co.elastic.clients</groupId>
-			<artifactId>elasticsearch-java</artifactId>
-			<version>8.1.2</version>
+			<groupId>com.heroku.sdk</groupId>
+			<artifactId>heroku-maven-plugin</artifactId>
+			<version>3.0.4</version>
+			<type>maven-plugin</type>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -227,26 +202,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals><goal>copy</goal></goals>
-                    <configuration>
-                        <artifactItems>
-                            <artifactItem>
-                                <groupId>com.heroku</groupId>
-                                <artifactId>webapp-runner</artifactId>
-                                <version>9.0.52.1</version>
-                                <destFileName>webapp-runner.jar</destFileName>
-                            </artifactItem>
-                        </artifactItems>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+
 		</plugins>
 		<finalName>FoodMap04</finalName>
 	</build>

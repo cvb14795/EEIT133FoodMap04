@@ -2,7 +2,7 @@ package util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.microsoft.azure.storage.core.Base64;
+import java.util.Base64;
 
 public class Test {
 
@@ -12,7 +12,8 @@ public class Test {
 //		boolean checkpw = BCrypt.checkpw("", "$2a$10$zHKYCbQu4NCHQ2xSmGXKguNakPeCRLnj3X6WzUyq6tbnueFf5lfu6");
 //		System.out.println(checkpw);
 		String hashpw = BCrypt.hashpw("eeit133group4", BCrypt.gensalt(10));
-		String result = Base64.encode(String.join("-", hashpw,String.valueOf(System.currentTimeMillis())).getBytes());
+		String token = String.join("-", hashpw,String.valueOf(System.currentTimeMillis()));
+		String result = Base64.getEncoder().encodeToString(token.getBytes());
 		System.out.println(result);
 	}
 

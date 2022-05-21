@@ -37,3 +37,5 @@ bin/
 target/m2e-wtp/
 target/tomcat.8080/
 gmail應用程式密碼.txt
+*.original
+target/
