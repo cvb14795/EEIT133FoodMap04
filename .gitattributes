@@ -1,0 +1,2 @@
+*.war filter=lfs diff=lfs merge=lfs -text
+webapp-runner.jar filter=lfs diff=lfs merge=lfs -text
