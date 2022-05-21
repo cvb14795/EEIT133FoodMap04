@@ -12,6 +12,7 @@ import org.elasticsearch.client.RestClient;
 
 import java.io.IOException;
 
+//test
 public class ElkConnectTest {
     public void createClient() throws IOException {
         // Create the low-level client
